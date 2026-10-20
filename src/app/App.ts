@@ -7,6 +7,7 @@ import { Sidebar } from '../components/Sidebar/Sidebar'
 import { LessonView } from '../components/LessonView/LessonView'
 import { CourseCatalog } from '../components/CourseCatalog/CourseCatalog'
 import { Home } from '../components/Home/Home'
+import { ScrollTopButton } from '../components/ScrollTopButton/ScrollTopButton'
 import type { NextLessonButtonProps } from '../components/NextLessonButton/NextLessonButton'
 
 interface AppProps {
@@ -60,12 +61,17 @@ export function App({ courses }: AppProps) {
   const sidebarSlot = el.querySelector<HTMLElement>(`.${styles.sidebar}`)!
   const contentSlot = el.querySelector<HTMLElement>(`.${styles.content}`)!
 
+  // Кнопка «нагору» стоїть у правому нижньому куті контенту на всіх сторінках
+  el.querySelector(`.${styles.body}`)!.append(ScrollTopButton({ target: contentSlot }))
+
   const state = {
     page: 'home' as Route['page'],
     course: undefined as Course | undefined,
     blockId: '',
     lessonId: '',
     openModules: new Set<string>(),
+    /** Модуль, підсвічений у меню: останній натиснутий або той, де відкрита тема */
+    selectedModuleId: '',
     query: '',
   }
 
@@ -112,8 +118,10 @@ export function App({ courses }: AppProps) {
         block: state.course.blocks.find((b) => b.id === state.blockId),
         activeLessonId: state.lessonId,
         openModules: state.openModules,
+        selectedModuleId: state.selectedModuleId,
         query: state.query,
         onToggleModule: (moduleId) => {
+          state.selectedModuleId = moduleId
           if (state.openModules.has(moduleId)) state.openModules.delete(moduleId)
           else state.openModules.add(moduleId)
           renderSidebar()
@@ -151,7 +159,10 @@ export function App({ courses }: AppProps) {
     state.course = course
     state.blockId = found?.block.id ?? course?.blocks[0]?.id ?? ''
     state.lessonId = found?.lesson.id ?? ''
-    if (found) state.openModules.add(found.module.id)
+    if (found) {
+      state.openModules.add(found.module.id)
+      state.selectedModuleId = found.module.id
+    }
 
     el.classList.toggle(styles.noSidebar, !course)
     setMenuOpen(false)

@@ -11,13 +11,13 @@ interface ModuleItemProps {
   /** Уроки, які показуємо (під час пошуку — лише знайдені) */
   lessons: Lesson[]
   isOpen: boolean
+  /** Підсвічений модуль (білий фон з обводкою) */
+  isSelected: boolean
   activeLessonId: string
   onToggle: () => void
 }
 
-export function ModuleItem({ courseId, module, lessons, isOpen, activeLessonId, onToggle }: ModuleItemProps) {
-  const hasActive = module.lessons.some((lesson) => lesson.id === activeLessonId)
-
+export function ModuleItem({ courseId, module, lessons, isOpen, isSelected, activeLessonId, onToggle }: ModuleItemProps) {
   const lessonLink = (lesson: Lesson) => {
     const isActive = lesson.id === activeLessonId
     return `
@@ -36,7 +36,7 @@ export function ModuleItem({ courseId, module, lessons, isOpen, activeLessonId, 
     : `<p class="${styles.empty}">Матеріали з’являться згодом</p>`
 
   const el = html(`
-    <section class="${cx(styles.root, isOpen && styles.open, hasActive && styles.current)}">
+    <section class="${cx(styles.root, isOpen && styles.open, isSelected && styles.selected)}">
       <button class="${styles.toggle}" type="button" aria-expanded="${isOpen}">
         <span>${module.title}</span>
         <span class="${styles.chevron}">${icons.chevron}</span>

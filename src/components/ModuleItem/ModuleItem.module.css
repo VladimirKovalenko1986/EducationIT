@@ -31,8 +31,8 @@
   transform: rotate(180deg);
 }
 
-/* Модуль, у якому відкритий урок */
-.current .toggle {
+/* Підсвічений модуль: останній натиснутий або той, де відкрита тема */
+.selected .toggle {
   color: var(--text);
   font-weight: 800;
   background: var(--bg);

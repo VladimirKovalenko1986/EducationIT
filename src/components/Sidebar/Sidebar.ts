@@ -8,11 +8,20 @@ interface SidebarProps {
   block?: Block
   activeLessonId: string
   openModules: Set<string>
+  selectedModuleId: string
   query: string
   onToggleModule: (moduleId: string) => void
 }
 
-export function Sidebar({ courseId, block, activeLessonId, openModules, query, onToggleModule }: SidebarProps) {
+export function Sidebar({
+  courseId,
+  block,
+  activeLessonId,
+  openModules,
+  selectedModuleId,
+  query,
+  onToggleModule,
+}: SidebarProps) {
   const el = html(`<nav class="${styles.root}" aria-label="Модулі курсу"></nav>`)
   const search = query.trim().toLowerCase()
 
@@ -36,6 +45,7 @@ export function Sidebar({ courseId, block, activeLessonId, openModules, query, o
         lessons,
         // Під час пошуку модулі з результатами завжди розгорнуті
         isOpen: search ? true : openModules.has(module.id),
+        isSelected: module.id === selectedModuleId,
         activeLessonId,
         onToggle: () => onToggleModule(module.id),
       }),
