@@ -28,9 +28,9 @@
   display: none;
 }
 
-/* Сторінка каталогу курсів: без меню модулів */
-.catalog .sidebar,
-.catalog .overlay {
+/* Головна і список курсів: без меню модулів */
+.noSidebar .sidebar,
+.noSidebar .overlay {
   display: none;
 }
 

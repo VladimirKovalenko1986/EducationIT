@@ -6,6 +6,7 @@ import { Header } from '../components/Header/Header'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { LessonView } from '../components/LessonView/LessonView'
 import { CourseCatalog } from '../components/CourseCatalog/CourseCatalog'
+import { Home } from '../components/Home/Home'
 
 interface AppProps {
   courses: Course[]
@@ -37,6 +38,7 @@ export function App({ courses }: AppProps) {
   const contentSlot = el.querySelector<HTMLElement>(`.${styles.content}`)!
 
   const state = {
+    page: 'home' as Route['page'],
     course: undefined as Course | undefined,
     blockId: '',
     lessonId: '',
@@ -50,6 +52,7 @@ export function App({ courses }: AppProps) {
   function renderHeader() {
     headerSlot.replaceChildren(
       Header({
+        page: state.page,
         course: state.course,
         blockId: state.blockId,
         onBlockChange: (blockId) => {
@@ -94,27 +97,34 @@ export function App({ courses }: AppProps) {
   }
 
   function renderContent() {
-    const lesson = state.course && findLesson(state.course, state.lessonId)?.lesson
-    contentSlot.replaceChildren(state.course ? LessonView({ lesson }) : CourseCatalog({ courses }))
+    const pages = {
+      home: () => Home(),
+      courses: () => CourseCatalog({ courses }),
+      course: () => LessonView({ lesson: state.course && findLesson(state.course, state.lessonId)?.lesson }),
+    }
+    contentSlot.replaceChildren(pages[state.page]())
     contentSlot.scrollTop = 0
   }
 
-  function handleRoute({ courseId, lessonId }: Route) {
-    const course = courses.find((c) => c.id === courseId)
-    const found = course && findLesson(course, lessonId)
+  function handleRoute(route: Route) {
+    const course = route.page === 'course' ? courses.find((c) => c.id === route.courseId) : undefined
+    const found = course && findLesson(course, route.page === 'course' ? route.lessonId : undefined)
+    const prevPage = state.page
     const prevCourse = state.course
     const prevBlockId = state.blockId
 
+    // Неіснуючий курс — повертаємо до списку курсів
+    state.page = route.page === 'course' && !course ? 'courses' : route.page
     state.course = course
     state.blockId = found?.block.id ?? course?.blocks[0]?.id ?? ''
     state.lessonId = found?.lesson.id ?? ''
     if (found) state.openModules.add(found.module.id)
 
-    el.classList.toggle(styles.catalog, !course)
+    el.classList.toggle(styles.noSidebar, !course)
     setMenuOpen(false)
 
-    // Шапку перемальовуємо лише при зміні курсу чи блоку, щоб не скидати пошук
-    if (prevCourse !== course || prevBlockId !== state.blockId || !headerSlot.firstChild) {
+    // Шапку перемальовуємо лише при зміні сторінки, курсу чи блоку, щоб не скидати пошук
+    if (prevPage !== state.page || prevCourse !== course || prevBlockId !== state.blockId || !headerSlot.firstChild) {
       state.query = ''
       renderHeader()
     }

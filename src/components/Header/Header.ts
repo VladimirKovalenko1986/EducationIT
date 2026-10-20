@@ -5,8 +5,10 @@ import { icons } from '../../utils/icons'
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs'
 import { BlockSelect } from '../BlockSelect/BlockSelect'
 import { SearchInput } from '../SearchInput/SearchInput'
+import type { Route } from '../../app/router'
 
 interface HeaderProps {
+  page: Route['page']
   /** Відкритий курс; без нього шапка показує лише «Курси» */
   course?: Course
   blockId: string
@@ -15,7 +17,7 @@ interface HeaderProps {
   onMenuToggle: () => void
 }
 
-export function Header({ course, blockId, onBlockChange, onSearch, onMenuToggle }: HeaderProps) {
+export function Header({ page, course, blockId, onBlockChange, onSearch, onMenuToggle }: HeaderProps) {
   const el = html(`<header class="${styles.root}"></header>`)
 
   if (course) {
@@ -26,6 +28,7 @@ export function Header({ course, blockId, onBlockChange, onSearch, onMenuToggle 
 
   el.append(
     Breadcrumbs({
+      page,
       course,
       slot: course ? BlockSelect({ blocks: course.blocks, value: blockId, onChange: onBlockChange }) : undefined,
     }),

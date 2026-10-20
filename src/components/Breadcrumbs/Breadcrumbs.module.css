@@ -30,6 +30,11 @@
   text-underline-offset: 4px;
 }
 
+/* Сторінка, на якій зараз користувач */
+.item[aria-current='page'] {
+  color: #5eead4;
+}
+
 .current {
   color: var(--header-text);
   font-weight: 600;
