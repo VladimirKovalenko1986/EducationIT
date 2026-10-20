@@ -17,6 +17,46 @@
   color: var(--text-muted);
 }
 
+/* ---------- Урок з бічною панеллю (домашнє завдання) ---------- */
+
+.withAside {
+  container-type: inline-size;
+  max-width: 1280px;
+}
+
+.main,
+.aside {
+  min-width: 0;
+}
+
+.aside {
+  margin-top: 32px;
+}
+
+/* Дві колонки, коли області контенту вистачає місця (не залежить від ширини вікна).
+   Container query стилізує лише нащадків контейнера, тому сітка — на внутрішньому .grid */
+@container (min-width: 860px) {
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+    gap: 40px;
+  }
+
+  .aside {
+    position: sticky;
+    top: 0;
+    margin-top: 0;
+  }
+}
+
+@container (min-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 48px;
+  }
+}
+
 /* ---------- Зміст уроку: готовий HTML, тому стилізуємо теги всередині .body ---------- */
 
 .body > :first-child {

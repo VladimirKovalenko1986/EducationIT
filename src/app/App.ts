@@ -8,6 +8,7 @@ import { LessonView } from '../components/LessonView/LessonView'
 import { CourseCatalog } from '../components/CourseCatalog/CourseCatalog'
 import { Home } from '../components/Home/Home'
 import { ScrollTopButton } from '../components/ScrollTopButton/ScrollTopButton'
+import { HomeworkPanel } from '../components/HomeworkPanel/HomeworkPanel'
 import type { NextLessonButtonProps } from '../components/NextLessonButton/NextLessonButton'
 
 interface AppProps {
@@ -136,9 +137,23 @@ export function App({ courses }: AppProps) {
       courses: () => CourseCatalog({ courses }),
       course: () => {
         const block = state.course?.blocks.find((b) => b.id === state.blockId)
+        const found = state.course && state.lessonId ? findLesson(state.course, state.lessonId) : undefined
         return LessonView({
-          lesson: state.course && state.lessonId ? findLesson(state.course, state.lessonId)?.lesson : undefined,
+          lesson: found?.lesson,
           next: state.course && findNextLesson(state.course, state.lessonId),
+          // Для домашнього завдання справа — панель здачі
+          aside:
+            state.course && found?.lesson.isTask
+              ? HomeworkPanel({
+                  lesson: found.lesson,
+                  context: {
+                    course: state.course.title,
+                    block: found.block.title,
+                    module: found.module.title,
+                    lesson: found.lesson.title,
+                  },
+                })
+              : undefined,
           emptyText: block?.modules.length ? undefined : 'Матеріали цього блоку з’являться згодом',
         })
       },

@@ -3,8 +3,10 @@ export interface Lesson {
   title: string
   /** HTML-розмітка уроку */
   content: string
-  /** Виділяє пункт у меню (наприклад, домашнє завдання) */
+  /** Домашнє завдання: виділяється в меню і має форму здачі */
   isTask?: boolean
+  /** Дедлайн домашнього завдання у форматі 'YYYY-MM-DD'; без нього — «Дедлайн відсутній» */
+  deadline?: string
 }
 
 export interface Module {

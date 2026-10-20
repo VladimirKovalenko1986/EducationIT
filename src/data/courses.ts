@@ -1,6 +1,7 @@
 import type { Course, Module } from '../types'
 import b1m1t1 from './lessons/cybersecurity/b1-m1-t1.html?raw'
 import b1m1t2 from './lessons/cybersecurity/b1-m1-t2.html?raw'
+import b1m1hw from './lessons/cybersecurity/b1-m1-hw.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 const emptyModule = (n: number, title: string): Module => ({
@@ -30,7 +31,8 @@ export const courses: Course[] = [
                 id: 'b1-m1-hw',
                 title: 'Домашнє завдання',
                 isTask: true,
-                content: '<p>Домашнє завдання з’явиться згодом.</p>',
+                // deadline: '2026-11-01',
+                content: b1m1hw,
               },
             ],
           },
