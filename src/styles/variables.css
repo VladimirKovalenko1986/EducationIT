@@ -1,0 +1,56 @@
+/*
+  Брейкпоінти (у media queries змінні CSS не працюють, тому числа пишемо напряму):
+    mobile   — до 767px
+    tablet   — 768px…1023px
+    laptop   — 1024px…1439px
+    desktop  — від 1440px
+*/
+
+:root {
+  --header-bg: #0b1a2e;
+  --header-text: #c9d6e8;
+  --header-muted: #7f93ad;
+  --header-border: #24364f;
+
+  --bg: #ffffff;
+  --bg-soft: #f3f6fa;
+  --bg-hover: #e9eef5;
+  --bg-active: #e3f6f3;
+  --border: #dbe3ec;
+  --text: #13233a;
+  --text-muted: #5b6b80;
+  --accent: #0d9488;
+  --accent-strong: #0b7c72;
+  --accent-glow: linear-gradient(90deg, #14b8a6, #3b82f6);
+
+  --font: 'Manrope', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --radius: 14px;
+
+  --header-h: 64px;
+  --sidebar-w: min(340px, 85vw);
+  --content-pad: 20px 16px 48px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 76px;
+    --sidebar-w: 340px;
+    --content-pad: 32px 32px 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 84px;
+    --sidebar-w: 300px;
+    --content-pad: 36px 40px 64px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --header-h: 92px;
+    --sidebar-w: 360px;
+    --content-pad: 44px 64px 72px;
+  }
+}

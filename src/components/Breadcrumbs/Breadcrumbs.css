@@ -1,0 +1,85 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  color: var(--header-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.breadcrumbs__home svg {
+  width: 22px;
+  height: 22px;
+}
+
+.breadcrumbs__home:hover,
+.breadcrumbs__link:hover {
+  color: #ffffff;
+}
+
+.breadcrumbs__link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.breadcrumbs__current {
+  color: var(--header-text);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumbs__sep {
+  display: flex;
+  color: var(--header-muted);
+}
+
+.breadcrumbs__sep svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Mobile: у курсі лишаємо тільки «додому» і вибір блоку */
+@media (max-width: 767px) {
+  .breadcrumbs:has(.block-select) .breadcrumbs__courses,
+  .breadcrumbs:has(.block-select) .breadcrumbs__current,
+  .breadcrumbs:has(.block-select) .breadcrumbs__current + .breadcrumbs__sep {
+    display: none;
+  }
+
+  .breadcrumbs:has(.block-select) .breadcrumbs__home + .breadcrumbs__sep {
+    display: none;
+  }
+}
+
+/* Tablet: ховаємо назву курсу, щоб усе вмістилось */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .breadcrumbs__current,
+  .breadcrumbs__current + .breadcrumbs__sep {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .breadcrumbs {
+    gap: 14px;
+  }
+
+  .breadcrumbs__home svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .breadcrumbs__sep svg {
+    width: 16px;
+    height: 16px;
+  }
+}

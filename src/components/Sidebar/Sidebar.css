@@ -1,0 +1,15 @@
+.sidebar {
+  padding: 16px 12px 32px;
+}
+
+.sidebar__empty {
+  padding: 12px 14px;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    padding: 24px 16px 40px;
+  }
+}

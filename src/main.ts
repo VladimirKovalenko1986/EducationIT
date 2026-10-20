@@ -1,5 +1,6 @@
-import './style.css'
+import './styles/variables.css'
+import './styles/base.css'
+import { App } from './app/App'
+import { courses } from './data/courses'
 
-const app = document.querySelector<HTMLDivElement>('#app')!
-
-app.innerHTML = `<h1>EducationIT</h1>`
+document.querySelector('#app')!.replaceWith(App({ courses }))

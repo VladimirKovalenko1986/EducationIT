@@ -1,0 +1,74 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.app__body {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.app__sidebar {
+  overflow-y: auto;
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border);
+}
+
+.app__content {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: var(--content-pad);
+}
+
+.app__overlay {
+  display: none;
+}
+
+.app.is-catalog .app__sidebar,
+.app.is-catalog .app__overlay {
+  display: none;
+}
+
+/* Mobile і tablet: меню виїжджає зліва поверх контенту */
+@media (max-width: 1023px) {
+  .app__sidebar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: var(--sidebar-w);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .app.is-menu-open .app__sidebar {
+    transform: translateX(0);
+    box-shadow: 0 0 32px rgba(11, 26, 46, 0.2);
+  }
+
+  .app__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: block;
+    background: rgba(11, 26, 46, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .app.is-menu-open .app__overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Laptop і desktop: меню — постійна колонка зліва */
+@media (min-width: 1024px) {
+  .app__sidebar {
+    flex: 0 0 var(--sidebar-w);
+  }
+}
