@@ -59,6 +59,13 @@
   color: var(--text);
 }
 
+.body h4 {
+  margin: 22px 0 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent-strong);
+}
+
 /* Списки */
 .body ul,
 .body ol {
@@ -171,6 +178,41 @@
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.body [data-layout='cards'] small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Нумеровані картки: <ol data-layout="cards"> — номер у правому верхньому куті */
+.body ol[data-layout='cards'] {
+  counter-reset: card;
+}
+
+.body ol[data-layout='cards'] > li {
+  position: relative;
+  padding-right: 44px;
+  counter-increment: card;
+}
+
+.body ol[data-layout='cards'] > li::after {
+  content: counter(card);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: var(--card-color, var(--accent));
+  border-radius: 50%;
 }
 
 .body [data-layout='cards'] svg {
