@@ -1,0 +1,106 @@
+.root {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.button {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  color: #ffffff;
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(20, 184, 166, 0.45), transparent 60%),
+    var(--header-bg);
+  border-radius: 18px;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--accent-glow);
+}
+
+.button:hover {
+  box-shadow: 0 14px 30px rgba(11, 26, 46, 0.25);
+  transform: translateY(-2px);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.title {
+  font-size: 0.875rem;
+  color: var(--header-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow {
+  display: flex;
+  flex-shrink: 0;
+  padding: 10px;
+  color: #ffffff;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: transform 0.2s;
+}
+
+.button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Tablet і більше: кнопка вища, текст по центру — як головна дія сторінки */
+@media (min-width: 768px) {
+  .root {
+    margin-top: 56px;
+    padding-top: 32px;
+  }
+
+  .button {
+    padding: 22px 28px;
+  }
+
+  .label {
+    font-size: 1.2rem;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .button {
+    padding: 26px 32px;
+  }
+
+  .label {
+    font-size: 1.3rem;
+  }
+}

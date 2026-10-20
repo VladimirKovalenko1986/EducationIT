@@ -17,27 +17,174 @@
   color: var(--text-muted);
 }
 
-/* Зміст уроку приходить готовим HTML, тому стилізуємо теги всередині .body */
+/* ---------- Зміст уроку: готовий HTML, тому стилізуємо теги всередині .body ---------- */
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body p {
+  margin: 0 0 14px;
+}
+
+.body a {
+  color: var(--accent-strong);
+  text-underline-offset: 3px;
+}
+
+/* Розділ: заголовок з кольоровою смужкою зліва */
 .body h2 {
-  margin: 36px 0 12px;
+  position: relative;
+  margin: 44px 0 16px;
+  padding-left: 16px;
   font-size: 1.35rem;
   font-weight: 800;
   line-height: 1.3;
 }
 
+.body h2::before {
+  content: '';
+  position: absolute;
+  inset: 4px auto 4px 0;
+  width: 5px;
+  border-radius: 999px;
+  background: var(--accent-glow);
+}
+
+.body h3 {
+  margin: 28px 0 10px;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+/* Списки */
 .body ul,
 .body ol {
-  padding-left: 24px;
+  margin: 0 0 16px;
+  padding-left: 22px;
 }
 
 .body li + li {
-  margin-top: 4px;
+  margin-top: 8px;
+}
+
+.body ul > li::marker {
+  color: var(--accent);
+}
+
+.body ol > li::marker {
+  font-weight: 800;
+  color: var(--accent-strong);
+}
+
+/* Виноска «важливо» */
+.body aside {
+  position: relative;
+  margin: 20px 0;
+  padding: 16px 18px 16px 52px;
+  font-weight: 600;
+  background: var(--bg-active);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  border-radius: var(--radius);
+}
+
+.body aside::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 16px;
+  top: 15px;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.body aside:not([data-icon])::before {
+  content: '☝🏻';
+}
+
+/* Визначення термінів: картки */
+.body dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 16px 0 20px;
+}
+
+.body dl > div {
+  padding: 16px 18px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.body dt {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.body dd {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+}
+
+/* Зображення та схеми */
+.body figure {
+  margin: 24px 0 28px;
 }
 
 .body img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  max-width: 640px;
   height: auto;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.body figcaption {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Картки з іконками: <ul data-layout="cards">, колір картки задає --card-color */
+.body [data-layout='cards'] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.body [data-layout='cards'] > li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 14px 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.body [data-layout='cards'] svg {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  fill: none;
+  stroke: var(--card-color, var(--accent));
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  background: color-mix(in srgb, var(--card-color, var(--accent)) 12%, transparent);
+  border-radius: 12px;
 }
 
 .body code {
@@ -58,6 +205,7 @@
   padding: 0;
 }
 
+/* Tablet */
 @media (min-width: 768px) {
   .root {
     font-size: 1.0625rem;
@@ -68,16 +216,37 @@
   }
 
   .body h2 {
-    margin-top: 44px;
-    font-size: 1.5rem;
+    margin-top: 56px;
+    font-size: 1.55rem;
+  }
+
+  .body h3 {
+    font-size: 1.2rem;
   }
 
   .body ul,
   .body ol {
-    padding-left: 36px;
+    padding-left: 28px;
+  }
+
+  .body dl {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .body [data-layout='cards'] {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }
 
+/* Laptop */
+@media (min-width: 1024px) {
+  .body [data-layout='cards'] {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop */
 @media (min-width: 1440px) {
   .root {
     max-width: 1000px;
@@ -89,6 +258,10 @@
   }
 
   .body h2 {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
+  }
+
+  .body h3 {
+    font-size: 1.28rem;
   }
 }

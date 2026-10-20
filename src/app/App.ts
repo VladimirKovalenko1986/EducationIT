@@ -7,6 +7,7 @@ import { Sidebar } from '../components/Sidebar/Sidebar'
 import { LessonView } from '../components/LessonView/LessonView'
 import { CourseCatalog } from '../components/CourseCatalog/CourseCatalog'
 import { Home } from '../components/Home/Home'
+import type { NextLessonButtonProps } from '../components/NextLessonButton/NextLessonButton'
 
 interface AppProps {
   courses: Course[]
@@ -19,6 +20,28 @@ function findLesson(course: Course, lessonId?: string) {
       if (lesson) return { block, module, lesson }
     }
   }
+}
+
+/** Наступний урок курсу (порожні модулі пропускаємо) і підпис для кнопки переходу */
+function findNextLesson(course: Course, lessonId: string): NextLessonButtonProps | undefined {
+  const all = course.blocks.flatMap((block) =>
+    block.modules.flatMap((module) => module.lessons.map((lesson) => ({ block, module, lesson }))),
+  )
+  const index = all.findIndex((item) => item.lesson.id === lessonId)
+  const current = all[index]
+  const next = all[index + 1]
+  if (!current || !next) return
+
+  const label =
+    next.block !== current.block
+      ? 'До наступного блоку'
+      : next.module !== current.module
+        ? 'До наступного модуля'
+        : next.lesson.isTask
+          ? 'До домашнього завдання'
+          : 'До наступної теми'
+
+  return { href: lessonUrl(course.id, next.lesson.id), label, title: next.lesson.title }
 }
 
 export function App({ courses }: AppProps) {
@@ -107,6 +130,7 @@ export function App({ courses }: AppProps) {
         const block = state.course?.blocks.find((b) => b.id === state.blockId)
         return LessonView({
           lesson: state.course && state.lessonId ? findLesson(state.course, state.lessonId)?.lesson : undefined,
+          next: state.course && findNextLesson(state.course, state.lessonId),
           emptyText: block?.modules.length ? undefined : 'Матеріали цього блоку з’являться згодом',
         })
       },
