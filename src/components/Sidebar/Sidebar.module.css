@@ -1,15 +1,15 @@
-.sidebar {
+.root {
   padding: 16px 12px 32px;
 }
 
-.sidebar__empty {
+.empty {
   padding: 12px 14px;
   margin: 0;
   color: var(--text-muted);
 }
 
 @media (min-width: 1440px) {
-  .sidebar {
+  .root {
     padding: 24px 16px 40px;
   }
 }

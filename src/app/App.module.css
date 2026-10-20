@@ -1,41 +1,42 @@
-.app {
+.root {
   display: flex;
   flex-direction: column;
   height: 100dvh;
 }
 
-.app__body {
+.body {
   position: relative;
   display: flex;
   flex: 1;
   min-height: 0;
 }
 
-.app__sidebar {
+.sidebar {
   overflow-y: auto;
   background: var(--bg-soft);
   border-right: 1px solid var(--border);
 }
 
-.app__content {
+.content {
   flex: 1;
   min-width: 0;
   overflow-y: auto;
   padding: var(--content-pad);
 }
 
-.app__overlay {
+.overlay {
   display: none;
 }
 
-.app.is-catalog .app__sidebar,
-.app.is-catalog .app__overlay {
+/* Сторінка каталогу курсів: без меню модулів */
+.catalog .sidebar,
+.catalog .overlay {
   display: none;
 }
 
 /* Mobile і tablet: меню виїжджає зліва поверх контенту */
 @media (max-width: 1023px) {
-  .app__sidebar {
+  .sidebar {
     position: absolute;
     inset: 0 auto 0 0;
     z-index: 20;
@@ -44,12 +45,12 @@
     transition: transform 0.25s ease;
   }
 
-  .app.is-menu-open .app__sidebar {
+  .menuOpen .sidebar {
     transform: translateX(0);
     box-shadow: 0 0 32px rgba(11, 26, 46, 0.2);
   }
 
-  .app__overlay {
+  .overlay {
     position: absolute;
     inset: 0;
     z-index: 10;
@@ -60,7 +61,7 @@
     transition: opacity 0.25s ease;
   }
 
-  .app.is-menu-open .app__overlay {
+  .menuOpen .overlay {
     opacity: 1;
     pointer-events: auto;
   }
@@ -68,7 +69,7 @@
 
 /* Laptop і desktop: меню — постійна колонка зліва */
 @media (min-width: 1024px) {
-  .app__sidebar {
+  .sidebar {
     flex: 0 0 var(--sidebar-w);
   }
 }

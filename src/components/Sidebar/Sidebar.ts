@@ -1,4 +1,4 @@
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 import type { Block } from '../../types'
 import { html } from '../../utils/dom'
 import { ModuleItem } from '../ModuleItem/ModuleItem'
@@ -13,7 +13,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ courseId, block, activeLessonId, openModules, query, onToggleModule }: SidebarProps) {
-  const el = html(`<nav class="sidebar" aria-label="Модулі курсу"></nav>`)
+  const el = html(`<nav class="${styles.root}" aria-label="Модулі курсу"></nav>`)
   const search = query.trim().toLowerCase()
 
   const modules = (block?.modules ?? [])
@@ -24,7 +24,7 @@ export function Sidebar({ courseId, block, activeLessonId, openModules, query, o
     .filter(({ module, lessons }) => !search || lessons.length > 0 || module.title.toLowerCase().includes(search))
 
   if (modules.length === 0) {
-    el.append(html(`<p class="sidebar__empty">${search ? 'Нічого не знайдено' : 'Тут поки немає модулів'}</p>`))
+    el.append(html(`<p class="${styles.empty}">${search ? 'Нічого не знайдено' : 'Тут поки немає модулів'}</p>`))
     return el
   }
 

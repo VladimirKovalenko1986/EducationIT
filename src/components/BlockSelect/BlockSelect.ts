@@ -1,4 +1,4 @@
-import './BlockSelect.css'
+import styles from './BlockSelect.module.css'
 import type { Block } from '../../types'
 import { html } from '../../utils/dom'
 import { icons } from '../../utils/icons'
@@ -11,13 +11,13 @@ interface BlockSelectProps {
 
 export function BlockSelect({ blocks, value, onChange }: BlockSelectProps) {
   const el = html(`
-    <label class="block-select">
-      <select aria-label="Блок курсу">
+    <label class="${styles.root}">
+      <select class="${styles.select}" aria-label="Блок курсу">
         ${blocks
           .map((block) => `<option value="${block.id}" ${block.id === value ? 'selected' : ''}>${block.title}</option>`)
           .join('')}
       </select>
-      ${icons.chevron}
+      <span class="${styles.icon}">${icons.chevron}</span>
     </label>
   `)
 

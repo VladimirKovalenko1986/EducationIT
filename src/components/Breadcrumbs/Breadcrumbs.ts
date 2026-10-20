@@ -1,6 +1,7 @@
-import './Breadcrumbs.css'
+import styles from './Breadcrumbs.module.css'
 import type { Course } from '../../types'
 import { html } from '../../utils/dom'
+import { cx } from '../../utils/cx'
 import { icons } from '../../utils/icons'
 import { coursesUrl } from '../../app/router'
 
@@ -11,15 +12,20 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ course, slot }: BreadcrumbsProps) {
-  const sep = `<span class="breadcrumbs__sep">${icons.arrow}</span>`
+  const sep = (...extra: string[]) => `<span class="${cx(styles.sep, ...extra)}">${icons.arrow}</span>`
 
   const el = html(`
-    <nav class="breadcrumbs" aria-label="Навігація">
-      <a href="${coursesUrl()}" class="breadcrumbs__item breadcrumbs__home" aria-label="Головна">${icons.home}</a>
-      ${sep}
-      <a href="${coursesUrl()}" class="breadcrumbs__item breadcrumbs__link breadcrumbs__courses">Курси</a>
-      ${course ? `${sep}<span class="breadcrumbs__item breadcrumbs__current">${course.title}</span>` : ''}
-      ${slot ? sep : ''}
+    <nav class="${cx(styles.root, course && styles.inCourse)}" aria-label="Навігація">
+      <a href="${coursesUrl()}" class="${cx(styles.item, styles.home)}" aria-label="Головна">${icons.home}</a>
+      ${sep(styles.secondary)}
+      <a href="${coursesUrl()}" class="${cx(styles.item, styles.link, styles.secondary)}">Курси</a>
+      ${
+        course
+          ? `${sep(styles.secondary, styles.courseSep)}
+             <span class="${cx(styles.item, styles.current, styles.secondary)}">${course.title}</span>`
+          : ''
+      }
+      ${slot ? sep() : ''}
     </nav>
   `)
 

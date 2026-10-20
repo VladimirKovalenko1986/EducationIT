@@ -1,4 +1,4 @@
-import './App.css'
+import styles from './App.module.css'
 import type { Course } from '../types'
 import { html } from '../utils/dom'
 import { lessonUrl, onRouteChange, type Route } from './router'
@@ -22,19 +22,19 @@ function findLesson(course: Course, lessonId?: string) {
 
 export function App({ courses }: AppProps) {
   const el = html(`
-    <div class="app">
-      <div class="app__header"></div>
-      <div class="app__body">
-        <aside class="app__sidebar"></aside>
-        <div class="app__overlay"></div>
-        <main class="app__content"></main>
+    <div class="${styles.root}">
+      <div class="${styles.header}"></div>
+      <div class="${styles.body}">
+        <aside class="${styles.sidebar}"></aside>
+        <div class="${styles.overlay}"></div>
+        <main class="${styles.content}"></main>
       </div>
     </div>
   `)
 
-  const headerSlot = el.querySelector<HTMLElement>('.app__header')!
-  const sidebarSlot = el.querySelector<HTMLElement>('.app__sidebar')!
-  const contentSlot = el.querySelector<HTMLElement>('.app__content')!
+  const headerSlot = el.querySelector<HTMLElement>(`.${styles.header}`)!
+  const sidebarSlot = el.querySelector<HTMLElement>(`.${styles.sidebar}`)!
+  const contentSlot = el.querySelector<HTMLElement>(`.${styles.content}`)!
 
   const state = {
     course: undefined as Course | undefined,
@@ -44,8 +44,8 @@ export function App({ courses }: AppProps) {
     query: '',
   }
 
-  const setMenuOpen = (open: boolean) => el.classList.toggle('is-menu-open', open)
-  el.querySelector('.app__overlay')!.addEventListener('click', () => setMenuOpen(false))
+  const setMenuOpen = (open: boolean) => el.classList.toggle(styles.menuOpen, open)
+  el.querySelector(`.${styles.overlay}`)!.addEventListener('click', () => setMenuOpen(false))
 
   function renderHeader() {
     headerSlot.replaceChildren(
@@ -69,7 +69,7 @@ export function App({ courses }: AppProps) {
           state.query = query
           renderSidebar()
         },
-        onMenuToggle: () => setMenuOpen(!el.classList.contains('is-menu-open')),
+        onMenuToggle: () => setMenuOpen(!el.classList.contains(styles.menuOpen)),
       }),
     )
   }
@@ -110,7 +110,7 @@ export function App({ courses }: AppProps) {
     state.lessonId = found?.lesson.id ?? ''
     if (found) state.openModules.add(found.module.id)
 
-    el.classList.toggle('is-catalog', !course)
+    el.classList.toggle(styles.catalog, !course)
     setMenuOpen(false)
 
     // Шапку перемальовуємо лише при зміні курсу чи блоку, щоб не скидати пошук

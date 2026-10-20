@@ -1,4 +1,4 @@
-import './SearchInput.css'
+import styles from './SearchInput.module.css'
 import { html } from '../../utils/dom'
 import { icons } from '../../utils/icons'
 
@@ -8,9 +8,9 @@ interface SearchInputProps {
 
 export function SearchInput({ onSearch }: SearchInputProps) {
   const el = html(`
-    <label class="search-input">
-      <input type="search" placeholder="Пошук" aria-label="Пошук уроків" />
-      ${icons.search}
+    <label class="${styles.root}">
+      <input class="${styles.input}" type="search" placeholder="Пошук" aria-label="Пошук уроків" />
+      <span class="${styles.icon}">${icons.search}</span>
     </label>
   `)
 

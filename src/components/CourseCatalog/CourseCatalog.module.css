@@ -1,16 +1,16 @@
-.course-catalog {
+.root {
   max-width: 1280px;
   margin: 0 auto;
 }
 
-.course-catalog__title {
+.title {
   margin: 0 0 20px;
   font-size: 1.75rem;
   font-weight: 800;
 }
 
 /* Mobile: 1 колонка */
-.course-catalog__grid {
+.grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
@@ -18,11 +18,11 @@
 
 /* Tablet: 2 колонки */
 @media (min-width: 768px) {
-  .course-catalog__title {
+  .title {
     font-size: 2rem;
   }
 
-  .course-catalog__grid {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
@@ -30,19 +30,19 @@
 
 /* Laptop: 3 колонки */
 @media (min-width: 1024px) {
-  .course-catalog__grid {
+  .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* Desktop: 4 колонки */
 @media (min-width: 1440px) {
-  .course-catalog__title {
+  .title {
     margin-bottom: 28px;
     font-size: 2.25rem;
   }
 
-  .course-catalog__grid {
+  .grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
   }

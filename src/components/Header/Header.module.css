@@ -1,4 +1,4 @@
-.header {
+.root {
   position: relative;
   height: var(--header-h);
   display: flex;
@@ -9,7 +9,7 @@
   color: var(--header-text);
 }
 
-.header::before {
+.root::before {
   content: '';
   position: absolute;
   inset: 0 0 auto;
@@ -17,7 +17,7 @@
   background: var(--accent-glow);
 }
 
-.header__menu {
+.menu {
   display: flex;
   padding: 8px;
   margin-left: -8px;
@@ -28,12 +28,12 @@
   cursor: pointer;
 }
 
-.header__menu:hover {
+.menu:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
 @media (min-width: 768px) {
-  .header {
+  .root {
     gap: 20px;
     padding: 0 24px;
   }
@@ -41,13 +41,13 @@
 
 /* Laptop і більше: меню завжди видно, кнопка не потрібна */
 @media (min-width: 1024px) {
-  .header__menu {
+  .menu {
     display: none;
   }
 }
 
 @media (min-width: 1440px) {
-  .header {
+  .root {
     padding: 0 32px;
   }
 }

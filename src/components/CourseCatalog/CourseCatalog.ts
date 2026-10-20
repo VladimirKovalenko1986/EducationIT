@@ -1,4 +1,4 @@
-import './CourseCatalog.css'
+import styles from './CourseCatalog.module.css'
 import type { Course } from '../../types'
 import { html } from '../../utils/dom'
 import { CourseCard } from '../CourseCard/CourseCard'
@@ -8,14 +8,15 @@ interface CourseCatalogProps {
 }
 
 export function CourseCatalog({ courses }: CourseCatalogProps) {
+  const grid = html(`<div class="${styles.grid}"></div>`)
+  grid.append(...courses.map((course) => CourseCard({ course })))
+
   const el = html(`
-    <section class="course-catalog">
-      <h1 class="course-catalog__title">Курси</h1>
-      <div class="course-catalog__grid"></div>
+    <section class="${styles.root}">
+      <h1 class="${styles.title}">Курси</h1>
     </section>
   `)
-
-  el.querySelector('.course-catalog__grid')!.append(...courses.map((course) => CourseCard({ course })))
+  el.append(grid)
 
   return el
 }

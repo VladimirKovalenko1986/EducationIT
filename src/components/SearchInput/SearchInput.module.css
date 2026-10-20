@@ -1,10 +1,10 @@
-.search-input {
+.root {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.search-input input {
+.input {
   width: 40px;
   height: 40px;
   padding: 0 0 0 40px;
@@ -16,39 +16,40 @@
   transition: width 0.2s;
 }
 
-.search-input input::placeholder {
+.input::placeholder {
   color: var(--header-muted);
 }
 
-.search-input input:focus {
+.input:focus {
   border-color: var(--accent);
   outline: none;
   cursor: text;
 }
 
-.search-input svg {
+.icon {
   position: absolute;
   left: 10px;
+  display: flex;
   color: var(--header-muted);
   pointer-events: none;
 }
 
-/* Mobile: поле розгортається, коли на нього натиснули */
+/* Mobile: лише іконка; поле розгортається на всю шапку, коли на нього натиснули */
 @media (max-width: 767px) {
-  .search-input input:not(:focus)::placeholder {
+  .input:not(:focus)::placeholder {
     color: transparent;
   }
 
-  .search-input:focus-within,
-  .search-input:has(input:not(:placeholder-shown)) {
+  .root:focus-within,
+  .root:has(.input:not(:placeholder-shown)) {
     position: absolute;
     left: 16px;
     right: 16px;
     z-index: 1;
   }
 
-  .search-input:focus-within input,
-  .search-input:has(input:not(:placeholder-shown)) input {
+  .root:focus-within .input,
+  .root:has(.input:not(:placeholder-shown)) .input {
     width: 100%;
     padding-right: 12px;
     background: var(--header-bg);
@@ -56,7 +57,7 @@
 }
 
 @media (min-width: 768px) {
-  .search-input input {
+  .input {
     width: 200px;
     padding-right: 14px;
     cursor: text;
@@ -64,7 +65,7 @@
 }
 
 @media (min-width: 1440px) {
-  .search-input input {
+  .input {
     width: 260px;
     height: 44px;
   }

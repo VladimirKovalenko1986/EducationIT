@@ -1,4 +1,4 @@
-.block-select {
+.root {
   position: relative;
   display: flex;
   align-items: center;
@@ -6,7 +6,7 @@
   min-width: 0;
 }
 
-.block-select select {
+.select {
   appearance: none;
   width: 100%;
   padding: 10px 40px 10px 14px;
@@ -19,35 +19,36 @@
   cursor: pointer;
 }
 
-.block-select select:hover,
-.block-select select:focus-visible {
+.select:hover,
+.select:focus-visible {
   border-color: var(--accent);
   outline: none;
 }
 
-.block-select option {
+.select option {
   color: var(--text);
 }
 
-.block-select svg {
+.icon {
   position: absolute;
   right: 12px;
+  display: flex;
   color: var(--header-muted);
   pointer-events: none;
 }
 
 @media (min-width: 768px) {
-  .block-select {
+  .root {
     flex: 0 1 260px;
   }
 }
 
 @media (min-width: 1440px) {
-  .block-select {
+  .root {
     flex-basis: 320px;
   }
 
-  .block-select select {
+  .select {
     padding: 12px 44px 12px 16px;
   }
 }

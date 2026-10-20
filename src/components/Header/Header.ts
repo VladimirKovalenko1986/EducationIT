@@ -1,4 +1,4 @@
-import './Header.css'
+import styles from './Header.module.css'
 import type { Course } from '../../types'
 import { html } from '../../utils/dom'
 import { icons } from '../../utils/icons'
@@ -16,10 +16,10 @@ interface HeaderProps {
 }
 
 export function Header({ course, blockId, onBlockChange, onSearch, onMenuToggle }: HeaderProps) {
-  const el = html(`<header class="header"></header>`)
+  const el = html(`<header class="${styles.root}"></header>`)
 
   if (course) {
-    const menuButton = html(`<button class="header__menu" type="button" aria-label="Меню модулів">${icons.menu}</button>`)
+    const menuButton = html(`<button class="${styles.menu}" type="button" aria-label="Меню модулів">${icons.menu}</button>`)
     menuButton.addEventListener('click', onMenuToggle)
     el.append(menuButton)
   }
