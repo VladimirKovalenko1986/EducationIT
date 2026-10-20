@@ -24,9 +24,16 @@ export function ModuleItem({ courseId, module, lessons, isOpen, activeLessonId, 
       <li>
         <a href="${lessonUrl(courseId, lesson.id)}"
            class="${cx(styles.lesson, isActive && styles.lessonActive, lesson.isTask && styles.lessonTask)}"
-           ${isActive ? 'aria-current="page"' : ''}>${lesson.title}</a>
+           ${isActive ? 'aria-current="page"' : ''}>
+          ${lesson.isTask ? `<span class="${styles.taskIcon}">${icons.laptop}</span>` : ''}
+          <span>${lesson.title}</span>
+        </a>
       </li>`
   }
+
+  const list = lessons.length
+    ? `<ul class="${styles.lessons}">${lessons.map(lessonLink).join('')}</ul>`
+    : `<p class="${styles.empty}">Матеріали з’являться згодом</p>`
 
   const el = html(`
     <section class="${cx(styles.root, isOpen && styles.open, hasActive && styles.current)}">
@@ -34,7 +41,7 @@ export function ModuleItem({ courseId, module, lessons, isOpen, activeLessonId, 
         <span>${module.title}</span>
         <span class="${styles.chevron}">${icons.chevron}</span>
       </button>
-      ${isOpen ? `<ul class="${styles.lessons}">${lessons.map(lessonLink).join('')}</ul>` : ''}
+      ${isOpen ? list : ''}
     </section>
   `)
 

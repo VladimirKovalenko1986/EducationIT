@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 import type { Course } from '../types'
 import { html } from '../utils/dom'
-import { lessonUrl, onRouteChange, type Route } from './router'
+import { lessonUrl, onRouteChange, parseRoute, type Route } from './router'
 import { Header } from '../components/Header/Header'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { LessonView } from '../components/LessonView/LessonView'
@@ -59,7 +59,10 @@ export function App({ courses }: AppProps) {
           const block = state.course?.blocks.find((b) => b.id === blockId)
           const firstLesson = block?.modules[0]?.lessons[0]
           if (firstLesson) {
-            location.hash = lessonUrl(state.course!.id, firstLesson.id)
+            const url = lessonUrl(state.course!.id, firstLesson.id)
+            // Та сама адреса не викликає hashchange, тому оновлюємо сторінку вручну
+            if (location.hash === url) handleRoute(parseRoute())
+            else location.hash = url
           } else {
             // Порожній блок: показуємо його без уроку
             state.blockId = blockId
@@ -100,7 +103,13 @@ export function App({ courses }: AppProps) {
     const pages = {
       home: () => Home(),
       courses: () => CourseCatalog({ courses }),
-      course: () => LessonView({ lesson: state.course && findLesson(state.course, state.lessonId)?.lesson }),
+      course: () => {
+        const block = state.course?.blocks.find((b) => b.id === state.blockId)
+        return LessonView({
+          lesson: state.course && state.lessonId ? findLesson(state.course, state.lessonId)?.lesson : undefined,
+          emptyText: block?.modules.length ? undefined : 'Матеріали цього блоку з’являться згодом',
+        })
+      },
     }
     contentSlot.replaceChildren(pages[state.page]())
     contentSlot.scrollTop = 0

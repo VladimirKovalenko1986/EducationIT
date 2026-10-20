@@ -4,10 +4,12 @@ import { html } from '../../utils/dom'
 
 interface LessonViewProps {
   lesson?: Lesson
+  /** Текст, коли уроку немає */
+  emptyText?: string
 }
 
-export function LessonView({ lesson }: LessonViewProps) {
-  if (!lesson) return html(`<p class="${styles.empty}">Обери урок у меню</p>`)
+export function LessonView({ lesson, emptyText = 'Оберіть тему в меню' }: LessonViewProps) {
+  if (!lesson) return html(`<p class="${styles.empty}">${emptyText}</p>`)
 
   return html(`
     <article class="${styles.root}">
