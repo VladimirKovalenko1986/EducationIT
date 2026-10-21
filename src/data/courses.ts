@@ -2,6 +2,9 @@ import type { Course, Module } from '../types'
 import b1m1t1 from './lessons/cybersecurity/b1-m1-t1.html?raw'
 import b1m1t2 from './lessons/cybersecurity/b1-m1-t2.html?raw'
 import b1m1hw from './lessons/cybersecurity/b1-m1-hw.html?raw'
+import b1m2t1 from './lessons/cybersecurity/b1-m2-t1.html?raw'
+import b1m2t2 from './lessons/cybersecurity/b1-m2-t2.html?raw'
+import b1m2hw from './lessons/cybersecurity/b1-m2-hw.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 const emptyModule = (n: number, title: string): Module => ({
@@ -36,7 +39,15 @@ export const courses: Course[] = [
               },
             ],
           },
-          emptyModule(2, 'Операційний центр безпеки (SOC)'),
+          {
+            id: 'b1-m2',
+            title: 'Модуль 2. Операційний центр безпеки (SOC)',
+            lessons: [
+              { id: 'b1-m2-t1', title: 'Тема 1. Що таке SOC', content: b1m2t1 },
+              { id: 'b1-m2-t2', title: 'Тема 2. Ролі та відповідальності', content: b1m2t2 },
+              { id: 'b1-m2-hw', title: 'Домашнє завдання', isTask: true, content: b1m2hw },
+            ],
+          },
           emptyModule(3, 'Адміністрування систем кібербезпеки'),
           emptyModule(4, 'Безпечне адміністрування мережі'),
           emptyModule(5, 'Архітектура кібербезпеки'),
