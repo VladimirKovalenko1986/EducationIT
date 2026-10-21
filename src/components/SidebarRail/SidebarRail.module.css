@@ -1,0 +1,93 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Номер модуля */
+.module {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.module:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+/* Вибраний модуль — як біла картка в розгорнутому меню */
+.moduleSelected {
+  color: var(--text);
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+/* Номери тем вибраного модуля */
+.lessons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.lesson {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.lesson svg {
+  width: 16px;
+  height: 16px;
+}
+
+.lesson:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+.lessonActive {
+  color: #ffffff;
+  background: var(--accent);
+}
+
+.lessonActive:hover {
+  color: #ffffff;
+  background: var(--accent-strong);
+}
+
+.module:focus-visible,
+.lesson:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}

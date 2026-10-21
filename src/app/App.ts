@@ -1,6 +1,7 @@
 import styles from './App.module.css'
 import type { Course } from '../types'
 import { html } from '../utils/dom'
+import { readStorage, writeStorage } from '../utils/storage'
 import { lessonUrl, moduleUrl, onRouteChange, parseRoute, type Route } from './router'
 import { Header } from '../components/Header/Header'
 import { Sidebar } from '../components/Sidebar/Sidebar'
@@ -74,6 +75,8 @@ function findNextLesson(course: Course, lessonId: string): NextLessonButtonProps
   return { href: lessonUrl(course.id, next.lesson.id), label, title: next.lesson.title }
 }
 
+const SIDEBAR_KEY = 'educationit:sidebar-collapsed'
+
 export function App({ courses }: AppProps) {
   const el = html(`
     <div class="${styles.root}">
@@ -104,7 +107,12 @@ export function App({ courses }: AppProps) {
     /** Модуль, підсвічений у меню: останній натиснутий або той, де відкрита тема */
     selectedModuleId: '',
     query: '',
+    /** Згорнуте меню модулів; запам'ятовується між відвідуваннями */
+    sidebarCollapsed: readStorage(SIDEBAR_KEY) === '1',
   }
+
+  const applySidebarCollapsed = () => el.classList.toggle(styles.sidebarCollapsed, state.sidebarCollapsed)
+  applySidebarCollapsed()
 
   const setMenuOpen = (open: boolean) => el.classList.toggle(styles.menuOpen, open)
   el.querySelector(`.${styles.overlay}`)!.addEventListener('click', () => setMenuOpen(false))
@@ -133,6 +141,11 @@ export function App({ courses }: AppProps) {
         },
         onSearch: (query) => {
           state.query = query
+          // Результати пошуку видно лише в розгорнутому меню
+          if (query.trim() && state.sidebarCollapsed) {
+            state.sidebarCollapsed = false
+            applySidebarCollapsed()
+          }
           renderSidebar()
         },
         onMenuToggle: () => setMenuOpen(!el.classList.contains(styles.menuOpen)),
@@ -151,6 +164,13 @@ export function App({ courses }: AppProps) {
         openModules: state.openModules,
         selectedModuleId: state.selectedModuleId,
         query: state.query,
+        collapsed: state.sidebarCollapsed,
+        onToggleCollapsed: () => {
+          state.sidebarCollapsed = !state.sidebarCollapsed
+          writeStorage(SIDEBAR_KEY, state.sidebarCollapsed ? '1' : '0')
+          applySidebarCollapsed()
+          renderSidebar()
+        },
         onToggleModule: (moduleId) => {
           state.selectedModuleId = moduleId
           if (state.openModules.has(moduleId)) state.openModules.delete(moduleId)

@@ -71,5 +71,12 @@
 @media (min-width: 1024px) {
   .sidebar {
     flex: 0 0 var(--sidebar-w);
+    overflow-x: hidden;
+    transition: flex-basis 0.25s ease;
+  }
+
+  /* Згорнуте меню: вузька колонка з номерами модулів, решта місця — під конспект */
+  .sidebarCollapsed .sidebar {
+    flex-basis: 64px;
   }
 }
