@@ -2,7 +2,6 @@ import styles from './HomeworkForm.module.css'
 import { html } from '../../utils/dom'
 import { cx } from '../../utils/cx'
 import { icons } from '../../utils/icons'
-import { readStorage, writeStorage } from '../../utils/storage'
 import { HomeworkNotConfiguredError, sendHomework, type HomeworkSubmission } from '../../services/homework'
 
 interface HomeworkFormProps {
@@ -10,8 +9,6 @@ interface HomeworkFormProps {
   context: Omit<HomeworkSubmission, 'studentName' | 'answer' | 'pageUrl'>
   onSubmitted: () => void
 }
-
-const NAME_KEY = 'educationit:student-name'
 
 export function HomeworkForm({ context, onSubmitted }: HomeworkFormProps) {
   const el = html<HTMLFormElement>(`
@@ -23,7 +20,7 @@ export function HomeworkForm({ context, onSubmitted }: HomeworkFormProps) {
 
         <label class="${styles.field}">
           <span class="${styles.label}">Ім'я та прізвище</span>
-          <input class="${styles.input}" name="name" type="text" autocomplete="name" required />
+          <input class="${styles.input}" name="name" type="text" autocomplete="off" required />
         </label>
 
         <label class="${styles.field}">
@@ -44,8 +41,6 @@ export function HomeworkForm({ context, onSubmitted }: HomeworkFormProps) {
   const answer = el.querySelector<HTMLTextAreaElement>('textarea')!
   const submit = el.querySelector<HTMLButtonElement>('button[type="submit"]')!
   const message = el.querySelector<HTMLElement>('[role="status"]')!
-
-  name.value = readStorage(NAME_KEY) ?? ''
 
   const showMessage = (text: string, kind: 'success' | 'error' | '' = '') => {
     message.textContent = text
@@ -68,7 +63,6 @@ export function HomeworkForm({ context, onSubmitted }: HomeworkFormProps) {
 
     submit.disabled = true
     showMessage('Надсилаємо…')
-    writeStorage(NAME_KEY, name.value.trim())
 
     try {
       await sendHomework({
@@ -77,7 +71,8 @@ export function HomeworkForm({ context, onSubmitted }: HomeworkFormProps) {
         answer: answer.value.trim(),
         pageUrl: location.href,
       })
-      answer.value = ''
+      // Після успішної відправки форма очищається повністю
+      el.reset()
       showMessage('Готово! Завдання надіслано на перевірку.', 'success')
       onSubmitted()
     } catch (error) {
