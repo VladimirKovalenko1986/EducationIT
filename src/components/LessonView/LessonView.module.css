@@ -326,6 +326,11 @@
   .body [data-layout='cards'] {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  /* Рівно 4 картки — сітка 2×2, щоб остання не висіла сама */
+  .body [data-layout='cards']:has(> li:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Desktop */
