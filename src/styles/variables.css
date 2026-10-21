@@ -22,6 +22,10 @@
   --accent: #0d9488;
   --accent-strong: #0b7c72;
   --accent-glow: linear-gradient(90deg, #14b8a6, #3b82f6);
+  --accent-ring: rgba(13, 148, 136, 0.25);
+  --danger: #c2410c;
+  --shadow: rgba(11, 26, 46, 0.2);
+  --color-scheme: light;
 
   --font: 'Manrope', system-ui, 'Segoe UI', Roboto, sans-serif;
   --radius: 14px;
@@ -29,6 +33,51 @@
   --header-h: 64px;
   --sidebar-w: min(340px, 85vw);
   --content-pad: 20px 16px 48px;
+}
+
+/*
+  Темна тема. Вмикається кнопкою в шапці (data-theme="dark" на <html>)
+  або автоматично, якщо в системі темна тема і користувач не обрав світлу.
+  Набір змінних однаковий в обох блоках — у CSS не можна об'єднати селектор з media query.
+*/
+:root[data-theme='dark'] {
+  --header-bg: #08111f;
+  --header-border: #1f3049;
+
+  --bg: #0d1828;
+  --bg-soft: #122136;
+  --bg-hover: #1a2c45;
+  --bg-active: rgba(20, 184, 166, 0.14);
+  --border: #24364f;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent: #14b8a6;
+  --accent-strong: #2dd4bf;
+  --accent-ring: rgba(45, 212, 191, 0.3);
+  --danger: #fb923c;
+  --shadow: rgba(0, 0, 0, 0.45);
+  --color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --header-bg: #08111f;
+    --header-border: #1f3049;
+
+    --bg: #0d1828;
+    --bg-soft: #122136;
+    --bg-hover: #1a2c45;
+    --bg-active: rgba(20, 184, 166, 0.14);
+    --border: #24364f;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #14b8a6;
+    --accent-strong: #2dd4bf;
+    --accent-ring: rgba(45, 212, 191, 0.3);
+    --danger: #fb923c;
+    --shadow: rgba(0, 0, 0, 0.45);
+    --color-scheme: dark;
+  }
 }
 
 @media (min-width: 768px) {

@@ -5,6 +5,7 @@ import { icons } from '../../utils/icons'
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs'
 import { BlockSelect } from '../BlockSelect/BlockSelect'
 import { SearchInput } from '../SearchInput/SearchInput'
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
 import type { Route } from '../../app/router'
 
 interface HeaderProps {
@@ -35,6 +36,7 @@ export function Header({ page, course, blockId, onBlockChange, onSearch, onMenuT
   )
 
   if (course) el.append(SearchInput({ onSearch }))
+  el.append(ThemeToggle())
 
   return el
 }

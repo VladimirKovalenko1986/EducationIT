@@ -17,6 +17,7 @@
   background:
     radial-gradient(circle at 100% 0%, rgba(20, 184, 166, 0.45), transparent 60%),
     var(--header-bg);
+  border: 1px solid var(--header-border);
   border-radius: 18px;
   transition:
     box-shadow 0.2s,
@@ -32,7 +33,7 @@
 }
 
 .button:hover {
-  box-shadow: 0 14px 30px rgba(11, 26, 46, 0.25);
+  box-shadow: 0 14px 30px var(--shadow);
   transform: translateY(-2px);
 }
 

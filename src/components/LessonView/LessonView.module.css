@@ -133,7 +133,7 @@
   padding: 16px 18px 16px 52px;
   font-weight: 600;
   background: var(--bg-active);
-  border: 1px solid rgba(13, 148, 136, 0.25);
+  border: 1px solid var(--accent-ring);
   border-radius: var(--radius);
 }
 

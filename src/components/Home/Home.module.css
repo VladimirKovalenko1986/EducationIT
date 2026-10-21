@@ -12,6 +12,7 @@
     radial-gradient(circle at 100% 0%, rgba(20, 184, 166, 0.35), transparent 55%),
     radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.3), transparent 55%),
     var(--header-bg);
+  border: 1px solid var(--header-border);
   border-radius: 22px;
 }
 

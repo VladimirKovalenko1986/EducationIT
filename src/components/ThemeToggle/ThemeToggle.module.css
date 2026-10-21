@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--header-text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--header-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.root:hover {
+  color: #5eead4;
+  border-color: var(--accent);
+}
+
+.root:active {
+  transform: rotate(-20deg) scale(0.92);
+}
+
+.root:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1440px) {
+  .root {
+    width: 44px;
+    height: 44px;
+  }
+}

@@ -81,7 +81,7 @@
 .input:focus {
   border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .textarea {
@@ -140,5 +140,5 @@
 }
 
 .error {
-  color: #c2410c;
+  color: var(--danger);
 }
