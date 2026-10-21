@@ -1,6 +1,7 @@
 import styles from './HomeworkStatus.module.css'
 import { html } from '../../utils/dom'
 import { cx } from '../../utils/cx'
+import { icons } from '../../utils/icons'
 
 interface HomeworkStatusProps {
   submitted: boolean
@@ -24,7 +25,9 @@ export function HomeworkStatus({ submitted, deadline }: HomeworkStatusProps) {
   return html(`
     <ul class="${styles.root}">
       <li class="${cx(styles.row, submitted && styles.done)}">
-        <span class="${styles.icon}" aria-hidden="true">${submitted ? '✅' : '⏰'}</span>
+        <span class="${cx(styles.checkbox, submitted && styles.checked)}" aria-hidden="true">
+          ${submitted ? icons.check : ''}
+        </span>
         ${submitted ? 'Надіслано на перевірку' : 'Завдання очікує виконання'}
       </li>
       <li class="${cx(styles.row, due.overdue && !submitted && styles.overdue)}">

@@ -30,6 +30,38 @@
   border-radius: 12px;
 }
 
+/* Квадратик статусу: порожній, поки завдання не здано; зелений з галочкою — після відправки */
+.checkbox {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+}
+
+.checkbox svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 3;
+}
+
+.checked {
+  color: #ffffff;
+  background: var(--accent);
+  border-color: var(--accent);
+  animation: tick 0.3s ease;
+}
+
+@keyframes tick {
+  from {
+    transform: scale(0.7);
+  }
+}
+
 .done {
   color: var(--accent-strong);
 }
