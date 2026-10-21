@@ -26,6 +26,8 @@
   --danger: #c2410c;
   --shadow: rgba(11, 26, 46, 0.2);
   --color-scheme: light;
+  /* Наскільки висвітлювати кольорові акценти (іконки карток тощо): у темній темі темні кольори зливаються з фоном */
+  --dark-tint: 0%;
 
   --font: 'Manrope', system-ui, 'Segoe UI', Roboto, sans-serif;
   --radius: 14px;
@@ -62,6 +64,7 @@
   --danger: #fb923c;
   --shadow: rgba(0, 0, 0, 0.45);
   --color-scheme: dark;
+  --dark-tint: 45%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,6 +85,7 @@
     --danger: #fb923c;
     --shadow: rgba(0, 0, 0, 0.45);
     --color-scheme: dark;
+    --dark-tint: 45%;
   }
 }
 

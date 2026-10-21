@@ -200,7 +200,8 @@
   color: var(--text-muted);
 }
 
-/* Картки з іконками: <ul data-layout="cards">, колір картки задає --card-color */
+/* Картки з іконками: <ul data-layout="cards">, колір картки задає --card-color.
+   --card-accent — той самий колір, у темній темі висвітлений (--dark-tint), щоб темні кольори не зливались з фоном */
 .body [data-layout='cards'] {
   display: grid;
   grid-template-columns: 1fr;
@@ -211,6 +212,8 @@
 }
 
 .body [data-layout='cards'] > li {
+  --card-accent: color-mix(in oklab, var(--card-color, var(--accent)), #ffffff var(--dark-tint));
+
   display: flex;
   align-items: center;
   gap: 14px;
@@ -253,8 +256,9 @@
   height: 24px;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #ffffff;
-  background: var(--card-color, var(--accent));
+  /* Колір фону сторінки: білий на світлій темі, темний на висвітленому акценті темної */
+  color: var(--bg);
+  background: var(--card-accent);
   border-radius: 50%;
 }
 
@@ -264,11 +268,11 @@
   height: 44px;
   padding: 10px;
   fill: none;
-  stroke: var(--card-color, var(--accent));
+  stroke: var(--card-accent);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  background: color-mix(in srgb, var(--card-color, var(--accent)) 12%, transparent);
+  background: color-mix(in srgb, var(--card-accent) 14%, transparent);
   border-radius: 12px;
 }
 
