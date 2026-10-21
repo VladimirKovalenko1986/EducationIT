@@ -31,7 +31,7 @@ export const courses: Course[] = [
                 id: 'b1-m1-hw',
                 title: 'Домашнє завдання',
                 isTask: true,
-                // deadline: '2026-11-01',
+                deadline: '2026-10-31',
                 content: b1m1hw,
               },
             ],
