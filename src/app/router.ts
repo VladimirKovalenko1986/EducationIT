@@ -2,7 +2,7 @@
 //   #/                          — головна (привітання)
 //   #/courses                   — список курсів
 //   #/courses/<курс>            — перший урок курсу
-//   #/courses/<курс>/<урок>     — конкретний урок
+//   #/courses/<курс>/<урок>     — конкретний урок (або модуль без уроків)
 
 export type Route =
   | { page: 'home' }
@@ -13,6 +13,8 @@ export const homeUrl = () => '#/'
 export const coursesUrl = () => '#/courses'
 export const courseUrl = (courseId: string) => `#/courses/${courseId}`
 export const lessonUrl = (courseId: string, lessonId: string) => `#/courses/${courseId}/${lessonId}`
+/** Модуль без уроків відкривається за тією ж схемою адреси, що й урок */
+export const moduleUrl = (courseId: string, moduleId: string) => `#/courses/${courseId}/${moduleId}`
 
 export function parseRoute(hash = location.hash): Route {
   const [section, courseId, lessonId] = hash.replace(/^#\/?/, '').split('/').filter(Boolean)

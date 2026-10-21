@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 import type { Course } from '../types'
 import { html } from '../utils/dom'
-import { lessonUrl, onRouteChange, parseRoute, type Route } from './router'
+import { lessonUrl, moduleUrl, onRouteChange, parseRoute, type Route } from './router'
 import { Header } from '../components/Header/Header'
 import { Sidebar } from '../components/Sidebar/Sidebar'
 import { LessonView } from '../components/LessonView/LessonView'
@@ -24,6 +24,29 @@ function findLesson(course: Course, lessonId?: string) {
   }
 }
 
+function findModule(course: Course, moduleId?: string) {
+  for (const block of course.blocks) {
+    const module = block.modules.find((m) => m.id === moduleId)
+    if (module) return { block, module }
+  }
+}
+
+/** Куди веде домашнє завдання: на наступний модуль (навіть порожній) або наступний блок */
+function findNextModule(course: Course, moduleId: string): NextLessonButtonProps | undefined {
+  const all = course.blocks.flatMap((block) => block.modules.map((module) => ({ block, module })))
+  const index = all.findIndex((item) => item.module.id === moduleId)
+  const current = all[index]
+  const next = all[index + 1]
+  if (!current || !next) return
+
+  const firstLesson = next.module.lessons[0]
+  return {
+    href: firstLesson ? lessonUrl(course.id, firstLesson.id) : moduleUrl(course.id, next.module.id),
+    label: next.block !== current.block ? 'До наступного блоку' : 'До наступного модуля',
+    title: next.module.title,
+  }
+}
+
 /** Наступний урок курсу (порожні модулі пропускаємо) і підпис для кнопки переходу */
 function findNextLesson(course: Course, lessonId: string): NextLessonButtonProps | undefined {
   const all = course.blocks.flatMap((block) =>
@@ -31,8 +54,13 @@ function findNextLesson(course: Course, lessonId: string): NextLessonButtonProps
   )
   const index = all.findIndex((item) => item.lesson.id === lessonId)
   const current = all[index]
+  if (!current) return
+
+  // Домашнє завдання завжди веде на наступний модуль
+  if (current.lesson.isTask) return findNextModule(course, current.module.id)
+
   const next = all[index + 1]
-  if (!current || !next) return
+  if (!next) return
 
   const label =
     next.block !== current.block
@@ -70,6 +98,8 @@ export function App({ courses }: AppProps) {
     course: undefined as Course | undefined,
     blockId: '',
     lessonId: '',
+    /** Відкритий за посиланням модуль без уроків (показуємо заглушку) */
+    emptyModuleId: '',
     openModules: new Set<string>(),
     /** Модуль, підсвічений у меню: останній натиснутий або той, де відкрита тема */
     selectedModuleId: '',
@@ -138,6 +168,17 @@ export function App({ courses }: AppProps) {
       course: () => {
         const block = state.course?.blocks.find((b) => b.id === state.blockId)
         const found = state.course && state.lessonId ? findLesson(state.course, state.lessonId) : undefined
+        const emptyModule = state.course && findModule(state.course, state.emptyModuleId)?.module
+        // Модуль без уроків: заголовок модуля і заглушка замість змісту
+        if (emptyModule) {
+          return LessonView({
+            lesson: {
+              id: emptyModule.id,
+              title: emptyModule.title,
+              content: '<p>Матеріали цього модуля з’являться згодом.</p>',
+            },
+          })
+        }
         return LessonView({
           lesson: found?.lesson,
           next: state.course && findNextLesson(state.course, state.lessonId),
@@ -165,6 +206,8 @@ export function App({ courses }: AppProps) {
   function handleRoute(route: Route) {
     const course = route.page === 'course' ? courses.find((c) => c.id === route.courseId) : undefined
     const found = course && findLesson(course, route.page === 'course' ? route.lessonId : undefined)
+    // Адреса може вести не на урок, а на порожній модуль (кнопка після домашнього завдання)
+    const foundModule = course && route.page === 'course' ? findModule(course, route.lessonId) : undefined
     const prevPage = state.page
     const prevCourse = state.course
     const prevBlockId = state.blockId
@@ -172,11 +215,13 @@ export function App({ courses }: AppProps) {
     // Неіснуючий курс — повертаємо до списку курсів
     state.page = route.page === 'course' && !course ? 'courses' : route.page
     state.course = course
-    state.blockId = found?.block.id ?? course?.blocks[0]?.id ?? ''
+    state.blockId = found?.block.id ?? foundModule?.block.id ?? course?.blocks[0]?.id ?? ''
     state.lessonId = found?.lesson.id ?? ''
-    if (found) {
-      state.openModules.add(found.module.id)
-      state.selectedModuleId = found.module.id
+    state.emptyModuleId = foundModule?.module.id ?? ''
+    const module = found?.module ?? foundModule?.module
+    if (module) {
+      state.openModules.add(module.id)
+      state.selectedModuleId = module.id
     }
 
     el.classList.toggle(styles.noSidebar, !course)
