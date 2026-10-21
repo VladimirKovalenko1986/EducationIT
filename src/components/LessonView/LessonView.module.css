@@ -1,6 +1,8 @@
 .root {
-  max-width: 920px;
-  font-size: 1rem;
+  /* Ширина, вирівнювання й розмір тексту задаються змінними: при згорнутому меню App робить урок ширшим і по центру */
+  max-width: var(--lesson-max-w);
+  margin-inline: var(--lesson-margin);
+  font-size: var(--lesson-font);
   line-height: 1.7;
 }
 
@@ -22,6 +24,7 @@
 .withAside {
   container-type: inline-size;
   max-width: 1280px;
+  margin-inline: var(--lesson-margin);
 }
 
 .main,
@@ -289,10 +292,6 @@
 
 /* Tablet */
 @media (min-width: 768px) {
-  .root {
-    font-size: 1.0625rem;
-  }
-
   .title {
     font-size: 2rem;
   }
@@ -335,11 +334,6 @@
 
 /* Desktop */
 @media (min-width: 1440px) {
-  .root {
-    max-width: 1000px;
-    font-size: 1.125rem;
-  }
-
   .title {
     font-size: 2.25rem;
   }

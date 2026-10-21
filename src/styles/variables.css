@@ -33,6 +33,11 @@
   --header-h: 64px;
   --sidebar-w: min(340px, 85vw);
   --content-pad: 20px 16px 48px;
+
+  /* Сторінка уроку */
+  --lesson-max-w: 920px;
+  --lesson-margin: 0;
+  --lesson-font: 1rem;
 }
 
 /*
@@ -85,6 +90,7 @@
     --header-h: 76px;
     --sidebar-w: 340px;
     --content-pad: 32px 32px 56px;
+    --lesson-font: 1.0625rem;
   }
 }
 
@@ -101,5 +107,7 @@
     --header-h: 92px;
     --sidebar-w: 360px;
     --content-pad: 44px 64px 72px;
+    --lesson-max-w: 1000px;
+    --lesson-font: 1.125rem;
   }
 }

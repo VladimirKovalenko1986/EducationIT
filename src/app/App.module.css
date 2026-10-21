@@ -79,4 +79,26 @@
   .sidebarCollapsed .sidebar {
     flex-basis: 64px;
   }
+
+  /* Звільнене місце віддаємо уроку: ширший, по центру, трохи більший шрифт */
+  .sidebarCollapsed {
+    --lesson-max-w: 1080px;
+    --lesson-margin: auto;
+    --lesson-font: 1.125rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebarCollapsed {
+    --lesson-max-w: 1180px;
+    --lesson-font: 1.2rem;
+  }
+}
+
+/* Дуже широкі монітори */
+@media (min-width: 1800px) {
+  .sidebarCollapsed {
+    --lesson-max-w: 1340px;
+    --lesson-font: 1.3rem;
+  }
 }
