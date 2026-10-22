@@ -307,14 +307,73 @@
 }
 
 .body pre {
-  padding: 16px;
+  margin: 12px 0 18px;
+  padding: 14px 18px;
   overflow-x: auto;
-  background: var(--bg-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  /* Команди виглядають як термінал — однаково темні в обох темах */
+  color: #e2e8f0;
+  background: #0f1b2d;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
 .body pre code {
   padding: 0;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+}
+
+/* Результат виконання команди: <pre data-label="Результат"> */
+.body pre[data-label]::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+}
+
+/* Таблиці: <div data-layout="table"><table>…</table></div>, на телефоні прокручуються вбік */
+.body [data-layout='table'] {
+  margin: 16px 0 22px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.body table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.body th,
+.body td {
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.body tr:last-child td {
+  border-bottom: 0;
+}
+
+.body th {
+  font-weight: 800;
+  background: var(--bg-soft);
+}
+
+.body td:first-child {
+  font-weight: 700;
 }
 
 /* Tablet */
