@@ -7,6 +7,7 @@ import b1m2t2 from './lessons/cybersecurity/b1-m2-t2.html?raw'
 import b1m2hw from './lessons/cybersecurity/b1-m2-hw.html?raw'
 import b1m3t1 from './lessons/cybersecurity/b1-m3-t1.html?raw'
 import b1m3t2 from './lessons/cybersecurity/b1-m3-t2.html?raw'
+import b1m3hw from './lessons/cybersecurity/b1-m3-hw.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 const emptyModule = (n: number, title: string): Module => ({
@@ -56,6 +57,7 @@ export const courses: Course[] = [
             lessons: [
               { id: 'b1-m3-t1', title: 'Тема 1. Основи Windows', content: b1m3t1 },
               { id: 'b1-m3-t2', title: 'Тема 2. Основи Linux', content: b1m3t2 },
+              { id: 'b1-m3-hw', title: 'Домашнє завдання', isTask: true, content: b1m3hw },
             ],
           },
           emptyModule(4, 'Безпечне адміністрування мережі'),
