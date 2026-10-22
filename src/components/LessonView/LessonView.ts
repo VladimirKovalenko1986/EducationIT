@@ -2,6 +2,7 @@ import styles from './LessonView.module.css'
 import type { Lesson } from '../../types'
 import { html } from '../../utils/dom'
 import { NextLessonButton, type NextLessonButtonProps } from '../NextLessonButton/NextLessonButton'
+import { ImageLightbox } from '../ImageLightbox/ImageLightbox'
 
 interface LessonViewProps {
   lesson?: Lesson
@@ -23,6 +24,19 @@ export function LessonView({ lesson, next, aside, emptyText = 'Оберіть т
     </article>
   `)
 
+  const body = article.querySelector<HTMLElement>(`.${styles.body}`)!
+
+  // Картинка, якої ще немає на сервері, не повинна лишати «битий» значок — ховаємо її разом з підписом
+  body.addEventListener(
+    'error',
+    (e) => {
+      const target = e.target as HTMLElement
+      if (target instanceof HTMLImageElement) (target.closest('figure') ?? target).remove()
+    },
+    true,
+  )
+
+  article.append(ImageLightbox({ target: body }))
   if (next) article.append(NextLessonButton(next))
   if (!aside) return article
 

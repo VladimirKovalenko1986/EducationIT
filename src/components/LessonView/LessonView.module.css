@@ -191,6 +191,29 @@
   height: auto;
   margin: 0 auto;
   border-radius: 20px;
+  /* По кліку картинка збільшується (ImageLightbox) */
+  cursor: zoom-in;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.body img:hover {
+  box-shadow: 0 12px 30px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.body img:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Скріншоти: <figure data-kind="screenshot"> — ширші, з рамкою; білий фон, щоб у темній темі не зливались */
+.body [data-kind='screenshot'] img {
+  max-width: 760px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
 .body figcaption {
