@@ -10,8 +10,9 @@ import b1m3t2 from './lessons/cybersecurity/b1-m3-t2.html?raw'
 import b1m3hw from './lessons/cybersecurity/b1-m3-hw.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
-const emptyModule = (n: number, title: string): Module => ({
-  id: `b1-m${n}`,
+// prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
+const emptyModule = (n: number, title: string, prefix = 'b1'): Module => ({
+  id: `${prefix}-m${n}`,
   title: `Модуль ${n}. ${title}`,
   lessons: [],
 })
@@ -77,6 +78,19 @@ export const courses: Course[] = [
     id: 'fullstack',
     title: 'Full-stack developers',
     description: 'Розробка вебзастосунків від інтерфейсу до сервера: HTML, CSS, JavaScript та бекенд.',
-    blocks: [{ id: 'block-1', title: 'Блок 1', modules: [] }],
+    blocks: [
+      {
+        id: 'block-1',
+        title: 'HTML+CSS 2.1',
+        modules: [
+          emptyModule(1, 'Основи HTML', 'fs-b1'),
+          emptyModule(2, 'Вступ до CSS', 'fs-b1'),
+          emptyModule(3, 'Блокова модель. Flexbox', 'fs-b1'),
+          emptyModule(4, 'Декоративні ефекти', 'fs-b1'),
+          emptyModule(5, 'Елементи форм. Доступність', 'fs-b1'),
+          emptyModule(6, 'Адаптивний дизайн', 'fs-b1'),
+        ],
+      },
+    ],
   },
 ]
