@@ -1,54 +1,69 @@
 .root {
   margin: 24px 0 28px;
-  padding: 20px;
+  overflow: hidden;
   background: var(--bg-soft);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius);
+  border-radius: 22px;
+  transition: border-color 0.2s;
 }
 
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent-strong);
-  background: var(--bg-active);
-  border-radius: 999px;
+.solved {
+  border-color: var(--accent);
+}
+
+.failed {
+  border-color: var(--danger);
+}
+
+.body {
+  padding: 20px 20px 14px;
 }
 
 .question {
-  margin: 12px 0 14px;
+  margin: 0 0 12px;
   font-size: 1.05em;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.45;
+}
+
+.hint {
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 
+/* Варіант відповіді — як радіокнопка */
 .option {
-  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 10px 12px;
   font: inherit;
-  font-weight: 600;
   text-align: left;
   color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: none;
+  border: 0;
   border-radius: 12px;
   cursor: pointer;
-  transition:
-    border-color 0.2s,
-    background 0.2s;
+  transition: background 0.2s;
 }
 
-.option:hover:not(:disabled) {
-  border-color: var(--accent);
+.option:hover {
+  background: var(--bg-hover);
+}
+
+.solved .option {
+  cursor: default;
+}
+
+.solved .option:hover {
+  background: none;
 }
 
 .option:focus-visible {
@@ -56,63 +71,112 @@
   outline-offset: 2px;
 }
 
-.option:disabled {
-  cursor: default;
+.radio {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+  transition: border-color 0.2s;
 }
 
-.option:disabled:not(.correct):not(.wrong) {
-  opacity: 0.55;
+.radio::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.15s;
 }
 
-.correct {
-  color: var(--accent-strong);
-  background: var(--bg-active);
+.correct .radio {
   border-color: var(--accent);
 }
 
-.wrong {
-  color: var(--danger);
+.correct .radio::after {
+  background: var(--accent);
+  transform: scale(1);
+}
+
+.wrong .radio {
   border-color: var(--danger);
-  text-decoration: line-through;
 }
 
+.wrong .radio::after {
+  background: var(--danger);
+  transform: scale(1);
+}
+
+/* Блок результату внизу картки */
 .result {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 14px 0 0;
-  font-weight: 700;
+  padding: 14px 20px 18px;
+  border-top: 1px solid var(--border);
 }
 
-.result:empty {
+.result[hidden] {
   display: none;
 }
 
-.result svg {
-  width: 20px;
-  height: 20px;
-}
-
 .success {
-  color: var(--accent-strong);
+  border-top-color: var(--accent);
 }
 
 .error {
+  border-top-color: var(--danger);
+}
+
+.resultTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-size: 1.05em;
+  font-weight: 700;
+}
+
+.success .resultTitle {
+  color: var(--accent-strong);
+}
+
+.error .resultTitle {
   color: var(--danger);
 }
 
+.resultIcon {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  color: var(--bg);
+  border-radius: 50%;
+}
+
+.success .resultIcon {
+  background: var(--accent);
+}
+
+.error .resultIcon {
+  background: var(--danger);
+}
+
+.resultIcon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 3;
+}
+
+.resultText {
+  margin: 0;
+}
+
 @media (min-width: 768px) {
-  .root {
-    padding: 22px 26px;
+  .body {
+    padding: 24px 28px 16px;
   }
 
-  .options {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .option {
-    flex: 1 1 160px;
-    text-align: center;
+  .result {
+    padding: 16px 28px 20px;
   }
 }
