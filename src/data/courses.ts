@@ -73,4 +73,10 @@ export const courses: Course[] = [
       { id: 'block-3', title: 'Блок 3', modules: [] },
     ],
   },
+  {
+    id: 'fullstack',
+    title: 'Full-stack developers',
+    description: 'Розробка вебзастосунків від інтерфейсу до сервера: HTML, CSS, JavaScript та бекенд.',
+    blocks: [{ id: 'block-1', title: 'Блок 1', modules: [] }],
+  },
 ]
