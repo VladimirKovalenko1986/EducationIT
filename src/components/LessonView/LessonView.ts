@@ -37,7 +37,7 @@ export function LessonView({ lesson, next, aside, emptyText = 'Оберіть т
     true,
   )
 
-  mountQuizzes(body)
+  mountQuizzes(body, lesson.id)
   article.append(ImageLightbox({ target: body }))
   if (next) article.append(NextLessonButton(next))
   if (!aside) return article

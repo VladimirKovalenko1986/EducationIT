@@ -58,12 +58,51 @@
   background: var(--bg-hover);
 }
 
-.solved .option {
+.answered .option {
   cursor: default;
 }
 
-.solved .option:hover {
+.answered .option:hover {
   background: none;
+}
+
+/* Обраний, але ще не надісланий варіант */
+.option[aria-checked='true'] .radio {
+  border-color: var(--accent);
+}
+
+.option[aria-checked='true'] .radio::after {
+  background: var(--accent);
+  transform: scale(1);
+}
+
+.submit {
+  margin-top: 14px;
+  padding: 11px 20px;
+  font: inherit;
+  font-weight: 800;
+  color: #ffffff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--accent-strong);
+}
+
+.submit:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
 }
 
 .option:focus-visible {
@@ -99,11 +138,11 @@
   transform: scale(1);
 }
 
-.wrong .radio {
+.option.wrong .radio {
   border-color: var(--danger);
 }
 
-.wrong .radio::after {
+.option.wrong .radio::after {
   background: var(--danger);
   transform: scale(1);
 }

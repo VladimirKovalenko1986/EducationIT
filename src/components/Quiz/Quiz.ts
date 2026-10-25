@@ -2,8 +2,11 @@ import styles from './Quiz.module.css'
 import { html } from '../../utils/dom'
 import { cx } from '../../utils/cx'
 import { icons } from '../../utils/icons'
+import { readStorage, writeStorage } from '../../utils/storage'
 
 interface QuizProps {
+  /** Унікальний id квізу: за ним запам'ятовується відповідь */
+  id: string
   question: string
   options: string[]
   /** Індекс правильної відповіді */
@@ -15,19 +18,23 @@ interface QuizProps {
 }
 
 /**
- * Квіз з одним правильним варіантом. У конспекті записується так:
- * <div data-quiz data-correct="0" data-success="Молодець!" data-error="Пройди матеріал ще раз">
+ * Квіз з одним правильним варіантом. Відповідь надсилається кнопкою один раз і запам'ятовується.
+ * У конспекті записується так:
+ * <div data-quiz data-correct="0" data-success="Молодець!">
  *   <p>Питання</p>
  *   <ul><li>Варіант 1</li><li>Варіант 2</li></ul>
  * </div>
  */
 export function Quiz({
+  id,
   question,
   options,
   correct,
   success = 'Молодець!',
-  error = 'Неправильно. Пройди ще раз матеріал вище і спробуй знову!',
+  error = 'Неправильно. Пройди ще раз матеріал і перечитай уважніше.',
 }: QuizProps) {
+  const storageKey = `educationit:quiz:${id}`
+
   const el = html(`
     <section class="${styles.root}" aria-label="Квіз">
       <div class="${styles.body}">
@@ -43,6 +50,7 @@ export function Quiz({
             )
             .join('')}
         </div>
+        <button class="${styles.submit}" type="button" disabled>Відправити відповідь</button>
       </div>
       <div class="${styles.result}" role="status" hidden>
         <p class="${styles.resultTitle}"></p>
@@ -54,37 +62,55 @@ export function Quiz({
   const result = el.querySelector<HTMLElement>(`.${styles.result}`)!
   const resultTitle = el.querySelector<HTMLElement>(`.${styles.resultTitle}`)!
   const resultText = el.querySelector<HTMLElement>(`.${styles.resultText}`)!
+  const submit = el.querySelector<HTMLButtonElement>(`.${styles.submit}`)!
   const buttons = [...el.querySelectorAll<HTMLButtonElement>(`.${styles.option}`)]
+  let selected = -1
 
-  el.addEventListener('click', (e) => {
-    const button = (e.target as HTMLElement).closest<HTMLButtonElement>(`.${styles.option}`)
-    if (!button || el.classList.contains(styles.solved)) return
+  const select = (index: number) => {
+    selected = index
+    for (const b of buttons) b.setAttribute('aria-checked', String(Number(b.dataset.index) === index))
+    submit.disabled = false
+  }
 
-    const isCorrect = Number(button.dataset.index) === correct
+  // Показ результату; після відповіді квіз закривається назавжди
+  const showResult = (index: number) => {
+    select(index)
+    const isCorrect = index === correct
+    buttons[index].classList.add(isCorrect ? styles.correct : styles.wrong)
+    for (const b of buttons) b.disabled = true
+    submit.remove()
 
-    // Позначаємо лише обраний варіант; після помилки можна обрати інший
-    for (const b of buttons) {
-      b.classList.remove(styles.correct, styles.wrong)
-      b.setAttribute('aria-checked', String(b === button))
-    }
-    button.classList.add(isCorrect ? styles.correct : styles.wrong)
-
-    el.classList.toggle(styles.solved, isCorrect)
-    el.classList.toggle(styles.failed, !isCorrect)
+    el.classList.add(styles.answered, isCorrect ? styles.solved : styles.failed)
     resultTitle.innerHTML = `<span class="${styles.resultIcon}">${isCorrect ? icons.check : icons.close}</span>Результат`
     resultText.textContent = isCorrect ? success : error
     result.className = cx(styles.result, isCorrect ? styles.success : styles.error)
     result.hidden = false
+  }
+
+  el.addEventListener('click', (e) => {
+    const button = (e.target as HTMLElement).closest<HTMLButtonElement>(`.${styles.option}`)
+    if (button && !button.disabled) select(Number(button.dataset.index))
   })
+
+  submit.addEventListener('click', () => {
+    if (selected < 0) return
+    writeStorage(storageKey, String(selected))
+    showResult(selected)
+  })
+
+  // Якщо на квіз уже відповідали — одразу показуємо збережений результат
+  const saved = readStorage(storageKey)
+  if (saved !== null && buttons[Number(saved)]) showResult(Number(saved))
 
   return el
 }
 
 /** Замінює розмітку квізів у змісті уроку на інтерактивні компоненти */
-export function mountQuizzes(root: HTMLElement) {
-  for (const node of root.querySelectorAll<HTMLElement>('[data-quiz]')) {
+export function mountQuizzes(root: HTMLElement, lessonId: string) {
+  root.querySelectorAll<HTMLElement>('[data-quiz]').forEach((node, index) => {
     node.replaceWith(
       Quiz({
+        id: `${lessonId}:${index}`,
         question: node.querySelector('p')?.innerHTML ?? '',
         options: [...node.querySelectorAll('li')].map((li) => li.innerHTML),
         correct: Number(node.dataset.correct ?? 0),
@@ -92,5 +118,5 @@ export function mountQuizzes(root: HTMLElement) {
         error: node.dataset.error,
       }),
     )
-  }
+  })
 }
