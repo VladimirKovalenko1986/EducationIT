@@ -5,6 +5,7 @@ export const icons = {
   home: svg('<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'),
   arrow: svg('<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'),
   chevron: svg('<path d="m6 9 6 6 6-6"/>'),
+  reset: svg('<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>'),
   check: svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
   close: svg('<path d="M6 6l12 12M18 6 6 18"/>'),
   send: svg('<path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/>'),

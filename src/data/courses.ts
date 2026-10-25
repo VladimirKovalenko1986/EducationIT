@@ -10,6 +10,7 @@ import b1m3t2 from './lessons/cybersecurity/b1-m3-t2.html?raw'
 import b1m3hw from './lessons/cybersecurity/b1-m3-hw.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
+import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 // prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
@@ -93,7 +94,7 @@ export const courses: Course[] = [
             lessons: [
               { id: 'fs-b1-m1-program', title: 'Програма модулю', content: fsB1m1Program },
               { id: 'fs-b1-m1-web-tech', title: 'Веб-технології', content: fsB1m1WebTech },
-              { id: 'fs-b1-m1-tags', title: 'Теги та атрибути', content: placeholder },
+              { id: 'fs-b1-m1-tags', title: 'Теги та атрибути', content: fsB1m1Tags },
               { id: 'fs-b1-m1-links', title: 'Посилання', content: placeholder },
               { id: 'fs-b1-m1-structure', title: 'Структурна розмітка', content: placeholder },
               { id: 'fs-b1-m1-skeleton', title: 'Скелет HTML-документа', content: placeholder },

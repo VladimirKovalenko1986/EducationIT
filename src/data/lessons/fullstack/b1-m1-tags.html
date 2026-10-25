@@ -1,0 +1,836 @@
+<h2>Є задача!</h2>
+
+<p>Твій добрий знайомий вирішив опублікувати улюблений рецепт на сайті, який бачитимуть люди по всьому світу. Насамперед треба створити розмітку сторінки рецепта. І він просить тебе про допомогу.</p>
+<p>Тобі відомо, що з трьох основних технологій (HTML, CSS і JS) саме HTML відповідає за додавання вмісту. А ще в твоєму арсеналі є найкращі навчальні матеріали з HTML. Чи цього достатньо, щоб сказати «Так» твоєму знайомому? Для розробників, які працюють у динамічній IT-сфері, — цілком достатньо.</p>
+
+<aside data-icon="💻">Практичні завдання в цій темі виконуй у VS Code: створи файл <code>index.html</code> і крок за кроком будуй сторінку рецепта. Після кожного завдання звіряй свій код з рішенням.</aside>
+
+<h2>Теги</h2>
+
+<p><b>Тег</b> (tag) — елемент мови розмітки гіпертексту. Теги є найменшими будівельними блоками, з яких складається будь-яка вебсторінка. Кожен тег позначає окрему сутність: заголовок, список, абзац тексту, зображення. Для виділення тегів у тексті документа використовуються кутові дужки, у яких вказується ім'я тегу та його атрибути.</p>
+
+<pre><code>&lt;ім'я_тегу&gt;...&lt;/ім'я_тегу&gt;</code></pre>
+
+<p><b>Відкриваючий</b> тег вказує на початок елемента, <b>закриваючий</b> — на його кінець. Закриваючий тег утворюється додаванням слешу (<code>/</code>) перед ім'ям тегу. Між відкриваючим та закриваючим тегами знаходиться контент тегу.</p>
+<p>Приклади тегів:</p>
+
+<pre><code>&lt;section&gt;Секція&lt;/section&gt;
+&lt;p&gt;Абзац&lt;/p&gt;
+&lt;a&gt;Посилання&lt;/a&gt;
+&lt;button&gt;Кнопка&lt;/button&gt;</code></pre>
+
+<aside data-icon="📌"><b>HTML-елемент</b> — це абзац, заголовок, список, посилання тощо. У HTML-документі елемент складається з тегу та контенту тегу.</aside>
+
+<div data-quiz data-correct="2" data-success="Це правильна відповідь! Є кутові дужки і / у закриваючому тегу. Правильне ім'я у відкриваючому та закриваючому тегах.">
+  <p>Який тег написаний правильно?</p>
+  <ul>
+    <li><code>{section}Секція{/section}</code></li>
+    <li><code>&lt;p&gt;Абзац&lt;p&gt;</code></li>
+    <li><code>&lt;a&gt;Посилання&lt;/a&gt;</code></li>
+    <li><code>&lt;button&gt;Кнопка&lt;/section&gt;</code></li>
+  </ul>
+</div>
+
+<h2>Тег абзацу</h2>
+
+<p>У нас є опис страви для сайту «10 000 найсмачніших страв світу». Давай додамо опис на сторінку!</p>
+
+<p>Тег <code>&lt;p&gt;</code> — універсальний контейнер для групування дрібних фразових елементів, відокремлення їх один від одного й подальшої стилізації. За замовчуванням <code>&lt;p&gt;</code> — це блоковий елемент, який починається з нового рядка і має вертикальні відступи, які можна змінити за допомогою CSS.</p>
+
+<pre><code>&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing.
+  Neque eligendi, a eaque, esse itaque porro non
+  exercitationem odio earum quos perferendis!
+&lt;/p&gt;
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  Illo, totam velit asperiores non temporibus ut nisi?
+&lt;/p&gt;</code></pre>
+
+<p>Часто тег треба заповнити текстом, але справжнього тексту для сайту ще немає. Для цього використовують спеціальний заповнювач — <b>текст-рибу</b> (lorem ipsum).</p>
+
+<aside data-icon="⚡">У VS Code в HTML-документі набери <code>lorem10</code> і натисни <code>Tab</code> — з'явиться текст із 10 слів. Замість 10 можна поставити будь-яке число.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 1</h4>
+  <p>В редакторі вже є опис рецепта, але зараз це просто текст. Обгорни його в тег <code>&lt;p&gt;</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:p">У коді є відкриваючий тег <code>&lt;p&gt;</code></li>
+    <li data-check="closing:p">У коді є закриваючий тег <code>&lt;/p&gt;</code></li>
+    <li data-check="contains:p=A light and gently sweet breakfast dish">Опис рецепта знаходиться всередині парного тегу <code>&lt;p&gt;</code></li>
+  </ul>
+<pre data-start><code>A light and gently sweet breakfast dish or a dessert for picky eaters. With
+crispy coating and the light and soft inside, you get a lovely balance of
+flavors and textures. These delicious pancakes pair perfectly with sour cream
+and fruit in pretty much any form.</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Тег заголовка</h2>
+
+<p>Опис рецепта є, а назви — нема! Треба обов'язково додати заголовок, адже користувачі мають швидко зрозуміти, що це за страва.</p>
+
+<p>Заголовок є інструментом структурування текстового вмісту сторінки. Щоб додати найважливіший заголовок, що описує весь вміст сторінки, використовується тег <code>&lt;h1&gt;</code> — заголовок першого рівня. На практиці <code>&lt;h1&gt;</code> використовується лише один раз як основний заголовок сторінки.</p>
+
+<pre><code>&lt;h1&gt;Про компанію&lt;/h1&gt;
+&lt;p&gt;
+  Lorem ipsum dolor sit amet consectetur adipisicing.
+  Maiores delectus, esse consectetur, commodi voluptate
+  fuga ducimus eveniet sed debitis asperiores, corporis
+&lt;/p&gt;
+&lt;p&gt;
+  Lorem ipsum dolor sit amet consectetur adipisicing
+  elit. Dolorem soluta officia hic voluptatibus
+  impedit velit voluptate cum laboriosam quasi.
+&lt;/p&gt;</code></pre>
+
+<aside data-icon="✍️"><b>Оформлення коду.</b> У фрагменті вище — приклади коректного оформлення. Запам'ятай основне: кожен тег починається з нового рядка; якщо контент займає кілька рядків, відкриваючий та закриваючий теги розташовані один під одним (як в абзаці); якщо контент займає один рядок, теги стоять безпосередньо до та після контенту (як у заголовку). Так краще видно, де тег починається і де закінчується.</aside>
+
+<div data-quiz data-correct="0" data-success="Абсолютно точно!">
+  <p>Скільки разів рекомендовано використовувати тег <code>&lt;h1&gt;</code> на одній сторінці?</p>
+  <ul>
+    <li>1 раз</li>
+    <li>2 рази</li>
+    <li>ліміту немає</li>
+  </ul>
+</div>
+
+<section data-kind="task">
+  <h4>Практичне завдання 2</h4>
+  <p>Додай заголовок сторінки рецепта перед абзацом з описом. Використовуй тег <code>&lt;h1&gt;</code> з текстом <code>Sweet cheese pancakes</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:h1">У коді є відкриваючий тег <code>&lt;h1&gt;</code></li>
+    <li data-check="closing:h1">У коді є закриваючий тег <code>&lt;/h1&gt;</code></li>
+    <li data-check="exists:h1=Sweet cheese pancakes">Текст заголовка — <code>Sweet cheese pancakes</code></li>
+    <li data-check="before:h1,p">Елемент <code>&lt;h1&gt;</code> знаходиться перед абзацом опису рецепта</li>
+  </ul>
+<pre data-start><code>&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. ...
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Коментарі</h2>
+
+<p>Чому розробники пишуть коментарі у коді? Щоб у майбутньому тобі або колезі було зрозуміло, що це за код.</p>
+<p>Коментарі використовуються для того, щоб:</p>
+<ul>
+  <li>залишити у вихідному коді пояснення, нотатку;</li>
+  <li>візуально розділити код, позначивши, де починається і закінчується розмітка шапки сайту, підвалу, окремої секції тощо;</li>
+  <li>закоментувати ділянку коду, тобто тимчасово приховати частину HTML, щоб вона не відображалася на сторінці.</li>
+</ul>
+
+<pre><code>&lt;!-- Це коментар, його вміст не відобразиться на сторінці --&gt;
+
+&lt;p&gt;Це абзац тексту, він відображається на сторінці.&lt;/p&gt;
+
+&lt;!--
+  Коментар може бути багаторядковим.
+  Це зручно для більш ємних описів.
+--&gt;
+
+&lt;!--
+  &lt;p&gt;Цей абзац закоментований, тому він не відображається на сторінці.&lt;/p&gt;
+--&gt;</code></pre>
+
+<aside data-icon="⚡">У VS Code коментар додається комбінацією <code>Ctrl</code> + <code>/</code> (у macOS — <code>Cmd</code> + <code>/</code>). Повторне натискання знімає коментар.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 3</h4>
+  <p>Додай перед заголовком сторінки коментар, що описує код проєкту. Використовуй текст <code>Recipe page markup</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="comment">У коді є коментар</li>
+    <li data-check="commentBefore:h1">Коментар знаходиться перед заголовком сторінки</li>
+    <li data-check="comment:Recipe page markup">Текст коментаря — <code>Recipe page markup</code></li>
+  </ul>
+<pre data-start><code>&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;...&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Атрибути: тег посилання <code>&lt;a&gt;</code> та атрибут <code>href</code></h2>
+
+<p>Адмін платформи каже: треба обов'язково додати посилання на профіль автора рецепта.</p>
+
+<p><b>Атрибути</b> — це додаткові налаштування тегів, за допомогою яких можна змінювати властивості та поведінку елемента. Теги можуть мати обов'язкові та необов'язкові атрибути. Їх може бути декілька або зовсім не бути.</p>
+<p>Атрибути записуються всередині відкриваючого тегу, а їхні значення — у подвійних лапках. Кілька атрибутів розділяються пробілом.</p>
+
+<pre><code>&lt;a href="https://google.com" class="link"&gt;...&lt;/a&gt;
+&lt;img src="cat.jpg" alt="cute cat" /&gt;
+&lt;input type="text" name="user_name" /&gt;
+&lt;button type="submit"&gt;...&lt;/button&gt;</code></pre>
+
+<aside data-icon="💡"><b>Корисно!</b> Щоб дізнатися, які атрибути доступні для тегу та для чого вони, заглянь у документацію: <a href="https://developer.mozilla.org/uk/docs/Web/HTML/Element" target="_blank" rel="noreferrer">MDN Web Docs</a> або <a href="https://htmlreference.io/" target="_blank" rel="noreferrer">htmlreference.io</a>.</aside>
+
+<p>Розглянемо структуру тегу з атрибутами на прикладі тегу <code>&lt;a&gt;</code>. Він призначений для створення посилань: клікаючи по ньому, ми переходимо на іншу сторінку, завантажуємо файл тощо. За замовчуванням текст посилання синій і підкреслений, а при наведенні курсор миші змінює вигляд.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1/tag-anatomy.png" alt="Будова тегу a: ім'я тегу, атрибути href і class, їхні значення та контент тегу" loading="lazy" />
+  <figcaption>Будова тегу: ім'я, атрибути, значення атрибутів і контент</figcaption>
+</figure>
+
+<p>Адреса посилання задається в обов'язковому атрибуті <code>href="адреса"</code>, де адреса — це URL сторінки, файлу або будь-якого ресурсу.</p>
+
+<pre><code>&lt;a href="https://google.com"&gt;Посилання на головну сторінку Google&lt;/a&gt;</code></pre>
+
+<p><b>URL</b> (Uniform Resource Locator) — унікальна адреса, що вказує шлях до ресурсу в інтернеті, наприклад <code>https://goit.global/</code>.</p>
+
+<aside data-icon="📌"><b>Запам'ятай основне про атрибути:</b> вони змінюють або додають тегам властивості; кілька атрибутів відокремлюються пробілом; атрибути та їхні значення записуються всередині відкриваючого тегу; між атрибутом і значенням ставиться знак <code>=</code>.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 4</h4>
+  <p>У кожного рецепта є автор. Додай одразу під описом посилання на профіль автора. Посилання веде на <code>https://instagram.com/goitclub</code>, текст посилання — <code>Author's profile</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:a; closing:a">У коді є відкриваючий тег <code>&lt;a&gt;</code> і закриваючий <code>&lt;/a&gt;</code></li>
+    <li data-check="exists:a=Author's profile">Контент посилання — <code>Author's profile</code></li>
+    <li data-check="attr:a@href=https://instagram.com/goitclub">У посиланні є атрибут <code>href</code> зі значенням <code>https://instagram.com/goitclub</code></li>
+    <li data-check="before:p,a">Посилання знаходиться після опису рецепта</li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;...&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub"&gt;Author's profile&lt;/a&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Посилання: атрибут <code>target</code></h2>
+
+<p>Зараз профіль автора відкривається в поточній вкладці, і користувач замість рецепта бачить Instagram. Краще, щоб профіль відкривався в новій вкладці.</p>
+<p>Щоб сторінка за посиланням відкривалася в новій вкладці, додай тегу <code>&lt;a&gt;</code> атрибут <code>target="_blank"</code>. За замовчуванням посилання відкриваються в поточній вкладці — це значення <code>target="_self"</code>.</p>
+
+<pre><code>&lt;!-- Посилання на зовнішній ресурс, відкриється в поточній вкладці --&gt;
+&lt;a href="https://goit.global/"&gt;GoIT&lt;/a&gt;
+
+&lt;!-- Посилання на зовнішній ресурс, відкриється в новій вкладці --&gt;
+&lt;a href="https://goit.global/" target="_blank"&gt;GoIT&lt;/a&gt;</code></pre>
+
+<aside data-icon="🛡️">Для зовнішніх посилань з <code>target="_blank"</code> часто додають ще й <code>rel="noopener noreferrer"</code>: так сторінка, що відкрилася, не отримає доступу до твоєї вкладки. Сучасні браузери вже роблять <code>noopener</code> за замовчуванням, але явний запис — хороша звичка.</aside>
+
+<div data-quiz data-correct="1" data-success="Саме так, чудово!">
+  <p>Атрибут з яким значенням треба додати, щоб посилання відкривалося в новій вкладці?</p>
+  <ul>
+    <li><code>alt="_blank"</code></li>
+    <li><code>target="_blank"</code></li>
+    <li><code>target="_self"</code></li>
+  </ul>
+</div>
+
+<section data-kind="task">
+  <h4>Практичне завдання 5</h4>
+  <p>Додай до посилання на профіль автора атрибут, щоб воно відкривалося в новій вкладці.</p>
+  <ul data-kind="checklist">
+    <li data-check="attr:a@href=https://instagram.com/goitclub">У посиланні є атрибут <code>href</code> зі значенням <code>https://instagram.com/goitclub</code></li>
+    <li data-check="attr:a@target=_blank">У посиланні є атрибут <code>target</code> зі значенням <code>_blank</code></li>
+    <li data-check="exists:a=Author's profile; before:p,a">Контент посилання — <code>Author's profile</code>, посилання стоїть після опису</li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub"&gt;Author's profile&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Тег <code>&lt;img&gt;</code> і атрибут <code>src</code></h2>
+
+<p>Як би викласти на сайт фото страви? Дивишся — і одразу зрозуміло: смакота.</p>
+<p>Зображення роблять вебсторінки візуально привабливими й допомагають краще передати зміст документа.</p>
+<p><b>Растрова графіка</b> (raster, bitmap) — опис зображення як масиву пікселів, де для кожного пікселя вказано колір. Це як мапа кольорів фіксованого розміру.</p>
+
+<div data-layout="table">
+  <table>
+    <thead><tr><th>Формат</th><th>Коли використовувати</th></tr></thead>
+    <tbody>
+      <tr><td>JPEG</td><td>Яскраві реалістичні фотографії з мільйонами кольорів, коли не потрібні прозорий фон і анімація</td></tr>
+      <tr><td>PNG</td><td>Зображення з прозорим або однокольоровим фоном, іконки, декоративні елементи, а також скріншоти, креслення й графіки, де важлива чіткість</td></tr>
+      <tr><td>WebP / AVIF</td><td>Сучасні формати: та сама якість, що в JPEG і PNG, але файли значно менші. Підтримуються всіма сучасними браузерами</td></tr>
+      <tr><td>SVG</td><td>Векторна графіка — іконки й логотипи, які чітко виглядають у будь-якому розмірі</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Тег <code>&lt;img&gt;</code> призначений для розмітки зображень. Щоб задати адресу зображення, використовується обов'язковий атрибут <code>src="шлях"</code>.</p>
+
+<pre><code>&lt;img src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg" /&gt;</code></pre>
+
+<section data-kind="task">
+  <h4>Практичне завдання 6</h4>
+  <p>Додай тегом <code>&lt;img&gt;</code> фото готової страви між заголовком сторінки та описом рецепта. Адреса зображення: <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg</code></p>
+  <ul data-kind="checklist">
+    <li data-check="exists:img; between:img,h1,p">У коді є тег <code>&lt;img&gt;</code> між заголовком і описом рецепта</li>
+    <li data-check="attr:img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg">У тега <code>&lt;img&gt;</code> є атрибут <code>src</code> з потрібною адресою</li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;img src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg" /&gt;
+&lt;p&gt;...&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Парні та одиночні теги</h2>
+
+<p>Ти міг помітити, що тег <code>&lt;img&gt;</code> синтаксично відрізняється від попередніх. Він <b>одиночний</b>, тобто не має закриваючого тегу.</p>
+
+<dl>
+  <div>
+    <dt>Парні теги</dt>
+    <dd>Складаються з відкриваючого і закриваючого тегів, огортають вміст, дозволяють групувати контент, можуть містити інші теги.</dd>
+  </div>
+  <div>
+    <dt>Одиночні теги</dt>
+    <dd>Мають лише відкриваючий тег, не містять текстового вмісту, отримують вміст або поведінку з атрибутів (як <code>src</code> у <code>&lt;img&gt;</code>).</dd>
+  </div>
+</dl>
+
+<pre><code>&lt;!-- Стаття із заголовком та абзацом --&gt;
+&lt;article&gt;
+  &lt;h1&gt;Коротко про парні теги&lt;/h1&gt;
+  &lt;p&gt;
+    Більшість тегів парні. Їх контент міститься між
+    відкриваючим та закриваючим тегами.
+  &lt;/p&gt;
+&lt;/article&gt;</code></pre>
+
+<pre><code>&lt;!-- Метаінформація про кодування --&gt;
+&lt;meta charset="utf-8" /&gt;
+&lt;!-- Поле вводу --&gt;
+&lt;input type="text" /&gt;
+&lt;!-- Зображення --&gt;
+&lt;img src="cat.jpg" alt="cool cat" /&gt;</code></pre>
+
+<aside data-icon="💡">Слеш у кінці одиночного тегу (<code>&lt;img ... /&gt;</code>) у HTML5 необов'язковий: <code>&lt;img ...&gt;</code> теж правильно. У цьому курсі ми пишемо зі слешем — головне, щоб стиль був однаковим у всьому проєкті.</aside>
+
+<h2>Зображення: атрибут <code>alt</code></h2>
+
+<p>Якщо зображення не завантажилося або сторінку відкрив користувач з порушеннями зору (через скрінрідер), потрібен текстовий опис зображення.</p>
+
+<pre><code>&lt;img
+  src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg"
+  alt="Macbook Air на сірому дерев'яному столі"
+/&gt;</code></pre>
+
+<p>Альтернативний текст має бути в кожному тегу <code>&lt;img&gt;</code>:</p>
+<ul>
+  <li>опис — закінчене, повністю сформульоване речення;</li>
+  <li>він відповідає на питання «Що зображено?»;</li>
+  <li>опис унікальний і не повторює текст, що стоїть поруч із зображенням;</li>
+  <li>не потрібні слова «зображення», «картинка» чи «ілюстрація» — це й так зрозуміло.</li>
+</ul>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1/kittens.webp" alt="П'ять сірих смугастих кошенят граються на рожевій пухнастій ковдрі." loading="lazy" />
+</figure>
+
+<p>Якщо в тексті сторінки вже розповідається історія цих кошенят, достатньо короткого опису:</p>
+<pre><code>&lt;img src="kittens.jpg" alt="Кошенята" /&gt;</code></pre>
+<p>А якщо це просто галерея без тексту, треба уточнити, що саме зображено:</p>
+<pre><code>&lt;img src="kittens.jpg" alt="П'ять кошенят граються на ковдрі." /&gt;</code></pre>
+
+<aside data-icon="💡">Якщо зображення суто декоративне і нічого не означає (візерунок, фонова прикраса), пиши порожній <code>alt=""</code> — тоді скрінрідер його пропустить.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 7</h4>
+  <p>Якщо зображення не завантажиться, користувач має побачити хоча б опис. Додай тегу <code>&lt;img&gt;</code> атрибут <code>alt</code> зі значенням <code>Sweet cheese pancakes served with berries</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="between:img,h1,p">Тег <code>&lt;img&gt;</code> знаходиться між заголовком і описом рецепта</li>
+    <li data-check="attr:img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg">У тега є атрибут <code>src</code> з адресою фото</li>
+    <li data-check="attr:img@alt=Sweet cheese pancakes served with berries">У тега є атрибут <code>alt</code> зі значенням <code>Sweet cheese pancakes served with berries</code></li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;img src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg" /&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;img
+  src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"
+  alt="Sweet cheese pancakes served with berries"
+/&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Зображення: атрибути <code>width</code> і <code>height</code></h2>
+
+<p>За замовчуванням браузер показує будь-яке зображення в оригінальному розмірі. Щоб змінити розмір, у тега <code>&lt;img&gt;</code> є атрибути <code>width</code> (ширина) і <code>height</code> (висота). Значення задаються в пікселях, але в коді пишеться лише число, без <code>px</code>.</p>
+<p>Якщо вказати лише одну величину — ширину або висоту, — браузер сам обчислить іншу, зберігши пропорції.</p>
+
+<pre><code>&lt;img
+  src="https://images.pexels.com/photos/67112/pexels-photo-67112.jpeg"
+  alt="Macbook Air на сірому дерев'яному столі"
+  width="400"
+/&gt;</code></pre>
+
+<aside data-icon="⚡">Хороша практика — вказувати і <code>width</code>, і <code>height</code>: тоді браузер заздалегідь резервує місце під зображення, і сторінка не «стрибає», поки картинка завантажується.</aside>
+
+<p>Уважно роздивись схему нижче — в оформленні атрибутів є помилки:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1/img-spaces.png" alt="Тег img з атрибутами, цифрами 1–7 позначено пробіли між його частинами" loading="lazy" />
+  <figcaption>Цифрами 1–7 позначено пробіли між частинами тегу</figcaption>
+</figure>
+
+<div data-quiz data-correct="0" data-success="Правильно! Пробіл ставиться лише перед кожним атрибутом і перед />, а навколо = пробілів немає.">
+  <p>На схемі цифри 1–7 вказують на пробіли між частинами тегу <code>&lt;img&gt;</code>. Де пробіли використані правильно?</p>
+  <ul>
+    <li>Приклади 1, 3, 5, 7 — перед назвою кожного атрибута й перед <code>/&gt;</code></li>
+    <li>Приклади 1 і 7 — лише перед першим атрибутом і перед <code>/&gt;</code></li>
+    <li>Приклади 2, 4, 6 — перед значенням кожного атрибута</li>
+  </ul>
+</div>
+
+<section data-kind="task">
+  <h4>Практичне завдання 8</h4>
+  <p>Оригінальне фото досить велике. Зроби так, щоб на екрані воно було шириною <code>320</code> пікселів.</p>
+  <ul data-kind="checklist">
+    <li data-check="attr:img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg; attr:img@alt=Sweet cheese pancakes served with berries">У тега <code>&lt;img&gt;</code> є атрибути <code>src</code> і <code>alt</code>, як у попередньому завданні</li>
+    <li data-check="attr:img@width=320">У тега <code>&lt;img&gt;</code> є атрибут <code>width</code> зі значенням <code>320</code></li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;img
+  src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"
+  alt="Sweet cheese pancakes served with berries"
+/&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;img
+  src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"
+  alt="Sweet cheese pancakes served with berries"
+  width="320"
+/&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Списки</h2>
+
+<p>На черзі — список інгредієнтів! А для цього варто дізнатися, як робити списки.</p>
+<p>Списки впорядковують колекції та показують їх наочно й зручно. Список — це контейнер, дітьми якого можуть бути лише елементи списку — теги <code>&lt;li&gt;</code> (list item).</p>
+
+<h3>Невпорядкований список</h3>
+<p>Тег <code>&lt;ul&gt;</code> (unordered list) створює маркований список: кожен елемент починається з невеликого символу (маркера). За допомогою CSS маркер можна прибрати або замінити. Використовується для переліку в довільному порядку, наприклад списку курортів:</p>
+
+<pre><code>&lt;h1&gt;Найгарячіші курорти&lt;/h1&gt;
+&lt;p&gt;Цього року експерти радять відвідати наступні локації.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Туніс&lt;/li&gt;
+  &lt;li&gt;Туреччина&lt;/li&gt;
+  &lt;li&gt;Греція&lt;/li&gt;
+  &lt;li&gt;Єгипет&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<aside data-icon="✍️"><b>Оформлення коду.</b> Вкладені елементи <code>&lt;li&gt;</code> розташовуються не прямо під <code>&lt;ul&gt;</code>, а з відступом — 2 або 4 пробіли. Важливо, щоб відступ був однаковим у всьому проєкті. Така «ялинка» показує вкладеність і покращує читабельність коду.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 9</h4>
+  <p>На сторінці вже є абзац із загальним описом продуктів. Додай під ним невпорядкований список <code>&lt;ul&gt;</code> із семи інгредієнтів — кожен у своєму <code>&lt;li&gt;</code>:</p>
+<pre><code>2 cups farmer's cheese, homemade
+3 large eggs
+3 cups all-purpose flour, plus about 1/2 cup more for dredging
+3 tablespoons white sugar
+half teaspoon salt
+2-3 tablespoons extra light olive oil for each batch
+fresh fruit, jam, or sour cream for topping</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Тег <code>&lt;ul&gt;</code> знаходиться після абзацу з описом інгредієнтів</li>
+    <li data-check="count:ul > li=7">Всередині <code>&lt;ul&gt;</code> сім тегів <code>&lt;li&gt;</code></li>
+    <li data-check="items:ul=2 cups farmer's cheese, homemade|3 large eggs|3 cups all-purpose flour, plus about 1/2 cup more for dredging|3 tablespoons white sugar|half teaspoon salt|2-3 tablespoons extra light olive oil for each batch|fresh fruit, jam, or sour cream for topping">Текст у <code>&lt;li&gt;</code> збігається з текстом інгредієнтів</li>
+  </ul>
+<pre data-start><code>&lt;p&gt;
+  The right choice of cheese is extremely important for this dish. Farmer's
+  cheese will suit best. Another alternative is using ricotta or cottage cheese.
+  In this case, the taste and flavor will be slightly different.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;2 cups farmer's cheese, homemade&lt;/li&gt;
+  &lt;li&gt;3 large eggs&lt;/li&gt;
+  &lt;li&gt;3 cups all-purpose flour, plus about 1/2 cup more for dredging&lt;/li&gt;
+  &lt;li&gt;3 tablespoons white sugar&lt;/li&gt;
+  &lt;li&gt;half teaspoon salt&lt;/li&gt;
+  &lt;li&gt;2-3 tablespoons extra light olive oil for each batch&lt;/li&gt;
+  &lt;li&gt;fresh fruit, jam, or sour cream for topping&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+
+<h3>Впорядкований список</h3>
+<p>Тепер треба додати покрокову інструкцію приготування — тут важлива послідовність дій.</p>
+<p>Тег <code>&lt;ol&gt;</code> (ordered list) створює нумерований список. Браузер нумерує елементи автоматично: якщо видалити один із пунктів, решта перенумеруються. Найчастіше нумерований список використовують для дій, які виконуються в певному порядку, наприклад у рецепті.</p>
+
+<pre><code>&lt;h1&gt;Як заварити чай&lt;/h1&gt;
+&lt;p&gt;Покрокова інструкція для чайників. Просто повтори — і в тебе все вийде!&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Закип'яти воду&lt;/li&gt;
+  &lt;li&gt;Насип чай у чашку&lt;/li&gt;
+  &lt;li&gt;Налий у чашку окропу&lt;/li&gt;
+  &lt;li&gt;Зачекай 10 хвилин, після чого можна пити&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+<aside data-icon="📌">У теги <code>&lt;ul&gt;</code> і <code>&lt;ol&gt;</code> можна вкладати лише елементи списку — теги <code>&lt;li&gt;</code>. А всередині <code>&lt;li&gt;</code> вже можуть бути інші теги. Детальніше про вкладеність — у наступному розділі.</aside>
+
+<div data-quiz data-correct="2" data-success="Чудово!">
+  <p>Вибери ситуацію, коли розробнику доцільно використати тег <code>&lt;ol&gt;</code>.</p>
+  <ul>
+    <li>Додати назву конференції на сайт, присвячений події</li>
+    <li>Додати опис досвіду кожного експерта, що виступатиме на конференції</li>
+    <li>Додати покрокову інструкцію, як зареєструватися на конференцію</li>
+    <li>Додати перелік усіх компаній, що брали участь в організації події</li>
+  </ul>
+</div>
+
+<section data-kind="task">
+  <h4>Практичне завдання 10</h4>
+  <p>Ми додали абзац із загальним описом процесу приготування. Додай під ним нумерований список із шести кроків:</p>
+<pre><code>Beat eggs, salt and sugar together in a bowl until smooth.
+Add flour and farmer's cheese. Mix well until the dough is thick and sticky.
+Heat a skillet over medium heat, add 2-3 tablespoon oil.
+Divide dough into portions, form into balls and coat with some flour. With well-floured hands, flatten slightly to form into discs.
+Once the oil is hot, place the discs and fry until golden brown, 3-5 minutes each side.
+Serve with your favorite toppings - jam, sour cream, or fruits and berries.</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ol; before:p,ol">Тег <code>&lt;ol&gt;</code> знаходиться після абзацу з описом процесу приготування</li>
+    <li data-check="count:ol > li=6">Всередині <code>&lt;ol&gt;</code> шість тегів <code>&lt;li&gt;</code></li>
+    <li data-check="items:ol=Beat eggs, salt and sugar together in a bowl until smooth.|Add flour and farmer's cheese. Mix well until the dough is thick and sticky.|Heat a skillet over medium heat, add 2-3 tablespoon oil.|Divide dough into portions, form into balls and coat with some flour. With well-floured hands, flatten slightly to form into discs.|Once the oil is hot, place the discs and fry until golden brown, 3-5 minutes each side.|Serve with your favorite toppings - jam, sour cream, or fruits and berries.">Текст у <code>&lt;li&gt;</code> збігається з текстом кроків</li>
+  </ul>
+<pre data-start><code>&lt;p&gt;
+  Before frying, make sure the oil in the skillet is hot. Test it by sprinkling
+  a bit of flour into the pan. If it sizzles, the temperature is right.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Beat eggs, salt and sugar together in a bowl until smooth.&lt;/li&gt;
+  &lt;li&gt;Add flour and farmer's cheese. Mix well until the dough is thick and sticky.&lt;/li&gt;
+  &lt;li&gt;Heat a skillet over medium heat, add 2-3 tablespoon oil.&lt;/li&gt;
+  &lt;li&gt;Divide dough into portions, form into balls and coat with some flour. With well-floured hands, flatten slightly to form into discs.&lt;/li&gt;
+  &lt;li&gt;Once the oil is hot, place the discs and fry until golden brown, 3-5 minutes each side.&lt;/li&gt;
+  &lt;li&gt;Serve with your favorite toppings - jam, sour cream, or fruits and berries.&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Ієрархія заголовків</h2>
+
+<p>Група тегів від <code>&lt;h1&gt;</code> до <code>&lt;h6&gt;</code> визначає заголовки смислових розділів різного рівня. Вони показують важливість секції контенту, що йде після них, і структурують текст.</p>
+<p><code>&lt;h1&gt;</code> найчастіше використовується лише один раз — як основний заголовок сторінки. Інші заголовки (<code>&lt;h2&gt;</code>–<code>&lt;h6&gt;</code>) можна використовувати скільки завгодно разів, але завжди дотримуючись ієрархії. Не обов'язково мати всі 6 рівнів — зазвичай вистачає трьох-чотирьох.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1/headings-hierarchy.png" alt="Сторінка «Підсумки року» і схема її заголовків: один h1, чотири h2, а в розділі «Нова кар'єра» три h3" loading="lazy" />
+  <figcaption>Правильна ієрархія: один <code>h1</code>, розділи — <code>h2</code>, підрозділи — <code>h3</code></figcaption>
+</figure>
+
+<p>Пошукові системи звертають особливу увагу на заголовки, тому правильне використання цих тегів дуже важливе. Не визначай рівень заголовка за розміром тексту на макеті: не кожен великий текст — заголовок. Заголовок — це вираз, що описує зміст розділу чи секції.</p>
+
+<p>Вивчи схему заголовків, що містить помилку:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1/headings-error.png" alt="Схема заголовків з помилкою: під h1 стоять h2 і h3, а під ними — по два h3" loading="lazy" />
+</figure>
+
+<div data-quiz data-correct="1" data-success="Так! Заголовок h1 найчастіше використовується лише один раз, а для однаково важливих розділів потрібні заголовки одного рівня.">
+  <p>Де помилка на схемі вище?</p>
+  <ul>
+    <li>У першому рядку: заголовок <code>&lt;h1&gt;</code> використаний лише один раз</li>
+    <li>У другому рядку: однаково важливі розділи мають позначатися однаковими заголовками — праворуч має бути <code>&lt;h2&gt;</code> замість <code>&lt;h3&gt;</code></li>
+    <li>У третьому рядку: <code>&lt;h3&gt;</code> не можна використовувати повторно, треба додати інші рівні</li>
+  </ul>
+</div>
+
+<section data-kind="task">
+  <h4>Практичне завдання 11</h4>
+  <p>Створи ієрархію заголовків на сторінці рецепта. Додай заголовок <code>Ingredients</code> перед абзацом з описом інгредієнтів і заголовок <code>Directions</code> перед абзацом з описом процесу приготування. Коментарі в коді позначають початок відповідних секцій.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:h2=Ingredients; before:h2=Ingredients,ul">У коді є тег <code>&lt;h2&gt;</code> з текстом <code>Ingredients</code> перед секцією інгредієнтів</li>
+    <li data-check="exists:h2=Directions; before:ul,h2=Directions; before:h2=Directions,ol">У коді є тег <code>&lt;h2&gt;</code> з текстом <code>Directions</code> перед секцією приготування</li>
+  </ul>
+<pre data-start><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;img
+  src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"
+  alt="Sweet cheese pancakes served with berries"
+  width="320"
+/&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. With
+  crispy coating and the light and soft inside, you get a lovely balance of
+  flavors and textures. These delicious pancakes pair perfectly with sour cream
+  and fruit in pretty much any form.
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;
+
+&lt;!-- Ingredients section start --&gt;
+&lt;p&gt;
+  The right choice of cheese is extremely important for this dish. Farmer's
+  cheese will suit best. Another alternative is using ricotta or cottage cheese.
+  In this case, the taste and flavor will be slightly different.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;2 cups farmer's cheese, homemade&lt;/li&gt;
+  &lt;li&gt;3 large eggs&lt;/li&gt;
+  &lt;li&gt;3 cups all-purpose flour, plus about 1/2 cup more for dredging&lt;/li&gt;
+  &lt;li&gt;3 tablespoons white sugar&lt;/li&gt;
+  &lt;li&gt;half teaspoon salt&lt;/li&gt;
+  &lt;li&gt;2-3 tablespoons extra light olive oil for each batch&lt;/li&gt;
+  &lt;li&gt;fresh fruit, jam, or sour cream for topping&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Directions section start --&gt;
+&lt;p&gt;
+  Before frying, make sure the oil in the skillet is hot. Test it by sprinkling
+  a bit of flour into the pan. If it sizzles, the temperature is right.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Beat eggs, salt and sugar together in a bowl until smooth.&lt;/li&gt;
+  &lt;li&gt;Add flour and farmer's cheese. Mix well until the dough is thick and sticky.&lt;/li&gt;
+  &lt;li&gt;Heat a skillet over medium heat, add 2-3 tablespoon oil.&lt;/li&gt;
+  &lt;li&gt;Divide dough into portions, form into balls and coat with some flour. With well-floured hands, flatten slightly to form into discs.&lt;/li&gt;
+  &lt;li&gt;Once the oil is hot, place the discs and fry until golden brown, 3-5 minutes each side.&lt;/li&gt;
+  &lt;li&gt;Serve with your favorite toppings - jam, sour cream, or fruits and berries.&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  <details>
+    <summary>Показати рішення — уся сторінка рецепта</summary>
+<pre><code>&lt;!-- Recipe page markup --&gt;
+&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;
+&lt;img
+  src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"
+  alt="Sweet cheese pancakes served with berries"
+  width="320"
+/&gt;
+&lt;p&gt;
+  A light and gently sweet breakfast dish or a dessert for picky eaters. ...
+&lt;/p&gt;
+&lt;a href="https://instagram.com/goitclub" target="_blank"&gt;Author's profile&lt;/a&gt;
+
+&lt;!-- Ingredients section start --&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;p&gt;
+  The right choice of cheese is extremely important for this dish. ...
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;2 cups farmer's cheese, homemade&lt;/li&gt;
+  &lt;!-- ... --&gt;
+&lt;/ul&gt;
+
+&lt;!-- Directions section start --&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;p&gt;
+  Before frying, make sure the oil in the skillet is hot. ...
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Beat eggs, salt and sugar together in a bowl until smooth.&lt;/li&gt;
+  &lt;!-- ... --&gt;
+&lt;/ol&gt;</code></pre>
+  </details>
+</section>
+
+<aside data-icon="🎉">Рецепт зверстано! І це неабияке досягнення для початку навчання. Але виникло питаннячко: чи використовуєш ти принципи семантичної розмітки?</aside>
+
+<h2>Семантика</h2>
+
+<p>Розмітка вебсторінки підпорядковується певним правилам — так само, як сторінка газети чи журналу, де на першій шпальті завжди найважливіші теми.</p>
+<p>Вебсторінки містять різні типи контенту: заголовки, списки, зображення, абзаци тощо. Для кожного є відповідний тег: абзац — <code>&lt;p&gt;</code>, посилання — <code>&lt;a&gt;</code> і так далі. Отже, <b>семантика</b> (тобто призначення тегів) є невід'ємною частиною HTML уже з базового рівня.</p>
+
+<h3>Семантична розмітка</h3>
+<p><b>Семантична розмітка</b> — підхід до створення HTML-розмітки, в якому вибір тегу залежить від:</p>
+<ul>
+  <li>призначення тегу, вказаного в специфікації;</li>
+  <li>типу контенту.</li>
+</ul>
+<p>Окрім очевидних випадків (<code>&lt;img&gt;</code> для зображень), бувають складніші. Уяви, що два розробники по-різному додали розділ меню на сторінку ресторану:</p>
+
+<pre><code>&lt;!-- Розробник Петро --&gt;
+&lt;h3&gt;Страви від шефа&lt;/h3&gt;
+&lt;p&gt;
+  Поєднання найсвіжіших локальних
+  продуктів і авторського бачення.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Крем-суп із гарбуза&lt;/li&gt;
+  &lt;li&gt;Телятина на пательні&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Розробник Матвій --&gt;
+&lt;p&gt;Страви від шефа&lt;/p&gt;
+&lt;p&gt;
+  Поєднання найсвіжіших локальних
+  продуктів і авторського бачення.
+&lt;/p&gt;
+&lt;p&gt;Крем-суп із гарбуза&lt;/p&gt;
+&lt;p&gt;Телятина на пательні&lt;/p&gt;</code></pre>
+
+<p><b>Петро</b> подивився, що на сторінці є назва ресторану (<code>&lt;h1&gt;</code>), меню та акції (<code>&lt;h2&gt;</code>), а розділи меню на кшталт «Перші страви» чи «Десерти» зверстані через <code>&lt;h3&gt;</code>. Він проаналізував тип контенту та призначення тегів, додав розділ «Страви від шефа» з тегом <code>&lt;h3&gt;</code>, а страви зверстав списком. Це приклад семантичної розмітки.</p>
+<p><b>Матвій</b> обрав теги за тим, як вони виглядають у браузері: короткий абзац з назвою, ще один з описом і ще два зі стравами. Його сторінка теж працює. Але замовник незадоволений.</p>
+
+<h3>У чому переваги семантичної розмітки?</h3>
+<dl>
+  <div>
+    <dt>Пошукові системи</dt>
+    <dd>Семантична розмітка допомагає пошуковим роботам краще розуміти, що є на сторінці, і правильно ранжувати сайт у видачі.</dd>
+  </div>
+  <div>
+    <dt>Асистивні технології</dt>
+    <dd>Для людей з вадами зору основний інструмент — скрінрідер, що зачитує сторінку. Семантика допомагає йому правильно визначати блоки, а користувачу — розуміти вміст.</dd>
+  </div>
+  <div>
+    <dt>Читабельність коду</dt>
+    <dd>Іншим розробникам у команді — і тобі самому через кілька місяців — важливо швидко розуміти структуру коду.</dd>
+  </div>
+</dl>
+
+<div data-quiz data-correct="1" data-success="Гарна робота!">
+  <p>Вибери правильне визначення семантичної розмітки.</p>
+  <ul>
+    <li>Семантична розмітка — це стратегія створення коду, що працює без помилок</li>
+    <li>Семантична розмітка — це використання тегів відповідно до їхнього призначення</li>
+    <li>Семантична розмітка — це підхід, що виключає потребу в доопрацюваннях від замовника чи тестувальників</li>
+  </ul>
+</div>
+
+<h2>Оформлення коду: теги</h2>
+
+<p>Під час створення сайтів завжди доводиться повертатися до вже написаного коду. Зазвичай над проєктом працюють кілька розробників. Якщо код не оформлено за стандартами, він стає нечитабельним, і швидкість розробки падає.</p>
+<p>Підсумуємо стандарти, які ти вже знаєш.</p>
+
+<h4>1. Кожен новий тег — з нового рядка</h4>
+<pre><code>&lt;!-- ❌ --&gt;
+&lt;h1&gt;Про компанію&lt;/h1&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;h1&gt;Про компанію&lt;/h1&gt;
+&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;</code></pre>
+
+<h4>2. Короткий контент — теги в тому ж рядку</h4>
+<pre><code>&lt;!-- ❌ --&gt;
+&lt;h1&gt;
+  Про компанію
+&lt;/h1&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;h1&gt;Про компанію&lt;/h1&gt;</code></pre>
+
+<h4>3. Контент на кілька рядків — теги один під одним</h4>
+<pre><code>&lt;!-- ❌ --&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores delectus,
+  fuga ducimus eveniet sed debitis asperiores, corporis exercitationem&lt;/p&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;p&gt;
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem soluta
+  officia hic voluptatibus voluptatum impedit velit voluptate cum laboriosam quasi.
+&lt;/p&gt;</code></pre>
+
+<h4>4. Атрибути — через один пробіл, без пробілів навколо «=», значення в подвійних лапках</h4>
+<pre><code>&lt;!-- ❌ --&gt;
+&lt;img src= "cat.jpg"   alt= "cute cat" /&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;img src="cat.jpg" alt="cute cat" /&gt;</code></pre>
+
+<h4>5. Вкладені елементи — з однаковим відступом 2 або 4 пробіли</h4>
+<pre><code>&lt;!-- ❌ --&gt;
+&lt;h1&gt;3 найдорожчі курорти світу&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;North Island Lodge, на Сейшельських островах&lt;/li&gt;
+    &lt;li&gt;Laucala Resort, Фіджі&lt;/li&gt;
+&lt;li&gt;Khwai River Lodge, Ботсвана&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- ✅ --&gt;
+&lt;h1&gt;3 найдорожчі курорти світу&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;North Island Lodge, на Сейшельських островах&lt;/li&gt;
+  &lt;li&gt;Laucala Resort, Фіджі&lt;/li&gt;
+  &lt;li&gt;Khwai River Lodge, Ботсвана&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<aside data-icon="⚡">Щоб не вирівнювати все вручну, встанов у VS Code розширення <b>Prettier</b> — воно автоматично форматує код при збереженні файлу.</aside>
+
+<p>Список стандартів поповнюватиметься в наступних розділах. Твоє завдання — якомога швидше почати їх використовувати.</p>
+
+<p>Вивчи приклади оформлення коду:</p>
+<p><b>Приклад 1</b></p>
+<pre><code>&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt;</code></pre>
+<p><b>Приклад 2</b></p>
+<pre><code>&lt;h1&gt;Sweet cheese pancakes&lt;/h1&gt; &lt;p&gt;A light and gently sweet breakfast dish or a dessert
+for picky eaters. With crispy coating and the light and soft inside, you get a lovely
+balance of flavors and textures.These delicious pancakes pair perfectly with sour cream
+and fruit in pretty much any form.&lt;/p</code></pre>
+
+<div data-quiz data-correct="0" data-success="Абсолютно точно! У прикладі 2 два теги в одному рядку, довгий абзац без перенесення тегів, а закриваючий тег узагалі обірваний.">
+  <p>Який приклад оформлено згідно зі стандартом?</p>
+  <ul>
+    <li>Приклад 1</li>
+    <li>Приклад 2</li>
+  </ul>
+</div>

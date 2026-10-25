@@ -432,3 +432,94 @@
     font-size: 1.28rem;
   }
 }
+
+/* ---------- Практичне завдання: <section data-kind="task"> ---------- */
+
+.body [data-kind='task'] {
+  margin: 24px 0 28px;
+  padding: 20px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-left: 4px solid #7c3aed;
+  border-radius: 18px;
+}
+
+.body [data-kind='task'] > h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, #7c3aed, #ffffff var(--dark-tint));
+}
+
+/* Чекліст вимог: кружечки замість маркерів */
+.body [data-kind='checklist'] {
+  margin: 12px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.body [data-kind='checklist'] > li {
+  position: relative;
+  padding-left: 30px;
+}
+
+.body [data-kind='checklist'] > li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.35em;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+}
+
+.body details {
+  margin-top: 14px;
+}
+
+.body summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.body summary::-webkit-details-marker {
+  display: none;
+}
+
+.body summary::before {
+  content: '▸';
+  transition: transform 0.2s;
+}
+
+.body details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.body summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.body details > pre {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .body [data-kind='task'] {
+    padding: 22px 28px;
+  }
+}
