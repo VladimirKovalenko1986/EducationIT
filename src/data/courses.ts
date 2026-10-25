@@ -8,9 +8,13 @@ import b1m2hw from './lessons/cybersecurity/b1-m2-hw.html?raw'
 import b1m3t1 from './lessons/cybersecurity/b1-m3-t1.html?raw'
 import b1m3t2 from './lessons/cybersecurity/b1-m3-t2.html?raw'
 import b1m3hw from './lessons/cybersecurity/b1-m3-hw.html?raw'
+import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
+import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 // prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
+const placeholder = '<p>Конспект з’явиться згодом.</p>'
+
 const emptyModule = (n: number, title: string, prefix = 'b1'): Module => ({
   id: `${prefix}-m${n}`,
   title: `Модуль ${n}. ${title}`,
@@ -83,7 +87,19 @@ export const courses: Course[] = [
         id: 'block-1',
         title: 'HTML+CSS 2.1',
         modules: [
-          emptyModule(1, 'Основи HTML', 'fs-b1'),
+          {
+            id: 'fs-b1-m1',
+            title: 'Модуль 1. Основи HTML',
+            lessons: [
+              { id: 'fs-b1-m1-program', title: 'Програма модулю', content: fsB1m1Program },
+              { id: 'fs-b1-m1-web-tech', title: 'Веб-технології', content: fsB1m1WebTech },
+              { id: 'fs-b1-m1-tags', title: 'Теги та атрибути', content: placeholder },
+              { id: 'fs-b1-m1-links', title: 'Посилання', content: placeholder },
+              { id: 'fs-b1-m1-structure', title: 'Структурна розмітка', content: placeholder },
+              { id: 'fs-b1-m1-skeleton', title: 'Скелет HTML-документа', content: placeholder },
+              { id: 'fs-b1-m1-algorithm', title: 'Алгоритм створення сторінки', content: placeholder },
+            ],
+          },
           emptyModule(2, 'Вступ до CSS', 'fs-b1'),
           emptyModule(3, 'Блокова модель. Flexbox', 'fs-b1'),
           emptyModule(4, 'Декоративні ефекти', 'fs-b1'),

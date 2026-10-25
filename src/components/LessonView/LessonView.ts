@@ -3,6 +3,7 @@ import type { Lesson } from '../../types'
 import { html } from '../../utils/dom'
 import { NextLessonButton, type NextLessonButtonProps } from '../NextLessonButton/NextLessonButton'
 import { ImageLightbox } from '../ImageLightbox/ImageLightbox'
+import { mountQuizzes } from '../Quiz/Quiz'
 
 interface LessonViewProps {
   lesson?: Lesson
@@ -36,6 +37,7 @@ export function LessonView({ lesson, next, aside, emptyText = 'Оберіть т
     true,
   )
 
+  mountQuizzes(body)
   article.append(ImageLightbox({ target: body }))
   if (next) article.append(NextLessonButton(next))
   if (!aside) return article
