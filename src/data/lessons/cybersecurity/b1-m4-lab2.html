@@ -1,0 +1,377 @@
+<h2>Налаштування OpenVPN</h2>
+
+<p><b>1.</b> Перейди в домашній каталог:</p>
+
+<pre><code>cd</code></pre>
+
+<p><b>2.</b> Клонуй репозиторій OpenVPN:</p>
+
+<pre><code>git clone https://github.com/OpenVPN/openvpn</code></pre>
+
+<p>Якщо в консолі з'явилось повідомлення, що команду <code>git</code> не знайдено (<code>git: command not found</code>), встанови git:</p>
+
+<pre><code>sudo apt install git</code></pre>
+
+<p>І повтори клонування репозиторію:</p>
+
+<pre><code>git clone https://github.com/OpenVPN/openvpn</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/git-clone.webp" alt="Клонування репозиторію OpenVPN командою git clone" loading="lazy" />
+  <figcaption>Клонування репозиторію</figcaption>
+</figure>
+
+<p><b>3.</b> Скопіюй <code>server.conf</code> до директорії OpenVPN. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача:</p>
+
+<pre><code>sudo cp /home/ВАШ_КОРИСТУВАЧ/openvpn/sample/sample-config-files/server.conf /etc/openvpn/server/</code></pre>
+
+<p><b>4.</b> Відкрий цей файл для редагування. Пересуватися файлом можна стрілками вгору та вниз, а шукати текст у <code>nano</code> — комбінацією <code>Ctrl + W</code>.</p>
+
+<pre><code>sudo nano /etc/openvpn/server/server.conf</code></pre>
+
+<p><b>5.</b> Знайди рядок <code>;data-ciphers AES-256-GCM:AES-128-GCM:?CHACHA20-POLY1305:AES-256-CBC</code>, закоментуй його символом <code>#</code> та додай рядки:</p>
+
+<pre><code>cipher AES-256-GCM
+auth SHA256</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/cipher-auth.webp" alt="Закоментований рядок data-ciphers та додані рядки cipher і auth" loading="lazy" />
+  <figcaption>Налаштування шифру та автентифікації</figcaption>
+</figure>
+
+<p><b>6.</b> Знайди рядок <code>dh dh2048.pem</code> або <code>dh dh.pem</code> і закоментуй його: у нашому випадку файл Діффі-Геллмана не потрібен. Після закоментованого рядка встав:</p>
+
+<pre><code>dh none</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/server-dh-none.webp" alt="Закоментований рядок dh та доданий dh none" loading="lazy" />
+  <figcaption>Вимкнення файлу Діффі-Геллмана</figcaption>
+</figure>
+
+<p><b>7.</b> Щоб OpenVPN працював без зайвих привілеїв, знайди рядки <code>;user openvpn</code> та <code>;group openvpn</code>. Зроби з них такі рядки. <b>Важливо</b> прибрати символи <code>;</code> на початку:</p>
+
+<pre><code>user nobody
+group nogroup</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/server-user-group.webp" alt="Рядки user nobody та group nogroup у конфігурації сервера" loading="lazy" />
+  <figcaption>Зниження привілеїв служби OpenVPN</figcaption>
+</figure>
+
+<p><b>8.</b> У довільне місце файлу додай рядок. Саме він спрямовує весь трафік клієнта через VPN:</p>
+
+<pre><code>push "redirect-gateway def1"</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/server-redirect-gateway.webp" alt="Доданий рядок push redirect-gateway def1" loading="lazy" />
+  <figcaption>Перенаправлення трафіку через VPN</figcaption>
+</figure>
+
+<p><b>9.</b> Знайди рядок <code>tls-auth ta.key 0</code>, закоментуй його та додай рядок із <code>tls-crypt</code>, як на скриншоті нижче. Усі інші варіанти авторизації закоментуй. <b>Важливо</b>: у новому рядку не повинно бути <code>0</code> після <code>ta.key</code>.</p>
+
+<pre><code>tls-crypt ta.key # This file is secret</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/server-tls-crypt.webp" alt="Закоментований рядок tls-auth та доданий tls-crypt ta.key" loading="lazy" />
+  <figcaption>Налаштування tls-crypt на сервері</figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>, щоб закрити редактор.</p>
+
+<h2>Конфігурація мережі на сервері VPN</h2>
+
+<p>Щоб VPN-сервер міг пересилати трафік клієнтів, потрібно змінити конфігурацію мережі.</p>
+
+<p><b>1.</b> Відкрий конфігураційний файл <code>/etc/sysctl.conf</code>:</p>
+
+<pre><code>sudo nano /etc/sysctl.conf</code></pre>
+
+<p><b>2.</b> Розкоментуй рядок <code>net.ipv4.ip_forward=1</code>:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/sysctl-forward.webp" alt="Розкоментований рядок net.ipv4.ip_forward=1" loading="lazy" />
+  <figcaption>Увімкнення пересилання пакетів</figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>.</p>
+
+<p><b>3.</b> Застосуй нові налаштування:</p>
+
+<pre><code>sudo sysctl -p</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/sysctl-apply.webp" alt="Результат sudo sysctl -p: net.ipv4.ip_forward = 1" loading="lazy" />
+  <figcaption>Налаштування застосовано</figcaption>
+</figure>
+
+<h2>Налаштування мережевого екрана</h2>
+
+<p><b>1.</b> Щоб визначити відкритий мережевий інтерфейс, виконай команду:</p>
+
+<pre><code>ip route list default</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/ip-route-default.webp" alt="Маршрут за замовчуванням через інтерфейс eth0" loading="lazy" />
+  <figcaption>Назву інтерфейсу видно після параметра <code>dev</code></figcaption>
+</figure>
+
+<p>Якщо твій інтерфейс не <code>eth0</code>, підстав його назву замість <code>eth0</code> у правилі нижче.</p>
+
+<p><b>2.</b> Відкрий файл <code>/etc/ufw/before.rules</code>:</p>
+
+<pre><code>sudo nano /etc/ufw/before.rules</code></pre>
+
+<p>На початок файлу встав такий текст:</p>
+
+<pre><code># START OPENVPN RULES
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+COMMIT
+#END OPENVPN RULES</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/before-rules.webp" alt="Правила NAT на початку файлу before.rules" loading="lazy" />
+  <figcaption>Правила NAT у <code>before.rules</code>. На скриншоті стоїть <code>/8</code>, але вводь <code>/24</code>, як у тексті вище</figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>.</p>
+
+<p><b>3.</b> Відкрий файл <code>/etc/default/ufw</code>:</p>
+
+<pre><code>sudo nano /etc/default/ufw</code></pre>
+
+<aside data-icon="⚠️"><b>Важливо!</b> Цей файл не повинен бути порожнім. Якщо він порожній, встанови ufw командою <code>sudo apt install ufw</code> і повтори налаштування мережевого екрана спочатку.</aside>
+
+<p><b>4.</b> У рядку <code>DEFAULT_FORWARD_POLICY</code> зміни значення <code>DROP</code> на <code>ACCEPT</code>:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/ufw-forward-policy.webp" alt="Рядок DEFAULT_FORWARD_POLICY зі значенням ACCEPT" loading="lazy" />
+  <figcaption>Дозвіл на пересилання трафіку</figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>.</p>
+
+<p><b>5.</b> Відкрий UDP-трафік на порту 1194 і дозволь OpenSSH:</p>
+
+<pre><code>sudo ufw allow 1194/udp
+sudo ufw allow OpenSSH</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/ufw-allow.webp" alt="Додавання правил ufw для 1194/udp та OpenSSH" loading="lazy" />
+  <figcaption>Правила мережевого екрана</figcaption>
+</figure>
+
+<aside data-icon="⚠️">Не пропускай правило для OpenSSH. Без нього після ввімкнення мережевого екрана ти втратиш SSH-доступ до віртуальної машини.</aside>
+
+<p><b>6.</b> Перезапусти UFW. Під час виконання другої команди потрібно ввести <code>y</code>:</p>
+
+<pre><code>sudo ufw disable
+sudo ufw enable</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/ufw-restart.webp" alt="Вимкнення та ввімкнення ufw із підтвердженням y" loading="lazy" />
+  <figcaption>Перезапуск мережевого екрана</figcaption>
+</figure>
+
+<h2>Запуск OpenVPN</h2>
+
+<p><b>1.</b> Запусти службу OpenVPN і додай її в автозавантаження:</p>
+
+<pre><code>sudo systemctl -f enable openvpn-server@server.service
+sudo systemctl start openvpn-server@server.service</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/systemctl-start.webp" alt="Команди ввімкнення та запуску служби OpenVPN" loading="lazy" />
+  <figcaption>Запуск служби OpenVPN</figcaption>
+</figure>
+
+<p><b>2.</b> Перевір, чи служба запустилась коректно:</p>
+
+<pre><code>sudo systemctl status openvpn-server@server.service</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/openvpn-status.webp" alt="Статус служби OpenVPN: active (running)" loading="lazy" />
+  <figcaption>Служба працює: статус <code>active (running)</code></figcaption>
+</figure>
+
+<p>Натисни <code>q</code>, щоб повернутися до командного рядка.</p>
+
+<h2>Створення користувача</h2>
+
+<p><b>1.</b> Створи структуру директорій, де зберігатимуться файли:</p>
+
+<pre><code>mkdir -p ~/clients/files</code></pre>
+
+<p><b>2.</b> Скопіюй шаблон конфігурації клієнта в папку <code>clients</code>. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача:</p>
+
+<pre><code>sudo cp /home/ВАШ_КОРИСТУВАЧ/openvpn/sample/sample-config-files/client.conf ~/clients/base.conf</code></pre>
+
+<p><b>3.</b> Відкрий <code>base.conf</code>:</p>
+
+<pre><code>sudo nano ~/clients/base.conf</code></pre>
+
+<p><b>4.</b> Знайди рядки з <code>user</code> та <code>group</code> і зроби їх такими, прибравши символ <code>;</code> на початку:</p>
+
+<pre><code>user nobody
+group nogroup</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-user-group.webp" alt="Рядки user nobody та group nogroup у конфігурації клієнта" loading="lazy" />
+  <figcaption>Зниження привілеїв клієнта</figcaption>
+</figure>
+
+<p><b>5.</b> У рядку <code>remote my-server-1 1194</code> заміни <code>my-server-1</code> на IP-адресу твоєї ВМ.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-remote-default.webp" alt="Рядок remote my-server-1 1194 до зміни" loading="lazy" />
+  <figcaption>Було</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-remote-ip.webp" alt="Рядок remote з IP-адресою віртуальної машини" loading="lazy" />
+  <figcaption>Стало, але з IP-адресою твоєї ВМ</figcaption>
+</figure>
+
+<p><b>6.</b> Закоментуй такі рядки:</p>
+
+<pre><code># ca ca.crt
+# cert client.crt
+# key client.key</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-certs-commented.webp" alt="Закоментовані рядки ca, cert та key" loading="lazy" />
+  <figcaption>Сертифікати будуть вбудовані у файл клієнта</figcaption>
+</figure>
+
+<p><b>7.</b> У довільне місце додай рядок:</p>
+
+<pre><code>key-direction 1</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-key-direction.webp" alt="Доданий рядок key-direction 1" loading="lazy" />
+  <figcaption>Доданий рядок <code>key-direction 1</code></figcaption>
+</figure>
+
+<p><b>8.</b> Закоментуй рядок <code>;tls-auth ta.key 1</code> і додай рядок із <code>tls-crypt</code>, як на скриншоті нижче. Усі інші варіанти авторизації закоментуй.</p>
+
+<pre><code>tls-crypt ta.key</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/client-tls-crypt.webp" alt="Закоментований рядок tls-auth та доданий tls-crypt ta.key у конфігурації клієнта" loading="lazy" />
+  <figcaption>Налаштування tls-crypt для клієнта</figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>.</p>
+
+<p><b>9.</b> Створи скрипт <code>make_config.sh</code>. Він збиратиме конфігурацію клієнта й зберігатиме її в директорії <code>~/clients/files</code>:</p>
+
+<pre><code>sudo nano ~/clients/make_config.sh</code></pre>
+
+<p><b>10.</b> Встав у файл наведений нижче текст. <b>Важливо</b>, щоб між рядками не було порожніх рядків. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача <b>тричі</b>:</p>
+
+<pre><code>#!/bin/bash
+# First argument: Client identifier
+KEY_DIR=/home/ВАШ_КОРИСТУВАЧ/clients/keys
+OUTPUT_DIR=/home/ВАШ_КОРИСТУВАЧ/clients/files
+BASE_CONFIG=/home/ВАШ_КОРИСТУВАЧ/clients/base.conf
+cat ${BASE_CONFIG} \
+&lt;(echo -e '&lt;ca&gt;') \
+${KEY_DIR}/ca.crt \
+&lt;(echo -e '&lt;/ca&gt;\n&lt;cert&gt;') \
+${KEY_DIR}/${1}.crt \
+&lt;(echo -e '&lt;/cert&gt;\n&lt;key&gt;') \
+${KEY_DIR}/${1}.key \
+&lt;(echo -e '&lt;/key&gt;\n&lt;tls-crypt&gt;') \
+${KEY_DIR}/ta.key \
+&lt;(echo -e '&lt;/tls-crypt&gt;') \
+&gt; ${OUTPUT_DIR}/${1}.ovpn</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/make-config-script.webp" alt="Скрипт make_config.sh у редакторі nano" loading="lazy" />
+  <figcaption>Скрипт <code>make_config.sh</code></figcaption>
+</figure>
+
+<p>Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>.</p>
+
+<p><b>11.</b> Признач скрипту відповідні права:</p>
+
+<pre><code>sudo chmod 700 ~/clients/make_config.sh</code></pre>
+
+<h2>Створення конфігураційного файлу для клієнта</h2>
+
+<p><b>1.</b> Сертифікат клієнта <code>client-1.crt</code> та ключ <code>client-1.key</code> уже створено. Тепер запусти скрипт, щоб отримати файл конфігурації клієнта:</p>
+
+<pre><code>cd ~/clients
+sudo ./make_config.sh client-1</code></pre>
+
+<p>У результаті скрипт створить файл <code>~/clients/files/client-1.ovpn</code>.</p>
+
+<aside data-icon="🛡️">Файл <code>.ovpn</code> містить приватний ключ клієнта, тому поводься з ним як із паролем. Той, хто його отримає, зможе підключитися до твого VPN.</aside>
+
+<p><b>2.</b> Завантаж на свій особистий ПК VPN-клієнт з <a href="https://openvpn.net/client/client-connect-vpn-for-windows/" target="_blank" rel="noreferrer">офіційного сайту OpenVPN</a>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/openvpn-download.webp" alt="Сторінка завантаження OpenVPN Connect для Windows" loading="lazy" />
+  <figcaption>Завантаження OpenVPN Connect</figcaption>
+</figure>
+
+<p><b>3.</b> Щоб завантажити конфігураційні файли на свій ПК, скористаємося утилітою WinSCP. Завантаж її з <a href="https://winscp.net/eng/download.php" target="_blank" rel="noreferrer">офіційного сайту WinSCP</a>.</p>
+
+<p><b>4.</b> Підключись за допомогою WinSCP до своєї ВМ:</p>
+
+<p>Введи дані для підключення: IP-адресу своєї ВМ, порт 22, логін і пароль. Протокол — SFTP.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/winscp-login.webp" alt="Вікно входу WinSCP із протоколом SFTP, адресою, портом і логіном" loading="lazy" />
+  <figcaption>Підключення у WinSCP</figcaption>
+</figure>
+
+<p>Після підключення ти потрапиш у директорію <code>/home/ВАШ_КОРИСТУВАЧ</code>:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/winscp-home.webp" alt="Домашній каталог користувача у WinSCP" loading="lazy" />
+  <figcaption>Домашній каталог на ВМ</figcaption>
+</figure>
+
+<p>Перейди до директорії <code>clients/files/</code>, знайди конфігураційний файл <code>client-1.ovpn</code> і перетягни його на робочий стіл свого ПК у вікні зліва:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/winscp-files.webp" alt="Файл client-1.ovpn у директорії clients/files" loading="lazy" />
+  <figcaption>Конфігураційний файл клієнта</figcaption>
+</figure>
+
+<p>Перейди до директорії <code>clients/keys/</code>, знайди ключ <code>ta.key</code> і перетягни його на робочий стіл:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/winscp-keys.webp" alt="Сертифікати та ключі в директорії clients/keys" loading="lazy" />
+  <figcaption>Ключ <code>ta.key</code> у директорії <code>clients/keys/</code></figcaption>
+</figure>
+
+<p>Перетягни конфігураційний файл <code>.ovpn</code> у вікно VPN-клієнта:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/openvpn-upload.webp" alt="Вікно імпорту профілю в OpenVPN Connect" loading="lazy" style="max-width: 320px" />
+  <figcaption>Імпорт профілю в OpenVPN Connect</figcaption>
+</figure>
+
+<p>Натисни <b>CONNECT</b> і переконайся, що з'єднання встановлено:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/openvpn-connected.webp" alt="OpenVPN Connect зі статусом CONNECTED" loading="lazy" style="max-width: 320px" />
+  <figcaption>З'єднання встановлено</figcaption>
+</figure>
+
+<h2>Перевірка</h2>
+
+<p>Щоб переконатися, що весь трафік проходить через VPN-тунель, перевір зовнішню IP-адресу (WAN IP) свого ПК на сайті <a href="https://whatismyipaddress.com/" target="_blank" rel="noreferrer">whatismyipaddress.com</a>.</p>
+
+<p>Якщо все налаштовано правильно, ти побачиш IP-адресу своєї віртуальної машини.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab2/whatismyip.webp" alt="Сайт перевірки IP показує адресу віртуальної машини" loading="lazy" />
+  <figcaption>Сайт показує IP-адресу ВМ, а не твоєї домашньої мережі</figcaption>
+</figure>
+
+<aside data-icon="😎">Чудово виконана робота!</aside>
