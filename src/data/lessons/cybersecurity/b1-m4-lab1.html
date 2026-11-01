@@ -1,0 +1,340 @@
+<p>Ця лабораторна робота використовує віртуальні машини на платформі <b>Microsoft Azure</b>. Щоб отримати доступ до ВМ, звернись до свого клієнт-менеджера.</p>
+
+<p>Зверни увагу, що під час роботи з Azure віртуальні машини можуть бути тимчасово недоступними. Причини можуть бути такі:</p>
+
+<ul>
+  <li><b>Технічне обслуговування.</b> Azure регулярно проводить планові роботи для стабільної та безпечної роботи своїх сервісів.</li>
+  <li><b>Перезавантаження серверів.</b> Іноді серверам, на яких працюють віртуальні машини, потрібно перезавантажитися, щоб застосувати оновлення або виправити помилки.</li>
+  <li><b>Неполадки в апаратному забезпеченні.</b> Можуть виникати проблеми з фізичним обладнанням, на якому працюють віртуальні машини.</li>
+  <li><b>Оновлення безпеки.</b> Важливі оновлення можуть вимагати тимчасового відключення машин.</li>
+</ul>
+
+<p>Ми розуміємо, що це може спричиняти дискомфорт і затримки в навчанні. Тому просимо якомога швидше повідомляти про будь-які проблеми, щоб ми могли оперативно їх вирішити.</p>
+
+<h2>Налаштування OpenVPN для перенаправлення трафіку через VPN</h2>
+
+<h3>Огляд</h3>
+
+<p>У цій лабораторній роботі ми налаштуємо сервер OpenVPN так, щоб весь мережевий трафік проходив через VPN-тунель. Це дозволить створити безпечне та приватне з'єднання з інтернетом. Роботу виконуємо в ОС Linux.</p>
+
+<aside data-icon="💡">Для зручності центр сертифікації та VPN-сервер у цій лабораторній працюють на одній машині, тому команди <code>scp</code> копіюють файли локально. У реальному середовищі ЦС розміщують на окремому, добре захищеному сервері, а файли передають між машинами.</aside>
+
+<h2>Підключення до віртуальної машини за допомогою PuTTY</h2>
+
+<p><b>1.</b> Завантаж та встанови програму PuTTY з <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank" rel="noreferrer">офіційного сайту PuTTY</a>.</p>
+
+<p><b>2.</b> Запусти програму PuTTY.</p>
+
+<p><b>3.</b> У розділі <b>Session</b> введи IP-адресу або доменне ім'я віртуальної машини. Порт SSH за замовчуванням — 22.</p>
+
+<p><b>4.</b> Натисни кнопку <b>Open</b>, щоб встановити з'єднання.</p>
+
+<p><b>5.</b> У вікні, що відкриється, введи ім'я користувача та пароль. Щоб уникнути помилок, логін і пароль краще скопіювати: виділи текст, натисни <code>Ctrl + C</code> і встав його правою кнопкою миші у вікні PuTTY.</p>
+
+<p><b>6.</b> Пароль, на відміну від логіна, у PuTTY не відображається. Просто введи або встав його й натисни <code>Enter</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/putty-login.webp" alt="Вікно PuTTY із запитом логіна та пароля" loading="lazy" />
+  <figcaption>Вхід на віртуальну машину через PuTTY</figcaption>
+</figure>
+
+<p>Після успішного входу ти отримаєш доступ до командного рядка віртуальної машини.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/putty-welcome.webp" alt="Вітальне повідомлення Ubuntu та запрошення командного рядка в PuTTY" loading="lazy" />
+  <figcaption>Успішне підключення до віртуальної машини</figcaption>
+</figure>
+
+<aside data-icon="💡">У macOS та Linux PuTTY не потрібен. Підключись із термінала командою <code>ssh ім'я_користувача@IP-адреса</code>.</aside>
+
+<h2>Центр сертифікації</h2>
+
+<p>Розгортання VPN-сервера слід розпочати з налаштування центру сертифікації (ЦС). Він використовуватиметься виключно для створення, підписання та відкликання сертифікатів.</p>
+
+<p><b>1.</b> Встанови утиліту <code>easy-rsa</code>:</p>
+
+<pre><code>sudo apt update
+sudo apt install easy-rsa</code></pre>
+
+<p>Підтвердь встановлення: введи <code>y</code> і натисни <code>Enter</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/apt-install-easy-rsa.webp" alt="Встановлення пакета easy-rsa та запит підтвердження" loading="lazy" />
+  <figcaption>Встановлення easy-rsa</figcaption>
+</figure>
+
+<p><b>2.</b> Створи каталог <code>~/easy-rsa</code>:</p>
+
+<pre><code>mkdir ~/easy-rsa</code></pre>
+
+<p><b>3.</b> Створи посилання на файли <code>easy-rsa</code>:</p>
+
+<pre><code>ln -s /usr/share/easy-rsa/* ~/easy-rsa/</code></pre>
+
+<p><b>4.</b> Встанови права доступу, щоб каталог був доступний лише тобі:</p>
+
+<pre><code>chmod 700 ~/easy-rsa</code></pre>
+
+<p><b>5.</b> Запусти скрипт <code>easyrsa</code>:</p>
+
+<pre><code>cd ~/easy-rsa
+./easyrsa init-pki</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/init-pki.webp" alt="Команди створення каталогу easy-rsa та результат init-pki" loading="lazy" />
+  <figcaption>Створення каталогу та ініціалізація PKI</figcaption>
+</figure>
+
+<p>Так створюється директорія інфраструктури відкритих ключів (Public Key Infrastructure, PKI).</p>
+
+<p><b>6.</b> Тепер потрібно підготувати параметри для секретного ключа й сертифіката. Створи файл <code>vars</code> у каталозі <code>~/easy-rsa</code>:</p>
+
+<pre><code>sudo nano ~/easy-rsa/vars</code></pre>
+
+<p>Якщо редактор не відкрився, а в консолі з'явилося повідомлення <code>sudo: nano: command not found</code>:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/nano-not-found.webp" alt="Помилка sudo: nano: command not found" loading="lazy" />
+  <figcaption>Редактор nano не встановлено</figcaption>
+</figure>
+
+<p>тоді встанови редактор <code>nano</code>:</p>
+
+<pre><code>sudo apt install nano</code></pre>
+
+<p>Після цього повтори команду для створення файлу <code>vars</code>:</p>
+
+<pre><code>sudo nano ~/easy-rsa/vars</code></pre>
+
+<p><b>7.</b> Коли редактор відкриється, скопіюй у файл такий текст:</p>
+
+<pre><code>set_var EASYRSA_REQ_COUNTRY    "UA"
+set_var EASYRSA_REQ_PROVINCE   "Kyiv"
+set_var EASYRSA_REQ_CITY       "Kyiv City"
+set_var EASYRSA_REQ_ORG        "Test Company"
+set_var EASYRSA_REQ_EMAIL      "your_address@gmail.com"
+set_var EASYRSA_REQ_OU         "LDP"
+set_var EASYRSA_ALGO           "ec"
+set_var EASYRSA_DIGEST         "sha512"</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/vars-file.webp" alt="Файл vars у редакторі nano" loading="lazy" />
+  <figcaption>Файл <code>vars</code> у редакторі nano</figcaption>
+</figure>
+
+<p>Слідкуй, щоб між рядками не було порожніх рядків. Перед виходом збережи файл: натисни <code>Ctrl + S</code>, а потім <code>Ctrl + X</code>, щоб закрити редактор.</p>
+
+<p><b>8.</b> Запусти скрипт <code>easyrsa</code>:</p>
+
+<pre><code>./easyrsa build-ca</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/build-ca-passphrase.webp" alt="Запит парольної фрази для ключа ЦС" loading="lazy" />
+  <figcaption>Запит парольної фрази ЦС</figcaption>
+</figure>
+
+<p>Тут потрібно придумати парольну фразу. Її доведеться вводити для доступу до ЦС під час операцій із сертифікатами. Радимо просто ввести <code>pass</code> і натиснути <code>Enter</code>.</p>
+
+<pre><code>pass</code></pre>
+
+<aside data-icon="⚠️">У лабораторній пароль простий для зручності. У реальному середовищі використовуй довгу складну парольну фразу.</aside>
+
+<p>Пароль під час введення не відображається. Підтвердь його: введи ще раз і натисни <code>Enter</code>.</p>
+
+<pre><code>pass</code></pre>
+
+<p>Система запропонує ввести Common Name — ім'я твого ЦС. Прийми ім'я за замовчуванням, натиснувши <code>Enter</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/ca-common-name.webp" alt="Запит Common Name зі значенням Easy-RSA CA" loading="lazy" />
+  <figcaption>Common Name центру сертифікації</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/ca-complete.webp" alt="Повідомлення про створення ЦС і шлях до файлу ca.crt" loading="lazy" />
+  <figcaption>Центр сертифікації створено</figcaption>
+</figure>
+
+<p>Файл <code>ca.crt</code> — це сертифікат ЦС, який містить його відкритий ключ. Клієнти та сервери використовуватимуть його для перевірки сертифікатів.</p>
+
+<p>Тепер твій центр сертифікації готовий до роботи.</p>
+
+<h2>OpenVPN і Easy-RSA</h2>
+
+<p><b>1.</b> Встанови власника та права для папки <code>~/easy-rsa</code>. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача, наприклад <code>user036</code>:</p>
+
+<pre><code>sudo chown ВАШ_КОРИСТУВАЧ ~/easy-rsa
+chmod 700 ~/easy-rsa</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/chown-easy-rsa.webp" alt="Команди chown і chmod для каталогу easy-rsa" loading="lazy" />
+  <figcaption>Зміна власника та прав каталогу</figcaption>
+</figure>
+
+<h2>Сертифікат та закритий ключ OpenVPN</h2>
+
+<p>Тепер усе необхідне для генерації закритих ключів і запитів на підписання сертифікатів встановлено на сервері VPN.</p>
+
+<p><b>1.</b> Створимо секретний ключ і запит на підпис сертифіката. Перейди до директорії <code>~/easy-rsa</code>:</p>
+
+<pre><code>cd ~/easy-rsa</code></pre>
+
+<p><b>2.</b> Запусти <code>easyrsa</code>, де <code>server</code> — це Common Name (CN) твого VPN-сервера:</p>
+
+<pre><code>./easyrsa gen-req server nopass</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/gen-req-server.webp" alt="Генерація ключа сервера та запит Common Name" loading="lazy" />
+  <figcaption>Генерація запиту для сервера</figcaption>
+</figure>
+
+<p>Система запропонує ввести Common Name. Прийми ім'я за замовчуванням, натиснувши <code>Enter</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/gen-req-server-done.webp" alt="Створені файли server.req та server.key" loading="lazy" />
+  <figcaption>Створено запит <code>server.req</code> та ключ <code>server.key</code></figcaption>
+</figure>
+
+<p><b>3.</b> Скопіюй секретний ключ <code>server.key</code> до <code>/etc/openvpn/server</code>. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача:</p>
+
+<pre><code>sudo mkdir /etc/openvpn
+sudo mkdir /etc/openvpn/server
+sudo cp /home/ВАШ_КОРИСТУВАЧ/easy-rsa/pki/private/server.key /etc/openvpn/server/</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/copy-server-key.webp" alt="Створення каталогів openvpn і копіювання server.key" loading="lazy" />
+  <figcaption>Копіювання ключа сервера</figcaption>
+</figure>
+
+<h2>Підписання запиту сертифіката</h2>
+
+<p><b>1.</b> Тепер потрібно підписати сертифікат <code>server</code>. Спочатку скопіюй файл <code>server.req</code> для ЦС. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача:</p>
+
+<pre><code>scp /home/ВАШ_КОРИСТУВАЧ/easy-rsa/pki/reqs/server.req /tmp</code></pre>
+
+<p><b>2.</b> Підпиши запит скриптом <code>easyrsa</code>, використовуючи опцію <code>sign-req</code> і тип запиту <code>server</code>:</p>
+
+<pre><code>./easyrsa sign-req server server</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/sign-req-server.webp" alt="Запит підтвердження підпису сертифіката сервера" loading="lazy" />
+  <figcaption>Підтвердження деталей запиту</figcaption>
+</figure>
+
+<p><b>3.</b> Введи <code>yes</code>, а потім пароль ЦС, який ти створив на початку. Нагадаємо, що це <code>pass</code>:</p>
+
+<pre><code>pass</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/sign-req-server-pass.webp" alt="Запит парольної фрази для ca.key" loading="lazy" />
+  <figcaption>Введення пароля ЦС</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/sign-req-server-done.webp" alt="Успішне створення сертифіката server.crt" loading="lazy" />
+  <figcaption>Сертифікат сервера створено</figcaption>
+</figure>
+
+<p><b>4.</b> Скопіюй сертифікат сервера <code>server.crt</code> та сертифікат ЦС <code>ca.crt</code> до директорії <code>/tmp</code>:</p>
+
+<pre><code>scp pki/issued/server.crt /tmp
+scp pki/ca.crt /tmp</code></pre>
+
+<p><b>5.</b> Скопіюй ці файли з <code>/tmp</code> до <code>/etc/openvpn/server</code>:</p>
+
+<pre><code>sudo cp /tmp/{server.crt,ca.crt} /etc/openvpn/server</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/copy-server-crt.webp" alt="Команди копіювання server.crt і ca.crt до /etc/openvpn/server" loading="lazy" />
+  <figcaption>Копіювання сертифікатів сервера</figcaption>
+</figure>
+
+<h2>Криптографія OpenVPN</h2>
+
+<p><b>1.</b> Щоб підвищити рівень безпеки, додамо ще один секретний ключ, спільний для сервера і клієнтів, за допомогою OpenVPN tls-crypt. Створи його:</p>
+
+<pre><code>cd ~/easy-rsa
+sudo apt update
+sudo apt install libpkcs11-helper1
+sudo apt install openvpn
+openvpn --genkey --secret ta.key</code></pre>
+
+<aside data-icon="💡">У новіших версіях OpenVPN (2.5 і вище) команда має вигляд <code>openvpn --genkey secret ta.key</code>.</aside>
+
+<p><b>2.</b> Скопіюй файл <code>ta.key</code> до каталогу <code>/etc/openvpn/server/</code>:</p>
+
+<pre><code>sudo cp ta.key /etc/openvpn/server</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/ta-key.webp" alt="Створення ключа ta.key та його копіювання" loading="lazy" />
+  <figcaption>Створення та копіювання ключа <code>ta.key</code></figcaption>
+</figure>
+
+<p>Тепер можна створювати сертифікати клієнтів твого VPN та ключі для підключення до OpenVPN.</p>
+
+<h2>Генерація сертифікатів та ключів клієнтів</h2>
+
+<p><b>1.</b> Створи директорії для сертифікатів і ключів клієнтів та признач їм права:</p>
+
+<pre><code>mkdir -p ~/clients/keys
+chmod -R 700 ~/clients</code></pre>
+
+<p><b>2.</b> Запусти скрипт <code>easyrsa</code> з опціями <code>gen-req</code> і <code>nopass</code>, вказавши CN клієнта. Зверни увагу: друга команда починається саме з <code>./easyrsa</code>. Якщо пропустити <code>./</code>, отримаєш помилку.</p>
+
+<pre><code>cd ~/easy-rsa
+./easyrsa gen-req client-1 nopass</code></pre>
+
+<p>Система запропонує ввести Common Name. Прийми ім'я за замовчуванням, натиснувши <code>Enter</code>:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/gen-req-client.webp" alt="Генерація ключа клієнта та запит Common Name" loading="lazy" />
+  <figcaption>Генерація запиту для клієнта</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/gen-req-client-done.webp" alt="Створені файли client-1.req та client-1.key" loading="lazy" />
+  <figcaption>Створено запит і ключ клієнта</figcaption>
+</figure>
+
+<p><b>3.</b> Скопіюй <code>client-1.key</code> до <code>~/clients/keys/</code>:</p>
+
+<pre><code>cp pki/private/client-1.key ~/clients/keys/</code></pre>
+
+<p><b>4.</b> Скопіюй файл <code>client-1.req</code> для ЦС:</p>
+
+<pre><code>scp pki/reqs/client-1.req /tmp</code></pre>
+
+<p><b>5.</b> Підпиши цей запит, використовуючи тип запиту <code>client</code>:</p>
+
+<pre><code>cd ~/easy-rsa
+./easyrsa sign-req client client-1</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/sign-req-client.webp" alt="Запит підтвердження підпису сертифіката клієнта" loading="lazy" />
+  <figcaption>Підтвердження деталей запиту клієнта</figcaption>
+</figure>
+
+<p><b>6.</b> Введи <code>yes</code>, а потім пароль ЦС. Нагадаємо, що це <code>pass</code>:</p>
+
+<pre><code>pass</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/sign-req-client-done.webp" alt="Успішне створення сертифіката client-1.crt" loading="lazy" />
+  <figcaption>Сертифікат клієнта створено</figcaption>
+</figure>
+
+<p><b>7.</b> Так згенеровано сертифікат клієнта <code>client-1.crt</code>. Перемісти його в директорію <code>/tmp</code> і скопіюй до <code>~/clients/keys/</code>:</p>
+
+<pre><code>scp pki/issued/client-1.crt /tmp
+cp /tmp/client-1.crt ~/clients/keys/</code></pre>
+
+<p><b>8.</b> Скопіюй <code>ca.crt</code> та <code>ta.key</code> до каталогу <code>~/clients/keys/</code> і встанови відповідного власника. Заміни <code>ВАШ_КОРИСТУВАЧ</code> на свого користувача <b>двічі</b>, наприклад <code>user036:user036</code>:</p>
+
+<pre><code>cp ~/easy-rsa/ta.key ~/clients/keys/
+sudo cp /etc/openvpn/server/ca.crt ~/clients/keys/
+sudo chown ВАШ_КОРИСТУВАЧ:ВАШ_КОРИСТУВАЧ ~/clients/keys/*</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m4-lab1/copy-client-files.webp" alt="Команди копіювання сертифікатів і ключів клієнта" loading="lazy" />
+  <figcaption>Файли клієнта зібрані в <code>~/clients/keys/</code>. На скриншоті в <code>chown</code> стоїть крапка, це старіший запис того самого</figcaption>
+</figure>
