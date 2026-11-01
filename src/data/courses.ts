@@ -12,6 +12,7 @@ import b1m4t1 from './lessons/cybersecurity/b1-m4-t1.html?raw'
 import b1m4t2 from './lessons/cybersecurity/b1-m4-t2.html?raw'
 import b1m4lab1 from './lessons/cybersecurity/b1-m4-lab1.html?raw'
 import b1m4lab2 from './lessons/cybersecurity/b1-m4-lab2.html?raw'
+import b1m4hw from './lessons/cybersecurity/b1-m4-hw.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -82,6 +83,7 @@ export const courses: Course[] = [
               },
               { id: 'b1-m4-lab1', title: 'Лабораторна робота. ч. 1', content: b1m4lab1 },
               { id: 'b1-m4-lab2', title: 'Лабораторна робота. ч. 2', content: b1m4lab2 },
+              { id: 'b1-m4-hw', title: 'Домашнє завдання', isTask: true, content: b1m4hw },
             ],
           },
           emptyModule(5, 'Архітектура кібербезпеки'),
