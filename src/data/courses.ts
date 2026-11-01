@@ -9,6 +9,7 @@ import b1m3t1 from './lessons/cybersecurity/b1-m3-t1.html?raw'
 import b1m3t2 from './lessons/cybersecurity/b1-m3-t2.html?raw'
 import b1m3hw from './lessons/cybersecurity/b1-m3-hw.html?raw'
 import b1m4t1 from './lessons/cybersecurity/b1-m4-t1.html?raw'
+import b1m4t2 from './lessons/cybersecurity/b1-m4-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -72,6 +73,11 @@ export const courses: Course[] = [
             title: 'Модуль 4. Безпечне адміністрування мережі',
             lessons: [
               { id: 'b1-m4-t1', title: 'Тема 1. Огляд моделі OSI та роль протоколів', content: b1m4t1 },
+              {
+                id: 'b1-m4-t2',
+                title: 'Тема 2. Основи IP-адресації. Маршрутизація та робота маршрутизаторів',
+                content: b1m4t2,
+              },
             ],
           },
           emptyModule(5, 'Архітектура кібербезпеки'),
