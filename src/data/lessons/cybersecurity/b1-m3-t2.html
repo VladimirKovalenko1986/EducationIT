@@ -350,19 +350,19 @@ cd testdir2</code></pre>
     <tbody>
       <tr><td><code>ping</code></td><td>Перевірити, чи доступний віддалений хост</td><td><code>ping -c 4 google.com</code></td></tr>
       <tr><td><code>ip</code></td><td>Мережеві інтерфейси, IP-адреси, маршрути (замінив застарілі <code>ifconfig</code> і <code>route</code>)</td><td><code>ip a</code>, <code>ip route</code></td></tr>
-      <tr><td><code>ss</code></td><td>Відкриті порти та з'єднання (сучасна заміна <code>netstat</code>)</td><td><code>ss -tulpn</code></td></tr>
+      <tr><td><code>ss</code></td><td>Відкриті порти та з'єднання (сучасна заміна <code>netstat</code>)</td><td><code>sudo ss -tulpn</code></td></tr>
       <tr><td><code>traceroute</code> / <code>tracepath</code></td><td>Маршрут пакетів до хоста; <code>tracepath</code> простіший і не потребує root</td><td><code>tracepath google.com</code></td></tr>
       <tr><td><code>mtr</code></td><td>Поєднує ping і traceroute в реальному часі</td><td><code>mtr google.com</code></td></tr>
       <tr><td><code>dig</code></td><td>Детальні DNS-запити (записи A, MX, NS…)</td><td><code>dig google.com MX</code></td></tr>
       <tr><td><code>nslookup</code> / <code>host</code></td><td>Швидкий DNS-пошук, перевірка DNS-сервера</td><td><code>host google.com</code></td></tr>
-      <tr><td><code>hostname</code></td><td>Ім'я комп'ютера; змінити — <code>hostnamectl</code> (без перезавантаження)</td><td><code>sudo hostnamectl set-hostname srv01</code></td></tr>
+      <tr><td><code>hostname</code></td><td>Ім'я комп'ютера; змінити — <code>hostnamectl</code> (без перезавантаження, але нове ім'я треба вписати і в <code>/etc/hosts</code>, інакше <code>sudo</code> може показувати попередження)</td><td><code>sudo hostnamectl set-hostname srv01</code></td></tr>
     </tbody>
   </table>
 </div>
 
 <aside data-icon="💡">Деякі команди зі старих підручників застаріли. <code>netstat</code>, <code>ifconfig</code> та <code>route</code> (пакет net-tools) у сучасних дистрибутивах часто вже не встановлені за замовчуванням — замість них використовуються <code>ss</code> та <code>ip</code>. Команда <code>finger</code> (інформація про користувачів на віддаленій системі) сьогодні майже ніде не використовується і зазвичай заблокована з міркувань безпеки.</aside>
 
-<aside data-icon="🛡️"><code>ss -tulpn</code> — одна з перших команд під час розслідування інциденту: вона показує, які програми слухають порти. Невідомий процес на незвичному порту — привід придивитися уважніше.</aside>
+<aside data-icon="🛡️"><code>sudo ss -tulpn</code> — одна з перших команд під час розслідування інциденту: вона показує, які програми слухають порти (без <code>sudo</code> процеси інших користувачів не видно). Невідомий процес на незвичному порту — привід придивитися уважніше.</aside>
 
 <h2>Лабораторна робота 2. Основи Linux</h2>
 
