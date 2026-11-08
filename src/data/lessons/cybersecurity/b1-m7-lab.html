@@ -1,0 +1,165 @@
+<h2>Використання OpenSSL</h2>
+
+<p>У цій лабораторній роботі ти встановиш OpenSSL, навчишся створювати ключі та запити на підписання сертифіката (CSR), а потім зашифруєш і розшифруєш повідомлення. Спершу встанови OpenSSL для своєї операційної системи.</p>
+
+<h3>Linux: перевірка встановлення</h3>
+
+<p>У більшості дистрибутивів Linux OpenSSL уже встановлений. Перевір це командою, що відповідає твоєму типу пакетів.</p>
+
+<p>Дистрибутиви з rpm-пакетами (Fedora, RHEL, Rocky):</p>
+
+<pre><code>rpm -qa | grep -i openssl</code></pre>
+
+<p>Дистрибутиви з deb-пакетами (Debian, Ubuntu):</p>
+
+<pre><code>dpkg -l | grep -i openssl</code></pre>
+
+<p>Arch Linux:</p>
+
+<pre><code>pacman -Q openssl</code></pre>
+
+<h3>Windows: встановлення</h3>
+
+<p>Завантаж OpenSSL зі <a href="https://wiki.openssl.org/index.php/Binaries" target="_blank" rel="noreferrer">списку офіційних збірок</a>. Запусти інсталятор (обери 64-розрядну збірку <b>Win64 OpenSSL</b>) і встанови програму.</p>
+
+<p>Потім відкрий PowerShell і перейди в каталог встановлення (зазвичай <code>C:\Program Files\OpenSSL-Win64\bin\</code>). Виконуй команди OpenSSL звідти або додай цей каталог до змінної середовища <code>PATH</code>, щоб запускати <code>openssl</code> з будь-якого місця.</p>
+
+<h3>macOS: встановлення</h3>
+
+<h4>Спосіб 1. Через Homebrew</h4>
+
+<p><b>1.</b> Встанови Homebrew. Відкрий Термінал (він у папці «Утиліти», або знайди його через Spotlight) і виконай команду:</p>
+
+<pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+
+<p>Дотримуйся інструкцій у терміналі, щоб завершити встановлення.</p>
+
+<p><b>2.</b> Встанови OpenSSL:</p>
+
+<pre><code>brew install openssl</code></pre>
+
+<p><b>3.</b> Перевір встановлення:</p>
+
+<pre><code>openssl version</code></pre>
+
+<aside data-icon="⚠️">У macOS команда <code>openssl</code> може запускати вбудовану в систему бібліотеку LibreSSL, а не встановлений OpenSSL. Щоб запустити саме його, виконай: <code>$(brew --prefix openssl)/bin/openssl version</code>.</aside>
+
+<h4>Спосіб 2. Через MacPorts</h4>
+
+<p><b>1.</b> Встанови MacPorts за інструкцією з <a href="https://www.macports.org/install.php" target="_blank" rel="noreferrer">офіційного сайту MacPorts</a>.</p>
+
+<p><b>2.</b> Відкрий Термінал і встанови OpenSSL. Система попросить пароль адміністратора:</p>
+
+<pre><code>sudo port install openssl</code></pre>
+
+<p><b>3.</b> Перевір встановлення:</p>
+
+<pre><code>openssl version</code></pre>
+
+<p>Якщо команда показує LibreSSL, запусти встановлену версію за повним шляхом: <code>/opt/local/bin/openssl version</code>.</p>
+
+<h2>Основні команди OpenSSL</h2>
+
+<h3>Перевірка версії</h3>
+
+<pre><code>openssl version -a</code></pre>
+
+<p>Команда покаже версію OpenSSL, дату збірки та шлях до каталогу з налаштуваннями.</p>
+
+<h3>Генерація закритого ключа</h3>
+
+<p>Спершу створи закритий (приватний) ключ RSA довжиною 2048 біт:</p>
+
+<pre><code>openssl genrsa -out yourdomain.key 2048</code></pre>
+
+<h3>Перегляд закритого ключа</h3>
+
+<pre><code>cat yourdomain.key</code></pre>
+
+<pre data-label="Результат"><code>-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQ...
+...
+-----END PRIVATE KEY-----</code></pre>
+
+<aside data-icon="🛡️">Це навчальний ключ. Справжній закритий ключ ніколи не показують на екрані під час демонстрацій, не надсилають у чатах і не додають у Git.</aside>
+
+<h3>Створення CSR</h3>
+
+<p><b>CSR</b> (Certificate Signing Request, запит на підписання сертифіката) — файл, який надсилають центру сертифікації, щоб отримати сертифікат. Створи його за допомогою закритого ключа:</p>
+
+<pre><code>openssl req -new -key yourdomain.key -out yourdomain.csr</code></pre>
+
+<p>OpenSSL запитає дані про організацію: країну, регіон, місто, назву компанії, підрозділ і доменне ім'я (Common Name). Ці дані можна передати одразу в командному рядку за допомогою параметра <code>-subj</code>:</p>
+
+<pre><code>openssl req -new -key yourdomain.key -out yourdomain.csr -subj "/C=US/ST=CA/L=San Francisco/O=Your Company, Inc./OU=IT/CN=yourdomain.com"</code></pre>
+
+<h3>Перегляд параметрів закритого ключа</h3>
+
+<pre><code>openssl rsa -text -in yourdomain.key -noout</code></pre>
+
+<p>Команда покаже довжину ключа (<code>Private-Key: (2048 bit, 2 primes)</code>) і його математичні складові: модуль, експоненти та прості числа.</p>
+
+<h3>Отримання відкритого ключа</h3>
+
+<p>Відкритий ключ обчислюється із закритого:</p>
+
+<pre><code>openssl rsa -in yourdomain.key -pubout -out yourdomain_public.key</code></pre>
+
+<h3>Закритий ключ і CSR однією командою</h3>
+
+<pre><code>openssl req -new -newkey rsa:2048 -nodes -keyout yourdomain.key -out yourdomain.csr -subj "/C=US/ST=CA/L=San Francisco/O=Your Company, Inc./OU=IT/CN=yourdomain.com"</code></pre>
+
+<p>Параметр <code>-nodes</code> означає, що закритий ключ не буде захищено паролем.</p>
+
+<h3>Перевірка CSR</h3>
+
+<pre><code>openssl req -text -in yourdomain.csr -noout -verify</code></pre>
+
+<pre data-label="Результат"><code>Certificate request self-signature verify OK
+Certificate Request:
+    Data:
+        ...
+        Subject: C=US, ST=CA, L=San Francisco, O=Your Company, Inc., OU=IT, CN=yourdomain.com</code></pre>
+
+<p>Тепер ти знаєш, як за допомогою OpenSSL генерувати ключі та запити на сертифікати.</p>
+
+<h2>Завдання: генерація ключа та шифрування повідомлення</h2>
+
+<p><b>1.</b> Завантаж і встанови OpenSSL — через Homebrew чи MacPorts на macOS або іншим способом для твоєї операційної системи (див. вище).</p>
+
+<p><b>2.</b> Відкрий термінал або командний рядок.</p>
+
+<p><b>3.</b> Згенеруй новий ключ RSA:</p>
+
+<pre><code>openssl genrsa -out private_key.pem 2048</code></pre>
+
+<p><b>4.</b> Перевір створений ключ:</p>
+
+<pre><code>openssl rsa -in private_key.pem -text -noout</code></pre>
+
+<p><b>5.</b> Згенеруй відкритий ключ:</p>
+
+<pre><code>openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem</code></pre>
+
+<p><b>6.</b> Створи текстовий файл <code>plaintext.txt</code> з будь-яким вмістом, наприклад «Some secret message»:</p>
+
+<pre><code>echo "Some secret message" &gt; plaintext.txt</code></pre>
+
+<p><b>7.</b> Зашифруй повідомлення відкритим ключем:</p>
+
+<pre><code>openssl pkeyutl -encrypt -inkey public_key.pem -pubin -in plaintext.txt -out encrypted.txt</code></pre>
+
+<p>Спробуй переглянути <code>encrypted.txt</code> командою <code>cat</code>: замість тексту ти побачиш нечитабельний набір символів.</p>
+
+<p><b>8.</b> Розшифруй повідомлення закритим ключем:</p>
+
+<pre><code>openssl pkeyutl -decrypt -inkey private_key.pem -in encrypted.txt -out decrypted.txt</code></pre>
+
+<p><b>9.</b> Перевір, чи збігається розшифроване повідомлення з оригіналом:</p>
+
+<pre><code>diff plaintext.txt decrypted.txt
+cat decrypted.txt</code></pre>
+
+<p>Якщо <code>diff</code> нічого не виводить, файли однакові. Команда <code>cat</code> покаже текст «Some secret message».</p>
+
+<aside data-icon="😎">Готово! Ти згенерував ключі, зашифрував і розшифрував повідомлення за допомогою OpenSSL.</aside>
