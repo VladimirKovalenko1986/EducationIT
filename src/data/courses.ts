@@ -24,6 +24,7 @@ import b1m7t2 from './lessons/cybersecurity/b1-m7-t2.html?raw'
 import b1m7lab from './lessons/cybersecurity/b1-m7-lab.html?raw'
 import b1m7hw from './lessons/cybersecurity/b1-m7-hw.html?raw'
 import b1m8t1 from './lessons/cybersecurity/b1-m8-t1.html?raw'
+import b1m8t2 from './lessons/cybersecurity/b1-m8-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -128,7 +129,10 @@ export const courses: Course[] = [
           {
             id: 'b1-m8',
             title: 'Модуль 8. Обмін інформацією та збагачення систем кібербезпеки',
-            lessons: [{ id: 'b1-m8-t1', title: 'Тема 1. Індикатори кіберзагроз', content: b1m8t1 }],
+            lessons: [
+              { id: 'b1-m8-t1', title: 'Тема 1. Індикатори кіберзагроз', content: b1m8t1 },
+              { id: 'b1-m8-t2', title: 'Тема 2. Збагачення систем кібербезпеки', content: b1m8t2 },
+            ],
           },
           emptyModule(9, 'Кібербезпека в хмарній інфраструктурі'),
           emptyModule(10, 'Фінальна практика блоку'),
