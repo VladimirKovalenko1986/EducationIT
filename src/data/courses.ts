@@ -17,6 +17,7 @@ import b1m5t1 from './lessons/cybersecurity/b1-m5-t1.html?raw'
 import b1m5t2 from './lessons/cybersecurity/b1-m5-t2.html?raw'
 import b1m5hw from './lessons/cybersecurity/b1-m5-hw.html?raw'
 import b1m6t1 from './lessons/cybersecurity/b1-m6-t1.html?raw'
+import b1m6t2 from './lessons/cybersecurity/b1-m6-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -104,6 +105,7 @@ export const courses: Course[] = [
             title: 'Модуль 6. Реагування на інциденти (IR)',
             lessons: [
               { id: 'b1-m6-t1', title: 'Тема 1. Процес реагування на інциденти', content: b1m6t1 },
+              { id: 'b1-m6-t2', title: 'Тема 2. Технології реагування на інциденти', content: b1m6t2 },
             ],
           },
           emptyModule(7, 'Криптографія'),
