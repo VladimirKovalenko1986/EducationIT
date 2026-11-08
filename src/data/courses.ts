@@ -25,6 +25,7 @@ import b1m7lab from './lessons/cybersecurity/b1-m7-lab.html?raw'
 import b1m7hw from './lessons/cybersecurity/b1-m7-hw.html?raw'
 import b1m8t1 from './lessons/cybersecurity/b1-m8-t1.html?raw'
 import b1m8t2 from './lessons/cybersecurity/b1-m8-t2.html?raw'
+import b1m8case from './lessons/cybersecurity/b1-m8-case.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -132,6 +133,7 @@ export const courses: Course[] = [
             lessons: [
               { id: 'b1-m8-t1', title: 'Тема 1. Індикатори кіберзагроз', content: b1m8t1 },
               { id: 'b1-m8-t2', title: 'Тема 2. Збагачення систем кібербезпеки', content: b1m8t2 },
+              { id: 'b1-m8-case', title: 'Кейс: аналіз кібератак', content: b1m8case },
             ],
           },
           emptyModule(9, 'Кібербезпека в хмарній інфраструктурі'),
