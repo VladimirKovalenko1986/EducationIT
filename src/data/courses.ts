@@ -14,6 +14,7 @@ import b1m4lab1 from './lessons/cybersecurity/b1-m4-lab1.html?raw'
 import b1m4lab2 from './lessons/cybersecurity/b1-m4-lab2.html?raw'
 import b1m4hw from './lessons/cybersecurity/b1-m4-hw.html?raw'
 import b1m5t1 from './lessons/cybersecurity/b1-m5-t1.html?raw'
+import b1m5t2 from './lessons/cybersecurity/b1-m5-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -92,6 +93,7 @@ export const courses: Course[] = [
             title: 'Модуль 5. Архітектура кібербезпеки',
             lessons: [
               { id: 'b1-m5-t1', title: 'Тема 1. Екосистема кібербезпеки', content: b1m5t1 },
+              { id: 'b1-m5-t2', title: 'Тема 2. Референтні архітектури кібербезпеки', content: b1m5t2 },
             ],
           },
           emptyModule(6, 'Реагування на інциденти (IR)'),
