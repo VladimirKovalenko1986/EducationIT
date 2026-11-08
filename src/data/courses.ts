@@ -19,6 +19,7 @@ import b1m5hw from './lessons/cybersecurity/b1-m5-hw.html?raw'
 import b1m6t1 from './lessons/cybersecurity/b1-m6-t1.html?raw'
 import b1m6t2 from './lessons/cybersecurity/b1-m6-t2.html?raw'
 import b1m6hw from './lessons/cybersecurity/b1-m6-hw.html?raw'
+import b1m7t1 from './lessons/cybersecurity/b1-m7-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -110,7 +111,11 @@ export const courses: Course[] = [
               { id: 'b1-m6-hw', title: 'Домашнє завдання', isTask: true, content: b1m6hw },
             ],
           },
-          emptyModule(7, 'Криптографія'),
+          {
+            id: 'b1-m7',
+            title: 'Модуль 7. Криптографія',
+            lessons: [{ id: 'b1-m7-t1', title: 'Тема 1. Криптографія', content: b1m7t1 }],
+          },
           emptyModule(8, 'Обмін інформацією та збагачення систем кібербезпеки'),
           emptyModule(9, 'Кібербезпека в хмарній інфраструктурі'),
           emptyModule(10, 'Фінальна практика блоку'),
