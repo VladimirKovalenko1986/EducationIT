@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 915" width="900" height="915" font-family="Manrope, 'Segoe UI', Roboto, Arial, sans-serif" role="img"><title>Розслідування фішингу. Частина 1: лист і отримувачі</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5b70"/></marker></defs><rect width="900" height="915" fill="#ffffff"/><text text-anchor="middle" dominant-baseline="central" font-size="18" fill="#10233d" font-weight="700"><tspan x="450" y="28.0">Частина 1. Лист і його отримувачі</tspan></text>
+<rect x="40.0" y="62.0" width="320" height="56" rx="26" fill="#1f4e8c" stroke="#1f4e8c" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#ffffff" font-weight="700"><tspan x="200" y="80.9">Почни з фішингового листа:</tspan><tspan x="200" y="99.1">тема, адреса відправника</tspan></text>
+<rect x="50.0" y="155.0" width="300" height="50" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="200" y="170.9">Отримай список користувачів,</tspan><tspan x="200" y="189.1">які отримали лист</tspan></text>
+<rect x="50.0" y="240.0" width="300" height="50" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="200" y="255.9">Хто ще отримав або</tspan><tspan x="200" y="274.1">прочитав цей лист?</tspan></text>
+<rect x="75.0" y="350.0" width="250" height="60" rx="18" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#3d2a00" font-weight="700"><tspan x="200" y="370.9">Чи є делегований доступ</tspan><tspan x="200" y="389.1">до поштової скриньки?</tspan></text>
+<rect x="355.0" y="350.0" width="250" height="60" rx="18" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#3d2a00" font-weight="700"><tspan x="480" y="370.9">Чи є правило переадресації</tspan><tspan x="480" y="389.1">для поштової скриньки?</tspan></text>
+<path d="M715.0,352.0 v56 a75.0,10 0 0 0 150,0 v-56" fill="#eef2f6" stroke="#64748b" stroke-width="2"/><ellipse cx="790" cy="352.0" rx="75.0" ry="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#1e293b" font-weight="700"><tspan x="790" y="376.9">Журнали</tspan><tspan x="790" y="395.1">аудиту пошти</tspan></text>
+<rect x="190.0" y="475.0" width="300" height="50" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="340" y="490.9">Кому делеговано доступ</tspan><tspan x="340" y="509.1">або переадресовано листи?</tspan></text>
+<rect x="700.0" y="465.0" width="180" height="70" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="790" y="481.8">Отримай мітку часу</tspan><tspan x="790" y="500.0">доступу користувача</tspan><tspan x="790" y="518.2">до скриньки</tspan></text>
+<rect x="700.0" y="575.0" width="180" height="70" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="790" y="591.8">Досліди події</tspan><tspan x="790" y="610.0">входу, щоб</tspan><tspan x="790" y="628.2">встановити особу</tspan></text>
+<rect x="230.0" y="585.0" width="220" height="50" rx="18" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#3d2a00" font-weight="700"><tspan x="340" y="600.9">Чи прочитав</tspan><tspan x="340" y="619.1">користувач лист?</tspan></text>
+<rect x="505.0" y="575.0" width="170" height="70" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="590" y="591.8">Вилучи користувача</tspan><tspan x="590" y="610.0">зі списку</tspan><tspan x="590" y="628.2">постраждалих</tspan></text>
+<rect x="230.0" y="695.0" width="220" height="50" rx="18" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#3d2a00" font-weight="700"><tspan x="340" y="710.9">Чи містив лист</tspan><tspan x="340" y="729.1">вкладення?</tspan></text>
+<rect x="490.0" y="685.0" width="180" height="70" rx="18" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#3d2a00" font-weight="700"><tspan x="580" y="701.8">Чи було у вкладенні</tspan><tspan x="580" y="720.0">шкідливе</tspan><tspan x="580" y="738.2">навантаження?</tspan></text>
+<rect x="730.0" y="695.0" width="140" height="50" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="14" fill="#10233d"><tspan x="800" y="710.9">Запиши хеш</tspan><tspan x="800" y="729.1">файлу та IoC</tspan></text>
+<circle cx="340" cy="815" r="24" fill="#ffffff" stroke="#1f4e8c" stroke-width="3"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="22" fill="#1f4e8c" font-weight="700"><tspan x="340" y="815.0">A</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#1f4e8c" font-weight="700"><tspan x="340" y="858.0">продовження в частині 2</tspan></text>
+<path d="M200,118.0 L200,155.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M200,205.0 L200,240.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M200,290.0 L200,350.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M200,315 L480,315 L480,350.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M350.0,265 L790,265 L790,342.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M200,410.0 L200,475.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="204.0" y="431.5" width="36" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="222.0" y="442.5">Так</tspan></text>
+<path d="M480,410.0 L480,475.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="484.0" y="431.5" width="36" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="502.0" y="442.5">Так</tspan></text>
+<path d="M490.0,500 L660,500 L660,380 L715.0,380" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M790,418.0 L790,465.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M790,535.0 L790,575.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M340,525.0 L340,585.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M450.0,610 L505.0,610" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="463.5" y="586.0" width="28" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#b91c1c" font-weight="700"><tspan x="477.5" y="597.0">Ні</tspan></text>
+<path d="M340,635.0 L340,695.0" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="344.0" y="654.0" width="36" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="362.0" y="665.0">Так</tspan></text>
+<path d="M450.0,720 L490.0,720" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="452.0" y="696.0" width="36" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="470.0" y="707.0">Так</tspan></text>
+<path d="M670.0,720 L730.0,720" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="682.0" y="696.0" width="36" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="700.0" y="707.0">Так</tspan></text>
+<path d="M340,745.0 L340,791" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="348.0" y="757.0" width="28" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#b91c1c" font-weight="700"><tspan x="362.0" y="768.0">Ні</tspan></text>
+<path d="M580,755.0 L580,815 L364,815" fill="none" stroke="#4b5b70" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="588.0" y="774.0" width="28" height="22" rx="11" fill="#ffffff"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#b91c1c" font-weight="700"><tspan x="602.0" y="785.0">Ні</tspan></text>
+<path d="M800,745.0 L800,815 L580,815" fill="none" stroke="#4b5b70" stroke-width="2"/>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#334155" font-weight="700"><tspan x="70" y="892.0">Позначення:</tspan></text>
+<rect x="150" y="881" width="34" height="22" rx="8" fill="#e6effb" stroke="#3b6fb6" stroke-width="2"/>
+<text x="194" y="892" dominant-baseline="central" font-size="13" fill="#334155">Дія</text>
+<rect x="252" y="881" width="34" height="22" rx="11" fill="#fff3d1" stroke="#c98a00" stroke-width="2"/>
+<text x="296" y="892" dominant-baseline="central" font-size="13" fill="#334155">Питання</text>
+<rect x="386" y="881" width="34" height="22" rx="11" fill="#1f4e8c" stroke="#1f4e8c" stroke-width="2"/>
+<text x="430" y="892" dominant-baseline="central" font-size="13" fill="#334155">Початок / кінець</text>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#15803d" font-weight="700"><tspan x="606" y="892.0">Так</tspan></text>
+<text text-anchor="middle" dominant-baseline="central" font-size="13" fill="#b91c1c" font-weight="700"><tspan x="656" y="892.0">Ні</tspan></text></svg>
