@@ -1,0 +1,63 @@
+<h2>Настав час практики!</h2>
+
+<p>Сьогодні ми розглянемо використання OpenSSL для генерації ключа та шифрування повідомлення.</p>
+
+<p>Навички, які отримаєш:</p>
+<ul>
+  <li>робота з OpenSSL для забезпечення безпеки даних;</li>
+  <li>генерація RSA-ключів;</li>
+  <li>шифрування та розшифрування повідомлень.</li>
+</ul>
+
+<h2>Завдання (крок за кроком)</h2>
+
+<p><b>1.</b> Завантаж і встанови OpenSSL на свій комп'ютер будь-яким зручним способом: через Homebrew або MacPorts на macOS чи іншим доступним для твоєї операційної системи. Інструкції є в <a href="#/courses/cybersecurity/b1-m7-lab">лабораторній роботі</a>.</p>
+
+<p><b>2.</b> Відкрий термінал або командний рядок.</p>
+
+<p><b>3.</b> Згенеруй новий RSA-ключ:</p>
+
+<pre><code>openssl genrsa -out private_key.pem 2048</code></pre>
+
+<p><b>4.</b> Перевір створений ключ:</p>
+
+<pre><code>openssl rsa -in private_key.pem -text -noout</code></pre>
+
+<p><b>5.</b> Згенеруй відкритий ключ:</p>
+
+<pre><code>openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem</code></pre>
+
+<p><b>6.</b> Створи текстовий файл <code>plaintext.txt</code> з будь-яким вмістом, наприклад «Some secret message»:</p>
+
+<pre><code>echo "Some secret message" &gt; plaintext.txt</code></pre>
+
+<p><b>7.</b> Зашифруй повідомлення відкритим ключем:</p>
+
+<pre><code>openssl pkeyutl -encrypt -inkey public_key.pem -pubin -in plaintext.txt -out encrypted.txt</code></pre>
+
+<p><b>8.</b> Розшифруй повідомлення закритим ключем:</p>
+
+<pre><code>openssl pkeyutl -decrypt -inkey private_key.pem -in encrypted.txt -out decrypted.txt</code></pre>
+
+<p><b>9.</b> Перевір, чи збігається розшифроване повідомлення з оригіналом:</p>
+
+<pre><code>diff plaintext.txt decrypted.txt
+cat decrypted.txt</code></pre>
+
+<p>Якщо <code>diff</code> нічого не виводить, файли однакові.</p>
+
+<h2>Формат здачі</h2>
+
+<aside data-icon="📄">Документ на Google Docs із розшареним доступом, у якому є <b>скриншоти кожного кроку</b> процесу.</aside>
+
+<h2>Критерії прийняття завдання</h2>
+
+<ol>
+  <li>Усі кроки виконано правильно.</li>
+  <li>Для кожного кроку є скриншот.</li>
+  <li>Розшифроване повідомлення збігається з оригінальним текстом.</li>
+</ol>
+
+<h2>Формат оцінювання</h2>
+
+<aside data-icon="🎯">Залік / Незалік</aside>
