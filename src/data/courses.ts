@@ -27,6 +27,7 @@ import b1m8t1 from './lessons/cybersecurity/b1-m8-t1.html?raw'
 import b1m8t2 from './lessons/cybersecurity/b1-m8-t2.html?raw'
 import b1m8case from './lessons/cybersecurity/b1-m8-case.html?raw'
 import b1m8hw from './lessons/cybersecurity/b1-m8-hw.html?raw'
+import b1m9t1 from './lessons/cybersecurity/b1-m9-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -138,7 +139,13 @@ export const courses: Course[] = [
               { id: 'b1-m8-hw', title: 'Домашнє завдання', isTask: true, content: b1m8hw },
             ],
           },
-          emptyModule(9, 'Кібербезпека в хмарній інфраструктурі'),
+          {
+            id: 'b1-m9',
+            title: 'Модуль 9. Кібербезпека в хмарній інфраструктурі',
+            lessons: [
+              { id: 'b1-m9-t1', title: 'Тема 1. Адміністрування хмарної інфраструктури', content: b1m9t1 },
+            ],
+          },
           emptyModule(10, 'Фінальна практика блоку'),
         ],
       },
