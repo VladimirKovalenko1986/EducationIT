@@ -31,6 +31,7 @@ import b1m9t1 from './lessons/cybersecurity/b1-m9-t1.html?raw'
 import b1m9t2 from './lessons/cybersecurity/b1-m9-t2.html?raw'
 import b1m9lab from './lessons/cybersecurity/b1-m9-lab.html?raw'
 import b1m9hw from './lessons/cybersecurity/b1-m9-hw.html?raw'
+import b1m10t1 from './lessons/cybersecurity/b1-m10-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -152,7 +153,13 @@ export const courses: Course[] = [
               { id: 'b1-m9-hw', title: 'Домашнє завдання', isTask: true, content: b1m9hw },
             ],
           },
-          emptyModule(10, 'Фінальна практика блоку'),
+          {
+            id: 'b1-m10',
+            title: 'Модуль 10. Фінальна практика блоку',
+            lessons: [
+              { id: 'b1-m10-t1', title: 'Тема 1. Фінальна практика блоку', content: b1m10t1 },
+            ],
+          },
         ],
       },
       { id: 'block-2', title: 'Блок 2', modules: [] },

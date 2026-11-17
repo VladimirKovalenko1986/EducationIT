@@ -1,0 +1,719 @@
+<h2>Фаєрвол на базі pfSense</h2>
+
+<p>Ця практична робота присвячена встановленню та налаштуванню фаєрволу на базі платформи <b>pfSense</b>.</p>
+
+<p><b>pfSense</b> — це безкоштовний дистрибутив з відкритим кодом на основі FreeBSD для захисту та керування комп'ютерними мережами. Його встановлюють на окремий пристрій чи віртуальну машину, і він може виконувати функції роутера, фаєрвола, VPN-сервера, IDS/IPS, а також моніторити й аналізувати мережевий трафік.</p>
+
+<p>Основні ролі pfSense у захисті мережі:</p>
+
+<ol>
+  <li><b>Фаєрвол:</b> дозволяє або блокує різні типи мережевого трафіку й так захищає мережу від несанкціонованого доступу та атак.</li>
+  <li><b>VPN-сервер:</b> створює віртуальні приватні мережі (OpenVPN, IPsec, WireGuard), щоб користувачі могли безпечно підключатися до мережі з будь-якого місця.</li>
+  <li><b>IDS/IPS:</b> за допомогою додаткових пакетів (Suricata або Snort) аналізує трафік, виявляє та блокує атаки, зокрема сканування, експлойти й активність шкідливого ПЗ.</li>
+  <li><b>Моніторинг трафіку:</b> допомагає знаходити й усувати мережеві проблеми та помічати підозрілу активність.</li>
+  <li><b>Керування мережею:</b> роздає IP-адреси через DHCP, налаштовує підмережі, маршрутизацію, DNS тощо.</li>
+</ol>
+
+<p>pfSense популярний тому, що це рішення з відкритим кодом: його можна вільно налаштовувати й розширювати пакетами під власні потреби.</p>
+
+<h3>Кейси використання pfSense</h3>
+
+<ul>
+  <li><b>Малий і середній бізнес.</b> pfSense працює як фаєрвол, VPN-сервер для віддаленого доступу працівників та IDS/IPS для виявлення підозрілої активності.</li>
+  <li><b>Домашні мережі.</b> pfSense можна встановити на окремий міні-комп'ютер, який замінить домашній роутер: блокувати небажаний трафік, фільтрувати контент і забезпечувати безпечне підключення через VPN.</li>
+  <li><b>Освітні заклади.</b> Контроль і обмеження доступу до окремих сайтів та онлайн-ресурсів, безпечний доступ до мережі для студентів і викладачів, моніторинг трафіку.</li>
+  <li><b>Державні установи.</b> Надійний фаєрвол, VPN для віддаленого доступу та засоби моніторингу для виявлення кіберзагроз і реагування на них.</li>
+</ul>
+
+<h2>Лабораторна робота</h2>
+
+<p>Сьогодні ти навчишся:</p>
+
+<ul>
+  <li>встановлювати та налаштовувати віртуальне середовище у VirtualBox;</li>
+  <li>встановлювати фаєрвол pfSense і налаштовувати правила безпеки;</li>
+  <li>розгортати віртуальну машину з Windows 10;</li>
+  <li>перевіряти роботу фаєрвола, блокуючи доступ до вебсайтів;</li>
+  <li>керувати мережевою інфраструктурою через вебінтерфейс pfSense.</li>
+</ul>
+
+<p>Схема лабораторної: pfSense має два мережеві адаптери. Перший (<b>WAN</b>) підключений до твоєї домашньої мережі й виходить в інтернет, другий (<b>LAN</b>) — до внутрішньої мережі VirtualBox. Віртуальна машина з Windows 10 підключена лише до внутрішньої мережі, тому весь її трафік проходить через фаєрвол.</p>
+
+<h3>Етап 1. Встановлення VirtualBox</h3>
+
+<ol>
+  <li>Перейди на сторінку <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noreferrer">virtualbox.org/wiki/Downloads</a> і завантаж версію для своєї ОС (наприклад, <b>Windows hosts</b>).</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-download.webp" alt="Сторінка завантаження VirtualBox з виділеним посиланням Windows hosts" loading="lazy" />
+  <figcaption>Завантаження VirtualBox</figcaption>
+</figure>
+
+<aside data-icon="💡">На скриншотах використано VirtualBox 7.0.16. Завантажуй актуальну версію з офіційного сайту: старіші релізи можуть містити помилки й вразливості, які вже виправлено.</aside>
+
+<ol start="2">
+  <li>Запусти завантажений файл і натисни <b>Next</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-setup-welcome.webp" alt="Вітальне вікно майстра встановлення Oracle VM VirtualBox з кнопкою Next" loading="lazy" />
+  <figcaption>Майстер встановлення VirtualBox</figcaption>
+</figure>
+
+<ol start="3">
+  <li>Залиш компоненти за замовчуванням і знову натисни <b>Next</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-setup-custom.webp" alt="Вікно Custom Setup зі списком компонентів VirtualBox" loading="lazy" />
+  <figcaption>Вибір компонентів</figcaption>
+</figure>
+
+<ol start="4">
+  <li>На попередженні про тимчасове відключення мережі натисни <b>Yes</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-setup-network.webp" alt="Попередження Warning: Network Interfaces з кнопкою Yes" loading="lazy" />
+  <figcaption>Попередження про мережеві інтерфейси</figcaption>
+</figure>
+
+<ol start="5">
+  <li>Натисни <b>Install</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-setup-install.webp" alt="Вікно Ready to Install з кнопкою Install" loading="lazy" />
+  <figcaption>Початок встановлення</figcaption>
+</figure>
+
+<ol start="6">
+  <li>Натисни <b>Finish</b> і запусти VirtualBox.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-setup-finish.webp" alt="Вікно завершення встановлення VirtualBox з кнопкою Finish" loading="lazy" />
+  <figcaption>Встановлення завершено</figcaption>
+</figure>
+
+<h3>Етап 2. Завантаження pfSense і створення віртуальної машини</h3>
+
+<ol>
+  <li>Завантаж образ pfSense за <a href="https://drive.google.com/file/d/13IhpX_e4heA-iQk_2MWV8cU4-pMgTT1N/view?usp=sharing" target="_blank" rel="noreferrer">цим посиланням</a>: натисни <b>Download</b>, а потім <b>Download anyway</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-drive-download.webp" alt="Google Drive: попередній перегляд недоступний, кнопка Download" loading="lazy" />
+  <figcaption>Завантаження образу з Google Drive</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-drive-anyway.webp" alt="Попередження Google Drive про неможливість перевірити файл pfSense-CE-2.7.2-RELEASE-amd64.iso.gz на віруси, кнопка Download anyway" loading="lazy" />
+  <figcaption>Підтвердження завантаження</figcaption>
+</figure>
+
+<aside data-icon="🛡️">Офіційні образи pfSense CE поширює компанія Netgate через <a href="https://www.pfsense.org/download/" target="_blank" rel="noreferrer">pfsense.org/download</a>. Завантажуючи образи ОС з інших джерел, завжди звіряй контрольну суму (SHA-256) з офіційною — підмінений образ фаєрвола може сам стати точкою входу для зловмисника. Зверни увагу: Google Drive прямо попереджає, що не перевірив цей файл на віруси.</aside>
+
+<ol start="2">
+  <li>У VirtualBox натисни <b>Створити</b> і введи назву віртуальної машини <code>pfsense</code>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vbox-create.webp" alt="Головне вікно VirtualBox з виділеною кнопкою Створити" loading="lazy" />
+  <figcaption>Створення нової віртуальної машини</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-name.webp" alt="Майстер створення віртуальної машини з назвою pfsense" loading="lazy" />
+  <figcaption>Назва віртуальної машини</figcaption>
+</figure>
+
+<ol start="3">
+  <li>Вкажи завантажений ISO-файл. Образ запакований в архів <code>.iso.gz</code>, тому спочатку розпакуй його (наприклад, 7-Zip).</li>
+  <li>Вибери тип <b>BSD</b> і версію <b>FreeBSD (64-bit)</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-type.webp" alt="Майстер створення віртуальної машини: ISO-образ pfSense, тип BSD, версія FreeBSD (64-bit)" loading="lazy" />
+  <figcaption>ISO-образ і тип ОС</figcaption>
+</figure>
+
+<ol start="5">
+  <li>Виділи 3072 МБ оперативної пам'яті та 2 процесори.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-hardware.webp" alt="Крок Hardware майстра VirtualBox: основна пам'ять 3072 МБ, 2 процесори" loading="lazy" />
+  <figcaption>Пам'ять і процесори для pfSense</figcaption>
+</figure>
+
+<ol start="6">
+  <li>Створи віртуальний жорсткий диск обсягом 16 ГБ.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-disk.webp" alt="Крок Virtual Hard disk з розміром диска 16 ГБ" loading="lazy" />
+  <figcaption>Віртуальний диск для pfSense</figcaption>
+</figure>
+
+<ol start="7">
+  <li>Перевір підсумок і натисни <b>Закінчити</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-summary.webp" alt="Підсумок нової віртуальної машини pfsense: FreeBSD (64-bit), 3072 МБ, 2 процесори, диск 16 ГБ" loading="lazy" />
+  <figcaption>Підсумок налаштувань pfSense</figcaption>
+</figure>
+
+<h3>Етап 3. Налаштування мережевих адаптерів</h3>
+
+<ol>
+  <li>Вибери віртуальну машину pfSense і натисни <b>Налаштування</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-settings.webp" alt="Менеджер VirtualBox з вибраною машиною pfsense і виділеною кнопкою Налаштування" loading="lazy" />
+  <figcaption>Налаштування віртуальної машини</figcaption>
+</figure>
+
+<ol start="2">
+  <li>У розділі <b>Мережа</b> для <b>Адаптера 1</b> вибери тип підключення <b>Проміжний адаптер</b> (Bridged Adapter), а в полі «Назва» — мережевий інтерфейс, через який твій комп'ютер виходить в інтернет (наприклад, адаптер Wi-Fi). Це буде WAN.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-adapter1.webp" alt="Адаптер 1 машини pfsense під'єднаний до проміжного адаптера Intel Wi-Fi 6 AX200" loading="lazy" />
+  <figcaption>Адаптер 1 — WAN</figcaption>
+</figure>
+
+<ol start="3">
+  <li>На вкладці <b>Адаптер 2</b> увімкни адаптер, вибери <b>Внутрішня мережа</b> (Internal Network) і запам'ятай її назву (за замовчуванням <code>intnet</code>). Це буде LAN. Натисни <b>OK</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-adapter2.webp" alt="Адаптер 2 машини pfsense під'єднаний до внутрішньої мережі intnet" loading="lazy" />
+  <figcaption>Адаптер 2 — LAN</figcaption>
+</figure>
+
+<h3>Етап 4. Встановлення pfSense</h3>
+
+<ol>
+  <li>Запусти віртуальну машину pfSense кнопкою <b>Запустити</b> — почнеться встановлення.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-vm-start.webp" alt="Менеджер VirtualBox з вибраною машиною pfsense і виділеною кнопкою Запустити" loading="lazy" />
+  <figcaption>Запуск віртуальної машини</figcaption>
+</figure>
+
+<ol start="2">
+  <li>Погодься з умовами ліцензії — <b>Accept</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-accept.webp" alt="Інсталятор pfSense з повідомленням про авторські права і кнопкою Accept" loading="lazy" />
+  <figcaption>Умови ліцензії</figcaption>
+</figure>
+
+<ol start="3">
+  <li>Вибери <b>Install pfSense</b> і натисни <b>OK</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-welcome.webp" alt="Вітальне меню інсталятора pfSense з виділеним пунктом Install" loading="lazy" />
+  <figcaption>Початок встановлення</figcaption>
+</figure>
+
+<ol start="4">
+  <li>Залиш розмітку <b>Auto (ZFS)</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-zfs.webp" alt="Меню Partitioning з виділеним варіантом Auto (ZFS) Guided Root-on-ZFS" loading="lazy" />
+  <figcaption>Розмітка диска</figcaption>
+</figure>
+
+<ol start="5">
+  <li>Наступний крок теж залиш без змін: вибери <b>Install — Proceed with Installation</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-options.webp" alt="Меню ZFS Configuration з виділеним пунктом Install Proceed with Installation" loading="lazy" />
+  <figcaption>Параметри ZFS</figcaption>
+</figure>
+
+<ol start="6">
+  <li>Тип віртуального пристрою ZFS залиш без змін: <b>stripe</b> — без резервування, для одного диска.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-stripe.webp" alt="Вибір типу віртуального пристрою ZFS з виділеним stripe — No Redundancy" loading="lazy" />
+  <figcaption>Тип пристрою ZFS</figcaption>
+</figure>
+
+<ol start="7">
+  <li>Познач диск <code>ada0</code> клавішею <b>Пробіл</b> і вибери <b>OK</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-disk.webp" alt="Вибір диска ada0 VBOX HARDDISK у ZFS Configuration" loading="lazy" />
+  <figcaption>Вибір диска</figcaption>
+</figure>
+
+<ol start="8">
+  <li>На запитання, чи справді стерти вміст диска, вибери <b>YES</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-confirm.webp" alt="Попередження Last Chance про знищення вмісту диска ada0 з виділеною кнопкою YES" loading="lazy" />
+  <figcaption>Підтвердження форматування</figcaption>
+</figure>
+
+<ol start="9">
+  <li>Після завершення встановлення вибери <b>Reboot</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-install-reboot.webp" alt="Повідомлення Installation of pfSense complete з кнопкою Reboot" loading="lazy" />
+  <figcaption>Встановлення завершено</figcaption>
+</figure>
+
+<ol start="10">
+  <li>Під час перезавантаження в меню VirtualBox вибери <b>Пристрої → Оптичні диски → Вилучити диск з віртуального носія</b>, щоб система не запустила встановлення повторно.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-eject-iso.webp" alt="Меню VirtualBox Пристрої — Оптичні диски з виділеним пунктом Вилучити диск з віртуального носія" loading="lazy" />
+  <figcaption>Вилучення інсталяційного образу</figcaption>
+</figure>
+
+<ol start="11">
+  <li>Після запуску pfSense у консолі з'являться два інтерфейси: <b>WAN</b> з адресою від твого домашнього роутера та <b>LAN</b> з адресою <code>192.168.1.1</code>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/pf-console.webp" alt="Консоль pfSense 2.7.2 з інтерфейсами WAN 192.168.0.104/24 і LAN 192.168.1.1/24 та меню опцій" loading="lazy" />
+  <figcaption>Консоль pfSense після встановлення</figcaption>
+</figure>
+
+<aside data-icon="⚠️">Якщо твоя домашня мережа теж використовує адреси <code>192.168.1.x</code>, WAN і LAN опиняться в одній підмережі й pfSense працюватиме некоректно. У такому разі зміни адресу LAN у консолі pfSense (пункт <b>2) Set interface(s) IP address</b>), наприклад на <code>192.168.10.1/24</code>, і далі в лабораторній використовуй її замість <code>192.168.1.1</code>.</aside>
+
+<h3>Етап 5. Віртуальна машина з Windows 10</h3>
+
+<p>Для перевірки фаєрвола розгорнемо ще одну віртуальну машину — з Windows 10.</p>
+
+<aside data-icon="💡">Microsoft припинила підтримку Windows 10 у жовтні 2025 року. Для навчальної лабораторії в ізольованій мережі вона підходить, але в реальній роботі використовуй підтримувані системи. Аналогічно можна розгорнути й Windows 11 — VirtualBox 7 підтримує віртуальний TPM.</aside>
+
+
+<ol>
+  <li>На <a href="https://www.microsoft.com/uk-ua/software-download/windows10" target="_blank" rel="noreferrer">офіційному сайті Microsoft</a> натисни <b>Завантажити засіб</b> — завантажиться засіб створення носія (Media Creation Tool).</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-download-tool.webp" alt="Сторінка Microsoft із кнопкою Завантажити засіб" loading="lazy" />
+  <figcaption>Завантаження засобу створення носія</figcaption>
+</figure>
+
+<ol start="2">
+  <li>Запусти програму й прийми умови ліцензії — <b>Прийняти</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-mct-license.webp" alt="Умови ліцензії Microsoft Media Creation Tool з кнопкою Прийняти" loading="lazy" />
+  <figcaption>Умови ліцензії</figcaption>
+</figure>
+
+<ol start="3">
+  <li>Вибери <b>Створити інсталяційний диск (USB-носій, DVD або файл ISO) для іншого ПК</b> і натисни <b>Далі</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-mct-create.webp" alt="Вікно Що потрібно зробити з вибраним пунктом Створити інсталяційний диск" loading="lazy" />
+  <figcaption>Створення інсталяційного носія</figcaption>
+</figure>
+
+<ol start="4">
+  <li>Зніми позначку <b>Використовувати рекомендовані параметри для цього комп'ютера</b> і в полі «Архітектура» вибери <b>64-розрядна (x64)</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-mct-arch.webp" alt="Вибір мови, випуску й архітектури Windows 10 (на скриншоті вибрано 32-розрядну x86)" loading="lazy" />
+  <figcaption>Мова, випуск і архітектура (вибирай x64, а не x86, як на скриншоті)</figcaption>
+</figure>
+
+<ol start="5">
+  <li>Вибери <b>Файл ISO</b> і натисни <b>Далі</b>.</li>
+</ol>
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-media-iso.webp" alt="Засіб створення носія Windows 10: вибрано Файл ISO" loading="lazy" />
+  <figcaption>Вибір носія — файл ISO</figcaption>
+</figure>
+
+<ol start="6">
+  <li>Вкажи, куди зберегти файл, і натисни <b>Далі</b>.</li>
+  <li>Коли образ завантажиться, повернись у VirtualBox і натисни <b>Створити</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-create.webp" alt="Головне вікно VirtualBox з виділеною кнопкою Створити" loading="lazy" />
+  <figcaption>Створення нової віртуальної машини</figcaption>
+</figure>
+
+<ol start="8">
+  <li>Вкажи назву (наприклад, <code>Windows 10</code>), папку, де зберігатиметься віртуальна машина, і ISO-образ. Познач <b>Skip Unattended Installation</b>, щоб встановити систему вручну, і натисни <b>Next</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-name-os.webp" alt="Майстер VirtualBox: назва Windows 10, шлях до ISO-образу, позначка Skip Unattended Installation" loading="lazy" />
+  <figcaption>Назва, папка й образ ОС</figcaption>
+</figure>
+
+<aside data-icon="⚠️">На скриншотах VirtualBox визначив систему як <b>Windows 10 (32-bit)</b>, а під час інсталяції видно редакції <b>x86</b>. Краще використовуй 64-розрядний образ (x64), як вказано в кроці 4: 32-розрядна система бачить не більше 4 ГБ пам'яті, а Windows 11 32-розрядної версії взагалі не має.</aside>
+
+<ol start="9">
+  <li>Вибери кількість оперативної пам'яті та процесорів (наприклад, 4096 МБ і 2–3 CPU).</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-hardware.webp" alt="Крок Hardware: основна пам'ять 4096 МБ, 3 процесори" loading="lazy" />
+  <figcaption>Пам'ять і процесори</figcaption>
+</figure>
+
+<ol start="10">
+  <li>Вкажи розмір віртуального диска — щонайменше 50 ГБ.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-disk.webp" alt="Крок Virtual Hard disk з розміром диска 50 ГБ" loading="lazy" />
+  <figcaption>Розмір віртуального диска</figcaption>
+</figure>
+
+<ol start="11">
+  <li>Перевір підсумок і натисни <b>Закінчити</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-summary.webp" alt="Підсумок параметрів нової віртуальної машини Windows 10 з кнопкою Закінчити" loading="lazy" />
+  <figcaption>Підсумок налаштувань</figcaption>
+</figure>
+
+<ol start="12">
+  <li>Відкрий <b>Налаштування</b> нової машини, перейди в розділ <b>Мережа</b> і для <b>Адаптера 1</b> вибери <b>Внутрішня мережа</b> з тією самою назвою, що й у pfSense (<code>intnet</code>). Так Windows отримає IP-адресу від pfSense. Натисни <b>OK</b> і запусти машину.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/vbox-win-network.webp" alt="Налаштування мережі віртуальної машини Windows 10: Адаптер 1 під'єднаний до внутрішньої мережі intnet" loading="lazy" />
+  <figcaption>Підключення Windows до внутрішньої мережі</figcaption>
+</figure>
+
+<ol start="13">
+  <li>Вибери мову, формат часу й розкладку клавіатури та натисни <b>Далі</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-language.webp" alt="Перше вікно програми інсталяції Windows з вибором мови" loading="lazy" />
+  <figcaption>Вибір мови</figcaption>
+</figure>
+
+<ol start="14">
+  <li>Натисни <b>Інсталювати зараз</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-install-now.webp" alt="Кнопка Інсталювати зараз у програмі інсталяції Windows" loading="lazy" />
+  <figcaption>Початок інсталяції</figcaption>
+</figure>
+
+<ol start="15">
+  <li>Вибери <b>У мене немає ключа продукту</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-no-key.webp" alt="Вікно Активація Windows з посиланням У мене немає ключа продукту" loading="lazy" />
+  <figcaption>Пропуск введення ключа продукту</figcaption>
+</figure>
+
+<ol start="16">
+  <li>Вибери редакцію <b>Windows 10 Pro</b> і натисни <b>Далі</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-edition.webp" alt="Список редакцій Windows 10 з вибраною Windows 10 Pro" loading="lazy" />
+  <figcaption>Вибір редакції</figcaption>
+</figure>
+
+<ol start="17">
+  <li>Прийми ліцензійну угоду й вибери <b>Настроювана: інсталяція лише Windows (вибіркова)</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-custom-install.webp" alt="Вибір типу інсталяції: виділено Настроювана — інсталяція лише Windows" loading="lazy" />
+  <figcaption>Вибіркова інсталяція</figcaption>
+</figure>
+
+<ol start="18">
+  <li>Нічого не змінюй і натисни <b>Далі</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-disk.webp" alt="Вибір диска для інсталяції: вільне місце на диску 0, 50 ГБ" loading="lazy" />
+  <figcaption>Диск для інсталяції</figcaption>
+</figure>
+
+<ol start="19">
+  <li>Після інсталяції вибери регіон і натисни <b>Так</b>.</li>
+  <li>Вибери розкладку клавіатури й натисни <b>Так</b>.</li>
+  <li>Додаткову розкладку пропусти — натисни <b>Пропустити</b>.</li>
+  <li>Прийми ліцензійну угоду.</li>
+  <li>Вибери <b>Налаштувати для особистого використання</b> і натисни <b>Далі</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-personal.webp" alt="Вікно Виберіть спосіб налаштування з виділеним пунктом для особистого використання" loading="lazy" />
+  <figcaption>Спосіб налаштування</figcaption>
+</figure>
+
+<ol start="24">
+  <li>Вибери <b>Автономний обліковий запис</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-offline-account.webp" alt="Вікно Додаймо ваш обліковий запис з виділеним посиланням Автономний обліковий запис" loading="lazy" />
+  <figcaption>Автономний обліковий запис</figcaption>
+</figure>
+
+<ol start="25">
+  <li>Натисни <b>Обмежені можливості</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-limited.webp" alt="Пропозиція увійти в обліковий запис Microsoft з виділеним посиланням Обмежені можливості" loading="lazy" />
+  <figcaption>Відмова від облікового запису Microsoft</figcaption>
+</figure>
+
+<ol start="26">
+  <li>Вкажи ім'я облікового запису та пароль.</li>
+  <li>Дай відповіді на контрольні запитання й натисни <b>Далі</b>.</li>
+  <li>На наступних кроках натискай <b>Пропустити</b>.</li>
+  <li>Після завантаження ОС клацни правою кнопкою миші на значку мережі в треї та вибери <b>Відкрити настройки мережі й Інтернету</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-network-menu.webp" alt="Робочий стіл Windows 10 з контекстним меню значка мережі" loading="lazy" />
+  <figcaption>Меню значка мережі</figcaption>
+</figure>
+
+<ol start="30">
+  <li>Вибери <b>Змінити настройки адаптера</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-adapter-settings.webp" alt="Налаштування Ethernet з виділеним посиланням Змінити настройки адаптера" loading="lazy" />
+  <figcaption>Налаштування адаптера</figcaption>
+</figure>
+
+<ol start="31">
+  <li>Двічі клацни <b>Ethernet</b>, натисни <b>Докладно</b> і переконайся, що машина отримала IP-адресу з підмережі pfSense: адресу <code>192.168.1.100</code>, основний шлюз, DHCP- і DNS-сервер <code>192.168.1.1</code>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/w10-ip-details.webp" alt="Відомості про мережеве підключення: IPv4-адреса 192.168.1.100, шлюз, DHCP- і DNS-сервер 192.168.1.1" loading="lazy" />
+  <figcaption>Windows отримала адресу від pfSense</figcaption>
+</figure>
+
+<h3>Етап 6. Початкове налаштування pfSense</h3>
+
+<ol start="32">
+  <li>На Windows 10 відкрий браузер і введи адресу фаєрвола <code>https://192.168.1.1</code>.</li>
+  <li>Браузер попередить про незахищене підключення. Натисни <b>Докладно</b> і <b>Перейти на 192.168.1.1 (небезпечно)</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/01-cert-warning.webp" alt="Попередження браузера Ви використовуєте незакрите підключення з кнопкою Перейти на 192.168.1.1 (небезпечно)" loading="lazy" />
+  <figcaption>Попередження про сертифікат вебінтерфейсу pfSense</figcaption>
+</figure>
+
+<aside data-icon="💡">Попередження з'являється, бо pfSense використовує <b>самопідписаний сертифікат</b>. Для власного фаєрвола у твоїй ізольованій лабораторній мережі це очікувано. У робочих мережах для вебінтерфейсу варто встановити сертифікат, якому довіряють комп'ютери адміністраторів.</aside>
+
+<ol start="34">
+  <li>Увійди зі стандартними обліковими даними: логін <code>admin</code>, пароль <code>pfsense</code>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/02-login.webp" alt="Сторінка входу pfSense з логіном admin і паролем pfsense" loading="lazy" />
+  <figcaption>Вхід у вебінтерфейс pfSense</figcaption>
+</figure>
+
+<ol start="35">
+  <li>Запуститься майстер початкового налаштування.</li>
+  <li>Натисни <b>Next</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/03-wizard-start.webp" alt="Вітальна сторінка майстра pfSense Setup з кнопкою Next" loading="lazy" />
+  <figcaption>Майстер налаштування pfSense</figcaption>
+</figure>
+
+<ol start="37">
+  <li>У полі <b>Hostname</b> залиш <code>pfSense</code>, у полі <b>Primary DNS Server</b> вкажи <code>8.8.8.8</code> і зніми позначку <b>Override DNS</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/04-general-info.webp" alt="Поля Hostname, Domain, Primary DNS Server 8.8.8.8 і знята позначка Override DNS" loading="lazy" />
+  <figcaption>Загальні налаштування</figcaption>
+</figure>
+
+<ol start="38">
+  <li>У полі <b>Timezone</b> вибери <code>Europe/Kyiv</code> (у старіших версіях — <code>Europe/Kiev</code>, як на скриншоті).</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/05-timezone.webp" alt="Поле Timezone зі значенням Europe/Kiev" loading="lazy" />
+  <figcaption>Часовий пояс</figcaption>
+</figure>
+
+<ol start="39">
+  <li>На сторінці налаштування WAN прокрути вниз і зніми позначки <b>Block RFC1918 Private Networks</b> та <b>Block bogon networks</b>. Вони блокують на WAN трафік з приватних адрес, а в нашій лабораторній WAN якраз підключений до домашньої мережі з приватними адресами.</li>
+  <li>Адресу LAN-інтерфейсу залиш без змін.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/06-lan-ip.webp" alt="Налаштування LAN IP Address 192.168.1.1 з маскою 24" loading="lazy" />
+  <figcaption>Адреса LAN-інтерфейсу</figcaption>
+</figure>
+
+<ol start="41">
+  <li>Задай новий надійний пароль для входу у вебінтерфейс фаєрвола.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/07-admin-password.webp" alt="Сторінка Set Admin WebGUI Password з полями пароля" loading="lazy" />
+  <figcaption>Новий пароль адміністратора</figcaption>
+</figure>
+
+<aside data-icon="⚠️">Обов'язково зміни стандартний пароль <code>pfsense</code> і не використовуй простих паролів на кшталт <code>admin</code>. Стандартні облікові дані мережевих пристроїв загальновідомі, і зловмисники перевіряють їх першими.</aside>
+
+<ol start="42">
+  <li>Натисни <b>Reload</b>, щоб застосувати налаштування.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/08-reload.webp" alt="Крок Reload configuration майстра pfSense з кнопкою Reload" loading="lazy" />
+  <figcaption>Застосування налаштувань</figcaption>
+</figure>
+
+<p>Тепер на тестовій Windows 10 є доступ до інтернету, і весь він проходить через фаєрвол pfSense. Перевірити це можна в меню <b>Status → Traffic Graph</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/09-traffic-graph.webp" alt="Меню Status з виділеним пунктом Traffic Graph і графік трафіку WAN" loading="lazy" />
+  <figcaption>Графік трафіку через WAN</figcaption>
+</figure>
+
+<h3>Етап 7. Блокування доступу до сайту</h3>
+
+<ol start="43">
+  <li>Створимо політику, яка заблокує <code>www.facebook.com</code>. Відкрий меню <b>Firewall → Aliases</b> і натисни <b>Add</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/10-aliases-menu.webp" alt="Меню Firewall з виділеним пунктом Aliases" loading="lazy" />
+  <figcaption>Розділ Aliases</figcaption>
+</figure>
+
+<ol start="44">
+  <li>Заповни поля, як на скриншоті: назва <code>blocked_facebook</code>, тип <b>Network(s)</b>, а в списку <b>Network or FQDN</b> — домени Facebook. Натисни <b>Save</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/11-alias-fields.webp" alt="Аліас blocked_facebook типу Network(s) зі списком доменів Facebook" loading="lazy" />
+  <figcaption>Аліас зі списком доменів</figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/12-alias-save.webp" alt="Кінець списку доменів аліасу та кнопка Save" loading="lazy" />
+  <figcaption>Збереження аліасу</figcaption>
+</figure>
+
+<aside data-icon="📌"><b>Аліас</b> (alias) — це іменований список адрес, мереж чи портів, який можна використовувати в правилах фаєрвола. Якщо додати в аліас доменне ім'я (FQDN), pfSense сам періодично визначає його поточні IP-адреси й оновлює список.</aside>
+
+<ol start="45">
+  <li>Перейди в <b>Firewall → Rules</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/13-rules-menu.webp" alt="Меню Firewall з виділеним пунктом Rules" loading="lazy" />
+  <figcaption>Розділ Rules</figcaption>
+</figure>
+
+<ol start="46">
+  <li>Відкрий вкладку <b>LAN</b> і натисни <b>Add</b> (кнопка зі стрілкою вгору додає правило на початок списку).</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/14-lan-tab.webp" alt="Сторінка правил фаєрвола з виділеною вкладкою LAN" loading="lazy" />
+  <figcaption>Вкладка LAN</figcaption>
+</figure>
+
+<ol start="47">
+  <li>У полі <b>Action</b> вибери <b>Block</b>, у полі <b>Protocol</b> — <b>Any</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/15-rule-action.webp" alt="Редагування правила: Action Block, Interface LAN, Address Family IPv4, Protocol TCP" loading="lazy" />
+  <figcaption>Дія та протокол правила</figcaption>
+</figure>
+
+<aside data-icon="💡">На скриншоті вибрано протокол <b>TCP</b>, але краще вибрати <b>Any</b>. Сучасні браузери можуть звертатися до сайтів через протокол HTTP/3 (QUIC), який працює поверх <b>UDP</b>, і правило лише для TCP його не заблокує. Зверни увагу й на різницю між <b>Block</b> і <b>Reject</b>: Block мовчки відкидає пакети, а Reject ще й повідомляє відправника про відмову.</aside>
+
+<ol start="48">
+  <li>У полі <b>Destination</b> вибери <b>Address or Alias</b> і введи назву аліасу <code>blocked_facebook</code>. Натисни <b>Save</b>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/16-rule-destination.webp" alt="Поле Destination з типом Address or Alias і значенням blocked_facebook, кнопка Save" loading="lazy" />
+  <figcaption>Призначення правила — аліас</figcaption>
+</figure>
+
+<ol start="49">
+  <li>Натисни <b>Apply Changes</b>, щоб застосувати правило. Переконайся, що воно стоїть <b>вище</b> правила <b>Default allow LAN to any rule</b>: pfSense перевіряє правила зверху вниз і застосовує перше, що підійшло.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/17-apply-changes.webp" alt="Повідомлення про зміну конфігурації з кнопкою Apply Changes і нове правило блокування в списку" loading="lazy" />
+  <figcaption>Застосування змін</figcaption>
+</figure>
+
+<h3>Етап 8. Перевірка правила</h3>
+
+<ol start="50">
+  <li>Відкрий нову вкладку браузера й перейди на <code>www.facebook.com</code>. Сторінка не відкриється: з'явиться помилка <code>ERR_CONNECTION_TIMED_OUT</code>, бо фаєрвол мовчки відкидає пакети.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/18-facebook-blocked.webp" alt="Помилка браузера Не вдалося перейти на цю сторінку ERR_CONNECTION_TIMED_OUT для www.facebook.com" loading="lazy" />
+  <figcaption>Доступ до сайту заблоковано</figcaption>
+</figure>
+
+<ol start="51">
+  <li>Повернись у вебінтерфейс фаєрвола, познач правило блокування, натисни <b>Toggle</b>, щоб вимкнути його, і застосуй зміни.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/19-rule-toggle.webp" alt="Список правил LAN з позначеним правилом blocked_facebook і виділеною кнопкою Toggle" loading="lazy" />
+  <figcaption>Вимкнення правила блокування</figcaption>
+</figure>
+
+<ol start="52">
+  <li>Відкрий нову вкладку й знову спробуй перейти на <code>www.facebook.com</code>.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m10-t1/20-facebook-allowed.webp" alt="Сторінка входу Facebook, відкрита в браузері" loading="lazy" />
+  <figcaption>Після вимкнення правила сайт знову доступний</figcaption>
+</figure>
+
+<p>Як бачиш, тепер pfSense пропускає трафік до цього сайту.</p>
+
+<aside data-icon="⚠️">Якщо ти знову ввімкнеш правило блокування, перевіряй доступ у режимі інкогніто або очисти кеш браузера. Браузер може використовувати вже відкриті з'єднання й кешовані дані, тому блокування спрацює не одразу.</aside>
+
+<aside data-icon="💡">Блокування за IP-адресами має обмеження: великі сервіси використовують сотні адрес і CDN, які часто змінюються, тож частина трафіку може проходити повз аліас. У реальних мережах для фільтрації сайтів додатково використовують DNS-фільтрацію (наприклад, пакет pfBlockerNG) або вебпроксі.</aside>
