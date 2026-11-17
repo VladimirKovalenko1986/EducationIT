@@ -1,0 +1,167 @@
+<h2>Створення та запуск віртуальної машини на AWS</h2>
+
+<p>У цій лабораторній роботі ти створиш обліковий запис AWS, запустиш віртуальну машину з Windows Server в Amazon EC2 і підключишся до неї через протокол віддаленого робочого столу (RDP).</p>
+
+<aside data-icon="⚠️">Інтерфейс консолі AWS регулярно оновлюється, тому вигляд деяких вікон може трохи відрізнятися від скриншотів. Назви кнопок і логіка кроків зазвичай залишаються тими самими.</aside>
+
+<h3>1. Створення облікового запису AWS</h3>
+
+<p>Зареєструйся на сторінці <a href="https://portal.aws.amazon.com/billing/signup" target="_blank" rel="noreferrer">AWS Console — Sign up</a>: вкажи електронну адресу кореневого користувача (root) і назву облікового запису, підтверди адресу та заверши реєстрацію. Під час реєстрації AWS попросить дані банківської картки.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/01-signup.webp" alt="Сторінка реєстрації Sign up for AWS з полями електронної адреси та назви облікового запису" loading="lazy" />
+  <figcaption>Реєстрація нового облікового запису AWS</figcaption>
+</figure>
+
+<aside data-icon="💡">Нові користувачі отримують безкоштовні можливості AWS Free Tier. Умови Free Tier змінювалися (з 2025 року нові облікові записи отримують стартові кредити), тож актуальні умови перевір на <a href="https://aws.amazon.com/free/" target="_blank" rel="noreferrer">aws.amazon.com/free</a>. Одразу після реєстрації увімкни MFA для root-користувача — ти вже знаєш чому з попередніх тем.</aside>
+
+<h3>2. Запуск віртуальної машини</h3>
+
+<p>Після налаштування облікового запису натисни на логотип AWS у верхньому лівому куті або введи <code>console</code> у рядку пошуку. На головній сторінці консолі знайди блок <b>Build a solution</b> і вибери <b>Launch a virtual machine</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/02-launch-vm.webp" alt="Блок Build a solution у консолі AWS із виділеним пунктом Launch a virtual machine" loading="lazy" />
+  <figcaption>Запуск майстра створення віртуальної машини</figcaption>
+</figure>
+
+<aside data-icon="📌">Якщо ти новий користувач, активація облікового запису може зайняти до 24 годин.</aside>
+
+<h3>3. Назва машини</h3>
+
+<p>У полі <b>Name</b> вкажи назву своєї віртуальної машини, наприклад <code>TestForGoIT</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/03-name.webp" alt="Блок Name and tags з назвою TestForGoIT" loading="lazy" />
+  <figcaption>Назва віртуальної машини</figcaption>
+</figure>
+
+<h3>4. Вибір AMI</h3>
+
+<p><b>Образ машини Amazon (AMI)</b> — це шаблон із налаштуваннями програмного забезпечення: операційною системою, сервером застосунків і програмами. Можна вибрати Linux або Windows. Ми налаштуємо віртуальну машину з Windows: вибери <b>Windows</b> і образ <b>Microsoft Windows Server 2022 Base</b> з позначкою <b>Free tier eligible</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/04-ami.webp" alt="Вибір AMI Microsoft Windows Server 2022 Base з позначкою Free tier eligible" loading="lazy" />
+  <figcaption>Вибір образу Windows Server</figcaption>
+</figure>
+
+<h3>5. Тип екземпляра</h3>
+
+<p><b>Екземпляр</b> — це віртуальний сервер. Amazon EC2 пропонує багато типів екземплярів під різні задачі: вони відрізняються процесором, пам'яттю, сховищем, мережею тощо. Для лабораторної вибери тип з позначкою <b>Free tier eligible</b>, наприклад <code>t3.micro</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/05-instance-type.webp" alt="Список типів екземплярів з вибраним t3.micro" loading="lazy" />
+  <figcaption>Вибір типу екземпляра</figcaption>
+</figure>
+
+<h3>6. Пара ключів</h3>
+
+<p>У блоці <b>Key pair (login)</b> натисни <b>Create new key pair</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/06-key-pair.webp" alt="Блок Key pair (login) з виділеним посиланням Create new key pair" loading="lazy" />
+  <figcaption>Створення нової пари ключів</figcaption>
+</figure>
+
+<p>Задай назву ключа, наприклад <code>keytask</code>, <code>keytest1</code> або <code>keyforaws</code>. Вибери тип <b>RSA</b> і формат <b>.pem</b> — він знадобиться, щоб отримати пароль адміністратора. Натисни <b>Create key pair</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/07-create-key.webp" alt="Вікно Create key pair: назва keyforaws, тип RSA, формат .pem" loading="lazy" />
+  <figcaption>Параметри пари ключів</figcaption>
+</figure>
+
+<p>Переконайся, що файл ключа завантажився: зазвичай це відбувається автоматично після натискання <b>Create key pair</b>.</p>
+
+<aside data-icon="🛡️">Пара ключів складається з <b>відкритого ключа</b>, який зберігається в AWS, і <b>приватного ключа</b> — файлу <code>.pem</code> на твоєму комп'ютері. Разом вони дозволяють безпечно підключатися до екземпляра. Повторно завантажити приватний ключ неможливо, тому збережи його в надійному місці й нікому не передавай.</aside>
+
+<h3>7. Мережеві налаштування та група безпеки</h3>
+
+<p>Тут можна налаштувати мережу, підмережу, публічну IP-адресу тощо. Ми залишимо параметри за замовчуванням.</p>
+
+<p><b>Група безпеки</b> (Security group) — це набір правил брандмауера, які контролюють вхідний і вихідний трафік екземпляра. Можна створити нову групу або вибрати наявну. Залиш <b>Create security group</b> з правилом <b>Allow RDP traffic from</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/08-security-group.webp" alt="Налаштування групи безпеки з правилом Allow RDP traffic from Anywhere 0.0.0.0/0" loading="lazy" />
+  <figcaption>Налаштування групи безпеки</figcaption>
+</figure>
+
+<aside data-icon="⚠️">За замовчуванням RDP дозволено з <b>Anywhere (0.0.0.0/0)</b>, тобто з будь-якої IP-адреси в інтернеті. AWS сама попереджає, що це небезпечно: відкритий порт RDP швидко знаходять сканери й починають підбирати паролі. Краще вибери у випадному списку <b>My IP</b> — тоді підключитися зможеш лише ти зі своєї поточної адреси.</aside>
+
+<h3>8. Сховище</h3>
+
+<p>У блоці <b>Configure storage</b> можна додати або змінити сховище. AWS дозволяє додавати томи EBS і томи сховища екземплярів, а також змінювати параметри кореневого тому.</p>
+
+<p><a href="https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html" target="_blank" rel="noreferrer">Amazon Elastic Block Store (EBS)</a> надає блокові томи для екземплярів EC2. Вони поводяться як звичайні неформатовані диски, які можна підключити до екземпляра. Поки що залиш усе без змін.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/09-storage.webp" alt="Блок Configure storage з кореневим томом 30 GiB gp2" loading="lazy" />
+  <figcaption>Налаштування сховища</figcaption>
+</figure>
+
+<aside data-icon="💡">Зверни увагу на напис <b>Root volume (Not encrypted)</b>. У робочих середовищах томи EBS варто шифрувати — це вмикається в розділі <b>Advanced</b> або для всього облікового запису в налаштуваннях EC2.</aside>
+
+<h3>9. Перевірка та запуск</h3>
+
+<p>Перевір дані екземпляра в панелі <b>Summary</b> праворуч. Якщо все правильно, натисни <b>Launch instance</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/10-launch.webp" alt="Панель Summary з параметрами екземпляра та кнопкою Launch instance" loading="lazy" />
+  <figcaption>Запуск екземпляра</figcaption>
+</figure>
+
+<p>Ти створив(-ла) і запустив(-ла) віртуальну машину на AWS. Тепер перевір її стан і підключись до неї.</p>
+
+<h3>10. Підключення до екземпляра</h3>
+
+<p>Відкрий список екземплярів: <b>EC2 → Instances</b>. Дочекайся, поки стан зміниться на <b>Running</b>, а перевірки статусу — на <b>2/2 checks passed</b>. Вибери свій екземпляр і натисни <b>Connect</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/11-instances.webp" alt="Список екземплярів з вибраним TestForGoIT у стані Running і кнопкою Connect" loading="lazy" />
+  <figcaption>Список екземплярів</figcaption>
+</figure>
+
+<p>Перейди на вкладку <b>RDP client</b> і натисни <b>Get password</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/12-connect.webp" alt="Вкладка RDP client сторінки Connect to instance з кнопками Download remote desktop file і Get password" loading="lazy" />
+  <figcaption>Вкладка RDP client</figcaption>
+</figure>
+
+<p>Натисни <b>Upload private key file</b> і вибери файл <code>.pem</code>, завантажений під час створення пари ключів (крок 6). Потім натисни <b>Decrypt password</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/13-decrypt.webp" alt="Сторінка Get Windows password із завантаженим файлом ключа та кнопкою Decrypt password" loading="lazy" />
+  <figcaption>Розшифрування пароля адміністратора (вміст ключа на скриншоті розмито)</figcaption>
+</figure>
+
+<aside data-icon="🛡️">AWS розшифровує пароль у браузері, але ніколи не публікуй вміст приватного ключа й не показуй його на скриншотах — з ним будь-хто зможе отримати пароль адміністратора твого екземпляра.</aside>
+
+<p>Пароль з'явиться в полі <b>Password</b>. Збережи його, щоб не загубити. Ім'я користувача — <code>Administrator</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/14-password.webp" alt="Розшифрований пароль адміністратора на вкладці RDP client (приховано)" loading="lazy" />
+  <figcaption>Розшифрований пароль</figcaption>
+</figure>
+
+<p>Далі натисни <b>Download remote desktop file</b>. Відкрий завантажений файл <code>.rdp</code>, натисни <b>Connect</b> і введи пароль.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/15-rdp-connect.webp" alt="Вікно Remote Desktop Connection з попередженням Unknown publisher і кнопкою Connect" loading="lazy" />
+  <figcaption>Запуск RDP-підключення</figcaption>
+</figure>
+
+<p>Після введення пароля з'явиться попередження про сертифікат віддаленого комп'ютера. Натисни <b>Yes</b>, щоб підтвердити підключення.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b1-m9-lab/16-cert-warning.webp" alt="Попередження The identity of the remote computer cannot be verified з виділеною кнопкою Yes" loading="lazy" />
+  <figcaption>Попередження про сертифікат</figcaption>
+</figure>
+
+<aside data-icon="💡">Попередження з'являється, бо новий екземпляр Windows використовує <b>самопідписаний сертифікат</b>, якому твій комп'ютер не довіряє. Тут це очікувано: ти щойно створив(-ла) цю машину й підключаєшся до її адреси з консолі AWS. Але якщо таке вікно з'являється під час підключення до знайомого сервера, де раніше його не було, — це привід зупинитися: так може виглядати атака «людина посередині».</aside>
+
+<p>Після підключення ти побачиш робочий стіл Windows Server — це означає, що віртуальна машина AWS успішно запущена.</p>
+
+<h2>Завершення роботи</h2>
+
+<aside data-icon="⚠️"><b>Обов'язковий крок.</b> Після завершення вправи видали екземпляр: <b>Instance state → Terminate instance</b>. Перевір, що не залишилося платних ресурсів (томів EBS, публічних IP-адрес, знімків), щоб уникнути неочікуваних рахунків. Також можна видалити пару ключів і групу безпеки, створені для лабораторної.</aside>
+
+<p>Щоб не пропустити неочікувані витрати, налаштуй у розділі <b>Billing and Cost Management</b> бюджет з оповіщенням (AWS Budgets) — наприклад, на 1 USD.</p>
