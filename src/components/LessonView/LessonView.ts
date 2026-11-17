@@ -5,6 +5,7 @@ import { NextLessonButton, type NextLessonButtonProps } from '../NextLessonButto
 import { ImageLightbox } from '../ImageLightbox/ImageLightbox'
 import { mountQuizzes } from '../Quiz/Quiz'
 import { mountCodeTasks } from '../CodeTask/CodeTask'
+import { mountFinalTests } from '../FinalTest/FinalTest'
 
 interface LessonViewProps {
   lesson?: Lesson
@@ -40,6 +41,7 @@ export function LessonView({ lesson, next, aside, emptyText = 'Оберіть т
 
   mountQuizzes(body, lesson.id)
   mountCodeTasks(body, lesson.id)
+  mountFinalTests(body, lesson.id)
   article.append(ImageLightbox({ target: body }))
   if (next) article.append(NextLessonButton(next))
   if (!aside) return article
