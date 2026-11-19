@@ -216,6 +216,18 @@
   border-radius: 12px;
 }
 
+/* Відео: <figure data-kind="video"><video controls src="..."></video></figure> */
+.body video {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto;
+  background: #000000;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
 .body figcaption {
   margin-top: 10px;
   font-size: 0.875rem;

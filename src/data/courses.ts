@@ -39,6 +39,7 @@ import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
 import fsB1m1Links from './lessons/fullstack/b1-m1-links.html?raw'
+import fsB1m1Structure from './lessons/fullstack/b1-m1-structure.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 // prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
@@ -190,7 +191,7 @@ export const courses: Course[] = [
               { id: 'fs-b1-m1-web-tech', title: 'Веб-технології', content: fsB1m1WebTech },
               { id: 'fs-b1-m1-tags', title: 'Теги та атрибути', content: fsB1m1Tags },
               { id: 'fs-b1-m1-links', title: 'Посилання', content: fsB1m1Links },
-              { id: 'fs-b1-m1-structure', title: 'Структурна розмітка', content: placeholder },
+              { id: 'fs-b1-m1-structure', title: 'Структурна розмітка', content: fsB1m1Structure },
               { id: 'fs-b1-m1-skeleton', title: 'Скелет HTML-документа', content: placeholder },
               { id: 'fs-b1-m1-algorithm', title: 'Алгоритм створення сторінки', content: placeholder },
             ],

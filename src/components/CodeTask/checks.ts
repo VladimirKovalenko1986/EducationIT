@@ -10,6 +10,7 @@
 //   between:SPEC,SPEC,SPEC   перший стоїть між другим і третім
 //   items:SEL=a|b|c          елементи списку SEL > li мають саме ці тексти
 //   noText:SEL               усі такі елементи є і не містять тексту
+//   source:a|b|c             у самому коді є хоча б один із фрагментів (без урахування регістру)
 //   opening:тег / closing:тег   у коді є відкриваючий / закриваючий тег
 //   comment / comment:ТЕКСТ  у коді є коментар (з таким текстом)
 //   commentBefore:SPEC       коментар стоїть перед елементом
@@ -83,6 +84,8 @@ function rule(root: HTMLElement, code: string, raw: string): boolean {
       const actual = [...root.querySelectorAll(`${selector.trim()} > li`)].map((li) => normalize(li.textContent ?? ''))
       return actual.length === expected.length && expected.every((text, i) => actual[i] === text)
     }
+    case 'source':
+      return arg.split('|').some((part) => code.toLowerCase().includes(part.trim().toLowerCase()))
     case 'noText': {
       const nodes = [...root.querySelectorAll(arg)]
       return nodes.length > 0 && nodes.every((node) => normalize(node.textContent ?? '') === '')

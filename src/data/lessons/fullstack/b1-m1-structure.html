@@ -1,0 +1,1751 @@
+<p>Якби верстка сторінки була мистецтвом, то яким саме: музикою чи архітектурою?</p>
+
+<p>Досі ми мали справу з унікальним контентом вебсторінки. Він має бути цікавим і привабливим для користувача. Але кожна вебсторінка обов'язково має ще й <b>структуру</b>. Завдяки їй відвідувач почувається як удома, навіть якщо вперше потрапив на сайт. Саме її ти зараз вивчатимеш.</p>
+
+<h2>Що таке структурна розмітка</h2>
+
+<p>Практично кожна вебсторінка складається з трьох основних розділів.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/page-structure.webp" alt="Схема сторінки: Page header, Main content і Page footer поруч із фігуркою людини — голова, тулуб і ноги" loading="lazy" />
+  <figcaption>Хедер, основний вміст і футер — як голова, тулуб і ноги</figcaption>
+</figure>
+
+<p><b>Хедер</b> (header, шапка) — вступна частина всієї сторінки. Зазвичай містить логотип, навігацію, меню користувача тощо. На сайті <a href="https://goit.global/ua/" target="_blank" rel="noreferrer">goit.global</a> хедер — це синя область з логотипом компанії, навігацією та заголовком.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/goit-header.webp" alt="Хедер сайту GoIT: логотип, навігація, заголовок «GoIT — платформа IT-курсів» і кнопка" loading="lazy" />
+  <figcaption>Хедер сайту GoIT</figcaption>
+</figure>
+
+<p><b>Основний вміст</b> (main) — унікальний контент, який не повторюється на інших сторінках сайту. На сторінці може бути лише один такий розділ. На сайті GoIT основний вміст — це вся унікальна інформація: план навчання, перспективи професії, тести, історії успіху тощо.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/goit-main.webp" alt="Розділ основного вмісту сайту GoIT «Обирай професію до душі» з картками шести професій" loading="lazy" />
+  <figcaption>Частина основного вмісту сайту GoIT</figcaption>
+</figure>
+
+<p><b>Футер</b> (footer, підвал) — фінальна частина сторінки. Часто містить копірайт, посилання на соцмережі, контактну інформацію тощо. На сайті GoIT футер — це все, що на чорному полі наприкінці сторінки.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/goit-footer.webp" alt="Футер сайту GoIT на чорному фоні: форма консультації, контакти, соцмережі, списки курсів і копірайт" loading="lazy" />
+  <figcaption>Футер сайту GoIT</figcaption>
+</figure>
+
+<p>Коректне використання цих розділів впливає на семантику сторінки, роботу асистивних технологій і позиції в пошуковій видачі. Подивімось, як це виглядає на реальних сайтах. Уважно роздивись розділ у червоній рамці на сторінці <a href="https://www.equinox.com/" target="_blank" rel="noreferrer">Equinox</a>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/equinox-header.webp" alt="Верх сторінки Equinox: у червоній рамці логотип, меню навігації та кнопка Claim Offer" loading="lazy" />
+  <figcaption>Сторінка Equinox</figcaption>
+</figure>
+<div data-quiz data-correct="0" data-success="І це правильно!">
+  <p>Який структурний розділ сторінки Equinox виділено червоною рамкою?</p>
+  <ul>
+    <li>Хедер</li>
+    <li>Основний вміст</li>
+    <li>Футер</li>
+  </ul>
+</div>
+
+<h2>Шапка сайту: тег header</h2>
+
+<p>Тег <code>&lt;header&gt;</code> — це тег-контейнер: він має відкриваючий тег, контент і закриваючий тег. Хедер сторінки виділяє вступну частину всієї сторінки. Також <code>&lt;header&gt;</code> може позначати вступну частину складної секції чи статті — такі приклади розглянемо пізніше.</p>
+
+<aside data-icon="⚠️"><b>Важливо!</b> В одному документі може бути кілька елементів <code>&lt;header&gt;</code>, але лише один хедер сторінки.</aside>
+
+<p>Зазвичай хедер сторінки містить:</p>
+<ul>
+  <li>логотип;</li>
+  <li>навігацію;</li>
+  <li>вступний текст;</li>
+  <li>форму пошуку.</li>
+</ul>
+
+<pre><code>&lt;!-- Шапка вебсторінки --&gt;
+&lt;header&gt;
+  &lt;a href=""&gt;Логотип сайту&lt;/a&gt;
+
+  &lt;ul&gt;
+    &lt;!-- Меню навігації --&gt;
+  &lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+<div data-quiz data-correct="0" data-success="Правильно!">
+  <p>Яке твердження про тег <code>&lt;header&gt;</code> правильне?</p>
+  <ul>
+    <li>Тег <code>&lt;header&gt;</code> — парний тег, який виділяє вступну частину сторінки, блоку тощо.</li>
+    <li>Тег <code>&lt;header&gt;</code> — рядковий елемент.</li>
+    <li>Тег <code>&lt;header&gt;</code> позначає найважливішу інформацію на сторінці.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 1</h4>
+  <p>Додай у розмітку сторінки тег хедера, а в нього поки що просто текст <code>Page header</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:header">У документі є тег <code>&lt;header&gt;</code></li>
+    <li data-check="before:header,h1">Тег <code>&lt;header&gt;</code> знаходиться перед заголовком сторінки</li>
+    <li data-check="exists:header=Page header">Текст усередині хедера — <code>Page header</code></li>
+  </ul>
+<pre data-start><code>&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  </details>
+</section>
+
+<p>Який сайт бренду обійдеться без яскравого логотипа? Це абсолютний must have. А тобі, як майбутньому розробнику, просто необхідно вміти розміщувати логотип у шапці сайту.</p>
+
+<h2>Логотип</h2>
+
+<p>Логотип сайту розміщують у хедері, і він зазвичай є посиланням на головну сторінку. Розмітка логотипа залежить від дизайну. Це може бути:</p>
+
+<ul>
+  <li>текст:</li>
+</ul>
+<pre><code>&lt;a href=""&gt;Логотип сайту компанії&lt;/a&gt;</code></pre>
+<ul>
+  <li>зображення:</li>
+</ul>
+<pre><code>&lt;a href=""&gt;
+  &lt;img src="" alt="Логотип компанії" /&gt;
+&lt;/a&gt;</code></pre>
+<ul>
+  <li>комбінація зображення й тексту:</li>
+</ul>
+<pre><code>&lt;a href=""&gt;
+  &lt;img src="" alt="Логотип компанії" /&gt;
+  Логотип сайту компанії
+&lt;/a&gt;</code></pre>
+
+<p>Розглянь код логотипа нижче. У ньому треба вказати дві адреси.</p>
+
+<pre><code>&lt;a href="Адреса 1"&gt;
+  &lt;img src="Адреса 2" alt="..." /&gt;
+  ...
+&lt;/a&gt;</code></pre>
+<div data-quiz data-correct="0,3" data-success="Вітаю, ти молодець!">
+  <p>Що мають бути за адреси в коді логотипа вище?</p>
+  <ul>
+    <li>Адреса 1 — адреса головної сторінки бренду.</li>
+    <li>Адреса 1 — завжди адреса сайту, де розміщено логотип.</li>
+    <li>Адреса 2 — сторінка автора, який створив логотип.</li>
+    <li>Адреса 2 — адреса, де знаходиться зображення логотипа.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 2</h4>
+  <p>Видали з хедера текст і додай логотип компанії Planet Fatness — посилання із зображенням, ширина й висота якого — <code>40</code> пікселів.</p>
+  <pre><code>Адреса посилання: /
+Посилання на логотип: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg
+Альтернативний текст: Planet Fatness logo</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:header">У документі є тег <code>&lt;header&gt;</code></li>
+    <li data-check="before:header,h1">Тег <code>&lt;header&gt;</code> знаходиться перед заголовком сторінки</li>
+    <li data-check="exists:header a">Усередині хедера є посилання</li>
+    <li data-check="attr:header a@href=/">Значення атрибута <code>href</code> посилання — <code>/</code></li>
+    <li data-check="exists:header a img">У посиланні є зображення</li>
+    <li data-check="attr:header a img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg">Значення атрибута <code>src</code> зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg</code></li>
+    <li data-check="attr:header a img@alt=Planet Fatness logo">Значення атрибута <code>alt</code> зображення — <code>Planet Fatness logo</code></li>
+    <li data-check="attr:header a img@width=40">Ширина логотипа — 40 пікселів</li>
+    <li data-check="attr:header a img@height=40">Висота логотипа — 40 пікселів</li>
+  </ul>
+<pre data-start><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Навігація: тег nav</h2>
+
+<p>Навігація — це невпорядкований список посилань:</p>
+<ul>
+  <li>на інші сторінки сайту, якщо сайт багатосторінковий;</li>
+  <li>на розділи поточної сторінки, якщо сайт односторінковий.</li>
+</ul>
+
+<p>Головне меню навігації сайту розташовується в хедері разом з логотипом та іншими блоками, залежно від дизайну.</p>
+
+<pre><code>&lt;header&gt;
+  &lt;a href=""&gt;Website logo&lt;/a&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=""&gt;First link&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=""&gt;Second link&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=""&gt;Third link&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+
+<p>Щоб виділити головне меню навігації, використовують семантичний тег <code>&lt;nav&gt;</code> (navigation). Він позначає розділ основної навігації з посиланнями на інші сторінки чи секції поточної сторінки. Тег <code>&lt;nav&gt;</code> використовують лише для основної навігації, а не для будь-якої групи посилань у документі.</p>
+
+<pre><code>&lt;header&gt;
+  &lt;a href=""&gt;Website logo&lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=""&gt;First link&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;Second link&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;Third link&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+<div data-quiz data-correct="1,4" data-success="Супер!">
+  <p>Обери коректні твердження про тег <code>&lt;nav&gt;</code>.</p>
+  <ul>
+    <li>Тег <code>&lt;nav&gt;</code> використовується лише для багатосторінкових сайтів.</li>
+    <li>Тег <code>&lt;nav&gt;</code> розташовується у хедері.</li>
+    <li>Тег <code>&lt;nav&gt;</code> не впливає на відображення сайту в пошукових системах.</li>
+    <li>Тег <code>&lt;nav&gt;</code> використовується щоразу, коли треба спростити навігацію по сторінці чи її розділу.</li>
+    <li>Щоб виділити меню навігації, треба огорнути невпорядкований список з посиланнями тегом <code>&lt;nav&gt;</code>.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 3</h4>
+  <p>Додай у хедер після логотипа головне меню навігації — невпорядкований список із трьох елементів з посиланнями. Атрибут <code>href</code> поки залиш порожнім, додай лише текст посилань.</p>
+  <pre><code>Текст посилання 1: Our Clubs
+Текст посилання 2: PF Benefits
+Текст посилання 3: Tips and Programs</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:header nav">Усередині хедера є тег <code>&lt;nav&gt;</code></li>
+    <li data-check="exists:nav ul">У тегу <code>&lt;nav&gt;</code> є список</li>
+    <li data-check="count:nav ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:nav ul &gt; li &gt; a=3">У кожному елементі списку є посилання</li>
+    <li data-check="exists:nav li:nth-child(1) a=Our Clubs">Текст першого посилання — <code>Our Clubs</code></li>
+    <li data-check="exists:nav li:nth-child(2) a=PF Benefits">Текст другого посилання — <code>PF Benefits</code></li>
+    <li data-check="exists:nav li:nth-child(3) a=Tips and Programs">Текст третього посилання — <code>Tips and Programs</code></li>
+  </ul>
+<pre data-start><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=""&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+
+&lt;!-- Rest of the page markup --&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Посилання-якір</h2>
+
+<p>На односторінковому сайті, наприклад посадковій сторінці (landing page), головна навігація — це посилання, які прокручують сторінку до певного розділу без перезавантаження. Це навігація по сторінці.</p>
+
+<figure data-kind="video">
+  <video src="/videos/fs-b1-m1-structure/anchor-links.webm" controls preload="metadata" playsinline aria-label="Відео: натискання на пункти меню прокручує сторінку до відповідних розділів"></video>
+  <figcaption>Посилання-якорі прокручують сторінку до потрібного розділу</figcaption>
+</figure>
+
+<p>Для таких посилань використовують підхід <b>«посилання-якір»</b>. Він спирається на глобальний атрибут <code>id</code> — унікальний ідентифікатор елемента на сторінці. Атрибут <code>id</code> можна задати будь-якому тегу, але його значення має бути унікальним у межах сторінки.</p>
+
+<p>Щоб створити посилання-якір:</p>
+<ol>
+  <li>Визнач елементи, до яких треба прокручувати сторінку (наприклад, заголовки секцій).</li>
+  <li>Додай цим елементам атрибут <code>id</code> з унікальним значенням.</li>
+  <li>У посиланнях меню вкажи в атрибуті <code>href</code> символ <code>#</code> та ідентифікатор елемента.</li>
+</ol>
+
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#features"&gt;Features&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#team"&gt;Team&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#reviews"&gt;Testimonials&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Dental clinic website&lt;/h1&gt;
+
+&lt;h2 id="about"&gt;About&lt;/h2&gt;
+&lt;p&gt;Вміст секції About&lt;/p&gt;
+
+&lt;h2 id="features"&gt;Features&lt;/h2&gt;
+&lt;p&gt;Вміст секції Features&lt;/p&gt;
+
+&lt;h2 id="team"&gt;Team&lt;/h2&gt;
+&lt;p&gt;Вміст секції Team&lt;/p&gt;
+
+&lt;h2 id="reviews"&gt;Testimonials&lt;/h2&gt;
+&lt;p&gt;Вміст секції Testimonials&lt;/p&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 4</h4>
+  <p>Ми додали до твого хедера всю розмітку сторінки фітнес-клубів. Зроби так, щоб головне меню прокручувало сторінку до розділів: додай заголовкам <code>&lt;h2&gt;</code> атрибут <code>id</code> і заповни атрибут <code>href</code> у посиланнях навігації.</p>
+  <pre><code>Значення атрибута id для першого розділу: clubs
+Значення атрибута id для другого розділу: benefits
+Значення атрибута id для третього розділу: programs</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:header nav">Усередині хедера є тег <code>&lt;nav&gt;</code></li>
+    <li data-check="exists:nav ul">У тегу <code>&lt;nav&gt;</code> є список</li>
+    <li data-check="exists:h2#clubs=Find us near you">Значення атрибута <code>id</code> заголовка <code>Find us near you</code> — <code>clubs</code></li>
+    <li data-check="exists:h2#benefits=Why choose Planet Fatness?">Значення атрибута <code>id</code> заголовка <code>Why choose Planet Fatness?</code> — <code>benefits</code></li>
+    <li data-check="exists:h2#programs=How to stop doubting and start exercising regularly">Значення атрибута <code>id</code> заголовка <code>How to stop doubting and start exercising regularly</code> — <code>programs</code></li>
+    <li data-check="attr:nav li:nth-child(1) a@href=#clubs">Значення атрибута <code>href</code> посилання <code>Our Clubs</code> — <code>#clubs</code></li>
+    <li data-check="attr:nav li:nth-child(2) a@href=#benefits">Значення атрибута <code>href</code> посилання <code>PF Benefits</code> — <code>#benefits</code></li>
+    <li data-check="attr:nav li:nth-child(3) a@href=#programs">Значення атрибута <code>href</code> посилання <code>Tips and Programs</code> — <code>#programs</code></li>
+  </ul>
+<pre data-start><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=""&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=""&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+&lt;p&gt;
+  Now I'm a coach with 7+ years of experience who founded the chain of sport
+  clubs each having a fitness bar and assistance of psychologists, and
+  dietitians. I'm sure that nothing will work until you know where you are and
+  where you go. Possibly, you are now on the planet Fatness and want to escape
+  it. Here I am to show you the way out. The gym itself is the spacecraft for
+  you to reach a happy new life, with its fitness bars to adapt your body to new
+  conditions and with friendly crew to motivate you and help on your way.
+&lt;/p&gt;
+
+&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+        alt="PF Power Zone. A modern gym equipped with treadmills."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+        alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+        alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332 E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 94041&lt;br /&gt;
+  USA
+&lt;/address&gt;
+
+&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+&lt;p&gt;
+  Now I'm a coach with 7+ years of experience who founded the chain of sport
+  clubs each having a fitness bar and assistance of psychologists, and
+  dietitians. I'm sure that nothing will work until you know where you are and
+  where you go. Possibly, you are now on the planet Fatness and want to escape
+  it. Here I am to show you the way out. The gym itself is the spacecraft for
+  you to reach a happy new life, with its fitness bars to adapt your body to new
+  conditions and with friendly crew to motivate you and help on your way.
+&lt;/p&gt;
+
+&lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+        alt="PF Power Zone. A modern gym equipped with treadmills."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+        alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+        alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332 E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 94041&lt;br /&gt;
+  USA
+&lt;/address&gt;
+
+&lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Тег main</h2>
+
+<p>Тег <code>&lt;main&gt;</code> позначає основний вміст HTML-документа — унікальний контент, який не повторюється на інших сторінках сайту і безпосередньо стосується головної теми документа.</p>
+
+<p>На сторінці може бути лише один видимий тег <code>&lt;main&gt;</code>. До нього не входять блоки, що повторюються на різних сторінках сайту: шапка, підвал, навігація, бічна панель тощо.</p>
+
+<pre><code>&lt;!-- Хедер сторінки --&gt;
+&lt;header&gt;&lt;/header&gt;
+
+&lt;!-- Унікальний контент сторінки --&gt;
+&lt;main&gt;&lt;/main&gt;
+
+&lt;!-- Футер сторінки --&gt;
+&lt;footer&gt;&lt;/footer&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 5</h4>
+  <p>Огорни основний вміст сторінки фітнес-залів тегом <code>&lt;main&gt;</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:main">У розмітці є тег <code>&lt;main&gt;</code></li>
+    <li data-check="exists:main h1; exists:main h2#clubs; exists:main h2#benefits; exists:main h2#programs; exists:main address">Основний вміст сторінки знаходиться всередині тега <code>&lt;main&gt;</code></li>
+    <li data-check="exists:header; count:main header=0">Хедер сторінки не вкладено в <code>&lt;main&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+&lt;p&gt;
+  Now I'm a coach with 7+ years of experience who founded the chain of sport
+  clubs each having a fitness bar and assistance of psychologists, and
+  dietitians. I'm sure that nothing will work until you know where you are and
+  where you go. Possibly, you are now on the planet Fatness and want to escape
+  it. Here I am to show you the way out. The gym itself is the spacecraft for
+  you to reach a happy new life, with its fitness bars to adapt your body to new
+  conditions and with friendly crew to motivate you and help on your way.
+&lt;/p&gt;
+
+&lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+        alt="PF Power Zone. A modern gym equipped with treadmills."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+        alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+        alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332 E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 94041&lt;br /&gt;
+  USA
+&lt;/address&gt;
+
+&lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;h1&gt;Planet Fatness&lt;/h1&gt;
+  &lt;p&gt;
+    Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+    people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+    depressed, who ate tons of junk food to seize the stress, those
+    healthy-life-gurus sounded like aliens coming from another planet. On their
+    planet, it must have sounded right. On my planet, eating pizza was OK and
+    jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+    completely changed my diet, I still believe we WERE on different planets. The
+    thing is that once I escaped.
+  &lt;/p&gt;
+  &lt;p&gt;
+    Now I'm a coach with 7+ years of experience who founded the chain of sport
+    clubs each having a fitness bar and assistance of psychologists, and
+    dietitians. I'm sure that nothing will work until you know where you are and
+    where you go. Possibly, you are now on the planet Fatness and want to escape
+    it. Here I am to show you the way out. The gym itself is the spacecraft for
+    you to reach a happy new life, with its fitness bars to adapt your body to new
+    conditions and with friendly crew to motivate you and help on your way.
+  &lt;/p&gt;
+
+  &lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+  &lt;p&gt;
+    Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+    including HIIT classes, group fitness, and Personal Training, we have
+    something for every taste. All the gyms and fitness studios in our chain
+    are well-equipped facilities where you'll find all the amenities from
+    WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+    to help you relax and refuel after your workout. The menu offers
+    smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+    See where we're currently operating.
+  &lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+          alt="PF Power Zone. A modern gym equipped with treadmills."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+          alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+          alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+  &lt;p&gt;
+    We're bringing accessible, on-trend fitness to everyone! We are more than just
+    a gym - we are a community. We are the crew to help you reach the goals.
+  &lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      No blames, no empty promises, no people who are talking about things they
+      don't know about. Our mission is to create a safe space for you to change.
+    &lt;/li&gt;
+    &lt;li&gt;
+      All our coaches are certified experts. You may have tried to work hard but
+      we'll teach you to work smart.
+    &lt;/li&gt;
+    &lt;li&gt;
+      Your diet is no less important than your training. We believe in an
+      integrated approach which also includes dietitian's consultations and
+      motivational activities.
+    &lt;/li&gt;
+    &lt;li&gt;
+      Healthy menu require time and effort? Not in our healthy food bars. Let's
+      discover the world of tasty low-calorie dishes.
+    &lt;/li&gt;
+    &lt;li&gt;
+      You pay for reaching your goal. And it's our job to help you reach it as
+      soon as possible.
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+  &lt;address&gt;
+    Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+    Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+    You may also want to visit us:&lt;br /&gt;
+    Lorem Foundation&lt;br /&gt;
+    332 E Jacked Ave&lt;br /&gt;
+    Mountain View, CA 94041&lt;br /&gt;
+    USA
+  &lt;/address&gt;
+
+  &lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+  &lt;p&gt;
+    Thousands of people dream about having a nice body. They start doing sport,
+    face challenges and quit it in a few weeks or even days. Why does it happen?
+    The problem is that people often do too much physical activity when their body
+    is not ready for this load. Without allowing any recovery time between
+    exercise sessions, they get tired quickly and lose motivation. We believe that
+    you should have a smooth start and focus on developing a habit of doing sport
+    regularly. So, we offer you a few training programs for beginners.
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/main&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Підвал сайту: тег footer</h2>
+
+<p><b>Футер</b> (підвал) — фінальна частина всієї сторінки, її розділу або статті. Розмічається тегом <code>&lt;footer&gt;</code> і часто містить:</p>
+<ul>
+  <li>копірайт;</li>
+  <li>посилання на соцмережі;</li>
+  <li>контактну інформацію тощо.</li>
+</ul>
+
+<aside data-icon="⚠️">Як і з хедером: на сторінці може бути кілька елементів <code>&lt;footer&gt;</code> (наприклад, підвали окремих статей), але лише один футер сторінки.</aside>
+
+<pre><code>&lt;!-- Хедер сторінки --&gt;
+&lt;header&gt;&lt;/header&gt;
+
+&lt;!-- Унікальний контент сторінки --&gt;
+&lt;main&gt;&lt;/main&gt;
+
+&lt;!-- Футер сторінки --&gt;
+&lt;footer&gt;&lt;/footer&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 6</h4>
+  <p>Додай у розмітку сторінки тег футера, а в нього поки що просто текст <code>Page footer</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:footer">У документі є тег <code>&lt;footer&gt;</code></li>
+    <li data-check="exists:footer=Page footer">Текст усередині футера — <code>Page footer</code></li>
+    <li data-check="count:main footer=0">Тег <code>&lt;footer&gt;</code> не вкладений у тег <code>&lt;main&gt;</code></li>
+    <li data-check="before:main,footer">Тег <code>&lt;footer&gt;</code> знаходиться після основного вмісту</li>
+  </ul>
+<pre data-start><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;
+
+&lt;footer&gt;Page footer&lt;/footer&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Посилання на соцмережі</h2>
+
+<p>Футер сайту зазвичай містить посилання на сторінки компанії чи автора в соцмережах.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-structure/footer-social.webp" alt="Футер сайту GoIT: червоною рамкою виділено іконки соцмереж" loading="lazy" />
+  <figcaption>Іконки соцмереж у футері сайту GoIT</figcaption>
+</figure>
+
+<p>Технічно це ті самі зображення-посилання, які ти вже робив у темі «Посилання». Для іконок соцмереж найчастіше використовують формат <b>SVG</b>: такі зображення залишаються чіткими за будь-якого розміру і мало важать.</p>
+
+<aside data-icon="💡"><b>Перечитувати теорію — це ОК!</b> Нова інформація — виклик для мозку: коли її багато, він відсуває вже вивчене, щоб звільнити місце для нового. Тому корисне варто повторювати — перед заняттями, перед домашнім завданням або просто коли є час. Перечитувати все не потрібно, достатньо теоретичних блоків.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 7</h4>
+  <p>Видали текст із футера. Замість нього додай список зображень-посилань на популярні соцмережі. Кожна іконка — <code>32</code> пікселі завширшки й заввишки. Сторінки соцмереж мають відкриватися в новій вкладці браузера.</p>
+  <pre><code>Посилання 1: https://www.instagram.com/
+Іконка 1: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg
+Альтернативний текст 1: Instagram
+
+Посилання 2: https://www.facebook.com/
+Іконка 2: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg
+Альтернативний текст 2: Facebook
+
+Посилання 3: https://www.youtube.com/
+Іконка 3: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg
+Альтернативний текст 3: YouTube</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:footer">У документі є тег <code>&lt;footer&gt;</code></li>
+    <li data-check="exists:footer ul">Усередині футера є список</li>
+    <li data-check="count:footer ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:footer li &gt; a=3">У кожному елементі списку є посилання</li>
+    <li data-check="attr:footer li:nth-child(1) a@target=_blank; attr:footer li:nth-child(2) a@target=_blank; attr:footer li:nth-child(3) a@target=_blank">Посилання на соцмережі відкриваються в новій вкладці браузера</li>
+    <li data-check="count:footer li &gt; a &gt; img=3">У кожному посиланні є зображення</li>
+    <li data-check="attr:footer li:nth-child(1) a@href=https://www.instagram.com/">Значення атрибута <code>href</code> першого посилання — <code>https://www.instagram.com/</code></li>
+    <li data-check="attr:footer li:nth-child(1) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg">Значення атрибута <code>src</code> першого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg</code></li>
+    <li data-check="attr:footer li:nth-child(1) img@alt=Instagram">Значення атрибута <code>alt</code> першого зображення — <code>Instagram</code></li>
+    <li data-check="attr:footer li:nth-child(2) a@href=https://www.facebook.com/">Значення атрибута <code>href</code> другого посилання — <code>https://www.facebook.com/</code></li>
+    <li data-check="attr:footer li:nth-child(2) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg">Значення атрибута <code>src</code> другого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg</code></li>
+    <li data-check="attr:footer li:nth-child(2) img@alt=Facebook">Значення атрибута <code>alt</code> другого зображення — <code>Facebook</code></li>
+    <li data-check="attr:footer li:nth-child(3) a@href=https://www.youtube.com/">Значення атрибута <code>href</code> третього посилання — <code>https://www.youtube.com/</code></li>
+    <li data-check="attr:footer li:nth-child(3) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg">Значення атрибута <code>src</code> третього зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg</code></li>
+    <li data-check="attr:footer li:nth-child(3) img@alt=YouTube">Значення атрибута <code>alt</code> третього зображення — <code>YouTube</code></li>
+  </ul>
+<pre data-start><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;
+
+&lt;footer&gt;Page footer&lt;/footer&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+          width="32"
+          height="32"
+          alt="Instagram"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+          width="32"
+          height="32"
+          alt="Facebook"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+          width="32"
+          height="32"
+          alt="YouTube"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/footer&gt;</code></pre>
+  </details>
+</section>
+
+<p>У розмітці важлива кожна дрібниця, а в тексті від клієнта є кілька незвичайних символів.</p>
+
+<h2>Символьні підстановки</h2>
+
+<p>Не всі символи можна набрати на клавіатурі: наприклад, знак зареєстрованої торговельної марки ®, торговельної марки ™ чи авторського права ©. Для таких символів використовують <b>символьні підстановки</b> (мнемоніки).</p>
+
+<aside data-icon="📌">Стандарт кодування Unicode містить знаки майже всіх мов світу, а також спеціальні та службові символи. Символьна підстановка підказує браузеру, який саме Unicode-символ треба показати.</aside>
+
+<p>Символьні підстановки — це спеціальні рядки, які браузер перетворює на символи. Записати їх можна кількома способами:</p>
+<ul>
+  <li><code>&amp;мнемокод;</code> — за «мнемокодом», тобто ім'ям символу;</li>
+  <li><code>&amp;#КОД10;</code> — за десятковим кодом;</li>
+  <li><code>&amp;#xКОД16;</code> — за шістнадцятковим кодом.</li>
+</ul>
+
+<p>Наприклад, символ авторського права © можна додати так:</p>
+
+<pre><code>&lt;p&gt;Всі права захищені &amp;copy; Lex, 2020&lt;/p&gt;
+&lt;p&gt;Всі права захищені &amp;#169; Lex, 2020&lt;/p&gt;
+&lt;p&gt;Всі права захищені &amp;#xa9; Lex, 2020&lt;/p&gt;</code></pre>
+
+<p>Мнемоніку для будь-якого символу можна знайти на <a href="https://html.spec.whatwg.org/multipage/named-characters.html" target="_blank" rel="noreferrer">сторінці специфікації HTML</a> або в сервісі <a href="https://www.toptal.com/designers/htmlarrows/symbols/" target="_blank" rel="noreferrer">Toptal HTML Arrows</a>.</p>
+
+<aside data-icon="💡">Деякі спецсимволи можуть некоректно відображатися в окремих шрифтах чи браузерах. У таких випадках розробники замінюють їх іконками (зображеннями).</aside>
+
+<div data-quiz data-correct="1" data-success="Все правильно!">
+  <p>Як знайти символьну підстановку для символу, з яким маєш справу вперше?</p>
+  <ul>
+    <li>1) Відкрити сервіс Can I include. 2) Ввести в поле символ. 3) Дочекатися мнемокоду.</li>
+    <li>1) Відкрити Toptal (чи специфікацію HTML) і знайти потрібний символ. 2) Скопіювати мнемокод (або інший код) символу. 3) Використати його в коді.</li>
+    <li>1) Запитати код символу в ментора. 2) Якщо ментор не відповідає, запитати в Slack. 3) Якщо відповіді немає — зробити скриншот символу й вставити як зображення.</li>
+  </ul>
+</div>
+
+<h3>Символьні підстановки для символів коду</h3>
+
+<p>Підстановки потрібні не лише для символів, яких немає на клавіатурі, а й для символів зі спеціальним значенням у HTML. Наприклад, якщо на сторінці треба показати текст із тегами:</p>
+
+<pre><code>&lt;p&gt;Щоб виділити текст жирним, огорни його тегами &lt;strong&gt; і &lt;/strong&gt;.&lt;/p&gt;</code></pre>
+
+<p>Символи <code>&lt;</code> і <code>&gt;</code> — частина синтаксису HTML, вони відкривають і закривають теги. Тому браузер сприйме <code>&lt;strong&gt;</code> і <code>&lt;/strong&gt;</code> як справжні теги. Щоб показати їх як текст, замість <code>&lt;</code> і <code>&gt;</code> використовують підстановки <code>&amp;lt;</code> та <code>&amp;gt;</code>:</p>
+
+<pre><code>&lt;p&gt;Щоб виділити текст жирним, огорни його тегами &amp;lt;strong&amp;gt; і &amp;lt;/strong&amp;gt;.&lt;/p&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 8</h4>
+  <p>Додай у футер після списку посилань текст нижче з усіма символами. Використовуй символьні підстановки.</p>
+  <pre><code>©2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise indicated,
+all materials on the page are copyrighted by ARST Planet Fatness, Limited. All rights
+reserved. No part of this page, either text or image may be used for any purpose.</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:footer">У документі є тег <code>&lt;footer&gt;</code></li>
+    <li data-check="exists:footer p">Усередині футера є абзац</li>
+    <li data-check="source:&amp;copy|&amp;#169|&amp;#xa9">В абзаці є код символьної підстановки для <code>©</code></li>
+    <li data-check="contains:footer p=©2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise indicated, all materials on the page are copyrighted by ARST Planet Fatness, Limited. All rights reserved. No part of this page, either text or image may be used for any purpose.">Текст абзацу збігається із завданням</li>
+  </ul>
+<pre data-start><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+          width="32"
+          height="32"
+          alt="Instagram"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+          width="32"
+          height="32"
+          alt="Facebook"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+          width="32"
+          height="32"
+          alt="YouTube"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/footer&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;Page header&lt;/header&gt;
+
+&lt;main&gt;Main content&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+          width="32"
+          height="32"
+          alt="Instagram"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+          width="32"
+          height="32"
+          alt="Facebook"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+          width="32"
+          height="32"
+          alt="YouTube"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;
+    &amp;copy;2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise
+    indicated, all materials on the page are copyrighted by ARST Planet Fatness,
+    Limited. All rights reserved. No part of this page, either text or image may
+    be used for any purpose.
+  &lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+  </details>
+</section>
+
+<p>Які теги для групування контенту за змістом ти вже знаєш? Заголовки, теги структурної розмітки (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>), абзаци. Зараз вивчимо ще один!</p>
+
+<h2>Секції контенту: тег section</h2>
+
+<p>Будь-яку вебсторінку можна візуально й логічно поділити на розділи (секції). Секції зазвичай розташовані в <code>&lt;main&gt;</code>, трапляються також у футері, рідше в хедері. Найчастіше секцію вирізняє заголовок і тематично пов'язаний вміст після нього. Наприклад, розділ відгуків:</p>
+
+<pre><code>&lt;h2&gt;Відгуки про наш бізнес&lt;/h2&gt;
+&lt;p&gt;Абзац тексту про те, які ми класні&lt;/p&gt;
+&lt;ul&gt;
+  &lt;!-- Список відгуків --&gt;
+&lt;/ul&gt;</code></pre>
+<p>Або розділ переваг компанії:</p>
+
+<pre><code>&lt;h2&gt;Наші переваги&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;!-- Список блоків, що описують переваги --&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>Щоб згрупувати розмітку розділу в загальний контейнер і підвищити семантику, використовують тег-контейнер <code>&lt;section&gt;</code>. Він, як і <code>&lt;header&gt;</code> чи <code>&lt;footer&gt;</code>, об'єднує контент за змістом, але менш специфічний: просто ділить вміст документа на розділи та підрозділи.</p>
+
+<aside data-icon="📌"><b>Використовуй <code>&lt;section&gt;</code>, коли:</b> розділу можна дати власну назву, але як окрема одиниця поза сайтом він не матиме сенсу; ти дбаєш про семантику й віддаєш перевагу тегам, зрозумілим і браузеру, і розробнику. Заголовок у секції бажаний, але не обов'язковий.</aside>
+
+<p>Порівняй розмітку до та після додавання <code>&lt;section&gt;</code>. Без секцій це просто послідовність тегів. Заголовки й порожні рядки допомагають розрізняти розділи, але для роботів і пошукових систем усе це — інформація в одному контейнері. А якщо в розділах сотні рядків коду, розробнику буде важко знайти й виділити потрібний блок.</p>
+
+<pre><code>&lt;!-- До --&gt;
+&lt;main&gt;
+  &lt;h1&gt;Dental clinic website&lt;/h1&gt;
+
+  &lt;h2&gt;About&lt;/h2&gt;
+  &lt;p&gt;Вміст секції About&lt;/p&gt;
+
+  &lt;h2&gt;Features&lt;/h2&gt;
+  &lt;p&gt;Вміст секції Features&lt;/p&gt;
+
+  &lt;h2&gt;Team&lt;/h2&gt;
+  &lt;p&gt;Вміст секції Team&lt;/p&gt;
+
+  &lt;h2&gt;Testimonials&lt;/h2&gt;
+  &lt;p&gt;Вміст секції Testimonials&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+<p>З тегами <code>&lt;section&gt;</code> маємо послідовність чітко структурованих логічних блоків, які легко розрізняють роботи й пошукові системи і з якими зручно працювати розробнику:</p>
+
+<pre><code>&lt;!-- Після --&gt;
+&lt;main&gt;
+  &lt;h1&gt;Dental clinic website&lt;/h1&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;About&lt;/h2&gt;
+    &lt;p&gt;Вміст секції About&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;Features&lt;/h2&gt;
+    &lt;p&gt;Вміст секції Features&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;Team&lt;/h2&gt;
+    &lt;p&gt;Вміст секції Team&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2&gt;Testimonials&lt;/h2&gt;
+    &lt;p&gt;Вміст секції Testimonials&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+
+<p>Подивись, як розробник може використовувати секції для навігації в редакторі коду:</p>
+
+<figure data-kind="video">
+  <video src="/videos/fs-b1-m1-structure/editor-navigation.webm" controls preload="metadata" playsinline aria-label="Відео: навігація по секціях сторінки в редакторі коду"></video>
+  <figcaption>Секції допомагають швидко орієнтуватися в коді</figcaption>
+</figure>
+<div data-quiz data-correct="0,1,2" data-success="Правильно!">
+  <p>Обери правильні твердження про тег <code>&lt;section&gt;</code> і теги структурної розмітки.</p>
+  <ul>
+    <li>Так само, як хедер і футер, тег <code>&lt;section&gt;</code> групує контент.</li>
+    <li>Тег <code>&lt;section&gt;</code> менш специфічний, ніж хедер і футер, і може використовуватися на сторінці кілька разів.</li>
+    <li>Тег <code>&lt;section&gt;</code> можна вкладати в <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> або навіть <code>&lt;header&gt;</code>.</li>
+    <li>Тег <code>&lt;section&gt;</code> може замінити теги <code>&lt;main&gt;</code> або <code>&lt;footer&gt;</code>.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 9</h4>
+  <p>Виділи в документі три розділи, які починаються із заголовків другого рівня, і огорни кожен тегом <code>&lt;section&gt;</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="count:main &gt; section=3">Усередині <code>&lt;main&gt;</code> є три теги <code>&lt;section&gt;</code></li>
+    <li data-check="exists:main &gt; section:nth-of-type(1) &gt; h2#clubs; exists:main &gt; section:nth-of-type(1) &gt; p; exists:main &gt; section:nth-of-type(1) &gt; ul">Перший <code>&lt;section&gt;</code> містить теги <code>&lt;h2 id="clubs"&gt;</code>, <code>&lt;p&gt;</code> та <code>&lt;ul&gt;</code></li>
+    <li data-check="exists:main &gt; section:nth-of-type(2) &gt; h2#benefits; count:main &gt; section:nth-of-type(2) &gt; p=2; exists:main &gt; section:nth-of-type(2) &gt; ol; exists:main &gt; section:nth-of-type(2) &gt; address">Другий <code>&lt;section&gt;</code> містить теги <code>&lt;h2 id="benefits"&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;p&gt;</code> та <code>&lt;address&gt;</code></li>
+    <li data-check="exists:main &gt; section:nth-of-type(3) &gt; h2#programs; exists:main &gt; section:nth-of-type(3) &gt; p; exists:main &gt; section:nth-of-type(3) &gt; ul">Третій <code>&lt;section&gt;</code> містить теги <code>&lt;h2 id="programs"&gt;</code>, <code>&lt;p&gt;</code> та <code>&lt;ul&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;h1&gt;Planet Fatness&lt;/h1&gt;
+  &lt;p&gt;
+    Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+    people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+    depressed, who ate tons of junk food to seize the stress, those
+    healthy-life-gurus sounded like aliens coming from another planet. On their
+    planet, it must have sounded right. On my planet, eating pizza was OK and
+    jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+    completely changed my diet, I still believe we WERE on different planets. The
+    thing is that once I escaped.
+  &lt;/p&gt;
+  &lt;p&gt;
+    Now I'm a coach with 7+ years of experience who founded the chain of sport
+    clubs each having a fitness bar and assistance of psychologists, and
+    dietitians. I'm sure that nothing will work until you know where you are and
+    where you go. Possibly, you are now on the planet Fatness and want to escape
+    it. Here I am to show you the way out. The gym itself is the spacecraft for
+    you to reach a happy new life, with its fitness bars to adapt your body to new
+    conditions and with friendly crew to motivate you and help on your way.
+  &lt;/p&gt;
+
+  &lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+  &lt;p&gt;
+    Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+    including HIIT classes, group fitness, and Personal Training, we have
+    something for every taste. All the gyms and fitness studios in our chain
+    are well-equipped facilities where you'll find all the amenities from
+    WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+    to help you relax and refuel after your workout. The menu offers
+    smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+    See where we're currently operating.
+  &lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+          alt="PF Power Zone. A modern gym equipped with treadmills."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+          alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+          alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+          width="320"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+  &lt;p&gt;
+    We're bringing accessible, on-trend fitness to everyone! We are more than just
+    a gym - we are a community. We are the crew to help you reach the goals.
+  &lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      No blames, no empty promises, no people who are talking about things they
+      don't know about. Our mission is to create a safe space for you to change.
+    &lt;/li&gt;
+    &lt;li&gt;
+      All our coaches are certified experts. You may have tried to work hard but
+      we'll teach you to work smart.
+    &lt;/li&gt;
+    &lt;li&gt;
+      Your diet is no less important than your training. We believe in an
+      integrated approach which also includes dietitian's consultations and
+      motivational activities.
+    &lt;/li&gt;
+    &lt;li&gt;
+      Healthy menu require time and effort? Not in our healthy food bars. Let's
+      discover the world of tasty low-calorie dishes.
+    &lt;/li&gt;
+    &lt;li&gt;
+      You pay for reaching your goal. And it's our job to help you reach it as
+      soon as possible.
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+  &lt;address&gt;
+    Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+    Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+    You may also want to visit us:&lt;br /&gt;
+    Lorem Foundation&lt;br /&gt;
+    332 E Jacked Ave&lt;br /&gt;
+    Mountain View, CA 94041&lt;br /&gt;
+    USA
+  &lt;/address&gt;
+
+  &lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+  &lt;p&gt;
+    Thousands of people dream about having a nice body. They start doing sport,
+    face challenges and quit it in a few weeks or even days. Why does it happen?
+    The problem is that people often do too much physical activity when their body
+    is not ready for this load. Without allowing any recovery time between
+    exercise sessions, they get tired quickly and lose motivation. We believe that
+    you should have a smooth start and focus on developing a habit of doing sport
+    regularly. So, we offer you a few training programs for beginners.
+  &lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+          width="32"
+          height="32"
+          alt="Instagram"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+          width="32"
+          height="32"
+          alt="Facebook"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+          width="32"
+          height="32"
+          alt="YouTube"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;
+    &amp;copy;2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise
+    indicated, all materials on the page are copyrighted by ARST Planet Fatness,
+    Limited. All rights reserved. No part of this page, either text or image may
+    be used for any purpose.
+  &lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;header&gt;
+  &lt;a href="/"&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    /&gt;
+  &lt;/a&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;h1&gt;Planet Fatness&lt;/h1&gt;
+  &lt;p&gt;
+    Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+    people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+    depressed, who ate tons of junk food to seize the stress, those
+    healthy-life-gurus sounded like aliens coming from another planet. On their
+    planet, it must have sounded right. On my planet, eating pizza was OK and
+    jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+    completely changed my diet, I still believe we WERE on different planets. The
+    thing is that once I escaped.
+  &lt;/p&gt;
+  &lt;p&gt;
+    Now I'm a coach with 7+ years of experience who founded the chain of sport
+    clubs each having a fitness bar and assistance of psychologists, and
+    dietitians. I'm sure that nothing will work until you know where you are and
+    where you go. Possibly, you are now on the planet Fatness and want to escape
+    it. Here I am to show you the way out. The gym itself is the spacecraft for
+    you to reach a happy new life, with its fitness bars to adapt your body to new
+    conditions and with friendly crew to motivate you and help on your way.
+  &lt;/p&gt;
+
+  &lt;section&gt;
+    &lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+    &lt;p&gt;
+      Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+      including HIIT classes, group fitness, and Personal Training, we have
+      something for every taste. All the gyms and fitness studios in our chain
+      are well-equipped facilities where you'll find all the amenities from
+      WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+      to help you relax and refuel after your workout. The menu offers
+      smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+      See where we're currently operating.
+    &lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+            alt="PF Power Zone. A modern gym equipped with treadmills."
+            width="320"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+            alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+            width="320"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+            alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+            width="320"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+    &lt;p&gt;
+      We're bringing accessible, on-trend fitness to everyone! We are more than just
+      a gym - we are a community. We are the crew to help you reach the goals.
+    &lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;
+        No blames, no empty promises, no people who are talking about things they
+        don't know about. Our mission is to create a safe space for you to change.
+      &lt;/li&gt;
+      &lt;li&gt;
+        All our coaches are certified experts. You may have tried to work hard but
+        we'll teach you to work smart.
+      &lt;/li&gt;
+      &lt;li&gt;
+        Your diet is no less important than your training. We believe in an
+        integrated approach which also includes dietitian's consultations and
+        motivational activities.
+      &lt;/li&gt;
+      &lt;li&gt;
+        Healthy menu require time and effort? Not in our healthy food bars. Let's
+        discover the world of tasty low-calorie dishes.
+      &lt;/li&gt;
+      &lt;li&gt;
+        You pay for reaching your goal. And it's our job to help you reach it as
+        soon as possible.
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+    &lt;address&gt;
+      Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+      Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+      You may also want to visit us:&lt;br /&gt;
+      Lorem Foundation&lt;br /&gt;
+      332 E Jacked Ave&lt;br /&gt;
+      Mountain View, CA 94041&lt;br /&gt;
+      USA
+    &lt;/address&gt;
+  &lt;/section&gt;
+
+  &lt;section&gt;
+    &lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+    &lt;p&gt;
+      Thousands of people dream about having a nice body. They start doing sport,
+      face challenges and quit it in a few weeks or even days. Why does it happen?
+      The problem is that people often do too much physical activity when their body
+      is not ready for this load. Without allowing any recovery time between
+      exercise sessions, they get tired quickly and lose motivation. We believe that
+      you should have a smooth start and focus on developing a habit of doing sport
+      regularly. So, we offer you a few training programs for beginners.
+    &lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+          width="32"
+          height="32"
+          alt="Instagram"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+          width="32"
+          height="32"
+          alt="Facebook"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+          width="32"
+          height="32"
+          alt="YouTube"
+        /&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;
+    &amp;copy;2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise
+    indicated, all materials on the page are copyrighted by ARST Planet Fatness,
+    Limited. All rights reserved. No part of this page, either text or image may
+    be used for any purpose.
+  &lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+  </details>
+</section>
