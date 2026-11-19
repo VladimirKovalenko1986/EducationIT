@@ -43,6 +43,7 @@ import fsB1m1Structure from './lessons/fullstack/b1-m1-structure.html?raw'
 import fsB1m1Skeleton from './lessons/fullstack/b1-m1-skeleton.html?raw'
 import fsB1m1Algorithm from './lessons/fullstack/b1-m1-algorithm.html?raw'
 import fsB1m1Lessons from './lessons/fullstack/b1-m1-lessons.html?raw'
+import fsB1m1Hw from './lessons/fullstack/b1-m1-hw.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 // prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
@@ -196,6 +197,7 @@ export const courses: Course[] = [
               { id: 'fs-b1-m1-skeleton', title: 'Скелет HTML-документа', content: fsB1m1Skeleton },
               { id: 'fs-b1-m1-algorithm', title: 'Алгоритм створення сторінки', content: fsB1m1Algorithm },
               { id: 'fs-b1-m1-lessons', title: 'Уроки', content: fsB1m1Lessons },
+              { id: 'fs-b1-m1-hw', title: 'Домашнє завдання', isTask: true, content: fsB1m1Hw },
             ],
           },
           emptyModule(2, 'Вступ до CSS', 'fs-b1'),
