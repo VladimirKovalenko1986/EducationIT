@@ -120,11 +120,15 @@
   transition: border-color 0.2s;
 }
 
+.checkbox {
+  border-radius: 6px;
+}
+
 .radio::after {
   content: '';
   position: absolute;
   inset: 3px;
-  border-radius: 50%;
+  border-radius: inherit;
   transform: scale(0);
   transition: transform 0.15s;
 }

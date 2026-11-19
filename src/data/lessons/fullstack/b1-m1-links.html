@@ -1,0 +1,1536 @@
+<p>Новий клієнт — нове замовлення. Тобі потрібно зверстати сторінку мережі спортзалів. Схоже на сторінку рецептів, чи не так? Чудова нагода попрактикуватися у використанні тегів та атрибутів.</p>
+
+<p>Це також можливість розібрати чимало нового: у клієнта багато забаганок щодо посилань різних типів, а посилання дуже поширені у верстці. Крім того, кожен новий проєкт формує мислення досвідченого розробника й вчить аналізувати макет.</p>
+
+<h2>Аналіз контенту</h2>
+
+<p><b>Аналіз контенту</b> — обов'язковий крок перед початком верстки. Після роботи із заголовками ти вже знаєш, що сайт — це логічна структура з чіткою ієрархією, а не просто послідовність елементів. Щоб коректно перенести цю структуру в HTML-файл, треба визначити, які на сторінці є розділи та як вони пов'язані між собою.</p>
+
+<aside data-icon="💡">Завжди дивись на контент за принципом <b>«ззовні всередину»</b>: рухайся від великих смислових блоків до деталей.</aside>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/analysis-steps.webp" alt="Схема: визнач смислові розділи, створи ієрархію заголовків, визнач елементи розділу" loading="lazy" />
+  <figcaption>Три кроки аналізу контенту</figcaption>
+</figure>
+
+<ol>
+  <li><b>Визнач смислові розділи</b> — секції, логічні блоки сторінки. Це як написати план до вже готового твору: про що сторінка? Яка тема? Які пункти розглядаються?</li>
+  <li><b>Створи ієрархію заголовків</b> — визнач зв'язки між розділами. Як усі розділи пов'язані з темою і між собою? Скільки рівнів заголовків?</li>
+  <li><b>Визнач елементи кожного розділу</b> — абзаци, списки, зображення тощо. Дотримуйся семантичної розмітки та звертай увагу на поведінку елементів (наприклад, чи відкривається посилання в поточній або новій вкладці).</li>
+</ol>
+
+<p>Після цього в тебе буде чітке бачення, що і в якій послідовності верстати. Чим більше ти дізнаватимешся про структуру сайтів, тим більше кроків з'являтиметься в аналізі макета.</p>
+
+<p>Відкрий <a href="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/b03pfpagecontent.pdf" target="_blank" rel="noreferrer">макет сторінки мережі спортзалів</a> і вивч схеми А та B.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/sections-ab.webp" alt="Схема А: main із трьома section; схема B: чотири окремі section" loading="lazy" />
+  <figcaption>Схеми А і B: смислові розділи сторінки</figcaption>
+</figure>
+<div data-quiz data-correct="0" data-success="Все правильно!">
+  <p>Яка зі схем (А або B) краще візуалізує структуру контенту на сторінці мережі спортзалів?</p>
+  <ul>
+    <li>Схема А</li>
+    <li>Схема B</li>
+  </ul>
+</div>
+
+<h3>Як створити ієрархію</h3>
+
+<p>Цей крок спирається на логічні блоки, які ти виділив на попередньому кроці. Для ієрархії заголовків важливо зрозуміти зв'язки та рівні вкладеності одного блоку в інший. Порівняй:</p>
+
+<ol>
+  <li><b>Рецепт:</b> назва страви та два рівноцінні розділи — інгредієнти та інструкція. Два рівні заголовків.</li>
+  <li><b>Підсумки року:</b> розділи про сім'ю, здоров'я, нову кар'єру та друзів, а в розділі про кар'єру — ще й окремі досягнення. Тут уже три рівні заголовків.</li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/headings-compare.webp" alt="Порівняння ієрархії заголовків: рецепт з h1 і двома h2; підсумки року з h1, чотирма h2 і трьома h3" loading="lazy" />
+  <figcaption>Два рівні заголовків у рецепті та три — у підсумках року</figcaption>
+</figure>
+
+<p>А яка ієрархія буде на сторінці мережі спортзалів з <a href="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/b03pfpagecontent.pdf" target="_blank" rel="noreferrer">макета</a>? Вивч схеми А та B.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/hierarchy-ab.webp" alt="Схема А: h1, два h2, у першого h2 є h3; схема B: h1 і три h2" loading="lazy" />
+  <figcaption>Схеми ієрархії заголовків А і B</figcaption>
+</figure>
+<div data-quiz data-correct="1" data-success="Супер! Ти все схоплюєш на льоту!">
+  <p>Яка схема коректно описує ієрархію заголовків на сторінці мережі спортзалів?</p>
+  <ul>
+    <li>Схема А</li>
+    <li>Схема B</li>
+    <li>Жодна</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 1</h4>
+  <p>Розміть текст головним заголовком сторінки та двома абзацами.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:h1=Planet Fatness">У коді є тег <code>&lt;h1&gt;</code> з текстом <code>Planet Fatness</code></li>
+    <li data-check="count:p=2; contains:p=Healthy food is delicious; contains:p:nth-of-type(2)=Now I&#x27;m a coach with 7+ years">У коді є два абзаци з відповідним текстом</li>
+    <li data-check="before:h1,p">Абзаци йдуть після заголовка</li>
+  </ul>
+<pre data-start><code>Planet Fatness
+
+Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+depressed, who ate tons of junk food to seize the stress, those
+healthy-life-gurus sounded like aliens coming from another planet. On their
+planet, it must have sounded right. On my planet, eating pizza was OK and
+jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+completely changed my diet, I still believe we WERE on different planets. The
+thing is that once I escaped.
+
+Now I'm a coach with 7+ years of experience who founded the chain of sport
+clubs each having a fitness bar and assistance of psychologists, and
+dietitians. I'm sure that nothing will work until you know where you are and
+where you go. Possibly, you are now on the planet Fatness and want to escape
+it. Here I am to show you the way out. The gym itself is the spacecraft for
+you to reach a happy new life, with its fitness bars to adapt your body to new
+conditions and with friendly crew to motivate you and help on your way.</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;
+  Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+  people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+  depressed, who ate tons of junk food to seize the stress, those
+  healthy-life-gurus sounded like aliens coming from another planet. On their
+  planet, it must have sounded right. On my planet, eating pizza was OK and
+  jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+  completely changed my diet, I still believe we WERE on different planets. The
+  thing is that once I escaped.
+&lt;/p&gt;
+&lt;p&gt;
+  Now I'm a coach with 7+ years of experience who founded the chain of sport
+  clubs each having a fitness bar and assistance of psychologists, and
+  dietitians. I'm sure that nothing will work until you know where you are and
+  where you go. Possibly, you are now on the planet Fatness and want to escape
+  it. Here I am to show you the way out. The gym itself is the spacecraft for
+  you to reach a happy new life, with its fitness bars to adapt your body to new
+  conditions and with friendly crew to motivate you and help on your way.
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<p>Перший розділ уже зверстано, на черзі другий. Важливо верстати розділи послідовно, щоб нічого не пропустити. Переглянь розділ <b>Find us near you</b>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/find-us-section.webp" alt="Розділ Find us near you: заголовок і абзац виділено зеленою рамкою, під ними список із трьох фото" loading="lazy" />
+  <figcaption>Розділ Find us near you</figcaption>
+</figure>
+<div data-quiz data-correct="1,2" data-success="Дуже гарно! Тепер зверстаємо заголовок та абзац.">
+  <p>Які теги треба використати для верстки фрагмента в зеленій рамці на зображенні вище?</p>
+  <ul>
+    <li>Заголовок <code>&lt;h1&gt;</code></li>
+    <li>Заголовок <code>&lt;h2&gt;</code></li>
+    <li>Абзац</li>
+    <li>Нумерований список із зображеннями та посиланнями</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 2</h4>
+  <p>Розміть текст розділу про спортклуби мережі заголовком та абзацом.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:h2=Find us near you">У коді є тег <code>&lt;h2&gt;</code> з текстом <code>Find us near you</code></li>
+    <li data-check="contains:p=Get healthy, feel strong, and be happy!">У коді є абзац з відповідним текстом</li>
+    <li data-check="before:h2,p">Абзац іде після заголовка <code>&lt;h2&gt;</code></li>
+  </ul>
+<pre data-start><code>Find us near you
+
+Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+including HIIT classes, group fitness, and Personal Training, we have
+something for every taste. All the gyms and fitness studios in our chain
+are well-equipped facilities where you'll find all the amenities from
+WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+to help you relax and refuel after your workout. The menu offers
+smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+See where we're currently operating.</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<p>Щоб рухатися далі, треба розібратися, як вивчені елементи відображаються в браузері.</p>
+
+<h2>Блокові та рядкові елементи</h2>
+
+<p><b>Потік документа</b> — це вертикальний і горизонтальний порядок відображення елементів на вебсторінці.</p>
+
+<ul>
+  <li><b>Вертикально</b> потік іде згори вниз: за замовчуванням елементи відображаються в тому порядку, в якому записані в HTML-документі.</li>
+  <li><b>Горизонтально</b> потік іде зліва направо (для мов із письмом справа наліво, як-от арабська чи іврит, — справа наліво).</li>
+</ul>
+
+<p>Усі HTML-елементи — це прямокутні області, які браузер певним чином розміщує на сторінці. Є два основні типи елементів: <b>блокові</b> (займають усю доступну ширину, як назва твору в зошиті) та <b>рядкові</b> (стоять один за одним, як слова в реченні).</p>
+
+<p><b>Блоковий елемент</b> (block-level element) займає весь рядок незалежно від обсягу контенту, тому кілька блокових елементів ідуть один під одним. Заголовки, абзаци й списки, які ти вже знаєш, — блокові елементи.</p>
+
+<pre><code>&lt;!--
+  Заголовок, абзац, список, елементи списку - блокові елементи,
+  що відображатимуться один під одним
+--&gt;
+&lt;h1&gt;Lorem ipsum&lt;/h1&gt;
+&lt;p&gt;
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non laboriosam
+  quos, magni quasi nulla tempora quisquam consequatur voluptates ullam
+  repudiandae ad ducimus sint dolore autem?
+&lt;/p&gt;
+
+&lt;h2&gt;Lorem ipsum dolor&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit.&lt;/li&gt;
+  &lt;li&gt;Assumenda iusto dolorum architecto!&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/block-elements.webp" alt="Блокові елементи: заголовки, абзац і список ідуть один під одним на всю ширину" loading="lazy" />
+  <figcaption>Блокові елементи відображаються один під одним</figcaption>
+</figure>
+
+<p><b>Рядковий елемент</b> займає стільки місця, скільки його контент. Тому кілька рядкових елементів можуть стояти в одному рядку. Коли місця в рядку не вистачає, елемент переноситься на новий рядок.</p>
+
+<pre><code>&lt;!-- Посилання - рядкові елементи: стоять в одному рядку, поки вистачає місця --&gt;
+&lt;a href=""&gt;Рядковий елемент 1&lt;/a&gt;
+&lt;a href=""&gt;Рядковий елемент 2&lt;/a&gt;
+&lt;a href=""&gt;Рядковий елемент 3&lt;/a&gt;</code></pre>
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/inline-elements.webp" alt="Рядкові елементи: три елементи стоять поруч в одному рядку" loading="lazy" />
+  <figcaption>Рядкові елементи стоять в одному рядку</figcaption>
+</figure>
+<div data-quiz data-correct="1" data-success="Чудово!">
+  <p>Обери правильне твердження щодо блокових і рядкових елементів.</p>
+  <ul>
+    <li>Рядкові елементи займають цілий рядок незалежно від обсягу контенту, а блокові — лише місце, яке займає контент.</li>
+    <li>Блокові елементи займають цілий рядок незалежно від обсягу контенту, а рядкові — лише місце, яке займає контент.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 3</h4>
+  <p>Після абзацу додай три посилання, які ведуть на Google Maps з розташуванням залів мережі. Посилання мають відкриватися в новій вкладці браузера.</p>
+  <pre><code>Посилання 1: https://goo.gl/maps/qBnEfK5AingPLZgb9
+Текст 1: PF Power Zone
+
+Посилання 2: https://goo.gl/maps/WZ4K6XMvHU7FkgWB7
+Текст 2: PF Fit and Fast
+
+Посилання 3: https://goo.gl/maps/UZqkiUqS6eWL5DJd7
+Текст 3: PF Body Sculpting</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="count:a=3; before:p,a">Після абзацу є три теги <code>&lt;a&gt;</code></li>
+    <li data-check="attr:a:nth-of-type(1)@href=https://goo.gl/maps/qBnEfK5AingPLZgb9">Значення атрибута <code>href</code> першого посилання — <code>https://goo.gl/maps/qBnEfK5AingPLZgb9</code></li>
+    <li data-check="exists:a:nth-of-type(1)=PF Power Zone">Текст першого посилання — <code>PF Power Zone</code></li>
+    <li data-check="attr:a:nth-of-type(2)@href=https://goo.gl/maps/WZ4K6XMvHU7FkgWB7">Значення атрибута <code>href</code> другого посилання — <code>https://goo.gl/maps/WZ4K6XMvHU7FkgWB7</code></li>
+    <li data-check="exists:a:nth-of-type(2)=PF Fit and Fast">Текст другого посилання — <code>PF Fit and Fast</code></li>
+    <li data-check="attr:a:nth-of-type(3)@href=https://goo.gl/maps/UZqkiUqS6eWL5DJd7">Значення атрибута <code>href</code> третього посилання — <code>https://goo.gl/maps/UZqkiUqS6eWL5DJd7</code></li>
+    <li data-check="exists:a:nth-of-type(3)=PF Body Sculpting">Текст третього посилання — <code>PF Body Sculpting</code></li>
+    <li data-check="attr:a:nth-of-type(1)@target=_blank; attr:a:nth-of-type(2)@target=_blank; attr:a:nth-of-type(3)@target=_blank">Посилання відкриваються в новій вкладці браузера</li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;PF Power Zone&lt;/a&gt;
+&lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;PF Fit and Fast&lt;/a&gt;
+&lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;PF Body Sculpting&lt;/a&gt;</code></pre>
+  </details>
+</section>
+
+<p>Посилання на розташування спортклубів допомагають клієнтам обрати зал неподалік. Але є проблема: людині це може здаватися списком, а для пошукових систем — ні. Без семантичної розмітки пошуковики не зрозуміють, що це перелік однотипних елементів.</p>
+
+<h2>Список посилань</h2>
+
+<p>В елемент списку, крім тексту, можна вкладати інші теги, наприклад посилання. Структура списку при цьому не змінюється: увесь тег <code>&lt;a&gt;</code> стає контентом елемента <code>&lt;li&gt;</code>.</p>
+
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://robota.ua/"&gt;Посилання 1&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://jobs.dou.ua/"&gt;Посилання 2&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>Список як контейнер для однотипного контенту:</p>
+<ul>
+  <li>робить код зрозумілішим для розробників;</li>
+  <li>допомагає пошуковим системам, наприклад Google, правильно зрозуміти сторінку;</li>
+  <li>покращує роботу асистивних технологій для людей з інвалідністю.</li>
+</ul>
+
+<section data-kind="task">
+  <h4>Практичне завдання 4</h4>
+  <p>Підвищ семантику розмітки: замість трьох окремих посилань зроби невпорядкований список посилань. Усі посилання мають відкриватися в новій вкладці.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Після абзацу є невпорядкований список</li>
+    <li data-check="count:ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:ul &gt; li &gt; a=3">У кожен елемент списку вкладено посилання на зал</li>
+    <li data-check="attr:li:nth-child(1) a@href=https://goo.gl/maps/qBnEfK5AingPLZgb9">Значення атрибута <code>href</code> першого посилання — <code>https://goo.gl/maps/qBnEfK5AingPLZgb9</code></li>
+    <li data-check="exists:li:nth-child(1) a=PF Power Zone">Текст першого посилання — <code>PF Power Zone</code></li>
+    <li data-check="attr:li:nth-child(2) a@href=https://goo.gl/maps/WZ4K6XMvHU7FkgWB7">Значення атрибута <code>href</code> другого посилання — <code>https://goo.gl/maps/WZ4K6XMvHU7FkgWB7</code></li>
+    <li data-check="exists:li:nth-child(2) a=PF Fit and Fast">Текст другого посилання — <code>PF Fit and Fast</code></li>
+    <li data-check="attr:li:nth-child(3) a@href=https://goo.gl/maps/UZqkiUqS6eWL5DJd7">Значення атрибута <code>href</code> третього посилання — <code>https://goo.gl/maps/UZqkiUqS6eWL5DJd7</code></li>
+    <li data-check="exists:li:nth-child(3) a=PF Body Sculpting">Текст третього посилання — <code>PF Body Sculpting</code></li>
+    <li data-check="attr:li:nth-child(1) a@target=_blank; attr:li:nth-child(2) a@target=_blank; attr:li:nth-child(3) a@target=_blank">Посилання відкриваються в новій вкладці браузера</li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;PF Power Zone&lt;/a&gt;
+&lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;PF Fit and Fast&lt;/a&gt;
+&lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;PF Body Sculpting&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;PF Power Zone&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;PF Fit and Fast&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;PF Body Sculpting&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+
+<p>Клієнт дуже пишається своїми клубами. Він побачив, що на інших сайтах можна перейти за посиланням прямо з картинки, і хоче так само: відвідувачі побачать фото клубу й захочуть там опинитися.</p>
+
+<h2>Вкладеність тегів. Зображення-посилання</h2>
+
+<p>Посилання не обов'язково має текстовий контент. Наприклад, в інтернет-магазинах клік на фото товару відкриває сторінку цього товару.</p>
+
+<p>Щоб створити <b>зображення-посилання</b>, вклади тег <code>&lt;img&gt;</code> у посилання <code>&lt;a&gt;</code> замість тексту. Обов'язково додай зображенню атрибут <code>alt</code>: це текстовий опис на випадок, якщо картинка не завантажиться. Тут він ще важливіший, ніж зазвичай, — у посилання без тексту саме <code>alt</code> стає його назвою для асистивних технологій і пошукових систем.</p>
+
+<pre><code>&lt;a href="https://www.pexels.com/photo/animals-sweet-cat-kitty-57416/"&gt;
+  &lt;img
+    src="https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg?w=640"
+    alt="Рудий кіт"
+    width="640"
+  /&gt;
+&lt;/a&gt;</code></pre>
+
+<p>Як це працює:</p>
+<ol>
+  <li>Коли наводиш мишу на зображення, курсор змінюється на «руку» — як над будь-яким посиланням.</li>
+  <li>Під час кліку користувач переходить за адресою з атрибута <code>href</code>. За замовчуванням посилання відкривається в поточній вкладці, а щоб відкрити його в новій, додай атрибут <code>target="_blank"</code>.</li>
+</ol>
+
+<div data-quiz data-correct="0" data-success="Все правильно!">
+  <p>Як зробити зображення-посилання?</p>
+  <ul>
+    <li>Додати тег <code>&lt;img&gt;</code> замість текстового контенту тегу <code>&lt;a&gt;</code>.</li>
+    <li>Вкласти тег <code>&lt;a&gt;</code> у <code>&lt;img&gt;</code> замість текстового опису зображення.</li>
+  </ul>
+</div>
+
+<h3>Зображення-посилання в списку</h3>
+
+<p>Список, посилання й зображення можна поєднати. У тегах <code>&lt;ul&gt;</code> та <code>&lt;ol&gt;</code> обов'язкові вкладені елементи <code>&lt;li&gt;</code> — це перший рівень вкладеності. У <code>&lt;li&gt;</code> можна вкласти посилання <code>&lt;a&gt;</code> — це другий рівень. А в <code>&lt;a&gt;</code> — зображення <code>&lt;img&gt;</code>, третій рівень.</p>
+
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href=""&gt;
+      &lt;img src="" alt="" /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href=""&gt;
+      &lt;img src="" alt="" /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<aside data-icon="💡">Спочатку це може здатися складним, але якщо запам'ятати послідовність і трохи попрактикуватися, все вийде. Різні рівні вкладеності постійно трапляються в реальних проєктах, і в курсі ми розглянемо найпопулярніші випадки.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 5</h4>
+  <p>Заміни посилання на Google Maps зображеннями-посиланнями: вклади в посилання замість тексту зображення. Ширина зображень — 320 пікселів.</p>
+  <pre><code>Посилання на карти 1: https://goo.gl/maps/qBnEfK5AingPLZgb9
+Зображення 1: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg
+Альтернативний текст 1: PF Power Zone. A modern gym equipped with treadmills.
+
+Посилання на карти 2: https://goo.gl/maps/WZ4K6XMvHU7FkgWB7
+Зображення 2: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg
+Альтернативний текст 2: PF Fit and Fast. A gym with indoor bikes behind a glass door.
+
+Посилання на карти 3: https://goo.gl/maps/UZqkiUqS6eWL5DJd7
+Зображення 3: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg
+Альтернативний текст 3: PF Body Sculpting. A studio with fitness balls and trx straps.</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Після абзацу розділу є невпорядкований список</li>
+    <li data-check="count:ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:ul &gt; li &gt; a=3">У кожному елементі списку є посилання</li>
+    <li data-check="count:li &gt; a &gt; img=3">У кожне посилання вкладено зображення</li>
+    <li data-check="noText:li &gt; a">У посиланнях немає тексту, лише зображення</li>
+    <li data-check="attr:li:nth-child(1) img@width=320; attr:li:nth-child(2) img@width=320; attr:li:nth-child(3) img@width=320">Ширина зображень — <code>320</code> пікселів</li>
+    <li data-check="attr:li:nth-child(1) a@target=_blank; attr:li:nth-child(2) a@target=_blank; attr:li:nth-child(3) a@target=_blank">Посилання відкриваються в новій вкладці браузера</li>
+    <li data-check="attr:li:nth-child(1) a@href=https://goo.gl/maps/qBnEfK5AingPLZgb9">Значення атрибута <code>href</code> першого посилання — <code>https://goo.gl/maps/qBnEfK5AingPLZgb9</code></li>
+    <li data-check="attr:li:nth-child(1) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg">Значення атрибута <code>src</code> першого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg</code></li>
+    <li data-check="attr:li:nth-child(1) img@alt=PF Power Zone. A modern gym equipped with treadmills.">Альтернативний текст першого зображення — <code>PF Power Zone. A modern gym equipped with treadmills.</code></li>
+    <li data-check="attr:li:nth-child(2) a@href=https://goo.gl/maps/WZ4K6XMvHU7FkgWB7">Значення атрибута <code>href</code> другого посилання — <code>https://goo.gl/maps/WZ4K6XMvHU7FkgWB7</code></li>
+    <li data-check="attr:li:nth-child(2) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg">Значення атрибута <code>src</code> другого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg</code></li>
+    <li data-check="attr:li:nth-child(2) img@alt=PF Fit and Fast. A gym with indoor bikes behind a glass door.">Альтернативний текст другого зображення — <code>PF Fit and Fast. A gym with indoor bikes behind a glass door.</code></li>
+    <li data-check="attr:li:nth-child(3) a@href=https://goo.gl/maps/UZqkiUqS6eWL5DJd7">Значення атрибута <code>href</code> третього посилання — <code>https://goo.gl/maps/UZqkiUqS6eWL5DJd7</code></li>
+    <li data-check="attr:li:nth-child(3) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg">Значення атрибута <code>src</code> третього зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg</code></li>
+    <li data-check="attr:li:nth-child(3) img@alt=PF Body Sculpting. A studio with fitness balls and trx straps.">Альтернативний текст третього зображення — <code>PF Body Sculpting. A studio with fitness balls and trx straps.</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;PF Power Zone&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;PF Fit and Fast&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;PF Body Sculpting&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+        alt="PF Power Zone. A modern gym equipped with treadmills."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+        alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+        alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/gym-page.webp" alt="Сторінка Planet Fatness у браузері: заголовок, абзаци й список фото залів" loading="lazy" />
+  <figcaption>Так зараз виглядає сторінка в браузері: фото залів — посилання на карти</figcaption>
+</figure>
+
+<h2>Вкладеність тегів. Основи</h2>
+
+<p>Теги можна вкладати один в один, дотримуючись певних правил. Закривати їх треба в зворотному порядку — за принципом матрьошки: спочатку вкладаєш менші частини у більші, а закриваєш, починаючи з найменшої.</p>
+
+<pre><code>&lt;тег1&gt;
+  &lt;тег2&gt;
+    &lt;тег4&gt;...&lt;/тег4&gt;
+    &lt;тег5&gt;...&lt;/тег5&gt;
+  &lt;/тег2&gt;
+  &lt;тег3&gt;
+    &lt;тег6&gt;...&lt;/тег6&gt;
+  &lt;/тег3&gt;
+&lt;/тег1&gt;</code></pre>
+
+<p>Ось валідна розмітка абзацу з посиланням і списку переваг з описом:</p>
+
+<pre><code>&lt;p&gt;&lt;a href="https://squoosh.app"&gt;Squoosh&lt;/a&gt; — сервіс оптимізації зображень.&lt;/p&gt;
+
+&lt;p&gt;Список наших переваг&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Працює у браузері&lt;/li&gt;
+  &lt;li&gt;Не завантажує систему&lt;/li&gt;
+  &lt;li&gt;Зручний інтерфейс&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>А в цій версії — дві типові помилки:</p>
+
+<pre><code>&lt;!-- Не дотримано порядку закриття тегів --&gt;
+&lt;p&gt;&lt;a href="https://squoosh.app"&gt;Squoosh — сервіс &lt;/a&gt;оптимізації&lt;/p&gt; зображень.
+
+&lt;!-- Порушено правила вкладення: у &lt;ul&gt; можна вкладати лише &lt;li&gt; --&gt;
+&lt;ul&gt;
+  &lt;p&gt;Список наших переваг&lt;/p&gt;
+  &lt;li&gt;Працює у браузері&lt;/li&gt;
+  &lt;li&gt;Не завантажує систему&lt;/li&gt;
+  &lt;li&gt;Зручний інтерфейс&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<aside data-icon="💡">Уже за кілька днів роботи з HTML ти звикнеш правильно вкладати елементи: правила стануть інтуїтивно зрозумілими після знайомства з основними тегами.</aside>
+
+<h3>Як визначити, що куди можна вкладати</h3>
+
+<p>Вичерпна інформація про теги та правила вкладеності є в таких джерелах:</p>
+<ul>
+  <li><a href="https://html.spec.whatwg.org/multipage/" target="_blank" rel="noreferrer">HTML Living Standard</a> — специфікація, головний документ, що описує мову HTML;</li>
+  <li><a href="https://htmlreference.io/" target="_blank" rel="noreferrer">htmlreference.io</a> — зручний довідник тегів;</li>
+  <li><a href="https://developer.mozilla.org/uk/docs/Web/HTML/Element" target="_blank" rel="noreferrer">MDN Web Docs</a> — для кожного тегу є розділ «Дозволений вміст» (Permitted content).</li>
+</ul>
+
+<aside data-icon="📌">Розробник зазвичай знає напам'ять особливості тегів, з якими працює найчастіше, а рідкісні уточнює в довідниках. Питання про специфікацію можуть трапитися й на співбесіді.</aside>
+
+<p>Для щоденної роботи є зручний сервіс <a href="https://caninclude.glitch.me/" target="_blank" rel="noreferrer">Can I include</a>. Алгоритм простий:</p>
+<ol>
+  <li>Відкрий <a href="https://caninclude.glitch.me/" target="_blank" rel="noreferrer">caninclude.glitch.me</a>.</li>
+  <li>У поле <b>Child tag name</b> введи тег, який хочеш вкласти (наприклад, <code>li</code>), а в поле <b>Parent tag name</b> — тег, у який вкладаєш (наприклад, <code>ul</code>).</li>
+  <li>Натисни кнопку перевірки та подивись результат:
+    <ul>
+      <li><b>зелений</b> — можна вкласти;</li>
+      <li><b>червоний</b> — не можна;</li>
+      <li><b>жовтий</b> — однозначної відповіді немає, усе залежить від умов. Наприклад, у тег <code>&lt;a&gt;</code> можна вкладати все, крім інтерактивних елементів, зокрема інших посилань.</li>
+    </ul>
+  </li>
+</ol>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/caninclude.webp" alt="Результат Can I include: тег li можна вкласти в ul — Yes, you can!" loading="lazy" />
+  <figcaption>Can I include: <code>&lt;li&gt;</code> можна вкласти в <code>&lt;ul&gt;</code></figcaption>
+</figure>
+
+<aside data-icon="⚠️">Сервіс розміщений на платформі Glitch, яка припинила хостинг проєктів, тож він може бути недоступний. У такому разі шукай відповідь у розділі «Дозволений вміст» на MDN або в специфікації. Якщо однозначної відповіді немає — звернися до ментора.</aside>
+
+<div data-quiz data-correct="1" data-success="І це абсолютно правильно! &lt;img&gt; — порожній тег, у нього нічого не можна вкласти.">
+  <p>Чи можна вкласти тег <code>&lt;a&gt;</code> у тег <code>&lt;img&gt;</code>?</p>
+  <ul>
+    <li>Так, можна.</li>
+    <li>Ні, не можна.</li>
+    <li>Є нюанси.</li>
+  </ul>
+</div>
+<div data-quiz data-correct="0" data-success="О, це ти розумник!">
+  <p>Чи можна вкласти тег <code>&lt;a&gt;</code> у тег <code>&lt;li&gt;</code>?</p>
+  <ul>
+    <li>Так, можна.</li>
+    <li>Ні, не можна.</li>
+    <li>Є нюанси.</li>
+  </ul>
+</div>
+
+<p>Половину <a href="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/b03pfpagecontent.pdf" target="_blank" rel="noreferrer">сторінки</a> вже зверстано! Попереду розділ про переваги мережі. Що робити, ти вже знаєш:</p>
+<ol>
+  <li>зрозуміти, про що контент розділу;</li>
+  <li>визначитися з ієрархією заголовків;</li>
+  <li>обрати теги для елементів.</li>
+</ol>
+
+<p>І не забувай про семантичну розмітку: найкращий тег — той, що дає найточнішу інформацію пошуковим системам і роботам.</p>
+
+<h2>Оформлення коду: відступи між розділами</h2>
+
+<p>Коду в редакторі стає дедалі більше, але він має залишатися читабельним — і для колеги, і для тебе через кілька місяців. Відділяй логічні блоки порожнім рядком. Порівняй, у якому прикладі легше знайти початок другого розділу:</p>
+
+<p>❌ Без відступу:</p>
+<pre><code>&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;Healthy food is delicious. Doing sport is enjoyable...&lt;/p&gt;
+&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;PF Power Zone&lt;/li&gt;
+  &lt;li&gt;PF Fit and Fast&lt;/li&gt;
+  &lt;li&gt;PF Body Sculpting&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>✅ З відступом:</p>
+<pre><code>&lt;h1&gt;Planet Fatness&lt;/h1&gt;
+&lt;p&gt;Healthy food is delicious. Doing sport is enjoyable...&lt;/p&gt;
+
+&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;PF Power Zone&lt;/li&gt;
+  &lt;li&gt;PF Fit and Fast&lt;/li&gt;
+  &lt;li&gt;PF Body Sculpting&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 6</h4>
+  <p>Розміть текст розділу переваг заголовком та абзацом.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:h2=Why choose Planet Fatness?">У коді є тег <code>&lt;h2&gt;</code> з текстом <code>Why choose Planet Fatness?</code></li>
+    <li data-check="contains:p=We&#x27;re bringing accessible, on-trend fitness to everyone!">У коді є абзац з відповідним текстом</li>
+    <li data-check="before:h2,p">Абзац іде після заголовка <code>&lt;h2&gt;</code></li>
+  </ul>
+<pre data-start><code>Why choose Planet Fatness?
+
+We're bringing accessible, on-trend fitness to everyone! We are more than just
+a gym - we are a community. We are the crew to help you reach the goals.</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<p>Далі треба додати перелік переваг з <a href="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/b03pfpagecontent.pdf" target="_blank" rel="noreferrer">макета</a> — так само, як ти верстав покрокову інструкцію в рецепті.</p>
+
+<div data-quiz data-correct="0" data-success="Та ти все знаєш!">
+  <p>Які теги використаєш, щоб зверстати нумерований список переваг?</p>
+  <ul>
+    <li>Теги <code>&lt;ol&gt;</code> та <code>&lt;li&gt;</code></li>
+    <li>Теги <code>&lt;ul&gt;</code> та <code>&lt;li&gt;</code></li>
+    <li>Теги <code>&lt;ul&gt;</code> та <code>&lt;a&gt;</code></li>
+  </ul>
+</div>
+
+<aside data-icon="💡"><b>Повторення — це ОК!</b> Якщо сумніваєшся, повернися до попередньої теми й перечитай розділи про невпорядкований і впорядкований списки.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 7</h4>
+  <p>Додай після абзацу нумерований перелік переваг.</p>
+  <pre><code>No blames, no empty promises, no people who are talking about things they
+don't know about. Our mission is to create a safe space for you to change.
+
+All our coaches are certified experts. You may have tried to work hard but
+we'll teach you to work smart.
+
+Your diet is no less important than your training. We believe in an
+integrated approach which also includes dietitian's consultations and
+motivational activities.
+
+Healthy menu require time and effort? Not in our healthy food bars. Let's
+discover the world of tasty low-calorie dishes.
+
+You pay for reaching your goal. And it's our job to help you reach it as
+soon as possible.</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ol">У коді є тег списку <code>&lt;ol&gt;</code></li>
+    <li data-check="before:p,ol">Тег <code>&lt;ol&gt;</code> знаходиться після абзацу розділу переваг</li>
+    <li data-check="count:ol &gt; li=5">Список складається з п'яти елементів</li>
+    <li data-check="contains:ol &gt; li:nth-child(1)=No blames, no empty promises; contains:ol &gt; li:nth-child(2)=All our coaches are certified experts; contains:ol &gt; li:nth-child(3)=Your diet is no less important; contains:ol &gt; li:nth-child(4)=Healthy menu require time and effort; contains:ol &gt; li:nth-child(5)=You pay for reaching your goal">Текст елементів списку відповідає завданню</li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  </details>
+</section>
+
+<p>Клієнт хоче, щоб одразу після переваг, коли інтерес відвідувача найбільший, той бачив контактну інформацію. Вчимося верстати адресу!</p>
+
+<h2>Тег address</h2>
+
+<p>Більшість вебсторінок містять контактну інформацію — організації або людини (наприклад, автора статті). Для неї використовують блоковий тег <code>&lt;address&gt;</code>. Він семантично позначає, що це саме контакти, і допомагає пошуковим системам та асистивним технологіям правильно зрозуміти сторінку.</p>
+
+<p>Контактна інформація може бути будь-якою:</p>
+<ul>
+  <li>фізична адреса;</li>
+  <li>адреса електронної пошти;</li>
+  <li>посилання на сайт;</li>
+  <li>номер телефону тощо.</li>
+</ul>
+
+<pre><code>&lt;!-- Приклад 1 --&gt;
+&lt;address&gt;
+  mango@mail.pig
+  (111) 222-33-44
+  м. Київ,
+  бульвар Лесі Українки, буд. 26,
+  4-й поверх, офіс 427
+&lt;/address&gt;</code></pre>
+
+<p>У прикладі 1 уся контактна інформація відобразиться в один рядок, бо браузер ігнорує переноси рядків у коді. Текст, розбитий на рядки, читати легше. Для примусового перенесення рядка використовують тег <code>&lt;br /&gt;</code>:</p>
+
+<pre><code>&lt;!-- Приклад 2 --&gt;
+&lt;address&gt;
+  mango@mail.pig&lt;br /&gt;
+  (111) 222-33-44&lt;br /&gt;
+  м. Київ,&lt;br /&gt;
+  бульвар Лесі Українки, буд. 26,&lt;br /&gt;
+  4-й поверх, офіс 427
+&lt;/address&gt;</code></pre>
+<div data-quiz data-correct="1" data-success="Ти на правильному шляху!">
+  <p>Яку інформацію може містити тег <code>&lt;address&gt;</code>?</p>
+  <ul>
+    <li>Тільки фізичну адресу — країну, місто, вулицю, будинок.</li>
+    <li>Фізичну адресу, електронну пошту, телефон — будь-яку актуальну контактну інформацію.</li>
+    <li>Контакти або іншу інформацію про сторінку — авторські права, дати оновлення тощо.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 8</h4>
+  <p>Додай після переліку переваг абзац, а під ним — контактну інформацію. Розбий рядки контактів тегом <code>&lt;br /&gt;</code>, як у завданні.</p>
+  <pre><code>Do you want to know more? Contact us!
+
+Call us: +070174069900
+Email us: fatnessescape@doit.com
+You may also want to visit us:
+Lorem Foundation
+332E Jacked Ave
+Mountain View, CA 228322
+USA</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:p=Do you want to know more? Contact us!; before:ol,p:last-of-type">Після списку переваг є абзац з текстом <code>Do you want to know more? Contact us!</code></li>
+    <li data-check="exists:address">У коді є тег <code>&lt;address&gt;</code> з контактною інформацією</li>
+    <li data-check="contains:address=Call us: +070174069900; contains:address=Email us: fatnessescape@doit.com; contains:address=You may also want to visit us:; contains:address=Lorem Foundation; contains:address=332E Jacked Ave; contains:address=Mountain View, CA 228322; contains:address=USA">Вміст тега <code>&lt;address&gt;</code> збігається із завданням</li>
+    <li data-check="count:address br=6">Контактну інформацію розбито на рядки тегом <code>&lt;br /&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: +070174069900&lt;br /&gt;
+  Email us: fatnessescape@doit.com&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 228322&lt;br /&gt;
+  USA
+&lt;/address&gt;</code></pre>
+  </details>
+</section>
+
+<p>Зручно, коли відвідувач натискає на номер телефону — і одразу починається дзвінок. Давай так і зробимо!</p>
+
+<h2>Посилання: значення <code>tel:</code> і <code>mailto:</code> в атрибуті <code>href</code></h2>
+
+<p>Посилання можуть не лише відкривати інші сторінки, а й запускати дзвінки та листи. Для цього в атрибуті <code>href</code> використовують спеціальні значення.</p>
+
+<p>Щоб користувачу запропонувало здійснити дзвінок, вкажи <code>tel:номер-телефону</code>. Номер записують у міжнародному форматі (починається з <code>+</code>) без пробілів і розділових знаків.</p>
+
+<pre><code>&lt;a href="tel:+14251234563"&gt;+1 (425) 123-45-63&lt;/a&gt;</code></pre>
+
+<p>Щоб відкрився поштовий клієнт із заповненим полем одержувача, вкажи <code>mailto:адреса-пошти</code> — без пробілів після двокрапки.</p>
+
+<pre><code>&lt;a href="mailto:example@mail.pig"&gt;example@mail.pig&lt;/a&gt;</code></pre>
+
+<p>Такі посилання можна вкладати в тег <code>&lt;address&gt;</code>:</p>
+
+<pre><code>&lt;address&gt;
+  &lt;a href="mailto:mango@mail.pig"&gt;mango@mail.pig&lt;/a&gt;&lt;br /&gt;
+  &lt;a href="tel:+11112223344"&gt;+1 (111) 222-33-44&lt;/a&gt;&lt;br /&gt;
+  м. Київ,&lt;br /&gt;
+  бульвар Лесі Українки, буд. 26,&lt;br /&gt;
+  4-й поверх, офіс 427
+&lt;/address&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 9</h4>
+  <p>Зроби телефон <code>+070174069900</code> та адресу електронної пошти <code>fatnessescape@doit.com</code> посиланнями, щоб користувач міг зателефонувати або написати листа одним натисканням.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:address">У коді є тег <code>&lt;address&gt;</code> з контактною інформацією</li>
+    <li data-check="count:address a=2">У тегу <code>&lt;address&gt;</code> є два посилання</li>
+    <li data-check="exists:address a=+070174069900">Текст <code>+070174069900</code> огорнуто в посилання</li>
+    <li data-check="attr:address a:nth-of-type(1)@href=tel:+070174069900">Атрибут <code>href</code> посилання на телефон — <code>tel:+070174069900</code></li>
+    <li data-check="exists:address a=fatnessescape@doit.com">Текст <code>fatnessescape@doit.com</code> огорнуто в посилання</li>
+    <li data-check="attr:address a:nth-of-type(2)@href=mailto:fatnessescape@doit.com">Атрибут <code>href</code> посилання на пошту — <code>mailto:fatnessescape@doit.com</code></li>
+  </ul>
+<pre data-start><code>&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: +070174069900&lt;br /&gt;
+  Email us: fatnessescape@doit.com&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 228322&lt;br /&gt;
+  USA
+&lt;/address&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 228322&lt;br /&gt;
+  USA
+&lt;/address&gt;</code></pre>
+  </details>
+</section>
+
+<p>Залишився останній розділ — і сторінка зверстана! З чого почнеш?</p>
+
+<section data-kind="task">
+  <h4>Практичне завдання 10</h4>
+  <p>Розміть текст розділу порад для новачків заголовком та абзацом.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:h2=How to stop doubting and start exercising regularly">У коді є тег <code>&lt;h2&gt;</code> з текстом <code>How to stop doubting and start exercising regularly</code></li>
+    <li data-check="before:h2,p">Під заголовком є абзац</li>
+    <li data-check="contains:p=Thousands of people dream about having a nice body.; contains:p=So, we offer you a few training programs for beginners.">Текст абзацу збігається із завданням</li>
+  </ul>
+<pre data-start><code>How to stop doubting and start exercising regularly
+
+Thousands of people dream about having a nice body. They start doing sport,
+face challenges and quit it in a few weeks or even days. Why does it happen?
+The problem is that people often do too much physical activity when their body
+is not ready for this load. Without allowing any recovery time between
+exercise sessions, they get tired quickly and lose motivation. We believe that
+you should have a smooth start and focus on developing a habit of doing sport
+regularly. So, we offer you a few training programs for beginners.</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;</code></pre>
+  </details>
+</section>
+
+<p>Мережа пропонує відвідувачам програму тренувань для новачків у форматі PDF. Почати щось нове завжди важко, тож завантаження має бути максимально простим: натиснув — і файл уже на комп'ютері.</p>
+
+<h2>Посилання: атрибут <code>download</code></h2>
+
+<p>Значення атрибута <code>href</code> може вказувати на файл. Тоді браузер спробує відкрити його в поточній вкладці, якщо вміє показувати файли такого типу, — зазвичай так відбувається із зображеннями та PDF.</p>
+
+<pre><code>&lt;a href="/шлях/до/cv.pdf"&gt;Резюме&lt;/a&gt;</code></pre>
+
+<p>Атрибут <code>download</code> повідомляє браузеру, що файл треба не відкрити, а завантажити.</p>
+
+<pre><code>&lt;a href="/шлях/до/cv.pdf" download&gt;Завантажити резюме&lt;/a&gt;</code></pre>
+
+<p>Значення атрибута <code>download</code> можна не вказувати — тоді файл збережеться з ім'ям з атрибута <code>href</code>. А якщо значення є, воно задає нове ім'я файлу. Розширення (<code>.pdf</code>, <code>.png</code>, <code>.txt</code> тощо) браузер зазвичай додасть сам.</p>
+
+<pre><code>&lt;a href="/шлях/до/cv.pdf" download="cat-resume"&gt;Завантажити резюме&lt;/a&gt;</code></pre>
+
+<aside data-icon="⚠️">Атрибут <code>download</code> працює лише для файлів з того самого сайту (того самого домену), що й сторінка. Для файлів з інших доменів браузер ігнорує його й просто відкриває файл. Тому в завданні нижче, де PDF лежить на іншому сервері, файл у браузері може відкритися, а не завантажитися, — автоперевірка при цьому однаково зарахує правильну розмітку.</aside>
+
+<div data-quiz data-correct="0,2,3" data-success="Чудово! Ти уважно прочитав про атрибут download.">
+  <p>Обери коректні твердження щодо атрибутів <code>href</code> та <code>download</code>.</p>
+  <ul>
+    <li>На відміну від атрибута <code>href</code>, атрибут <code>download</code> не є обов'язковим для тегу <code>&lt;a&gt;</code>.</li>
+    <li>Значення атрибута <code>href</code> — це завжди посилання на вебсторінку, інакше браузер не розпізнає тег як посилання.</li>
+    <li>Атрибут <code>download</code> може використовуватися без жодного значення.</li>
+    <li>Значення атрибута <code>download</code> визначає, яке ім'я файлу побачить користувач після завантаження.</li>
+    <li>Значення атрибута <code>download</code> визначає тип файлу, який автоматично завантажуватиметься після натискання на посилання.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 11</h4>
+  <p>Додай під абзацом розділу порад посилання на завантаження PDF-файлу з планом тренувань. Завантажений файл має отримати ім'я із завдання.</p>
+  <pre><code>Посилання на файл: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf
+Ім'я файлу після завантаження: build-muscles-plan
+Текст посилання: Download «Build Muscles» training plan</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="before:p,a">Посилання на завантаження файлу знаходиться під абзацом</li>
+    <li data-check="attr:a@href=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf">Значення атрибута <code>href</code> — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf</code></li>
+    <li data-check="attr:a@download=build-muscles-plan">Значення атрибута <code>download</code> — <code>build-muscles-plan</code></li>
+    <li data-check="exists:a=Download «Build Muscles» training plan">Текст посилання — <code>Download «Build Muscles» training plan</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;</code></pre>
+  </details>
+</section>
+
+<p>Відвідувачам так сподобалася безкоштовна програма, що маркетологи вирішили додати ще дві — для різних цілей: накачати м'язи, схуднути тощо.</p>
+
+<div data-quiz data-correct="2" data-success="Саме так! Ця відповідь враховує семантичну розмітку.">
+  <p>Як найкраще додати ще два файли?</p>
+  <ul>
+    <li>Просто додати ще 2 посилання. Це рядкові теги, тож усі посилання стоятимуть в одному рядку — хіба це комусь заважає?</li>
+    <li>Додати ще 2 посилання, а щоб вони не стояли в одному рядку, поставити між ними тег <code>&lt;br /&gt;</code>.</li>
+    <li>Використати невпорядкований список: у мене три однотипні файли. Це зручно і для клієнтів, і для пошуковиків та асистивних технологій.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 12</h4>
+  <p>Маркетолог просить охопити ширшу аудиторію й додати ще два плани тренувань. Замість одного посилання зроби невпорядкований список із трьох посилань.</p>
+  <pre><code>Посилання на файл 1: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf
+Ім'я файлу після завантаження 1: build-muscles-plan
+Текст посилання 1: Download «Build Muscles» training plan
+
+Посилання на файл 2: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf
+Ім'я файлу після завантаження 2: burn-fat-plan
+Текст посилання 2: Download «Burn Fat» training plan
+
+Посилання на файл 3: https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf
+Ім'я файлу після завантаження 3: strength-and-mass-plan
+Текст посилання 3: Download «Build Strength and Mass» training plan</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Список посилань на завантаження файлів знаходиться під абзацом</li>
+    <li data-check="count:ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:ul &gt; li &gt; a=3">Усередині кожного елемента списку є посилання</li>
+    <li data-check="attr:li:nth-child(1) a@href=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf">Значення атрибута <code>href</code> першого посилання — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf</code></li>
+    <li data-check="attr:li:nth-child(1) a@download=build-muscles-plan">Значення атрибута <code>download</code> першого посилання — <code>build-muscles-plan</code></li>
+    <li data-check="exists:li:nth-child(1) a=Download «Build Muscles» training plan">Текст першого посилання — <code>Download «Build Muscles» training plan</code></li>
+    <li data-check="attr:li:nth-child(2) a@href=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf">Значення атрибута <code>href</code> другого посилання — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf</code></li>
+    <li data-check="attr:li:nth-child(2) a@download=burn-fat-plan">Значення атрибута <code>download</code> другого посилання — <code>burn-fat-plan</code></li>
+    <li data-check="exists:li:nth-child(2) a=Download «Burn Fat» training plan">Текст другого посилання — <code>Download «Burn Fat» training plan</code></li>
+    <li data-check="attr:li:nth-child(3) a@href=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf">Значення атрибута <code>href</code> третього посилання — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf</code></li>
+    <li data-check="attr:li:nth-child(3) a@download=strength-and-mass-plan">Значення атрибута <code>download</code> третього посилання — <code>strength-and-mass-plan</code></li>
+    <li data-check="exists:li:nth-child(3) a=Download «Build Strength and Mass» training plan">Текст третього посилання — <code>Download «Build Strength and Mass» training plan</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+&lt;p&gt;
+  Thousands of people dream about having a nice body. They start doing sport,
+  face challenges and quit it in a few weeks or even days. Why does it happen?
+  The problem is that people often do too much physical activity when their body
+  is not ready for this load. Without allowing any recovery time between
+  exercise sessions, they get tired quickly and lose motivation. We believe that
+  you should have a smooth start and focus on developing a habit of doing sport
+  regularly. So, we offer you a few training programs for beginners.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+
+<p>Продакт-менеджери отримали зворотний зв'язок:</p>
+<ul>
+  <li>клієнтам замало інформації в розділі про спортклуби мережі;</li>
+  <li>не всі розуміють, як взаємодіяти з інтерфейсом: мало хто здогадується клікнути на картинку, щоб перейти до карти.</li>
+</ul>
+
+<p>І ось найчастіший біль розробника — клієнт хоче внести зміни. Доробляти готовий сайт складніше, ніж робити з нуля, але ти впораєшся. Головне — розбити задачу на кроки:</p>
+<ol>
+  <li>Замінити зображення-посилання на зображення та текстове посилання <b>Open in Google Maps</b>.</li>
+  <li>Додати кнопку, щоб клієнт міг замовити дзвінок, а для кожного залу — заголовок з назвою та опис.</li>
+</ol>
+
+<p>Порівняй дві версії макета розділу про спортзали:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/gyms-before-after.webp" alt="Розділ про спортзали до змін (лише фото) і після змін (фото, назва залу, опис і посилання Open in Google Maps)" loading="lazy" />
+  <figcaption>Розділ про спортзали до та після змін від клієнта</figcaption>
+</figure>
+<div data-quiz data-correct="0,2,3,4" data-success="Саме так! Треба уважно вивчити, що саме змінити, щоб не переробляти двічі.">
+  <p>Визнач усі кроки, потрібні для заміни зображення-посилання на посилання з текстом.</p>
+  <ul>
+    <li>Знайти в коді розділ про спортклуби мережі. Чим краще оформлений код, тим швидше ти знайдеш потрібний фрагмент.</li>
+    <li>Змінити текст у першому абзаці на <code>Open in Google Maps</code>.</li>
+    <li>Зараз в елементи списку <code>&lt;li&gt;</code> вкладено теги <code>&lt;a&gt;</code>, а в <code>&lt;a&gt;</code> — <code>&lt;img&gt;</code>. Потрібно, щоб <code>&lt;a&gt;</code> та <code>&lt;img&gt;</code> залишилися в <code>&lt;li&gt;</code>, але стали сусідами.</li>
+    <li>Переконатися, що посилання знаходяться в елементах списку після зображення.</li>
+    <li>Додати в усі посилання текст <code>Open in Google Maps</code>.</li>
+    <li>Видалити все й зверстати заново!</li>
+  </ul>
+</div>
+
+<p>Тепер порівняй дві версії макета розділу контактів:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/contacts-before-after.webp" alt="Розділ контактів до змін і після змін — з кнопкою Request a callback під адресою" loading="lazy" />
+  <figcaption>Розділ контактів до та після змін від клієнта</figcaption>
+</figure>
+<div data-quiz data-correct="1" data-success="Круто!">
+  <p>Яку зміну треба внести в розділ контактів?</p>
+  <ul>
+    <li>Змінити шрифти в тегу <code>&lt;img&gt;</code>.</li>
+    <li>Додати новий елемент — кнопку.</li>
+    <li>Додати автоматичний дзвінок відвідувачу сторінки.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 13</h4>
+  <p>Зміни код списку залів так, щоб зображення більше не були посиланнями. Натомість під кожне зображення додай посилання з текстом <code>Open in Google Maps</code>. Посилання, як і раніше, мають відкриватися в новій вкладці.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Після абзацу розділу є невпорядкований список</li>
+    <li data-check="count:ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:li &gt; img=3">У кожному елементі списку є зображення</li>
+    <li data-check="count:li &gt; a=3">У кожному елементі списку є посилання</li>
+    <li data-check="count:a img=0">Зображення не вкладені в посилання</li>
+    <li data-check="before:li:nth-child(1) img,li:nth-child(1) a; before:li:nth-child(2) img,li:nth-child(2) a; before:li:nth-child(3) img,li:nth-child(3) a">Посилання знаходяться під зображеннями</li>
+    <li data-check="attr:li:nth-child(1) img@width=320; attr:li:nth-child(2) img@width=320; attr:li:nth-child(3) img@width=320">Ширина зображень — <code>320</code> пікселів</li>
+    <li data-check="exists:li:nth-child(1) a=Open in Google Maps; exists:li:nth-child(2) a=Open in Google Maps; exists:li:nth-child(3) a=Open in Google Maps">Текст посилань — <code>Open in Google Maps</code></li>
+    <li data-check="attr:li:nth-child(1) a@target=_blank; attr:li:nth-child(2) a@target=_blank; attr:li:nth-child(3) a@target=_blank">Посилання відкриваються в новій вкладці браузера</li>
+    <li data-check="attr:li:nth-child(1) a@href=https://goo.gl/maps/qBnEfK5AingPLZgb9">Значення атрибута <code>href</code> першого посилання — <code>https://goo.gl/maps/qBnEfK5AingPLZgb9</code></li>
+    <li data-check="exists:li:nth-child(1) a=Open in Google Maps">Текст першого посилання — <code>Open in Google Maps</code></li>
+    <li data-check="attr:li:nth-child(1) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg">Значення атрибута <code>src</code> першого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg</code></li>
+    <li data-check="attr:li:nth-child(1) img@alt=PF Power Zone. A modern gym equipped with treadmills.">Альтернативний текст першого зображення — <code>PF Power Zone. A modern gym equipped with treadmills.</code></li>
+    <li data-check="attr:li:nth-child(2) a@href=https://goo.gl/maps/WZ4K6XMvHU7FkgWB7">Значення атрибута <code>href</code> другого посилання — <code>https://goo.gl/maps/WZ4K6XMvHU7FkgWB7</code></li>
+    <li data-check="exists:li:nth-child(2) a=Open in Google Maps">Текст другого посилання — <code>Open in Google Maps</code></li>
+    <li data-check="attr:li:nth-child(2) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg">Значення атрибута <code>src</code> другого зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg</code></li>
+    <li data-check="attr:li:nth-child(2) img@alt=PF Fit and Fast. A gym with indoor bikes behind a glass door.">Альтернативний текст другого зображення — <code>PF Fit and Fast. A gym with indoor bikes behind a glass door.</code></li>
+    <li data-check="attr:li:nth-child(3) a@href=https://goo.gl/maps/UZqkiUqS6eWL5DJd7">Значення атрибута <code>href</code> третього посилання — <code>https://goo.gl/maps/UZqkiUqS6eWL5DJd7</code></li>
+    <li data-check="exists:li:nth-child(3) a=Open in Google Maps">Текст третього посилання — <code>Open in Google Maps</code></li>
+    <li data-check="attr:li:nth-child(3) img@src=https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg">Значення атрибута <code>src</code> третього зображення — <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg</code></li>
+    <li data-check="attr:li:nth-child(3) img@alt=PF Body Sculpting. A studio with fitness balls and trx straps.">Альтернативний текст третього зображення — <code>PF Body Sculpting. A studio with fitness balls and trx straps.</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+        alt="PF Power Zone. A modern gym equipped with treadmills."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+        alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+        alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+        width="320"
+      /&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+      alt="PF Power Zone. A modern gym equipped with treadmills."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+      alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+      alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
+
+<p>Тепер додамо кнопку, щоб відвідувачі могли залишити контакти й замовити дзвінок від менеджера.</p>
+
+<h2>Тег button</h2>
+
+<p>Тег <code>&lt;button&gt;</code> створює кнопку — інтерактивний елемент, який стає повністю функціональним за допомогою JavaScript. Це може бути кнопка відкриття чи закриття спливного вікна, мобільного меню, відправлення форми, гортання галереї тощо.</p>
+
+<pre><code>&lt;button&gt;Open sidebar&lt;/button&gt;</code></pre>
+
+<aside data-icon="💡">Стандартний вигляд кнопки залежить від браузера, тому, щоб вона виглядала однаково всюди, її стилізують за допомогою CSS.</aside>
+
+<h3>Атрибут type</h3>
+
+<p>Атрибут <code>type</code> задає тип кнопки:</p>
+<ul>
+  <li>значення за замовчуванням — <code>type="submit"</code>: кнопки створювалися для відправлення форм, про які ти дізнаєшся далі в курсі;</li>
+  <li>якщо кнопка використовується поза формою як окремий інтерактивний елемент, вкажи <code>type="button"</code>.</li>
+</ul>
+
+<pre><code>&lt;button type="button"&gt;Open sidebar&lt;/button&gt;</code></pre>
+
+<h3>Кнопка чи посилання?</h3>
+
+<p>Посилання й кнопку важливо не плутати: у макеті вони можуть виглядати однаково, адже CSS дозволяє стилізувати їх ідентично.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/button-vs-link.webp" alt="Кнопка і посилання, стилізовані однаково" loading="lazy" />
+  <figcaption>Кнопка й посилання можуть виглядати однаково</figcaption>
+</figure>
+
+<p><b>Використовуй посилання</b>, якщо під час кліку відбувається:</p>
+<ul>
+  <li>перехід за якоюсь адресою;</li>
+  <li>прокручування поточної сторінки до певного місця;</li>
+  <li>завантаження файлу.</li>
+</ul>
+<p>Усі ці дії потребують атрибута <code>href</code>.</p>
+
+<p><b>Використовуй кнопку</b>, якщо під час кліку щось відбувається на сторінці без переходу за адресою: відкривається вікно, додається товар у кошик, відправляється форма тощо.</p>
+
+<aside data-icon="📌">Найчастіше ми інтуїтивно розуміємо, що саме обрати. У складніших інтерфейсах потрібний тип елемента зазвичай вказують у завданні для розробника.</aside>
+
+<div data-quiz data-correct="1" data-success="Саме так! Посилання не завжди відкриває нову сторінку: воно може прокрутити поточну або завантажити файл.">
+  <p>Що відрізняє кнопку від посилання?</p>
+  <ul>
+    <li>Під час натискання на кнопку відбувається дія на поточній сторінці, а посилання завжди відкриває нову сторінку.</li>
+    <li>Різниця у функціоналі: кнопка — для додавання в кошик, відправлення форми тощо, а посилання — для переходу за адресою, завантаження файлів і прокручування сторінки.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 14</h4>
+  <p>Додай кнопку, яка надалі відкриватиме форму, де користувач залишить номер телефону для дзвінка від менеджера. Кнопка має стояти одразу після тега <code>&lt;address&gt;</code>. Текст кнопки — <code>Request a callback</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="exists:address">У коді є тег <code>&lt;address&gt;</code> з контактною інформацією</li>
+    <li data-check="exists:button">У коді є тег <code>&lt;button&gt;</code></li>
+    <li data-check="exists:address + button">Тег <code>&lt;button&gt;</code> стоїть одразу після тега <code>&lt;address&gt;</code></li>
+    <li data-check="attr:button@type=button">У тега <code>&lt;button&gt;</code> є атрибут <code>type</code> зі значенням <code>button</code></li>
+    <li data-check="exists:button=Request a callback">Текст кнопки — <code>Request a callback</code></li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332 E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 94041&lt;br /&gt;
+  USA
+&lt;/address&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Why choose Planet Fatness?&lt;/h2&gt;
+&lt;p&gt;
+  We're bringing accessible, on-trend fitness to everyone! We are more than just
+  a gym - we are a community. We are the crew to help you reach the goals.
+&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    No blames, no empty promises, no people who are talking about things they
+    don't know about. Our mission is to create a safe space for you to change.
+  &lt;/li&gt;
+  &lt;li&gt;
+    All our coaches are certified experts. You may have tried to work hard but
+    we'll teach you to work smart.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Your diet is no less important than your training. We believe in an
+    integrated approach which also includes dietitian's consultations and
+    motivational activities.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Healthy menu require time and effort? Not in our healthy food bars. Let's
+    discover the world of tasty low-calorie dishes.
+  &lt;/li&gt;
+  &lt;li&gt;
+    You pay for reaching your goal. And it's our job to help you reach it as
+    soon as possible.
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+&lt;address&gt;
+  Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+  Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+  You may also want to visit us:&lt;br /&gt;
+  Lorem Foundation&lt;br /&gt;
+  332 E Jacked Ave&lt;br /&gt;
+  Mountain View, CA 94041&lt;br /&gt;
+  USA
+&lt;/address&gt;
+&lt;button type="button"&gt;Request a callback&lt;/button&gt;</code></pre>
+  </details>
+</section>
+
+<p>Гарна робота! Залишилася остання порція правок — додати контент про кожен зал.</p>
+
+<div data-quiz data-correct="1,3,4" data-success="Чудово! Ти правильно визначив усі кроки.">
+  <p>Визнач усі кроки, потрібні для додавання опису кожного спортклубу.</p>
+  <ul>
+    <li>Додати під зображеннями заголовки <code>&lt;h1&gt;</code>.</li>
+    <li>Повернутися до ієрархії заголовків і зрозуміти, якого рівня мають бути заголовки PF Power Zone, PF Fit and Fast та PF Body Sculpting.</li>
+    <li>Додати під посиланнями заголовки <code>&lt;h2&gt;</code>.</li>
+    <li>Додати заголовки відповідного рівня в елементи списку між зображенням і текстовим посиланням на карту.</li>
+    <li>Додати абзац з описом після кожного заголовка.</li>
+  </ul>
+</div>
+
+<p>Вивч схеми А і B.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-links/hierarchy-after-ab.webp" alt="Схема А: h1, три h2, у першого h2 три h3; схема B: h1 і п&#x27;ять h2" loading="lazy" />
+  <figcaption>Схеми ієрархії заголовків після змін від клієнта</figcaption>
+</figure>
+<div data-quiz data-correct="0" data-success="Так! У першого розділу тепер три підрозділи — назви залів.">
+  <p>Яка схема коректно описує ієрархію заголовків на сторінці мережі спортзалів після змін від клієнта?</p>
+  <ul>
+    <li>Схема А</li>
+    <li>Схема B</li>
+    <li>Жодна</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 15</h4>
+  <p>Додай у кожен елемент списку залів, між зображенням і посиланням, заголовок та абзац з описом. Порядок елементів: зображення, заголовок, опис, посилання.</p>
+  <pre><code>PF Power Zone
+
+With full access membership you'll gain access to our state of the art gym
+floor and become a part of a supportive fitness community. Feel confident
+and strong, with equipment to challenge every level of fitness.
+
+
+PF Fit and Fast
+
+Small group training combines the focused attention of a private session
+with the energy of a group. With up to 5 people, the groups have their own
+program, training area and equipment.
+
+
+PF Body Sculpting
+
+Our 1 on 1 private training is the best choice for people looking for a
+personalized program based on their goals. You will have your own training
+room with one of our experienced fitness coaches.</code></pre>
+  <ul data-kind="checklist">
+    <li data-check="exists:ul; before:p,ul">Після абзацу розділу є невпорядкований список</li>
+    <li data-check="count:ul &gt; li=3">Список складається з трьох елементів</li>
+    <li data-check="count:li &gt; img=3">У кожному елементі списку є зображення</li>
+    <li data-check="count:li &gt; h3=3">У кожному елементі списку є заголовок третього рівня</li>
+    <li data-check="count:li &gt; p=3">У кожному елементі списку є абзац тексту</li>
+    <li data-check="count:li &gt; a=3">У кожному елементі списку є посилання</li>
+    <li data-check="before:li:nth-child(1) img,li:nth-child(1) h3; before:li:nth-child(2) img,li:nth-child(2) h3; before:li:nth-child(3) img,li:nth-child(3) h3">Заголовки знаходяться під зображеннями</li>
+    <li data-check="before:li:nth-child(1) h3,li:nth-child(1) p; before:li:nth-child(2) h3,li:nth-child(2) p; before:li:nth-child(3) h3,li:nth-child(3) p">Абзаци знаходяться під заголовками</li>
+    <li data-check="before:li:nth-child(1) p,li:nth-child(1) a; before:li:nth-child(2) p,li:nth-child(2) a; before:li:nth-child(3) p,li:nth-child(3) a">Посилання знаходяться під абзацами</li>
+    <li data-check="exists:li:nth-child(1) h3=PF Power Zone">Текст першого заголовка — <code>PF Power Zone</code></li>
+    <li data-check="exists:li:nth-child(2) h3=PF Fit and Fast">Текст другого заголовка — <code>PF Fit and Fast</code></li>
+    <li data-check="exists:li:nth-child(3) h3=PF Body Sculpting">Текст третього заголовка — <code>PF Body Sculpting</code></li>
+    <li data-check="contains:li:nth-child(1) p=With full access membership; contains:li:nth-child(2) p=Small group training combines; contains:li:nth-child(3) p=Our 1 on 1 private training">Тексти абзаців збігаються із завданням</li>
+  </ul>
+<pre data-start><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+      alt="PF Power Zone. A modern gym equipped with treadmills."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+      alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+      alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+      width="320"
+    /&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;h2&gt;Find us near you&lt;/h2&gt;
+&lt;p&gt;
+  Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+  including HIIT classes, group fitness, and Personal Training, we have
+  something for every taste. All the gyms and fitness studios in our chain
+  are well-equipped facilities where you'll find all the amenities from
+  WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+  to help you relax and refuel after your workout. The menu offers
+  smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+  See where we're currently operating.
+&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+      alt="PF Power Zone. A modern gym equipped with treadmills."
+      width="320"
+    /&gt;
+    &lt;h3&gt;PF Power Zone&lt;/h3&gt;
+    &lt;p&gt;
+      With full access membership you'll gain access to our state of the art gym
+      floor and become a part of a supportive fitness community. Feel confident
+      and strong, with equipment to challenge every level of fitness.
+    &lt;/p&gt;
+    &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+      alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+      width="320"
+    /&gt;
+    &lt;h3&gt;PF Fit and Fast&lt;/h3&gt;
+    &lt;p&gt;
+      Small group training combines the focused attention of a private session
+      with the energy of a group. With up to 5 people, the groups have their own
+      program, training area and equipment.
+    &lt;/p&gt;
+    &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+      alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+      width="320"
+    /&gt;
+    &lt;h3&gt;PF Body Sculpting&lt;/h3&gt;
+    &lt;p&gt;
+      Our 1 on 1 private training is the best choice for people looking for a
+      personalized program based on their goals. You will have your own training
+      room with one of our experienced fitness coaches.
+    &lt;/p&gt;
+    &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;Open in Google Maps&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </details>
+</section>
