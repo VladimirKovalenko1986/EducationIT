@@ -41,11 +41,10 @@ import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
 import fsB1m1Links from './lessons/fullstack/b1-m1-links.html?raw'
 import fsB1m1Structure from './lessons/fullstack/b1-m1-structure.html?raw'
 import fsB1m1Skeleton from './lessons/fullstack/b1-m1-skeleton.html?raw'
+import fsB1m1Algorithm from './lessons/fullstack/b1-m1-algorithm.html?raw'
 
 // Модулі без уроків: поки лише назви, зміст додамо пізніше
 // prefix розділяє id різних курсів (від нього залежать адреси та збережений статус ДЗ)
-const placeholder = '<p>Конспект з’явиться згодом.</p>'
-
 const emptyModule = (n: number, title: string, prefix = 'b1'): Module => ({
   id: `${prefix}-m${n}`,
   title: `Модуль ${n}. ${title}`,
@@ -194,7 +193,7 @@ export const courses: Course[] = [
               { id: 'fs-b1-m1-links', title: 'Посилання', content: fsB1m1Links },
               { id: 'fs-b1-m1-structure', title: 'Структурна розмітка', content: fsB1m1Structure },
               { id: 'fs-b1-m1-skeleton', title: 'Скелет HTML-документа', content: fsB1m1Skeleton },
-              { id: 'fs-b1-m1-algorithm', title: 'Алгоритм створення сторінки', content: placeholder },
+              { id: 'fs-b1-m1-algorithm', title: 'Алгоритм створення сторінки', content: fsB1m1Algorithm },
             ],
           },
           emptyModule(2, 'Вступ до CSS', 'fs-b1'),
