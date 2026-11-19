@@ -11,19 +11,25 @@
 //   items:SEL=a|b|c          елементи списку SEL > li мають саме ці тексти
 //   noText:SEL               усі такі елементи є і не містять тексту
 //   source:a|b|c             у самому коді є хоча б один із фрагментів (без урахування регістру)
+//   order:a|b|c              у самому коді є всі фрагменти саме в такому порядку
+// Код з <!DOCTYPE> або <html> розбирається як повний документ (з <html>, <head>, <body>)
 //   opening:тег / closing:тег   у коді є відкриваючий / закриваючий тег
 //   comment / comment:ТЕКСТ  у коді є коментар (з таким текстом)
 //   commentBefore:SPEC       коментар стоїть перед елементом
 
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim()
 
-export function parseHtml(code: string) {
-  // Явний <body>, щоб коментарі на початку коду теж потрапили в body
+type Root = ParentNode & Node
+
+export function parseHtml(code: string): Root {
+  // Повний документ (з <!DOCTYPE> чи <html>) розбираємо як є, щоб у ньому були справжні <html>, <head> і <body>
+  if (/<!doctype|<html[\s>]/i.test(code)) return new DOMParser().parseFromString(code, 'text/html')
+  // Фрагмент — у явному <body>, щоб коментарі на початку коду теж потрапили в body
   return new DOMParser().parseFromString(`<!DOCTYPE html><html><head></head><body>${code}</body></html>`, 'text/html')
     .body
 }
 
-function find(root: HTMLElement, spec: string) {
+function find(root: Root, spec: string) {
   const [selector, ...text] = spec.split('=')
   let nodes: Element[]
   try {
@@ -36,7 +42,7 @@ function find(root: HTMLElement, spec: string) {
   return nodes.find((node) => normalize(node.textContent ?? '') === expected)
 }
 
-function comments(root: HTMLElement) {
+function comments(root: Root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_COMMENT)
   const result: Comment[] = []
   while (walker.nextNode()) result.push(walker.currentNode as Comment)
@@ -46,7 +52,7 @@ function comments(root: HTMLElement) {
 const precedes = (a?: Node, b?: Node) =>
   Boolean(a && b && a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING)
 
-function rule(root: HTMLElement, code: string, raw: string): boolean {
+function rule(root: Root, code: string, raw: string): boolean {
   const index = raw.indexOf(':')
   const name = (index < 0 ? raw : raw.slice(0, index)).trim()
   const arg = index < 0 ? '' : raw.slice(index + 1).trim()
@@ -83,6 +89,17 @@ function rule(root: HTMLElement, code: string, raw: string): boolean {
       const expected = list.split('|').map(normalize)
       const actual = [...root.querySelectorAll(`${selector.trim()} > li`)].map((li) => normalize(li.textContent ?? ''))
       return actual.length === expected.length && expected.every((text, i) => actual[i] === text)
+    }
+    case 'order': {
+      // Фрагменти мають іти в самому коді саме в такому порядку
+      const lower = code.toLowerCase()
+      let from = 0
+      for (const part of arg.split('|')) {
+        const index = lower.indexOf(part.trim().toLowerCase(), from)
+        if (index < 0) return false
+        from = index + part.trim().length
+      }
+      return true
     }
     case 'source':
       return arg.split('|').some((part) => code.toLowerCase().includes(part.trim().toLowerCase()))

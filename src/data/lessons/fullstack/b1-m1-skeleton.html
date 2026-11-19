@@ -1,0 +1,753 @@
+<p>Знаєш, чому діти вчаться рахувати на яблуках?</p>
+
+<p>Те, що можна побачити чи помацати, сприймається легше, ніж абстрактні поняття. Тому ми вивчаємо HTML від простих тегів з помітним результатом до загальніших. Зверстав текст з тегом <code>&lt;p&gt;</code> — і одразу бачиш абзац. Додав тег <code>&lt;header&gt;</code> — і різницю на сторінці навряд чи помітиш. А от роботи й пошукові системи помічають!</p>
+
+<p>Тепер підемо ще далі й розберемо структуру HTML-документа. У браузері вона майже не видна, але без неї нічого не працюватиме, тож забувати про неї не можна.</p>
+
+<h2>Скелет HTML-документа</h2>
+
+<p>Перш ніж показати сторінку, браузер має отримати відповіді на кілька стандартних питань. Яка тут версія HTML? Де починається і закінчується код, який треба обробити? Якою мовою написана сторінка? Відповіді стандартні, але без них не обійтися — як без коріння дерева: його не видно, але воно абсолютно необхідне.</p>
+
+<p>Браузер читає код згори вниз, тому цю ключову інформацію записують на самому початку документа. Уся вебсторінка — це «дерево» вкладених один в одного тегів, у корені якого тег <code>&lt;html&gt;</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-skeleton/document-tree.webp" alt="Дерево тегів документа: html містить head (з title і meta) та body (з header, main і footer)" loading="lazy" />
+  <figcaption>Дерево HTML-документа</figcaption>
+</figure>
+
+<p>Ось мінімально необхідний набір тегів, який є основою будь-якого HTML-документа:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Службова інформація --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Вміст --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>У першому рядку — оголошення типу документа. Решта тегів — це <b>елементи верхнього рівня</b>, які формують основну структуру сторінки. Вони визначають:</p>
+<ul>
+  <li>розділ заголовка зі службовою інформацією;</li>
+  <li>тіло документа з усім вмістом сторінки.</li>
+</ul>
+
+<p>Далі розглянемо кожен тег окремо. А поки переглянь фрагмент коду:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Варіант 1 --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Варіант 2 --&gt;
+  &lt;/body&gt;
+  &lt;!-- Варіант 3 --&gt;
+&lt;/html&gt;</code></pre>
+<div data-quiz data-correct="1" data-success="Все правильно!">
+  <p>Згадай сторінку спортклубів. Куди в скелеті документа вище треба вкласти все, що ти зверстав?</p>
+  <ul>
+    <li>Варіант 1 — чим вище, тим швидше браузер прочитає вміст сторінки.</li>
+    <li>Варіант 2 — у тег <code>&lt;body&gt;</code>, вкладений у <code>&lt;html&gt;</code>, має розміщуватися вміст сторінки.</li>
+    <li>Варіант 3 — це окрема сторінка, і вона має свій хедер.</li>
+  </ul>
+</div>
+
+<h2>Оголошення типу документа</h2>
+
+<p><code>&lt;!DOCTYPE&gt;</code> — це не тег, а обов'язкова інструкція про тип документа. Вона повідомляє браузеру, за яким стандартом написано HTML, щоб той правильно відобразив сторінку. Оголошення типу документа має бути першим, що бачить браузер у HTML-документі. Без нього браузер переходить у режим сумісності зі старими сайтами (quirks mode), і сторінка може відображатися некоректно.</p>
+
+<pre><code>&lt;!-- Документ написано за специфікацією HTML Living Standard --&gt;
+&lt;!DOCTYPE html&gt;</code></pre>
+
+<aside data-icon="📌">Раніше HTML мав різні версії, останньою була HTML5. Тепер HTML Living Standard — єдина специфікація мови без номерів версій, вона просто постійно оновлюється. Коли кажуть «HTML5», зазвичай мають на увазі саме сучасний HTML, тобто HTML Living Standard.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 1</h4>
+  <p>Додай до коду інструкцію оголошення типу документа.</p>
+  <ul data-kind="checklist">
+    <li data-check="source:&lt;!doctype html">У коді є <code>&lt;!DOCTYPE html&gt;</code></li>
+  </ul>
+<pre data-start><code></code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+  </details>
+</section>
+
+<p>З першим рядком розібралися. Далі — тег, який підказує браузеру, де код, що треба обробити.</p>
+
+<h2>Елементи верхнього рівня: тег html</h2>
+
+<p>Елементи верхнього рівня формують основну структуру сторінки й визначають розділ заголовка (зі службовою інформацією) та тіло документа (з вмістом).</p>
+
+<p>Тег <code>&lt;html&gt;</code> — кореневий елемент документа, контейнер для всього вмісту сторінки. Усе, що поза <code>&lt;html&gt;</code>, браузер не вважає частиною документа.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;&lt;/html&gt;</code></pre>
+
+<p>Атрибут <code>lang</code> вказує мову тексту сторінки. Це важливо для пошукових систем і асистивних технологій, наприклад скринрідерів: вони вимовлятимуть текст правильною мовою. Для української сторінки вказують <code>lang="uk"</code>, для англійської — <code>lang="en"</code>.</p>
+
+<section data-kind="task">
+  <h4>Практичне завдання 2</h4>
+  <p>Додай у код контейнер <code>&lt;html&gt;</code> для розмітки всієї сторінки. Вміст документа буде англійською мовою.</p>
+  <ul data-kind="checklist">
+    <li data-check="order:&lt;!doctype|&lt;html">Тег <code>&lt;html&gt;</code> знаходиться після оголошення типу документа</li>
+    <li data-check="opening:html">У коді є тег <code>&lt;html&gt;</code></li>
+    <li data-check="closing:html">У коді є закриваючий тег <code>&lt;/html&gt;</code></li>
+    <li data-check="exists:html[lang]">У тегу <code>&lt;html&gt;</code> є атрибут <code>lang</code></li>
+    <li data-check="attr:html@lang=en">Значення атрибута <code>lang</code> — <code>en</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Елементи верхнього рівня: тег head</h2>
+
+<p>Тег <code>&lt;head&gt;</code> зберігає службову інформацію про сторінку:</p>
+<ul>
+  <li>заголовок;</li>
+  <li>кодування;</li>
+  <li>опис тощо.</li>
+</ul>
+
+<p>Ця інформація не відображається у вікні браузера, але підказує йому, як обробляти сторінку.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;!-- Службова інформація --&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 3</h4>
+  <p>Додай до коду контейнер службової інформації документа.</p>
+  <ul data-kind="checklist">
+    <li data-check="order:&lt;html|&lt;head|&lt;/head&gt;|&lt;/html&gt;">Тег <code>&lt;head&gt;</code> знаходиться всередині тега <code>&lt;html&gt;</code></li>
+    <li data-check="opening:head">У коді є відкриваючий тег <code>&lt;head&gt;</code></li>
+    <li data-check="closing:head">У коді є закриваючий тег <code>&lt;/head&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;&lt;/html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Теги заголовка документа: заголовок сторінки</h2>
+
+<p>Тег <code>&lt;title&gt;</code> — один зі службових тегів, які розміщують у <code>&lt;head&gt;</code>. Його текст відображається як назва вкладки браузера.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/fs-b1-m1-skeleton/title-tab.webp" alt="Сайт GoIT у Chrome: стрілка веде від назви вкладки до тегу title в інструментах розробника" loading="lazy" />
+  <figcaption>Текст тегу <code>&lt;title&gt;</code> — це назва вкладки браузера</figcaption>
+</figure>
+
+<p>На практиці цей тег надзвичайно важливий для пошуку: саме за вмістом <code>&lt;title&gt;</code> пошукова система значною мірою визначає, наскільки сторінка відповідає запиту, і показує його як заголовок у результатах пошуку.</p>
+
+<p>Текст заголовка має коротко й змістовно описувати сторінку. Рекомендована довжина — до 60 символів: довший заголовок пошукова система обріже.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;HTML is simple!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+
+<aside data-icon="💡">На багатосторінкових сайтах кожна сторінка має мати власний <code>&lt;title&gt;</code>, який відповідає саме її вмісту.</aside>
+
+<div data-quiz data-correct="1" data-success="Все правильно!">
+  <p>Чим відрізняється заголовок HTML-документа від заголовків на сайті?</p>
+  <ul>
+    <li>Усі заголовки документа й сайту мають утворювати ієрархію. А заголовок у тегу <code>&lt;title&gt;</code> — найголовніший, і він має збігатися з <code>&lt;h1&gt;</code>.</li>
+    <li>Заголовок документа (<code>&lt;title&gt;</code>) користувач бачить як назву вкладки. Заголовки сайту (<code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>) стосуються змісту сторінки й відображають структуру контенту.</li>
+  </ul>
+</div>
+
+<p>Розглянь код нижче.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;title&gt;Sweet cheese pancakes&lt;/title&gt;
+&lt;/html&gt;</code></pre>
+<div data-quiz data-correct="0" data-success="Все правильно!">
+  <p>Знайди помилку в прикладі вище.</p>
+  <ul>
+    <li>Тег <code>&lt;title&gt;</code> оформлено некоректно: він має бути вкладений в інший тег — <code>&lt;head&gt;</code>.</li>
+    <li>Вміст тегу <code>&lt;title&gt;</code> не відповідає вимогам до змісту й кількості символів.</li>
+    <li>Помилок немає.</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 4</h4>
+  <p>Додай заголовок сторінки з текстом <code>Planet Fatness is the place for beginners and pros!</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:title">У коді є тег <code>&lt;title&gt;</code></li>
+    <li data-check="closing:title">У коді є закриваючий тег <code>&lt;/title&gt;</code></li>
+    <li data-check="exists:title=Planet Fatness is the place for beginners and pros!">Вміст тегу <code>&lt;title&gt;</code> — текст <code>Planet Fatness is the place for beginners and pros!</code></li>
+    <li data-check="order:&lt;head|&lt;title|&lt;/title&gt;|&lt;/head&gt;">Тег <code>&lt;title&gt;</code> знаходиться всередині тега <code>&lt;head&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<h2>Службова інформація: кодування сторінки</h2>
+
+<p>Тег <code>&lt;meta&gt;</code> зберігає інформацію для браузера та пошукових систем: кодування документа, опис сторінки тощо. Мета-тегів може бути кілька — залежно від атрибутів вони несуть різну інформацію. Теги <code>&lt;meta&gt;</code> завжди розміщуються всередині <code>&lt;head&gt;</code>.</p>
+
+<aside data-icon="⚠️">Кодування сторінки треба вказати, щоб браузер знав, які символи використовуються, і правильно показав текст. Якщо цього не зробити або вказати неправильне кодування, замість літер можуть з'явитися незрозумілі символи («кракозябри»).</aside>
+
+<p>Для цього використовують тег <code>&lt;meta&gt;</code> з атрибутом <code>charset</code> і значенням <code>utf-8</code> — найпоширенішим кодуванням, яке підтримує символи майже всіх мов. Його розміщують першим у <code>&lt;head&gt;</code>, щоб браузер дізнався про кодування якомога раніше.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;HTML is simple!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+<section data-kind="task">
+  <h4>Практичне завдання 5</h4>
+  <p>Додай метаінформацію про кодування сторінки у форматі <code>utf-8</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:meta">У коді є тег <code>&lt;meta&gt;</code></li>
+    <li data-check="order:&lt;head|&lt;meta|&lt;/head&gt;">Тег <code>&lt;meta&gt;</code> знаходиться всередині тега <code>&lt;head&gt;</code></li>
+    <li data-check="exists:meta[charset]">У тегу <code>&lt;meta&gt;</code> є атрибут <code>charset</code></li>
+    <li data-check="attr:meta[charset]@charset=utf-8">Значення атрибута <code>charset</code> — <code>utf-8</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<p>І ще одна важлива річ — як сторінка взаємодіє з пошуковими системами.</p>
+
+<h2>Службова інформація: опис сторінки</h2>
+
+<p>Ще одна поширена функція тегу <code>&lt;meta&gt;</code> — передавати пошуковим системам опис сторінки. Для цього використовують пару атрибутів:</p>
+<ul>
+  <li><code>name="description"</code> — тип метаінформації, тут це опис вмісту сторінки;</li>
+  <li><code>content="..."</code> — сам короткий опис.</li>
+</ul>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="description" content="Learning the basics of HTML for beginners" /&gt;
+    &lt;title&gt;HTML is simple!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Атрибути <code>name</code> і <code>content</code> ідуть у парі: тип і значення.</p>
+
+<aside data-icon="💡">Пошукові системи часто показують цей опис під заголовком сторінки в результатах пошуку. На позицію сторінки він напряму не впливає, але гарний опис спонукає користувачів перейти саме на твій сайт.</aside>
+
+<section data-kind="task">
+  <h4>Практичне завдання 6</h4>
+  <p>Додай метаінформацію про вміст сторінки. Використай текст <code>Planet Fatness description meta tag content</code>.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:meta">У коді є тег <code>&lt;meta&gt;</code></li>
+    <li data-check="order:&lt;head|description|&lt;/head&gt;">Тег <code>&lt;meta&gt;</code> знаходиться всередині тега <code>&lt;head&gt;</code></li>
+    <li data-check="exists:meta[name]">У тегу <code>&lt;meta&gt;</code> є атрибут <code>name</code></li>
+    <li data-check="attr:meta[name]@name=description">Значення атрибута <code>name</code> — <code>description</code></li>
+    <li data-check="exists:meta[content]">У тегу <code>&lt;meta&gt;</code> є атрибут <code>content</code></li>
+    <li data-check="attr:meta[content]@content=Planet Fatness description meta tag content">Значення атрибута <code>content</code> — <code>Planet Fatness description meta tag content</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="description" content="Planet Fatness description meta tag content" /&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<p>Уся службова інформація зібрана в <code>&lt;head&gt;</code>. А де ж тоді вміст сторінки?</p>
+
+<h2>Елементи верхнього рівня: тег body</h2>
+
+<p>Тег <code>&lt;body&gt;</code> містить увесь вміст вебсторінки. Усе, що має відображатися на сторінці, розміщують саме в ньому.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="description" content="Learning the basics of HTML for beginners" /&gt;
+    &lt;title&gt;HTML is simple!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Вміст --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<div data-quiz data-correct="0" data-success="Все правильно!">
+  <p>У який тег вкладають тег <code>&lt;body&gt;</code>?</p>
+  <ul>
+    <li>У тег <code>&lt;html&gt;</code></li>
+    <li>У тег <code>&lt;head&gt;</code></li>
+    <li>Нікуди, це ж увесь вміст сторінки</li>
+  </ul>
+</div>
+<section data-kind="task">
+  <h4>Практичне завдання 7</h4>
+  <p>Додай у HTML-документ тег <code>&lt;body&gt;</code>, щоб увесь вміст сторінки спортклубів опинився всередині нього.</p>
+  <ul data-kind="checklist">
+    <li data-check="opening:body; closing:body">У коді є тег <code>&lt;body&gt;</code></li>
+    <li data-check="order:&lt;html|&lt;body|&lt;/body&gt;|&lt;/html&gt;">Тег <code>&lt;body&gt;</code> знаходиться всередині тега <code>&lt;html&gt;</code></li>
+    <li data-check="order:&lt;/head&gt;|&lt;body|&lt;header|&lt;/footer&gt;|&lt;/body&gt;">Весь вміст сторінки знаходиться всередині тега <code>&lt;body&gt;</code></li>
+  </ul>
+<pre data-start><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="description" content="Planet Fatness description meta tag content" /&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;header&gt;
+    &lt;a href="/"&gt;
+      &lt;img
+        src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+        width="40"
+        height="40"
+        alt="Planet Fatness logo"
+      /&gt;
+    &lt;/a&gt;
+
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;h1&gt;Planet Fatness&lt;/h1&gt;
+    &lt;p&gt;
+      Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+      people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+      depressed, who ate tons of junk food to seize the stress, those
+      healthy-life-gurus sounded like aliens coming from another planet. On their
+      planet, it must have sounded right. On my planet, eating pizza was OK and
+      jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+      completely changed my diet, I still believe we WERE on different planets. The
+      thing is that once I escaped.
+    &lt;/p&gt;
+    &lt;p&gt;
+      Now I'm a coach with 7+ years of experience who founded the chain of sport
+      clubs each having a fitness bar and assistance of psychologists, and
+      dietitians. I'm sure that nothing will work until you know where you are and
+      where you go. Possibly, you are now on the planet Fatness and want to escape
+      it. Here I am to show you the way out. The gym itself is the spacecraft for
+      you to reach a happy new life, with its fitness bars to adapt your body to new
+      conditions and with friendly crew to motivate you and help on your way.
+    &lt;/p&gt;
+
+    &lt;section&gt;
+      &lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+      &lt;p&gt;
+        Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+        including HIIT classes, group fitness, and Personal Training, we have
+        something for every taste. All the gyms and fitness studios in our chain
+        are well-equipped facilities where you'll find all the amenities from
+        WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+        to help you relax and refuel after your workout. The menu offers
+        smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+        See where we're currently operating.
+      &lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+              alt="PF Power Zone. A modern gym equipped with treadmills."
+              width="320"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+              alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+              width="320"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+              alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+              width="320"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+      &lt;p&gt;
+        We're bringing accessible, on-trend fitness to everyone! We are more than just
+        a gym - we are a community. We are the crew to help you reach the goals.
+      &lt;/p&gt;
+      &lt;ol&gt;
+        &lt;li&gt;
+          No blames, no empty promises, no people who are talking about things they
+          don't know about. Our mission is to create a safe space for you to change.
+        &lt;/li&gt;
+        &lt;li&gt;
+          All our coaches are certified experts. You may have tried to work hard but
+          we'll teach you to work smart.
+        &lt;/li&gt;
+        &lt;li&gt;
+          Your diet is no less important than your training. We believe in an
+          integrated approach which also includes dietitian's consultations and
+          motivational activities.
+        &lt;/li&gt;
+        &lt;li&gt;
+          Healthy menu require time and effort? Not in our healthy food bars. Let's
+          discover the world of tasty low-calorie dishes.
+        &lt;/li&gt;
+        &lt;li&gt;
+          You pay for reaching your goal. And it's our job to help you reach it as
+          soon as possible.
+        &lt;/li&gt;
+      &lt;/ol&gt;
+
+      &lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+      &lt;address&gt;
+        Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+        Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+        You may also want to visit us:&lt;br /&gt;
+        Lorem Foundation&lt;br /&gt;
+        332 E Jacked Ave&lt;br /&gt;
+        Mountain View, CA 94041&lt;br /&gt;
+        USA
+      &lt;/address&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+      &lt;p&gt;
+        Thousands of people dream about having a nice body. They start doing sport,
+        face challenges and quit it in a few weeks or even days. Why does it happen?
+        The problem is that people often do too much physical activity when their body
+        is not ready for this load. Without allowing any recovery time between
+        exercise sessions, they get tired quickly and lose motivation. We believe that
+        you should have a smooth start and focus on developing a habit of doing sport
+        regularly. So, we offer you a few training programs for beginners.
+      &lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+            width="32"
+            height="32"
+            alt="Instagram"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+            width="32"
+            height="32"
+            alt="Facebook"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+          &lt;img
+            src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+            width="32"
+            height="32"
+            alt="YouTube"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;
+      &amp;copy;2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise
+      indicated, all materials on the page are copyrighted by ARST Planet Fatness,
+      Limited. All rights reserved. No part of this page, either text or image may
+      be used for any purpose.
+    &lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/html&gt;</code></pre>
+  <details>
+    <summary>Показати рішення</summary>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="description" content="Planet Fatness description meta tag content" /&gt;
+    &lt;title&gt;Planet Fatness is the place for beginners and pros!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;
+      &lt;a href="/"&gt;
+        &lt;img
+          src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+          width="40"
+          height="40"
+          alt="Planet Fatness logo"
+        /&gt;
+      &lt;/a&gt;
+
+      &lt;nav&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="#clubs"&gt;Our Clubs&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#benefits"&gt;PF Benefits&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#programs"&gt;Tips and Programs&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+      &lt;h1&gt;Planet Fatness&lt;/h1&gt;
+      &lt;p&gt;
+        Healthy food is delicious. Doing sport is enjoyable. You just need to start -
+        people said. Nonsense! - I thought. To me, a 19-year-old guy, overweight and
+        depressed, who ate tons of junk food to seize the stress, those
+        healthy-life-gurus sounded like aliens coming from another planet. On their
+        planet, it must have sounded right. On my planet, eating pizza was OK and
+        jogging was exhausting. 12 years later, after I shed almost 100 pounds and
+        completely changed my diet, I still believe we WERE on different planets. The
+        thing is that once I escaped.
+      &lt;/p&gt;
+      &lt;p&gt;
+        Now I'm a coach with 7+ years of experience who founded the chain of sport
+        clubs each having a fitness bar and assistance of psychologists, and
+        dietitians. I'm sure that nothing will work until you know where you are and
+        where you go. Possibly, you are now on the planet Fatness and want to escape
+        it. Here I am to show you the way out. The gym itself is the spacecraft for
+        you to reach a happy new life, with its fitness bars to adapt your body to new
+        conditions and with friendly crew to motivate you and help on your way.
+      &lt;/p&gt;
+
+      &lt;section&gt;
+        &lt;h2 id="clubs"&gt;Find us near you&lt;/h2&gt;
+        &lt;p&gt;
+          Get healthy, feel strong, and be happy! With 50+ classes on the menu,
+          including HIIT classes, group fitness, and Personal Training, we have
+          something for every taste. All the gyms and fitness studios in our chain
+          are well-equipped facilities where you'll find all the amenities from
+          WiFi, lockers and towels to sauna and jacuzzi. Our fitness bars are here
+          to help you relax and refuel after your workout. The menu offers
+          smoothies. soups, salads, and other healthy snacks prepared fresh daily.
+          See where we're currently operating.
+        &lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="https://goo.gl/maps/qBnEfK5AingPLZgb9" target="_blank"&gt;
+              &lt;img
+                src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B031.jpg"
+                alt="PF Power Zone. A modern gym equipped with treadmills."
+                width="320"
+              /&gt;
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="https://goo.gl/maps/WZ4K6XMvHU7FkgWB7" target="_blank"&gt;
+              &lt;img
+                src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B032.jpg"
+                alt="PF Fit and Fast. A gym with indoor bikes behind a glass door."
+                width="320"
+              /&gt;
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="https://goo.gl/maps/UZqkiUqS6eWL5DJd7" target="_blank"&gt;
+              &lt;img
+                src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/B033.jpg"
+                alt="PF Body Sculpting. A studio with fitness balls and trx straps."
+                width="320"
+              /&gt;
+            &lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/section&gt;
+
+      &lt;section&gt;
+        &lt;h2 id="benefits"&gt;Why choose Planet Fatness?&lt;/h2&gt;
+        &lt;p&gt;
+          We're bringing accessible, on-trend fitness to everyone! We are more than just
+          a gym - we are a community. We are the crew to help you reach the goals.
+        &lt;/p&gt;
+        &lt;ol&gt;
+          &lt;li&gt;
+            No blames, no empty promises, no people who are talking about things they
+            don't know about. Our mission is to create a safe space for you to change.
+          &lt;/li&gt;
+          &lt;li&gt;
+            All our coaches are certified experts. You may have tried to work hard but
+            we'll teach you to work smart.
+          &lt;/li&gt;
+          &lt;li&gt;
+            Your diet is no less important than your training. We believe in an
+            integrated approach which also includes dietitian's consultations and
+            motivational activities.
+          &lt;/li&gt;
+          &lt;li&gt;
+            Healthy menu require time and effort? Not in our healthy food bars. Let's
+            discover the world of tasty low-calorie dishes.
+          &lt;/li&gt;
+          &lt;li&gt;
+            You pay for reaching your goal. And it's our job to help you reach it as
+            soon as possible.
+          &lt;/li&gt;
+        &lt;/ol&gt;
+
+        &lt;p&gt;Do you want to know more? Contact us!&lt;/p&gt;
+        &lt;address&gt;
+          Call us: &lt;a href="tel:+070174069900"&gt;+070174069900&lt;/a&gt;&lt;br /&gt;
+          Email us: &lt;a href="mailto:fatnessescape@doit.com"&gt;fatnessescape@doit.com&lt;/a&gt;&lt;br /&gt;
+          You may also want to visit us:&lt;br /&gt;
+          Lorem Foundation&lt;br /&gt;
+          332 E Jacked Ave&lt;br /&gt;
+          Mountain View, CA 94041&lt;br /&gt;
+          USA
+        &lt;/address&gt;
+      &lt;/section&gt;
+
+      &lt;section&gt;
+        &lt;h2 id="programs"&gt;How to stop doubting and start exercising regularly&lt;/h2&gt;
+        &lt;p&gt;
+          Thousands of people dream about having a nice body. They start doing sport,
+          face challenges and quit it in a few weeks or even days. Why does it happen?
+          The problem is that people often do too much physical activity when their body
+          is not ready for this load. Without allowing any recovery time between
+          exercise sessions, they get tired quickly and lose motivation. We believe that
+          you should have a smooth start and focus on developing a habit of doing sport
+          regularly. So, we offer you a few training programs for beginners.
+        &lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Muscles.pdf" download="build-muscles-plan"&gt;Download «Build Muscles» training plan&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Burn-Fat.pdf" download="burn-fat-plan"&gt;Download «Burn Fat» training plan&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/Build-Strength&amp;Mass.pdf" download="strength-and-mass-plan"&gt;Download «Build Strength and Mass» training plan&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;a href="https://www.instagram.com/" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04insta.svg"
+              width="32"
+              height="32"
+              alt="Instagram"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://www.facebook.com/" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04facebook.svg"
+              width="32"
+              height="32"
+              alt="Facebook"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;a href="https://www.youtube.com/" target="_blank"&gt;
+            &lt;img
+              src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04youtube.svg"
+              width="32"
+              height="32"
+              alt="YouTube"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;
+        &amp;copy;2023 ARST Planet Fatness, Ltd. All rights reserved. Unless otherwise
+        indicated, all materials on the page are copyrighted by ARST Planet Fatness,
+        Limited. All rights reserved. No part of this page, either text or image may
+        be used for any purpose.
+      &lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </details>
+</section>
+
+<aside data-icon="🎉">Вітаємо! Тепер сторінка мережі спортзалів — повноцінний HTML-документ: з оголошенням типу, мовою, службовою інформацією, структурою та вмістом.</aside>
