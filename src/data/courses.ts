@@ -40,6 +40,7 @@ import b2m1Ethics from './lessons/cybersecurity/b2-m1-ethics.html?raw'
 import b2m1Hw from './lessons/cybersecurity/b2-m1-hw.html?raw'
 import b2m2t1 from './lessons/cybersecurity/b2-m2-t1.html?raw'
 import b2m2t2 from './lessons/cybersecurity/b2-m2-t2.html?raw'
+import b2m2Hw from './lessons/cybersecurity/b2-m2-hw.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -196,6 +197,7 @@ export const courses: Course[] = [
             lessons: [
               { id: 'b2-m2-t1', title: 'Тема 1. Соціальна інженерія', content: b2m2t1 },
               { id: 'b2-m2-t2', title: 'Тема 2. Тестування на проникнення в фізичні приміщення', content: b2m2t2 },
+              { id: 'b2-m2-hw', title: 'Домашнє завдання', isTask: true, content: b2m2Hw },
             ],
           },
           emptyModule(3, 'Розвідка з відкритих джерел', 'b2'),
