@@ -35,6 +35,7 @@ import b1m10t1 from './lessons/cybersecurity/b1-m10-t1.html?raw'
 import b1m10t2 from './lessons/cybersecurity/b1-m10-t2.html?raw'
 import b1m10test from './lessons/cybersecurity/b1-m10-test.html?raw'
 import b1m10hw from './lessons/cybersecurity/b1-m10-hw.html?raw'
+import b2m1Offensive from './lessons/cybersecurity/b2-m1-offensive.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -172,7 +173,28 @@ export const courses: Course[] = [
           },
         ],
       },
-      { id: 'block-2', title: 'Блок 2', modules: [] },
+      {
+        id: 'block-2',
+        title: 'Блок 2. Наступальна кібербезпека',
+        modules: [
+          {
+            id: 'b2-m1',
+            title: 'Модуль 1. Вступ до наступальної кібербезпеки',
+            lessons: [
+              { id: 'b2-m1-offensive', title: 'Що таке наступальна кібербезпека', content: b2m1Offensive },
+            ],
+          },
+          emptyModule(2, 'Соціальна інженерія', 'b2'),
+          emptyModule(3, 'Розвідка з відкритих джерел', 'b2'),
+          emptyModule(4, 'Тестування на проникнення. Частина перша', 'b2'),
+          emptyModule(5, 'Тестування на проникнення. Частина друга', 'b2'),
+          emptyModule(6, 'Тестування на проникнення. Частина третя', 'b2'),
+          emptyModule(7, 'Штучний інтелект', 'b2'),
+          emptyModule(8, 'Моделювання поведінки ймовірних зловмисників', 'b2'),
+          emptyModule(9, 'Ризики мобільних пристроїв та IoT', 'b2'),
+          emptyModule(10, "Розбір сценаріїв та технічне інтерв'ю", 'b2'),
+        ],
+      },
       { id: 'block-3', title: 'Блок 3', modules: [] },
     ],
   },
