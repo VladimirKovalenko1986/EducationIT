@@ -37,6 +37,7 @@ import b1m10test from './lessons/cybersecurity/b1-m10-test.html?raw'
 import b1m10hw from './lessons/cybersecurity/b1-m10-hw.html?raw'
 import b2m1Offensive from './lessons/cybersecurity/b2-m1-offensive.html?raw'
 import b2m1Ethics from './lessons/cybersecurity/b2-m1-ethics.html?raw'
+import b2m1Hw from './lessons/cybersecurity/b2-m1-hw.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -184,6 +185,7 @@ export const courses: Course[] = [
             lessons: [
               { id: 'b2-m1-offensive', title: 'Що таке наступальна кібербезпека', content: b2m1Offensive },
               { id: 'b2-m1-ethics', title: 'Етичні та правові аспекти наступальної кібербезпеки', content: b2m1Ethics },
+              { id: 'b2-m1-hw', title: 'Домашнє завдання', isTask: true, content: b2m1Hw },
             ],
           },
           emptyModule(2, 'Соціальна інженерія', 'b2'),
