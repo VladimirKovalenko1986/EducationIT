@@ -44,6 +44,7 @@ import b2m2Hw from './lessons/cybersecurity/b2-m2-hw.html?raw'
 import b2m3t1 from './lessons/cybersecurity/b2-m3-t1.html?raw'
 import b2m3t2 from './lessons/cybersecurity/b2-m3-t2.html?raw'
 import b2m3Hw from './lessons/cybersecurity/b2-m3-hw.html?raw'
+import b2m4t1 from './lessons/cybersecurity/b2-m4-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -212,7 +213,13 @@ export const courses: Course[] = [
               { id: 'b2-m3-hw', title: 'Домашнє завдання', isTask: true, content: b2m3Hw },
             ],
           },
-          emptyModule(4, 'Тестування на проникнення. Частина перша', 'b2'),
+          {
+            id: 'b2-m4',
+            title: 'Модуль 4. Тестування на проникнення. Частина перша',
+            lessons: [
+              { id: 'b2-m4-t1', title: 'Тема 1. Основи тестування на проникнення', content: b2m4t1 },
+            ],
+          },
           emptyModule(5, 'Тестування на проникнення. Частина друга', 'b2'),
           emptyModule(6, 'Тестування на проникнення. Частина третя', 'b2'),
           emptyModule(7, 'Штучний інтелект', 'b2'),
