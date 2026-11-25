@@ -42,6 +42,7 @@ import b2m2t1 from './lessons/cybersecurity/b2-m2-t1.html?raw'
 import b2m2t2 from './lessons/cybersecurity/b2-m2-t2.html?raw'
 import b2m2Hw from './lessons/cybersecurity/b2-m2-hw.html?raw'
 import b2m3t1 from './lessons/cybersecurity/b2-m3-t1.html?raw'
+import b2m3t2 from './lessons/cybersecurity/b2-m3-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -206,6 +207,7 @@ export const courses: Course[] = [
             title: 'Модуль 3. Розвідка з відкритих джерел',
             lessons: [
               { id: 'b2-m3-t1', title: 'Тема 1. Операційна безпека при розвідці кіберзагроз', content: b2m3t1 },
+              { id: 'b2-m3-t2', title: 'Тема 2. Основи розвідки та енумерації', content: b2m3t2 },
             ],
           },
           emptyModule(4, 'Тестування на проникнення. Частина перша', 'b2'),
