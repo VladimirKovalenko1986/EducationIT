@@ -385,7 +385,11 @@ ip.addr==10.96.203.66 and tcp.port==80 and not (ip.addr==10.121.1.161)</code></p
 <details>
   <summary>Показати відповідь</summary>
   <pre><code>ip.addr==10.96.203.66 && tcp.port==80 && !(ip.addr==10.121.1.161)</code></pre>
-  <p>Кількість пакетів після фільтрації дивись у рядку стану внизу вікна — значення <b>Displayed</b>.</p>
+  <p>Кількість пакетів після фільтрації дивись у рядку стану внизу вікна — значення <b>Displayed</b>. У нашому захопленні таких пакетів <b>3</b> з 31 005.</p>
+  <figure data-kind="screenshot">
+    <img src="/images/lessons/b2-m4-lab/task4-exclude-ip.webp" alt="Фільтр ip.addr==10.96.203.66 and tcp.port==80 &amp;&amp; !(ip.addr==10.121.1.161): три TCP-пакети з'єднання на порт 80; у рядку стану Displayed: 3" loading="lazy" />
+    <figcaption>Після фільтрації залишилося 3 пакети. На скриншоті змішано <code>and</code> і <code>&amp;&amp;</code> — Wireshark це приймає, але краще писати в одному стилі</figcaption>
+  </figure>
 </details>
 
 <h2>Wireshark у руках пентестера</h2>
