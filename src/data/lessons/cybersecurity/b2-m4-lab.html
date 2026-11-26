@@ -1,0 +1,441 @@
+<h2>Вступ</h2>
+
+<p>Привіт! У цій лабораторній роботі ти глибше вивчиш Wireshark — з погляду того, як його використовують пентестери та зловмисники.</p>
+
+<p>Сьогодні ти:</p>
+
+<ul>
+  <li>зрозумієш, як влаштований мережевий трафік: протоколи, типи пакетів і їхня структура;</li>
+  <li>навчишся помічати потенційні загрози безпеці;</li>
+  <li>зможеш виявляти підозрілі дії, недоліки протоколів чи некоректні налаштування мережевих пристроїв, які можуть стати ціллю атаки;</li>
+  <li>потренуєш навички аналізу великих обсягів даних.</li>
+</ul>
+
+<h3>Можливості Wireshark</h3>
+
+<ul>
+  <li>Працює в UNIX-подібних системах (Linux, macOS) і Windows.</li>
+  <li>Зчитує пакети з мережевого інтерфейсу в реальному часі.</li>
+  <li>Відкриває файли захоплення (<code>.pcap</code>, <code>.pcapng</code>), створені tcpdump/WinDump, самим Wireshark та багатьма іншими програмами.</li>
+  <li>Імпортує пакети з текстових файлів із шістнадцятковими дампами.</li>
+  <li>Показує пакети з дуже детальною інформацією про протоколи.</li>
+  <li>Фільтрує та шукає пакети за багатьма критеріями; фільтри відображення впорядковують те, що ти бачиш на екрані.</li>
+  <li>Розфарбовує пакети за правилами на основі фільтрів.</li>
+  <li>Дає змогу відстежувати потоки (наприклад, TCP-розмову повністю).</li>
+  <li>Експортує всі чи вибрані пакети в різних форматах.</li>
+  <li>Будує різноманітну статистику.</li>
+  <li>Підтримує плагіни — так можна додати розбір нових протоколів.</li>
+</ul>
+
+<h2>Встановлення Wireshark</h2>
+
+<aside data-icon="💡">Якщо Wireshark уже встановлений з оглядової теми, пропусти цей розділ.</aside>
+
+<p><b>1.</b> Завантаж інсталятор з офіційного сайту <a href="https://www.wireshark.org/" target="_blank" rel="noreferrer">wireshark.org</a>.</p>
+
+<p><b>2.</b> На Ubuntu чи Debian встанови Wireshark з репозиторію:</p>
+
+<pre><code>sudo apt-get update
+sudo apt-get install wireshark tshark</code></pre>
+
+<p><b>3.</b> Щоб запустити Wireshark у Linux, введи в терміналі:</p>
+
+<pre><code>wireshark</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/launch-linux.webp" alt="Термінал Ubuntu з командою wireshark і вікно Wireshark зі списком мережевих інтерфейсів" loading="lazy" />
+  <figcaption>Запуск Wireshark з терміналу в Ubuntu</figcaption>
+</figure>
+
+<p><b>4.</b> У Windows запусти завантажений інсталятор. Коли він запропонує встановити <b>Npcap</b> — погоджуйся: це бібліотека, без якої неможливо захоплювати трафік у реальному часі.</p>
+
+<p><b>5.</b> Для захоплення трафіку потрібні права адміністратора:</p>
+
+<ul>
+  <li><b>Windows:</b> знайди Wireshark у меню «Пуск» і обери «Запуск від імені адміністратора».</li>
+  <li><b>macOS:</b> інсталятор пропонує встановити компонент <b>ChmodBPF</b>, який дає доступ до мережевих інтерфейсів без запуску від root — встанови його.</li>
+  <li><b>Linux:</b> замість запуску від root краще додати користувача до групи <code>wireshark</code>: <code>sudo usermod -aG wireshark $USER</code> (після цього перезайди в систему).</li>
+</ul>
+
+<aside data-icon="⚠️">Деякі організації забороняють використання Wireshark у своїх мережах. Якщо ти запускаєш його не на власному обладнанні — спершу переконайся, що це дозволено.</aside>
+
+<h2>Інтерфейс Wireshark</h2>
+
+<p>Після запуску у розділі <b>Capture</b> (Захоплення) обери мережевий інтерфейс, трафік якого хочеш переглядати. Графік праворуч від назви показує, чи є на інтерфейсі активність.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/capture-interfaces-windows.webp" alt="Стартове вікно Wireshark у Windows: поле фільтра захоплення та список інтерфейсів — Ethernet0, loopback, USBPcap" loading="lazy" />
+  <figcaption>Стартове вікно: вибір інтерфейсу для захоплення</figcaption>
+</figure>
+
+<p>Ось так виглядає головне вікно, коли пакети вже захоплені або завантажені з файлу:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/main-window.webp" alt="Головне вікно Wireshark з підписаними частинами: меню, головна панель інструментів, панель фільтра, список пакетів, деталі пакета, байти пакета, рядок стану" loading="lazy" />
+  <figcaption>Головне вікно Wireshark і його частини</figcaption>
+</figure>
+
+<dl>
+  <div>
+    <dt>Меню (Menu)</dt>
+    <dd>Запуск усіх дій програми.</dd>
+  </div>
+  <div>
+    <dt>Головна панель інструментів (Main Toolbar)</dt>
+    <dd>Швидкий доступ до найчастіше використовуваних пунктів меню.</dd>
+  </div>
+  <div>
+    <dt>Панель фільтра (Filter Toolbar)</dt>
+    <dd>Поле для фільтра відображення — визначає, які пакети показувати.</dd>
+  </div>
+  <div>
+    <dt>Список пакетів (Packet List)</dt>
+    <dd>Короткий підсумок кожного захопленого пакета.</dd>
+  </div>
+  <div>
+    <dt>Деталі пакета (Packet Details)</dt>
+    <dd>Розбір пакета, вибраного у списку.</dd>
+  </div>
+  <div>
+    <dt>Байти пакета (Packet Bytes)</dt>
+    <dd>Сирі дані вибраного пакета; підсвічує поле, вибране в деталях.</dd>
+  </div>
+  <div>
+    <dt>Рядок стану (Status Bar)</dt>
+    <dd>Стан програми та захоплення: файл, кількість пакетів (усього й показаних), профіль.</dd>
+  </div>
+</dl>
+
+<h3>Меню</h3>
+
+<p>Головне меню розташоване у верхній частині вікна.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/menu-bar.webp" alt="Рядок меню Wireshark: File, Edit, View, Go, Capture, Analyze, Statistics, Telephony, Wireless, Tools, Help — і панель інструментів під ним" loading="lazy" />
+  <figcaption>Меню та головна панель інструментів</figcaption>
+</figure>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Пункт</th><th>Що там є</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>File</b></td><td>Відкриття та об'єднання файлів захоплення, збереження, друк, експорт у різних форматах</td></tr>
+      <tr><td><b>Edit</b></td><td>Пошук пакета, позначення пакетів, прив'язка часу, профілі конфігурації, налаштування (Preferences)</td></tr>
+      <tr><td><b>View</b></td><td>Вигляд: розфарбовування пакетів, масштаб шрифту, перегляд пакета в окремому вікні, розгортання та згортання дерева деталей</td></tr>
+      <tr><td><b>Go</b></td><td>Перехід до певного пакета</td></tr>
+      <tr><td><b>Capture</b></td><td>Запуск і зупинка захоплення, фільтри захоплення</td></tr>
+      <tr><td><b>Analyze</b></td><td>Фільтри відображення, увімкнення чи вимкнення розбору протоколів, власні декодування, відстеження TCP-потоку</td></tr>
+      <tr><td><b>Statistics</b></td><td>Статистичні вікна: зведення по захопленню, ієрархія протоколів, розмови, графіки тощо</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Корисна статистика</h3>
+
+<p><b>Statistics → Protocol Hierarchy</b> (Ієрархія протоколів) — статистика по кожному протоколу. Допомагає зрозуміти, які протоколи є в захопленні, скільки їх і в якій пропорції.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/protocol-hierarchy.webp" alt="Вікно Protocol Hierarchy Statistics: дерево протоколів Frame, Ethernet, IPv4, UDP, QUIC, DNS, TCP, TLS, IGMP, ARP з відсотками пакетів і байтів" loading="lazy" />
+  <figcaption>Ієрархія протоколів: частка кожного протоколу в пакетах і байтах</figcaption>
+</figure>
+
+<p><b>Statistics → Conversations</b> (Розмови) — статистика по кожній «розмові» між двома адресами: скільки пакетів і байтів передано в кожен бік, коли почалася і скільки тривала. Вкладки дають змогу дивитися розмови на рівні Ethernet, IPv4, IPv6, TCP, UDP.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/conversations.webp" alt="Вікно Conversations, вкладка UDP: пари адрес і портів, кількість пакетів і байтів у кожному напрямку, час початку і тривалість" loading="lazy" />
+  <figcaption>Розмови: хто з ким обмінювався даними й скільки</figcaption>
+</figure>
+
+<p><b>Statistics → Flow Graph</b> (Діаграма потоків) — будує діаграму послідовності обміну для вибраного трафіку. Зручно, щоб розібратися з порядковими номерами (Seq) і підтвердженнями (Ack) TCP.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/flow-graph.webp" alt="Вікно Flow Graph: стрілки обміну пакетами між вузлами з часом, портами, TCP-прапорцями та коментарями" loading="lazy" />
+  <figcaption>Діаграма потоків: хто, коли і що надсилав</figcaption>
+</figure>
+
+<h3>Список пакетів</h3>
+
+<p>Тут показано всі пакети в тому порядку, в якому їх записано. Кожен рядок — один пакет. Клацни на рядок, щоб побачити подробиці в двох нижніх панелях.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/packet-list-pane.webp" alt="Панель списку пакетів зі стовпцями No., Time, Source, Destination, Protocol, Length, Info і кольоровими рядками SSDP, IGMP, TCP, ARP, DNS" loading="lazy" />
+  <figcaption>Список пакетів</figcaption>
+</figure>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Стовпець</th><th>Що означає</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>No.</b></td><td>Номер пакета у файлі захоплення. Не змінюється, навіть якщо застосовано фільтр</td></tr>
+      <tr><td><b>Time</b></td><td>Час захоплення пакета (формат можна змінити)</td></tr>
+      <tr><td><b>Source</b></td><td>Адреса, звідки надійшов пакет</td></tr>
+      <tr><td><b>Destination</b></td><td>Адреса, куди прямує пакет</td></tr>
+      <tr><td><b>Protocol</b></td><td>Протокол найвищого рівня, який розпізнав Wireshark</td></tr>
+      <tr><td><b>Length</b></td><td>Довжина пакета в байтах</td></tr>
+      <tr><td><b>Info</b></td><td>Додаткова інформація про вміст пакета</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Деталі пакета</h3>
+
+<p>Панель деталей показує протоколи та поля вибраного пакета у вигляді дерева, яке можна розгортати й згортати. Тут видно все — від MAC-адрес у заголовку Ethernet до прапорців і порядкових номерів TCP.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/packet-details-pane.webp" alt="Панель деталей пакета: розгорнутий заголовок TCP з портами, порядковими номерами, прапорцями, розміром вікна та контрольною сумою" loading="lazy" />
+  <figcaption>Деталі пакета: розгорнутий заголовок TCP</figcaption>
+</figure>
+
+<h3>Байти пакета</h3>
+
+<p>Панель байтів показує дані вибраного пакета у вигляді шістнадцяткового дампу: ліворуч — зміщення, посередині — байти, праворуч — ті самі байти як текст.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/packet-bytes-pane.webp" alt="Панель байтів пакета: шістнадцятковий дамп зі зміщеннями та текстовим поданням" loading="lazy" />
+  <figcaption>Байти пакета у шістнадцятковому вигляді</figcaption>
+</figure>
+
+<h3>Параметри захоплення</h3>
+
+<p>Найкорисніші параметри перед початком захоплення:</p>
+
+<ul>
+  <li><b>Мережевий інтерфейс</b> — наприклад, <code>eth0</code>: аналізуватимемо лише пакети, що проходять через нього (вхідні та вихідні).</li>
+  <li><b>Фільтр захоплення</b> — який трафік записувати: за портом, протоколом чи адресою. На відміну від фільтра відображення, він відкидає непотрібні пакети ще до запису.</li>
+</ul>
+
+<h2>Фільтри відображення</h2>
+
+<p>Обери <code>eth0</code> у списку інтерфейсів і натисни «Почати» (синій плавець на панелі інструментів). Ти побачиш увесь трафік, що проходить через інтерфейс. Пакетів буде дуже багато — тому без фільтрів аналізувати його незручно. Фільтр вводиться в поле над списком пакетів і застосовується клавішею <code>Enter</code> або кнопкою зі стрілкою.</p>
+
+<h3>HTTP-трафік</h3>
+
+<p>Введи <code>http</code> у поле фільтра й застосуй його. Потім відкрий браузер і перейди на будь-який сайт, що працює по HTTP:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/filter-http.webp" alt="Фільтр http: у списку лише HTTP-пакети — запити GET і відповіді 302 Found" loading="lazy" />
+  <figcaption>Фільтр <code>http</code>: лише HTTP-запити та відповіді</figcaption>
+</figure>
+
+<h3>HTTP-трафік від заданої IP-адреси</h3>
+
+<p>Щоб бачити HTTP-трафік, який надсилає вузол <code>192.168.0.10</code>, додай до фільтра умову за адресою джерела <code>ip.src</code>:</p>
+
+<pre><code>ip.src==192.168.0.10 && http</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/filter-ip-src-http.webp" alt="Фільтр ip.src==192.168.0.10&&http: усі пакети мають джерело 192.168.0.10 і протокол HTTP" loading="lazy" />
+  <figcaption>HTTP-пакети, надіслані з 192.168.0.10</figcaption>
+</figure>
+
+<h3>HTTP-трафік до заданої IP-адреси</h3>
+
+<p>Те саме, але для пакетів, що <b>надходять до</b> <code>192.168.0.10</code>, — умова за адресою призначення <code>ip.dst</code>:</p>
+
+<pre><code>ip.dst==192.168.0.10 && http</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/filter-ip-dst-http.webp" alt="Фільтр ip.dst==192.168.0.10&&http: усі пакети мають призначення 192.168.0.10 і протокол HTTP" loading="lazy" />
+  <figcaption>HTTP-пакети, адресовані 192.168.0.10</figcaption>
+</figure>
+
+<aside data-icon="💡">Щоб бачити пакети в обох напрямках, використовуй <code>ip.addr</code> замість <code>ip.src</code> чи <code>ip.dst</code>: <code>ip.addr==192.168.0.10 && http</code>.</aside>
+
+<h3>Логічні оператори</h3>
+
+<p>Wireshark підтримує два варіанти запису логічних операторів:</p>
+
+<ul>
+  <li><code>and</code>, <code>or</code>, <code>not</code> — читабельніший варіант;</li>
+  <li><code>&&</code>, <code>||</code>, <code>!</code> — компактний, як у мові C.</li>
+</ul>
+
+<p>Обидва варіанти правильні, але в межах одного виразу краще дотримуватися одного стилю, щоб не заплутатися:</p>
+
+<pre><code>ip.addr==10.96.203.66 && tcp.port==80 && !(ip.addr==10.121.1.161)
+
+ip.addr==10.96.203.66 and tcp.port==80 and not (ip.addr==10.121.1.161)</code></pre>
+
+<h3>Оператори порівняння</h3>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Оператор</th><th>Словесна форма</th><th>Значення</th><th>Приклад</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>==</code></td><td><code>eq</code></td><td>дорівнює</td><td><code>ip.src==192.168.0.134</code></td></tr>
+      <tr><td><code>!=</code></td><td><code>ne</code></td><td>не дорівнює</td><td><code>ip.src!=192.168.0.134</code></td></tr>
+      <tr><td><code>&gt;</code></td><td><code>gt</code></td><td>більше</td><td><code>frame.len &gt; 20</code></td></tr>
+      <tr><td><code>&lt;</code></td><td><code>lt</code></td><td>менше</td><td><code>frame.len &lt; 150</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td><code>ge</code></td><td>більше або дорівнює</td><td><code>frame.len &gt;= 0x50</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td><code>le</code></td><td>менше або дорівнює</td><td><code>frame.len &lt;= 0x30</code></td></tr>
+      <tr><td><code>&amp;</code></td><td>—</td><td>побітове «і»</td><td><code>tcp.flags &amp; 0x03</code></td></tr>
+      <tr><td><code>&amp;&amp;</code></td><td><code>and</code></td><td>логічне «і»</td><td><code>ip.src==192.168.0.134 and tcp.flags.fin</code></td></tr>
+      <tr><td><code>||</code></td><td><code>or</code></td><td>логічне «або»</td><td><code>ip.src==192.168.0.134 or ip.src==192.168.1.1</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Різниця між <code>ip.addr</code>, <code>ip.src</code>, <code>ip.dst</code> і <code>===</code></h3>
+
+<ul>
+  <li><code>ip.addr==10.96.203.66</code> — хоча б одне з полів, <code>ip.src</code> або <code>ip.dst</code>, дорівнює 10.96.203.66.</li>
+  <li><code>ip.src==10.96.203.66</code> — лише пакети, де адреса <b>джерела</b> дорівнює 10.96.203.66.</li>
+  <li><code>ip.dst==10.96.203.66</code> — лише пакети, де адреса <b>призначення</b> дорівнює 10.96.203.66.</li>
+  <li><code>ip.addr===10.96.203.66</code> — <b>усі</b> IP-адреси в пакеті дорівнюють 10.96.203.66 (строгий збіг; підтримується в нових версіях Wireshark).</li>
+</ul>
+
+<aside data-icon="⚠️">Зверни увагу на пастку з запереченням: <code>ip.addr != 10.96.203.66</code> покаже пакет, якщо <b>хоч одна</b> адреса не дорівнює 10.96.203.66 — тобто майже всі пакети. Щоб справді виключити адресу, пиши <code>!(ip.addr == 10.96.203.66)</code>.</aside>
+
+<h3>Трафік Apache і MySQL</h3>
+
+<p>Щоб бачити трафік на портах TCP 80 (вебсервер) і 3306 (сервер бази даних MySQL/MariaDB), об'єднай умови через «або»:</p>
+
+<pre><code>tcp.port==80 || tcp.port==3306</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/filter-apache-mysql.webp" alt="Фільтр tcp.port==80||tcp.port==3306: TCP-пакети з'єднань на порт http — SYN, SYN-ACK, ACK, FIN" loading="lazy" />
+  <figcaption>Трафік вебсервера та бази даних</figcaption>
+</figure>
+
+<h3>Виключення пакетів із заданою IP-адресою</h3>
+
+<p>Щоб прибрати зі списку пакети, які надходять від заданої адреси або прямують до неї, візьми умову в дужки й постав перед нею <code>!</code>:</p>
+
+<pre><code>!(ip.addr == 192.168.0.1)</code></pre>
+
+<h3>Трафік локальної мережі</h3>
+
+<p>Цей фільтр показує лише трафік усередині локальної мережі <code>192.168.0.0/24</code> і відкидає все, що йде в інтернет чи надходить з нього:</p>
+
+<pre><code>ip.src==192.168.0.0/24 and ip.dst==192.168.0.0/24</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/filter-local-network.webp" alt="Фільтр ip.src==192.168.0.0/24 and ip.dst==192.168.0.0/24: DNS-запити й відповіді між 192.168.0.103 і 192.168.0.1" loading="lazy" />
+  <figcaption>Лише локальний трафік — тут DNS-запити до домашнього роутера</figcaption>
+</figure>
+
+<h3>Вміст TCP-розмови</h3>
+
+<p>Щоб побачити весь обмін даними в одній TCP-розмові, клацни правою кнопкою на пакеті та обери <b>Follow → TCP Stream</b>. Відкриється вікно з повним вмістом: запити клієнта — червоним, відповіді сервера — синім.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m4-lab/follow-tcp-stream.webp" alt="Вікно Follow TCP Stream: HTTP-запит GET з заголовками Host, User-Agent, Accept і відповідь сервера 304 Not Modified від nginx" loading="lazy" />
+  <figcaption>Follow TCP Stream: HTTP-запит і відповідь сервера у відкритому вигляді</figcaption>
+</figure>
+
+<aside data-icon="⚠️">Саме так зловмисник бачить вміст незашифрованого трафіку — включно з логінами, паролями й cookie, якщо сайт працює по HTTP.</aside>
+
+<h2>Практичні завдання</h2>
+
+<p>Час потренуватися. Відповідь до кожного завдання можна розгорнути, але спершу спробуй скласти фільтр самостійно.</p>
+
+<h3>Завдання 1</h3>
+
+<p>Зловмисник намагається завантажити шкідливий файл із сайту <code>www.ethereal.com</code>. Запиши фільтр, який знайде звернення до цього HTTP-хоста.</p>
+
+<details>
+  <summary>Показати відповідь</summary>
+  <p>Кожен HTTP-запит містить заголовок <code>Host</code> з доменним ім'ям сайту. Фільтруємо за ним:</p>
+  <pre><code>http.host=="www.ethereal.com"</code></pre>
+  <p>Загальний вигляд — <code>http.host=="домен"</code>. У списку залишиться запит, а в полі Source — адреса вузла, який звертався до шкідливого сайту.</p>
+  <figure data-kind="screenshot">
+    <img src="/images/lessons/b2-m4-lab/task1-http-host.webp" alt="Фільтр http.host==&quot;www.ethereal.com&quot;: один HTTP-пакет GET /download.html від 145.254.160.237 і його байти з заголовком Host" loading="lazy" />
+    <figcaption>Знайдено запит <code>GET /download.html</code> до www.ethereal.com</figcaption>
+  </figure>
+</details>
+
+<h3>Завдання 2</h3>
+
+<p>Запиши фільтр, який покаже пакети з портом призначення 23 (Telnet).</p>
+
+<details>
+  <summary>Показати відповідь</summary>
+  <pre><code>tcp.dstport == 23</code></pre>
+  <p>Telnet передає дані, зокрема логін і пароль, у відкритому вигляді, тож такий трафік — завжди привід для уваги.</p>
+  <figure data-kind="screenshot">
+    <img src="/images/lessons/b2-m4-lab/task2-dstport.webp" alt="Фільтр tcp.dstport == 23: TCP- і TELNET-пакети на порт 23; у рядку стану Displayed: 70" loading="lazy" />
+    <figcaption>Пакети на порт 23 (Telnet)</figcaption>
+  </figure>
+</details>
+
+<h3>Завдання 3</h3>
+
+<p>Відфільтруй пакети за MAC-адресою <code>00:a0:cc:3b:bf:fa</code>.</p>
+
+<details>
+  <summary>Показати відповідь</summary>
+  <pre><code>eth.addr == 00:a0:cc:3b:bf:fa</code></pre>
+  <p>Загальний вигляд — <code>eth.addr == MAC-адреса</code>. Як і <code>ip.addr</code>, він спрацьовує, коли адреса стоїть у полі джерела або призначення. Знайти MAC-адресу можна в деталях пакета, у заголовку Ethernet II.</p>
+  <figure data-kind="screenshot">
+    <img src="/images/lessons/b2-m4-lab/task3-eth-addr.webp" alt="Фільтр eth.addr == 00:a0:cc:3b:bf:fa; у деталях пакета в заголовку Ethernet II виділено MAC-адресу джерела" loading="lazy" />
+    <figcaption>Фільтр за MAC-адресою; сама адреса виділена в заголовку Ethernet II</figcaption>
+  </figure>
+</details>
+
+<h3>Завдання 4</h3>
+
+<p>Запиши фільтр, який покаже трафік вузла <code>10.96.203.66</code> на порту 80, але <b>без</b> пакетів, пов'язаних з адресою <code>10.121.1.161</code>. Скільки пакетів залишилося?</p>
+
+<details>
+  <summary>Показати відповідь</summary>
+  <pre><code>ip.addr==10.96.203.66 && tcp.port==80 && !(ip.addr==10.121.1.161)</code></pre>
+  <p>Кількість пакетів після фільтрації дивись у рядку стану внизу вікна — значення <b>Displayed</b>.</p>
+</details>
+
+<h2>Wireshark у руках пентестера</h2>
+
+<dl>
+  <div>
+    <dt>Аналіз мережевого трафіку</dt>
+    <dd>Вивчення структури трафіку, типів пакетів і протоколів — TCP/IP, HTTP, DNS, SMTP тощо.</dd>
+  </div>
+  <div>
+    <dt>Виявлення атак</dt>
+    <dd>MITM, ARP Spoofing, перехоплення сесій та інші мережеві атаки. Наприклад, підміну DNS видно з аналізу DNS-відповідей, а спроби SQL-ін'єкції — з HTTP-запитів.</dd>
+  </div>
+  <div>
+    <dt>Пошук вразливостей</dt>
+    <dd>Слабкі місця мережевих пристроїв і протоколів, вразливості бездротових мереж через аналіз трафіку Wi-Fi.</dd>
+  </div>
+  <div>
+    <dt>Аналіз відповідей серверів</dt>
+    <dd>Відповіді на різні запити показують, як працюють сервіси та яке ПЗ використовується — і де можуть бути слабкості вебзастосунків.</dd>
+  </div>
+  <div>
+    <dt>Фільтрація та сортування</dt>
+    <dd>Виділення потрібних пакетів, наприклад трафіку, який містить паролі чи іншу конфіденційну інформацію.</dd>
+  </div>
+</dl>
+
+<h2>Wireshark у руках зловмисника</h2>
+
+<dl>
+  <div>
+    <dt>Перехоплення конфіденційних даних</dt>
+    <dd>Паролі, особисті дані, банківські реквізити з незашифрованого трафіку — наприклад, з HTTP.</dd>
+  </div>
+  <div>
+    <dt>Розвідка служб і протоколів</dt>
+    <dd>Збір відомостей про сервіси для підготовки атак — наприклад, аналіз SMTP-трафіку в пошуках небезпечних команд чи витоку інформації.</dd>
+  </div>
+  <div>
+    <dt>Підготовка атаки</dt>
+    <dd>Пошук вразливих пристроїв і слабких місць у внутрішній мережі компанії.</dd>
+  </div>
+  <div>
+    <dt>Пошук цілей для маніпуляції трафіком</dt>
+    <dd>Сам Wireshark трафік не змінює, але допомагає знайти пристрої для ARP Spoofing, DNS Poisoning чи HTTP-підміни та перевірити, що трафік жертви вже йде через зловмисника.</dd>
+  </div>
+  <div>
+    <dt>Виявлення захисних заходів</dt>
+    <dd>Фільтри пакетів, шифрування трафіку — і пошук способів їх обійти.</dd>
+  </div>
+</dl>
+
+<aside data-icon="🛡️">Wireshark, як і будь-який інструмент аналізу трафіку, — інструмент подвійного призначення. Саме тому важливо шифрувати трафік (HTTPS, SSH замість Telnet) і стежити за тим, що відбувається у власній мережі.</aside>
