@@ -47,6 +47,7 @@ import b2m3Hw from './lessons/cybersecurity/b2-m3-hw.html?raw'
 import b2m4t1 from './lessons/cybersecurity/b2-m4-t1.html?raw'
 import b2m4lab from './lessons/cybersecurity/b2-m4-lab.html?raw'
 import b2m4Hw from './lessons/cybersecurity/b2-m4-hw.html?raw'
+import b2m5t1 from './lessons/cybersecurity/b2-m5-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -224,7 +225,13 @@ export const courses: Course[] = [
               { id: 'b2-m4-hw', title: 'Домашнє завдання', isTask: true, content: b2m4Hw },
             ],
           },
-          emptyModule(5, 'Тестування на проникнення. Частина друга', 'b2'),
+          {
+            id: 'b2-m5',
+            title: 'Модуль 5. Тестування на проникнення. Частина друга',
+            lessons: [
+              { id: 'b2-m5-t1', title: 'Тема 1. Злам SQL-серверів. Злам вебсерверів', content: b2m5t1 },
+            ],
+          },
           emptyModule(6, 'Тестування на проникнення. Частина третя', 'b2'),
           emptyModule(7, 'Штучний інтелект', 'b2'),
           emptyModule(8, 'Моделювання поведінки ймовірних зловмисників', 'b2'),
