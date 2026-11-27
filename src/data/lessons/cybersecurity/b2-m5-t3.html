@@ -1,0 +1,289 @@
+<h2>Основні компоненти Metasploit</h2>
+
+<p>Працюючи з Metasploit Framework, ти здебільшого взаємодієш з консоллю <code>msfconsole</code> — головним інтерфейсом фреймворку. Через неї запускають <b>модулі</b> — невеликі компоненти, кожен з яких виконує конкретне завдання: експлуатує вразливість, сканує ціль або проводить перебір паролів.</p>
+
+<p>Перш ніж перейти до модулів, пригадаймо три базові поняття:</p>
+
+<dl>
+  <div>
+    <dt>Вразливість (vulnerability)</dt>
+    <dd>Помилка в дизайні, коді чи логіці системи. Її використання може розкрити конфіденційну інформацію або дати змогу виконати код на цілі.</dd>
+  </div>
+  <div>
+    <dt>Експлойт (exploit)</dt>
+    <dd>Код, який використовує конкретну вразливість у системі-цілі.</dd>
+  </div>
+  <div>
+    <dt>Payload</dt>
+    <dd>Код, що виконується на цілі <b>після</b> спрацювання експлойта, щоб досягти потрібного результату — наприклад, отримати доступ до системи чи прочитати дані.</dd>
+  </div>
+</dl>
+
+<h2>Типи модулів</h2>
+
+<p>Модулі згруповані в каталоги за призначенням. Розглянемо основні категорії.</p>
+
+<h3>Auxiliary (допоміжні)</h3>
+
+<p>Підтримуючі модулі: сканери, краулери та фаззери. Саме ними ми користувалися в лабораторній роботі.</p>
+
+<pre><code>auxiliary/
+├── admin
+├── analyze
+├── crawler
+├── dos
+├── fuzzers
+├── gather
+├── scanner
+├── sniffer
+├── spoof
+├── sqli
+└── ...</code></pre>
+
+<h3>Encoders (енкодери)</h3>
+
+<p>Кодують експлойти й payload у надії, що антивірус на основі сигнатур їх не виявить. Такі антивіруси тримають базу відомих загроз і порівнюють з нею підозрілі файли. Енкодери не завжди ефективні, бо антивірус може робити й інші перевірки.</p>
+
+<pre><code>encoders/
+├── cmd
+├── generic
+├── php
+├── ruby
+├── x64
+└── x86</code></pre>
+
+<h3>Evasion (обхід захисту)</h3>
+
+<p>На відміну від енкодерів, ці модулі <b>напряму</b> намагаються обійти антивірус — з різним ступенем успішності.</p>
+
+<pre><code>evasion/
+└── windows
+    ├── applocker_evasion_msbuild.rb
+    ├── process_herpaderping.rb
+    ├── windows_defender_exe.rb
+    └── ...</code></pre>
+
+<h3>Exploits (експлойти)</h3>
+
+<p>Код, що використовує вразливості. Згруповані за системами-цілями.</p>
+
+<pre><code>exploits/
+├── android
+├── apple_ios
+├── linux
+├── multi
+├── osx
+├── unix
+└── windows</code></pre>
+
+<h3>NOPs</h3>
+
+<p><b>NOP</b> (No Operation) — інструкція, яка нічого не робить. У процесорах Intel x86 їй відповідає байт <code>0x90</code>: процесор пропускає один цикл. NOP-и використовують як буфер, щоб payload мав сталий розмір.</p>
+
+<h3>Payloads</h3>
+
+<p>Код, який виконується на цілі. Експлойт лише використовує вразливість, а бажаного результату досягає саме payload: відкриває оболонку, завантажує бекдор, запускає команду. Наприклад, запуск <code>calc.exe</code> на віддаленій системі — безпечний спосіб показати в звіті, що ми можемо виконувати на ній команди.</p>
+
+<p>Найкорисніший результат — інтерактивна командна оболонка (<b>shell</b>), у яку можна вводити команди для виконання на цілі.</p>
+
+<p>Payload поділяються на розділи:</p>
+
+<dl>
+  <div>
+    <dt>Singles</dt>
+    <dd>Самостійні payload (додати користувача, запустити <code>notepad.exe</code>), яким не потрібні додаткові компоненти.</dd>
+  </div>
+  <div>
+    <dt>Stagers</dt>
+    <dd>Встановлюють канал зв'язку між Metasploit і ціллю. Потрібні для «інсценованих» payload.</dd>
+  </div>
+  <div>
+    <dt>Stages</dt>
+    <dd>Основна частина payload, яку завантажує стейджер. Так можна доставити більший payload.</dd>
+  </div>
+  <div>
+    <dt>Adapters</dt>
+    <dd>Обгортки, що перетворюють payload в інший формат — наприклад, в один рядок PowerShell.</dd>
+  </div>
+</dl>
+
+<aside data-icon="💡">За назвою payload видно, він одинарний («вбудований») чи інсценований: у <code>generic/shell_reverse_tcp</code> слова з'єднані <b>підкресленням</b> — це вбудований payload; у <code>windows/x64/shell/reverse_tcp</code> є <b>коса риска</b> між <code>shell</code> і <code>reverse</code> — це інсценований.</aside>
+
+<h3>Post (постексплуатація)</h3>
+
+<p>Модулі для фінального етапу — після того, як доступ до цілі вже отримано: збір даних, подальша експлуатація, закріплення.</p>
+
+<pre><code>post/
+├── android
+├── linux
+├── multi
+├── networking
+├── osx
+└── windows</code></pre>
+
+<h2>Робота в msfconsole</h2>
+
+<p>Консоль запускають командою:</p>
+
+<pre><code>msfconsole</code></pre>
+
+<p>Після запуску з'являється ASCII-арт і привітання, а промпт стає <code>msf6</code> (або <code>msf5</code> — залежно від версії). Тут же видно статистику модулів:</p>
+
+<pre><code>       =[ metasploit v6.0                         ]
++ -- --=[ 2048 exploits - 1105 auxiliary - 344 post       ]
++ -- --=[ 562 payloads - 45 encoders - 10 nops            ]
++ -- --=[ 7 evasion                                       ]
+
+msf6 ></code></pre>
+
+<p>Консоль підтримує більшість команд Linux — наприклад, <code>ls</code> чи <code>ping</code>:</p>
+
+<pre><code>msf6 > ping -c 1 8.8.8.8
+[*] exec: ping -c 1 8.8.8.8
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=109 time=1.33 ms</code></pre>
+
+<aside data-icon="⚠️">А ось перенаправлення виводу (<code>help &gt; help.txt</code>) msfconsole не підтримує — поверне «No such command».</aside>
+
+<h3>Корисні команди</h3>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Команда</th><th>Що робить</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>help [команда]</code></td><td>Довідка про команду (наприклад, <code>help set</code>)</td></tr>
+      <tr><td><code>search [запит]</code></td><td>Пошук модулів у базі Metasploit</td></tr>
+      <tr><td><code>use [модуль / номер]</code></td><td>Вибрати модуль і перейти в його контекст</td></tr>
+      <tr><td><code>show options</code></td><td>Показати параметри вибраного модуля</td></tr>
+      <tr><td><code>info</code></td><td>Детальна інформація про модуль</td></tr>
+      <tr><td><code>back</code></td><td>Вийти з контексту модуля до промпта <code>msf6</code></td></tr>
+      <tr><td><code>history</code></td><td>Історія введених команд</td></tr>
+      <tr><td><code>sessions</code></td><td>Перегляд активних сесій</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<aside data-icon="💡">Msfconsole підтримує автодоповнення клавішею <code>Tab</code> — це сильно пришвидшує роботу.</aside>
+
+<h3>Пошук модулів</h3>
+
+<p>Команда <code>search</code> шукає модулі за різними критеріями. Наприклад, за назвою вразливості:</p>
+
+<pre><code>msf6 > search ms17-010
+
+Matching Modules
+================
+   #  Name                                      Rank     Description
+   -  ----                                      ----     -----------
+   1  auxiliary/scanner/smb/smb_ms17_010        normal   MS17-010 SMB RCE Detection
+   2  exploit/windows/smb/ms17_010_eternalblue  average  MS17-010 EternalBlue SMB Remote...</code></pre>
+
+<p>Далі модуль обирають за номером зі списку:</p>
+
+<pre><code>msf6 > use 2
+msf6 exploit(windows/smb/ms17_010_eternalblue) ></code></pre>
+
+<p>Шукати можна й за фільтрами — типом, платформою чи CVE:</p>
+
+<pre><code>msf6 > search type:exploit platform:linux
+msf6 > search cve:2017-0143</code></pre>
+
+<h3>Ранжування експлойтів</h3>
+
+<p>Metasploit оцінює надійність кожного експлойта. Основні рівні — від найгіршого до найкращого:</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Рівень</th><th>Надійність</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Manual</b></td><td>Потрібна значна ручна взаємодія</td></tr>
+      <tr><td><b>Low</b></td><td>Низька надійність</td></tr>
+      <tr><td><b>Average</b></td><td>Помірно надійний</td></tr>
+      <tr><td><b>Normal</b></td><td>Зазвичай успішний, можливі незначні проблеми</td></tr>
+      <tr><td><b>Great</b></td><td>Надійний і стабільний</td></tr>
+      <tr><td><b>Excellent</b></td><td>Майже завжди успішний</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Контексти та промпти</h2>
+
+<p>За виглядом промпта завжди видно, де ти перебуваєш:</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Промпт</th><th>Де ти</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>root@kali:~#</code></td><td>Звичайний термінал Linux</td></tr>
+      <tr><td><code>msf6 &gt;</code></td><td>Консоль Metasploit — команди <code>use</code>, <code>search</code> тощо</td></tr>
+      <tr><td><code>msf6 exploit(...) &gt;</code></td><td>Контекст вибраного модуля (після <code>use</code>)</td></tr>
+      <tr><td><code>meterpreter &gt;</code></td><td>Сесія Meterpreter після успішної експлуатації</td></tr>
+      <tr><td><code>C:\Windows\system32&gt;</code></td><td>Оболонка на цільовій системі</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<aside data-icon="📌">Параметри, задані в контексті одного модуля, <b>не переносяться</b> в інший — хіба що ти встановив їх як глобальні.</aside>
+
+<h2>Параметри модулів</h2>
+
+<p>Перед запуском модуля треба задати його параметри. Найважливіші:</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Параметр</th><th>Значення</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>RHOSTS</code></td><td>IP-адреса (чи діапазон) цільової системи</td></tr>
+      <tr><td><code>RPORT</code></td><td>Порт цілі, де працює вразливий додаток</td></tr>
+      <tr><td><code>PAYLOAD</code></td><td>Payload, що використовується з експлойтом</td></tr>
+      <tr><td><code>LHOST</code></td><td>IP-адреса атакуючої (твоєї) машини</td></tr>
+      <tr><td><code>LPORT</code></td><td>Порт твоєї машини для зворотного з'єднання</td></tr>
+      <tr><td><code>SESSION</code></td><td>ID сесії для постексплуатаційних модулів</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Типова послідовність: вибрати модуль, задати параметри, переглянути їх і запустити.</p>
+
+<pre><code>msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 exploit(...) > set RHOSTS 192.168.1.100
+msf6 exploit(...) > show options
+msf6 exploit(...) > exploit</code></pre>
+
+<p>Щоб задати значення <b>глобально</b> (для всіх модулів до виходу з Metasploit), використовують <code>setg</code>:</p>
+
+<pre><code>msf6 exploit(...) > setg RHOSTS 192.168.1.100</code></pre>
+
+<h3>Запуск модуля</h3>
+
+<ul>
+  <li><code>exploit</code> — запускає модуль-експлойт.</li>
+  <li><code>run</code> — те саме; частіше вживають з неексплойтними модулями (сканерами).</li>
+  <li><code>exploit -z</code> — запускає й одразу переводить сесію у фоновий режим.</li>
+</ul>
+
+<h2>Керування сесіями</h2>
+
+<p>Після успішної експлуатації створюється <b>сесія</b> — канал зв'язку між ціллю й Metasploit.</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Команда</th><th>Дія</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>sessions</code></td><td>Переглянути всі сесії</td></tr>
+      <tr><td><code>sessions -i 1</code></td><td>Взаємодіяти з сесією №1</td></tr>
+      <tr><td><code>background</code> (або <code>Ctrl + Z</code>)</td><td>Відправити поточну сесію у фоновий режим</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<aside data-icon="☝🏻">Джерело й докладніший розбір — кімната <a href="https://tryhackme.com/room/metasploitintro" target="_blank" rel="noreferrer">Metasploit: Introduction</a> на TryHackMe.</aside>
