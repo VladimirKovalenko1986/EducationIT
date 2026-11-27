@@ -64,6 +64,7 @@ import b2m9t1 from './lessons/cybersecurity/b2-m9-t1.html?raw'
 import b2m9t2 from './lessons/cybersecurity/b2-m9-t2.html?raw'
 import b2m9Hw from './lessons/cybersecurity/b2-m9-hw.html?raw'
 import b2m10t1 from './lessons/cybersecurity/b2-m10-t1.html?raw'
+import b2m10t2 from './lessons/cybersecurity/b2-m10-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -292,6 +293,7 @@ export const courses: Course[] = [
             title: "Модуль 10. Розбір сценаріїв та технічне інтерв'ю",
             lessons: [
               { id: 'b2-m10-t1', title: 'Тема 1. Сценарії для самоперевірки', content: b2m10t1 },
+              { id: 'b2-m10-t2', title: "Тема 2. Приклади питань для технічного інтерв'ю", content: b2m10t2 },
             ],
           },
         ],
