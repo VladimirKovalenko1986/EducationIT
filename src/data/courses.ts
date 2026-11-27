@@ -61,6 +61,7 @@ import b2m8t1 from './lessons/cybersecurity/b2-m8-t1.html?raw'
 import b2m8t2 from './lessons/cybersecurity/b2-m8-t2.html?raw'
 import b2m8Hw from './lessons/cybersecurity/b2-m8-hw.html?raw'
 import b2m9t1 from './lessons/cybersecurity/b2-m9-t1.html?raw'
+import b2m9t2 from './lessons/cybersecurity/b2-m9-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -280,6 +281,7 @@ export const courses: Course[] = [
             title: 'Модуль 9. Ризики мобільних пристроїв та IoT',
             lessons: [
               { id: 'b2-m9-t1', title: 'Тема 1. Загрози та захист мобільних пристроїв', content: b2m9t1 },
+              { id: 'b2-m9-t2', title: 'Тема 2. Безпека IoT-пристроїв', content: b2m9t2 },
             ],
           },
           emptyModule(10, "Розбір сценаріїв та технічне інтерв'ю", 'b2'),
