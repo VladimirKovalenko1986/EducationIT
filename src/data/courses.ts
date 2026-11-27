@@ -54,6 +54,7 @@ import b2m5Hw from './lessons/cybersecurity/b2-m5-hw.html?raw'
 import b2m6t1 from './lessons/cybersecurity/b2-m6-t1.html?raw'
 import b2m6t2 from './lessons/cybersecurity/b2-m6-t2.html?raw'
 import b2m6Hw from './lessons/cybersecurity/b2-m6-hw.html?raw'
+import b2m7t1 from './lessons/cybersecurity/b2-m7-t1.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -250,7 +251,13 @@ export const courses: Course[] = [
               { id: 'b2-m6-hw', title: 'Домашнє завдання', isTask: true, content: b2m6Hw },
             ],
           },
-          emptyModule(7, 'Штучний інтелект', 'b2'),
+          {
+            id: 'b2-m7',
+            title: 'Модуль 7. Штучний інтелект',
+            lessons: [
+              { id: 'b2-m7-t1', title: 'Тема 1. Використання ChatGPT в оборонній кібербезпеці', content: b2m7t1 },
+            ],
+          },
           emptyModule(8, 'Моделювання поведінки ймовірних зловмисників', 'b2'),
           emptyModule(9, 'Ризики мобільних пристроїв та IoT', 'b2'),
           emptyModule(10, "Розбір сценаріїв та технічне інтерв'ю", 'b2'),
