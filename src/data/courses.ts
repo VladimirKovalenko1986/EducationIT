@@ -58,6 +58,7 @@ import b2m7t1 from './lessons/cybersecurity/b2-m7-t1.html?raw'
 import b2m7t2 from './lessons/cybersecurity/b2-m7-t2.html?raw'
 import b2m7Hw from './lessons/cybersecurity/b2-m7-hw.html?raw'
 import b2m8t1 from './lessons/cybersecurity/b2-m8-t1.html?raw'
+import b2m8t2 from './lessons/cybersecurity/b2-m8-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -268,6 +269,7 @@ export const courses: Course[] = [
             title: 'Модуль 8. Моделювання поведінки ймовірних зловмисників',
             lessons: [
               { id: 'b2-m8-t1', title: 'Тема 1. Оцінка загроз перед проведенням тестування', content: b2m8t1 },
+              { id: 'b2-m8-t2', title: 'Тема 2. Збір інформації про загрози та інструменти моделювання', content: b2m8t2 },
             ],
           },
           emptyModule(9, 'Ризики мобільних пристроїв та IoT', 'b2'),
