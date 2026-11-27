@@ -48,6 +48,7 @@ import b2m4t1 from './lessons/cybersecurity/b2-m4-t1.html?raw'
 import b2m4lab from './lessons/cybersecurity/b2-m4-lab.html?raw'
 import b2m4Hw from './lessons/cybersecurity/b2-m4-hw.html?raw'
 import b2m5t1 from './lessons/cybersecurity/b2-m5-t1.html?raw'
+import b2m5lab from './lessons/cybersecurity/b2-m5-lab.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -230,6 +231,7 @@ export const courses: Course[] = [
             title: 'Модуль 5. Тестування на проникнення. Частина друга',
             lessons: [
               { id: 'b2-m5-t1', title: 'Тема 1. Злам SQL-серверів. Злам вебсерверів', content: b2m5t1 },
+              { id: 'b2-m5-lab', title: 'Тема 2. Лабораторна робота зі створення атаки', content: b2m5lab },
             ],
           },
           emptyModule(6, 'Тестування на проникнення. Частина третя', 'b2'),
