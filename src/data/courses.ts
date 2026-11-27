@@ -52,6 +52,7 @@ import b2m5lab from './lessons/cybersecurity/b2-m5-lab.html?raw'
 import b2m5t3 from './lessons/cybersecurity/b2-m5-t3.html?raw'
 import b2m5Hw from './lessons/cybersecurity/b2-m5-hw.html?raw'
 import b2m6t1 from './lessons/cybersecurity/b2-m6-t1.html?raw'
+import b2m6t2 from './lessons/cybersecurity/b2-m6-t2.html?raw'
 import fsB1m1Program from './lessons/fullstack/b1-m1-program.html?raw'
 import fsB1m1WebTech from './lessons/fullstack/b1-m1-web-tech.html?raw'
 import fsB1m1Tags from './lessons/fullstack/b1-m1-tags.html?raw'
@@ -244,6 +245,7 @@ export const courses: Course[] = [
             title: 'Модуль 6. Тестування на проникнення. Частина третя',
             lessons: [
               { id: 'b2-m6-t1', title: 'Тема 1. Bug bounty', content: b2m6t1 },
+              { id: 'b2-m6-t2', title: 'Тема 2. Підготовка звіту з результатами тестування', content: b2m6t2 },
             ],
           },
           emptyModule(7, 'Штучний інтелект', 'b2'),
